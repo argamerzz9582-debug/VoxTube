@@ -40,7 +40,7 @@ LANGUAGE = re.compile(r"[a-z]{2,3}|b\+[A-Za-z0-9+]+")
 REGION = re.compile(r"r[A-Z]{2}")
 FIELD_ANNOTATIONS = re.compile(r"^Annotations on field #\d+ '([^']+)'")
 # Gson models live here; a field there that loses its generic signature deserializes raw (#996).
-MODEL_PACKAGE = "Lio/github/aedev/flow/data/"
+MODEL_PACKAGE = "Lcom/voxtube/app/data/"
 
 
 def build_tool(name: str) -> str:

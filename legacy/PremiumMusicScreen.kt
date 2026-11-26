@@ -1,4 +1,4 @@
-package io.github.aedev.flow.ui.screens.music
+package com.voxtube.app.ui.screens.music
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -30,14 +30,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import io.github.aedev.flow.data.search.SearchSuggestionsService
+import com.voxtube.app.data.search.SearchSuggestionsService
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
-import androidx.hilt.navigation.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

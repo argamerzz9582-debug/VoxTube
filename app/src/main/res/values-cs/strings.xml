@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Flow</string>
+    <string name="app_name">VoxTube</string>
     <string name="subscriptions_sort_label">Seřadit kanály</string>
     <string name="subscriptions_sort_default">Výchozí</string>
     <string name="subscriptions_sort_name">Jméno (A-Z)</string>
@@ -111,10 +111,10 @@
     <string name="related_videos">Navrhnout Videa</string>
     <string name="video_marked_not_interested">Video označeno jako nezajímá</string>
     <string name="subscriptions_last_refreshed_time_only_template">Naposledy aktualizováno %1$s</string>
-    <string name="channel_error_log_clip_label">Záznam chyb kanálu Flow</string>
+    <string name="channel_error_log_clip_label">Záznam chyb kanálu VoxTube</string>
     <string name="channel_and_more_template">%1$s a %2$d dalších</string>
     <string name="local_media_empty_title">Nebylo nalezeno žádné %1$s</string>
-    <string name="local_media_permission_body">Povolte přístup k médiím, aby Flow mohl vyhledávat a přehrávat místní videa a hudbu.</string>
+    <string name="local_media_permission_body">Povolte přístup k médiím, aby VoxTube mohl vyhledávat a přehrávat místní videa a hudbu.</string>
     <string name="failed_to_save_to_library">"Nepovedlo se uložit do  knihovny"</string>
     <string name="lyrics">karaoke</string>
     <string name="related">SOUVISEJÍCÍ</string>
@@ -241,7 +241,7 @@
     <string name="audio_bitrate_kbps_template">%1$d kb/s</string>
     <string name="explicit_badge">E</string>
     <string name="check_out_short_template">Podívejte se na tuto zkratku: %1$s\nhttps://youtube.com/shorts/%2$s</string>
-    <string name="link_not_supported">Flow nemůže otevřít tento druh odkazu</string>
+    <string name="link_not_supported">VoxTube nemůže otevřít tento druh odkazu</string>
     <string name="content_settings_share_without_text_subtitle">Sdílejte pouze odkaz na video bez zprávy „Podívejte se na toto video“.</string>
     <string name="quality_auto">Auto</string>
     <string name="quality_auto_template">Auto (%1$dp)</string>
@@ -249,7 +249,7 @@
     <string name="play_mode_suggestion_body">Toto video je kratší než 2 minuty. Chtěli byste přejít na specializovaného hráče?</string>
     <string name="shorts_player">Přehrávač Shorts</string>
     <string name="music_player">Hudební přehrávač</string>
-    <string name="music_service_disabled">Hudba nemůže hrát. Hudební služba Flow je na tomto zařízení vypnutá.</string>
+    <string name="music_service_disabled">Hudba nemůže hrát. Hudební služba VoxTube je na tomto zařízení vypnutá.</string>
     <plurals name="channels_count">
         <item quantity="one">%d kanál</item>
         <item quantity="few">%d kanály</item>
@@ -367,7 +367,7 @@
     <string name="new_update_available">K dispozici nová aktualizace</string>
     <string name="update_available_template">%1$s je nyní k dispozici</string>
     <string name="release_notes">POZNÁMKY K VYDÁNÍ</string>
-    <string name="update_flow">Aktualizujte Flow</string>
+    <string name="update_flow">Aktualizujte VoxTube</string>
     <string name="maybe_later">Možná později</string>
     <string name="nav_home">Domov</string>
     <string name="nav_shorts">Shorts</string>
@@ -429,7 +429,7 @@
     <string name="channel_links">Odkazy</string>
     <string name="artist">Umělec</string>
     <string name="playlist">Seznam skladeb</string>
-    <string name="app_name_uppercase">FLOW</string>
+    <string name="app_name_uppercase">VOXTUBE</string>
     <string name="notification_badge_9_plus">9+</string>
     <string name="personalized_feed">Váš personalizovaný zdroj</string>
     <plurals name="videos_curated_template">
@@ -495,7 +495,7 @@
     <string name="you">Vy</string>
     <string name="empty_downloads">Zatím žádné stahování</string>
     <string name="downloads_recover_title">Najděte soubory ke stažení z dřívější instalace</string>
-    <string name="downloads_recover_body">Flow ukládá stažené soubory do Download/Flow a Music/Flow. Chcete-li zobrazit seznam souborů z dřívější instalace, které tam byly uloženy, povolte přístup k videím a zvuku.</string>
+    <string name="downloads_recover_body">VoxTube ukládá stažené soubory do Download/VoxTube a Music/VoxTube. Chcete-li zobrazit seznam souborů z dřívější instalace, které tam byly uloženy, povolte přístup k videím a zvuku.</string>
     <string name="downloads_recover_allow">Povolit přístup</string>
     <string name="downloads_recover_dismiss">Teď ne</string>
     <plurals name="downloads_recovered_count">
@@ -698,14 +698,14 @@
     <string name="peace_and_quiet">Mír a klid</string>
     <string name="notifications_empty_body">Už jste všichni chyceni! Zde se zobrazí nové aktualizace z vašich odběrů.</string>
     <string name="settings_title">Nastavení</string>
-    <string name="settings_flow_engine_header">Motor Flow</string>
+    <string name="settings_flow_engine_header">Motor VoxTube</string>
     <string name="settings_active_learning">AKTIVNÍ UČENÍ</string>
-    <string name="settings_reset_brain_title">Resetovat osobnost Flow?</string>
-    <string name="settings_reset_brain_body">Tím se vymaže váš profil mozku Flow.\n\n• Naučená témata jsou zapomenuta.\n• Resetování osobnostních rysů.\n• Doporučení se vrátí k výchozímu nastavení.\n\nToto nelze vrátit zpět.</string>
+    <string name="settings_reset_brain_title">Resetovat osobnost VoxTube?</string>
+    <string name="settings_reset_brain_body">Tím se vymaže váš profil mozku VoxTube.\n\n• Naučená témata jsou zapomenuta.\n• Resetování osobnostních rysů.\n• Doporučení se vrátí k výchozímu nastavení.\n\nToto nelze vrátit zpět.</string>
     <string name="settings_reset_everything">Obnovit vše</string>
     <string name="settings_analyzing_interactions">Analýza vašich interakcí...</string>
     <string name="settings_view_analytics">Zobrazit službu Analytics</string>
-    <string name="deep_flow_mode_title">Hluboký režim Flow</string>
+    <string name="deep_flow_mode_title">Hluboký režim VoxTube</string>
     <string name="deep_flow_mode_subtitle">Pozastavte učení při procházení</string>
     <string name="deep_flow_learning_paused">UČENÍ POZASTAVENO</string>
     <string name="deep_flow_expires_in">Platnost vyprší za %s</string>
@@ -718,7 +718,7 @@
     <string name="deep_flow_scrobble_subtitle">Pokračujte v odesílání poslechů Last.fm, Libre.fm a ListenBrainz</string>
     <string name="deep_flow_on_search_title">Zobrazit při vyhledávání</string>
     <string name="deep_flow_on_search_subtitle">Přepínač Deep Flow nad nedávnými vyhledáváními</string>
-    <string name="deep_flow_long_press_hint">Dlouhým stisknutím loga nebo názvu Flow na Home přepnete Deep Flow</string>
+    <string name="deep_flow_long_press_hint">Dlouhým stisknutím loga nebo názvu VoxTube na Home přepnete Deep Flow</string>
     <string name="deep_flow_dialog_title">Doba trvání pauzy</string>
     <string name="deep_flow_dialog_body">Jak dlouho by mělo být učení pozastaveno?</string>
     <string name="deep_flow_enabled_message">Deep Flow povoleno</string>
@@ -745,7 +745,7 @@
     <string name="settings_header_about">O aplikaci</string>
     <string name="settings_header_notifications">Oznámení</string>
     <string name="settings_item_notifications">Předvolby oznámení</string>
-    <string name="settings_item_notifications_subtitle">Určete, která oznámení může Flow odesílat</string>
+    <string name="settings_item_notifications_subtitle">Určete, která oznámení může VoxTube odesílat</string>
     <string name="notif_settings_title">Předvolby oznámení</string>
     <string name="notif_type_new_videos">Nová videa</string>
     <string name="notif_type_new_videos_subtitle">Upozornit, když odebírané kanály nahrají nová videa</string>
@@ -769,7 +769,7 @@
     <string name="linked_title">Propojená zařízení</string>
     <string name="play_on_subtitle">Vyberte si, kde se bude hrát</string>
     <string name="play_on_manage_summary">Přejmenujte zařízení a vyberte, která zde mohou hrát</string>
-    <string name="linked_intro">Udržujte toto zařízení v synchronizaci s ostatními zařízeními prostřednictvím vašeho vlastního synchronizačního serveru Flow, složky WebDAV nebo vaší sítě Wi-Fi. Vše je na vašich zařízeních šifrováno; žádný server to nemůže přečíst.</string>
+    <string name="linked_intro">Udržujte toto zařízení v synchronizaci s ostatními zařízeními prostřednictvím vašeho vlastního synchronizačního serveru VoxTube, složky WebDAV nebo vaší sítě Wi-Fi. Vše je na vašich zařízeních šifrováno; žádný server to nemůže přečíst.</string>
     <string name="linked_join_request">%1$s se chce připojit</string>
     <string name="linked_join_notification_text">%1$s požádáni o připojení k vašim propojeným zařízením. Chcete-li přijmout nebo odmítnout, otevřete Propojená zařízení.</string>
     <string name="linked_server">Server</string>

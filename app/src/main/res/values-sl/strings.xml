@@ -2,7 +2,7 @@
 <resources>
     <string name="subscriptions_video_section_title">Video naročnine</string>
     <string name="subscriptions_music_section_title">Glasbene naročnine</string>
-    <string name="app_name_uppercase">FLOW</string>
+    <string name="app_name_uppercase">VOXTUBE</string>
     <string name="deep_flow_mode_subtitle">Med brskanjem zaustavite učenje</string>
     <string name="player_appearance_haptics_subtitle">Rahlo vibrira ob dotikih in potezah igralca</string>
     <string name="lyrics_provider_youtube_music_desc">Navadno besedilo · zavihek Besedila</string>
@@ -19,7 +19,7 @@
     <string name="linked_title">Povezane naprave</string>
     <string name="play_on_subtitle">Izberite, kje se predvaja</string>
     <string name="play_on_manage_summary">Preimenujte naprave in izberite, katere lahko predvajajo tukaj</string>
-    <string name="linked_intro">Sinhronizirajte to napravo z drugimi napravami prek lastnega strežnika za sinhronizacijo Flow, mape WebDAV ali omrežja Wi-Fi. V vaših napravah je vse šifrirano; noben strežnik ga ne more prebrati.</string>
+    <string name="linked_intro">Sinhronizirajte to napravo z drugimi napravami prek lastnega strežnika za sinhronizacijo VoxTube, mape WebDAV ali omrežja Wi-Fi. V vaših napravah je vse šifrirano; noben strežnik ga ne more prebrati.</string>
     <string name="linked_join_request">%1$s se želi pridružiti</string>
     <string name="linked_join_notification_text">%1$s prosi za pridružitev vašim povezanim napravam. Odprite Povezane naprave, da sprejmete ali zavrnete.</string>
     <string name="linked_server">Strežnik</string>

@@ -1,4 +1,4 @@
-package io.github.aedev.flow.ui.screens.explore
+package com.voxtube.app.ui.screens.explore
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,12 +20,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import io.github.aedev.flow.data.model.Video
-import io.github.aedev.flow.ui.components.VideoCard
-import io.github.aedev.flow.ui.components.ShimmerVideoCard
-import io.github.aedev.flow.ui.theme.extendedColors
-import io.github.aedev.flow.utils.formatDuration
-import io.github.aedev.flow.utils.formatViewCount
+import com.voxtube.app.data.model.Video
+import com.voxtube.app.ui.components.ShimmerVideoCard
+import com.voxtube.app.ui.components.VideoCard
+import com.voxtube.app.ui.theme.extendedColors
+import com.voxtube.app.utils.formatDuration
+import com.voxtube.app.utils.formatViewCount
 
 @Composable
 fun ExploreScreen(

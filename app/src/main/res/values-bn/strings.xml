@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ফ্লো</string>
+    <string name="app_name">VoxTube</string>
     <string name="subscriptions_search_placeholder">সাবস্ক্রিপশন অনুসন্ধান করুন ..।</string>
     <string name="subscriptions_sort_label">চ্যানেলগুলো সাজান</string>
     <string name="subscriptions_sort_default">ডিফল্ট</string>

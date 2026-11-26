@@ -1,0 +1,96 @@
+package com.voxtube.app.ui.screens.player.stage
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import com.voxtube.app.data.local.SponsorBlockSkipButtonStyle
+import com.voxtube.app.data.model.SponsorBlockSegment
+import com.voxtube.app.player.EnhancedPlayerManager
+import com.voxtube.app.ui.components.videoplayer.overlay.SponsorBlockSkipButton
+import com.voxtube.app.ui.components.videoplayer.placedWhen
+import kotlin.math.roundToInt
+
+/** The floating skip button, laid over the video area only and never over the body below it. */
+@Composable
+internal fun BoxScope.SponsorSkipLayer(
+    session: VideoPlayerStageSession,
+    sponsorSegments: List<SponsorBlockSegment>,
+    expandedPlayerBottomPx: () -> Float,
+    playerWidth: Dp,
+    expandedSurfacesPlaced: () -> Boolean,
+    style: SponsorBlockSkipButtonStyle,
+    bottomPadding: Dp,
+) {
+    val offForVideo by EnhancedPlayerManager.getInstance().sponsorBlockOffForVideo.collectAsState()
+    if (offForVideo) return
+    val skippedOnce by EnhancedPlayerManager.getInstance().sbSkippedOnce.collectAsState()
+    val screenState = session.screenState
+    val playerState = session.playerState
+    val layoutDirection = LocalLayoutDirection.current
+    val endPadding =
+        with(LocalDensity.current) {
+            maxOf(
+                WindowInsets.displayCutout.getRight(this, layoutDirection),
+                WindowInsets.systemBars.getRight(this, layoutDirection),
+            ).toDp() + 16.dp
+        }
+
+    val sponsorButtonPositionMs by remember {
+        derivedStateOf { (screenState.currentPosition / 1_000L) * 1_000L }
+    }
+    // Read in the layout phase: the player's bottom moves on every frame of a resize.
+    val sponsorLayerModifier =
+        Modifier.layout { measurable, constraints ->
+            val bottom = expandedPlayerBottomPx().roundToInt()
+            val height =
+                if (screenState.isFullscreen || bottom <= 0) constraints.maxHeight else bottom.coerceIn(0, constraints.maxHeight)
+            val placeable = measurable.measure(constraints.copy(minHeight = height, maxHeight = height))
+            layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+        }
+    Box(
+        modifier =
+            Modifier
+                .align(Alignment.TopStart)
+                .width(playerWidth)
+                .then(sponsorLayerModifier)
+                .zIndex(3f)
+                .placedWhen(expandedSurfacesPlaced),
+    ) {
+        SponsorBlockSkipButton(
+            sponsorSegments = sponsorSegments,
+            currentPositionMs = sponsorButtonPositionMs,
+            categoryActions = EnhancedPlayerManager.getInstance().sbCategoryActions,
+            skippedOnceUuids = skippedOnce,
+            controlsVisible = screenState.showControls,
+            playbackEnded = playerState.hasEnded,
+            style = style,
+            onSkipClick = { endPositionMs ->
+                EnhancedPlayerManager.getInstance().skipToSegmentEnd(endPositionMs)
+            },
+            modifier =
+                Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(
+                        end = endPadding,
+                        bottom = bottomPadding,
+                    ),
+        )
+    }
+}

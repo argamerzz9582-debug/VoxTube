@@ -13,6 +13,8 @@ lifecycle = "2.11.0"
 androidxWindow = "1.5.0"
 coil = "3.5.0"
 composeReorderable = "3.1.0"
+# Liquid Glass backdrop effects (blur, lens refraction, highlight) for the VoxTube glass UI.
+kyantBackdrop = "2.0.1"
 hilt = "2.60.1"
 hiltNavigationCompose = "1.4.0"
 okhttp = "5.4.0"
@@ -78,6 +80,7 @@ androidx-window = { group = "androidx.window", name = "window", version.ref = "a
 androidx-window-core = { group = "androidx.window", name = "window-core", version.ref = "androidxWindow" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 compose-reorderable = { group = "sh.calvin.reorderable", name = "reorderable", version.ref = "composeReorderable" }
+kyant-backdrop = { group = "io.github.kyant0", name = "backdrop", version.ref = "kyantBackdrop" }
 coil-video = { group = "io.coil-kt.coil3", name = "coil-video", version.ref = "coil" }
 coil-gif = { group = "io.coil-kt.coil3", name = "coil-gif", version.ref = "coil" }
 coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }

@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to Flow! We welcome contributions from the community.
 
-Flow (`io.github.aedev.flow`) is an Android music/video app written in Kotlin with Jetpack Compose,
+Flow (`com.voxtube.app`) is an Android music/video app written in Kotlin with Jetpack Compose,
 Hilt, and Media3/ExoPlayer. It plays YouTube content via a native InnerTube client with a
 NewPipe-based fallback extraction path, and supports local media playback, offline downloads,
 casting, lyrics, device-to-device sync, and an on-device recommendation engine (FlowNeuroEngine).
@@ -87,28 +87,18 @@ never bare `assembleDebug` or `compileDebugKotlin`.
 4. Respect Material 3 motion, elevation, and state-layer specs as documented — do not invent custom
    equivalents when a Material 3 component already provides them correctly.
 
-### The "Anti-Slop" Manifesto (zero tolerance)
+### Liquid Glass design language
 
-The following are **strictly forbidden** anywhere in this codebase. Pull requests containing them
-will be asked to remove them before review continues:
+VoxTube's chrome (tab bar, top bar, mini player, sheets, menus, floating controls) is Liquid Glass:
+translucent, refractive surfaces over the content. See the "VoxTube Liquid Glass design language"
+section of `AGENTS.md` for the full rules. In short:
 
-- ❌ **No gradients** — do not use `Brush.linearGradient`/`verticalGradient`/etc. as a background or
-  surface fill unless explicitly agreed, and never as a substitute for a real Material 3 surface
-  color.
-- ❌ **No glassmorphism** — no blurred, frosted, or semi-transparent "milky" backgrounds
-  (`Modifier.blur` on backgrounds, translucent overlay panels) outside the one existing,
-  deliberately-designed ambient/blur surface in the player. Do not add new ones.
-- ❌ **No fake drop shadows / glow effects** — do not hand-roll `shadow()` glows or neon box-shadow
-  equivalents. Use Material 3's built-in elevation/tonal-elevation system only.
-- ❌ **No colored borders around cards** — card and container borders must be neutral
-  (`MaterialTheme.colorScheme.outline`/`outlineVariant`), never a primary/accent-colored stroke used
-  as decoration.
-- ❌ **No arbitrary hex codes** — never write `Color(0xFF...)` inline. All colors come from
-  `MaterialTheme.colorScheme` or the app's color scheme source. If a color you need does not exist
-  yet, add it to the theme definition in `ui/theme/`, do not inline it at the call site.
-
-If you find yourself reaching for any of the above because "it looks nice", stop — it is not the
-app's design language and it will be reverted.
+- ✅ Use `GlassSurface` / `Modifier.liquidGlass` from `ui/theme/glass/` — never hand-roll blur,
+  `RenderEffect` or translucent overlays at call sites.
+- ✅ Glass is for chrome, not content; feed cards and text-heavy pages stay on solid surfaces.
+- ✅ Everything must stay readable on the opaque fallback (Android 8–11, reduce transparency).
+- ❌ No arbitrary hex codes — colours come from `MaterialTheme.colorScheme` and `LiquidGlassDefaults`.
+- ❌ No colored card borders, decorative gradients or neon glows.
 
 ## 🧩 Use the Platform — Never Hand-Roll an API a Dependency Already Provides
 
@@ -264,7 +254,7 @@ real shipped regression that had to be found and fixed on-device.
 13. Sustained heat while the app is open = per-frame work; drain with the screen off = CPU/network
     loops. Diagnose in that order: (a) run the rule-2 audit over every composed-but-hidden tree;
     (b) count fetches per user action in logcat — any unexplained second fetch is the bug;
-    (c) check `adb shell dumpsys gfxinfo io.github.aedev.flow` for continuous frame production while
+    (c) check `adb shell dumpsys gfxinfo com.voxtube.app` for continuous frame production while
     the UI should be idle; (d) only then suspect the player path. Do not "fix" heat by degrading
     visible design, motion, or update smoothness — find the invisible work instead.
 
@@ -565,7 +555,7 @@ bump takes three times as long to review and is three times as likely to be reve
 ## 🔐 Release and Signing Invariants
 
 Flow is distributed through GitHub Releases and
-[IzzyOnDroid](https://apt.izzysoft.de/packages/io.github.aedev.flow). Both pin properties of the
+[IzzyOnDroid](https://apt.izzysoft.de/packages/com.voxtube.app). Both pin properties of the
 published artifacts, so the following are hard constraints. Breaking one of them cannot be fixed by a
 follow-up release — it forces every installed user to uninstall and reinstall, losing their local
 data.

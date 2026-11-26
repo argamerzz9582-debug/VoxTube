@@ -1,4 +1,4 @@
-package io.github.aedev.flow.ui.components
+package com.voxtube.app.ui.components
 
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -33,9 +33,9 @@ import androidx.compose.ui.zIndex
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.PlayerView
 import coil.compose.AsyncImage
-import io.github.aedev.flow.data.model.Video
-import io.github.aedev.flow.player.EnhancedPlayerManager
-import io.github.aedev.flow.ui.theme.extendedColors
+import com.voxtube.app.data.model.Video
+import com.voxtube.app.player.EnhancedPlayerManager
+import com.voxtube.app.ui.theme.extendedColors
 import kotlinx.coroutines.delay
 import kotlin.math.abs
 import kotlin.math.roundToInt

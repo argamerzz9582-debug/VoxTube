@@ -51,13 +51,13 @@ fun translatedLocaleTags(): List<String> =
         .sorted()
 
 android {
-    namespace = "io.github.aedev.flow"
+    namespace = "com.voxtube.app"
     compileSdk {
         version = release(37) { minorApiLevel = 1 }
     }
 
     defaultConfig {
-        applicationId = "io.github.aedev.flow"
+        applicationId = "com.voxtube.app"
         minSdk = 26
         targetSdk = 36
         versionCode = 20
@@ -69,7 +69,7 @@ android {
         buildConfigField("String", "LASTFM_API_KEY", "\"${secretValue("lastfmApiKey", "lastfm.apiKey", "LASTFM_API_KEY")}\"")
         buildConfigField("String", "LASTFM_API_SECRET", "\"${secretValue("lastfmApiSecret", "lastfm.apiSecret", "LASTFM_API_SECRET")}\"")
 
-        testInstrumentationRunner = "io.github.aedev.flow.HiltTestRunner"
+        testInstrumentationRunner = "com.voxtube.app.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -350,6 +350,7 @@ dependencies {
     // --- Image Loading ---
     implementation(libs.coil.compose)
     implementation(libs.compose.reorderable)
+    implementation(libs.kyant.backdrop)
     implementation(libs.coil.video)
     implementation(libs.coil.gif)
     implementation(libs.coil.network.okhttp)

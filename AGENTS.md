@@ -1,6 +1,7 @@
-# Working with Flow as an AI agent
+# Working with VoxTube as an AI agent
 
-Flow (`io.github.aedev.flow`) is an Android music/video app written in Kotlin with Jetpack Compose, Hilt, and Media3/ExoPlayer. It plays YouTube content via a native InnerTube client with a NewPipe-based fallback extraction path, supports local media playback, offline downloads, casting, lyrics, a device-to-device sync feature, and an on-device recommendation engine (FlowNeuroEngine). It follows Material 3 design guidelines closely.
+VoxTube (`com.voxtube.app`) is an Android music/video app, a rebranded and redesigned fork of
+[Flow](https://github.com/Flow-Tube/Flow) (GPL-3.0; keep upstream license headers and credits intact). It is written in Kotlin with Jetpack Compose, Hilt, and Media3/ExoPlayer. It plays YouTube content via a native InnerTube client with a NewPipe-based fallback extraction path, supports local media playback, offline downloads, casting, lyrics, a device-to-device sync feature, and an on-device recommendation engine (FlowNeuroEngine). It follows Material 3 design guidelines closely.
 
 Product flavors: `github` (default, in-app updater enabled) and `foss` (no updater). Always use flavor-prefixed Gradle tasks — e.g. `assembleGithubDebug`, `compileFossDebugKotlin` — never bare `assembleDebug`/`compileDebugKotlin`.
 
@@ -22,17 +23,33 @@ Rules:
 3. Before implementing or fixing any Compose/Material 3 component, consult the official documentation (developer.android.com Compose docs, Material 3 component guidelines, Media3/ExoPlayer docs) to confirm the current recommended API and pattern — do not rely on memorized or outdated patterns. Training data lags the framework; verify against current docs when in doubt.
 4. Respect Material 3 motion, elevation, and state-layer specs as documented — do not invent custom equivalents when a Material 3 component already provides them correctly.
 
-## The "Anti-Slop" Manifesto (zero tolerance)
+## VoxTube Liquid Glass design language
 
-Models default to dated "AI slop" UI trends. The following are STRICTLY FORBIDDEN anywhere in this codebase:
+VoxTube's UI follows a Liquid Glass design language (translucent, refractive chrome floating over
+content, as introduced by Apple in iOS 26), built on top of Material 3 tokens. The glass material lives
+in `ui/theme/glass/LiquidGlass.kt` and is drawn with the Kyant backdrop library
+(`io.github.kyant0:backdrop`, see `gradle/libs.versions.toml`).
 
-- ❌ **No gradients** — do not use `Brush.linearGradient`/`verticalGradient`/etc. as a background or surface fill unless explicitly instructed, and never as a substitute for a real Material 3 surface color.
-- ❌ **No glassmorphism** — no blurred, frosted, or semi-transparent "milky" backgrounds (`Modifier.blur` on backgrounds, translucent overlay panels) outside of the one existing, deliberately-designed ambient/blur surfaces already in the player (do not add new ones elsewhere).
-- ❌ **No fake drop shadows / glow effects** — do not hand-roll `shadow()` glows or neon box-shadow equivalents. Use Material 3's built-in elevation/tonal-elevation system only.
-- ❌ **No colored borders around cards** — card/container borders must be neutral (`MaterialTheme.colorScheme.outline`/`outlineVariant`), never a primary/accent-colored stroke used as decoration.
-- ❌ **No arbitrary hex codes** — never write `Color(0xFF...)` inline. All colors must come from `MaterialTheme.colorScheme` (or the app's defined color scheme source). If a needed color doesn't exist yet, add it to the theme definition, don't inline it at the call site.
+Rules:
 
-If you find yourself about to reach for any of the above because "it looks nice," stop — it is not the app's design language and it will be reverted.
+- ✅ **Glass is for chrome, not content.** Tab bar, top bar, mini player, floating toolbars/buttons,
+  sheets, menus and dialogs may be glass. Feed cards, list rows and text-heavy pages stay on solid
+  `MaterialTheme.colorScheme` surfaces.
+- ✅ **Only through the glass API.** Use `GlassSurface` / `Modifier.liquidGlass` with a
+  `LiquidGlassStyle` (`Clear`, `Regular`, `Thick`). Never hand-roll `Modifier.blur`, `RenderEffect`,
+  or translucent overlays at call sites.
+- ✅ **One backdrop source per window.** Record content with `Modifier.glassBackdropSource` and provide
+  it with `ProvideGlassBackdrop`. Glass must never sit inside the node it samples.
+- ✅ **Always readable without the blur.** Android 8–11 get the opaque fallback automatically, and
+  `LocalLiquidGlassEnabled` turns effects off (reduce transparency / battery saver). Text on glass must
+  meet contrast on the fallback surface too.
+- ✅ **Shapes come from the theme.** `MaterialTheme.shapes` is `VoxTubeShapes` (larger, softer corners);
+  use `CapsuleShape` for pills. Glass shapes must be `CornerBasedShape` (the lens shader needs radii).
+- ❌ **No arbitrary hex codes** — never write `Color(0xFF...)` inline. Glass colours come from
+  `LiquidGlassDefaults.colors()`, which derives them from the active `MaterialTheme.colorScheme`.
+- ❌ **No colored borders around cards** — rims and borders stay neutral (`outline`/`outlineVariant`).
+- ❌ **No decorative gradients or neon glows** — depth comes from the glass material, its highlight
+  and its contact shadow, not from `Brush` fills or hand-rolled `shadow()` glows.
 
 ## Use the platform — never hand-roll an API a dependency already provides
 
@@ -166,8 +183,9 @@ hard constraints, not suggestions.
    only on the flip.
 4. **Expensive draw effects.** Full-screen `blur`/`RenderEffect` layers must hold static content
    (invalidated only on track/state change, as `PlayerBackground` does). Never attach a blur or
-   render effect to a node that invalidates per frame, and never add new blur surfaces (see
-   Anti-Slop).
+   render effect to a node that invalidates per frame. Glass chrome goes through
+   `ui/theme/glass/LiquidGlass.kt` only (see the Liquid Glass design language), which keeps one
+   recorded backdrop per window.
 
 ### Cadence contracts — polling and updates
 
@@ -214,7 +232,7 @@ hard constraints, not suggestions.
 13. Sustained heat while the app is open = per-frame work; drain with the screen off = CPU/network
     loops. Diagnose in that order: (a) run the rule-2 audit over every composed-but-hidden tree;
     (b) count fetches per user action in logcat — any unexplained second fetch is the bug;
-    (c) check `adb shell dumpsys gfxinfo io.github.aedev.flow` for continuous frame production
+    (c) check `adb shell dumpsys gfxinfo com.voxtube.app` for continuous frame production
     while the UI should be idle; (d) only then suspect the player path. Do not "fix" heat by
     degrading visible design, motion, or update smoothness — find the invisible work instead.
 

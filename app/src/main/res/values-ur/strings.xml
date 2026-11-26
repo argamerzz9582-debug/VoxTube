@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">فلو</string>
+    <string name="app_name">VoxTube</string>
     <string name="subscriptions_search_placeholder">سبسکرپشن تلاش کریں…</string>
     <string name="subscriptions_sort_label">چینلز کو ترتیب دیں</string>
     <string name="subscriptions_sort_default">ڈیفالٹ</string>
@@ -38,7 +38,7 @@
     <string name="copy_logs">لاگز کاپی کریں</string>
     <string name="logs_copied">لاگز کاپی ہو گئے</string>
     <string name="logs_copy_failed">لاگز کاپی نہیں ہو سکے</string>
-    <string name="channel_error_log_clip_label">فلو چینل کی خرابی کا لاگ</string>
+    <string name="channel_error_log_clip_label">VoxTube چینل کی خرابی کا لاگ</string>
     <string name="shorts">شارٹس</string>
     <string name="failed_to_load_channel">چینل لوڈ نہیں ہو سکا</string>
     <string name="subscribers">سبسکرائبرز</string>
@@ -66,7 +66,7 @@
     <string name="local_media_empty_title">کوئی %1$s نہیں ملا</string>
     <string name="local_media_empty_body">اس ڈیوائس پر محفوظ ویڈیوز اور موسیقی یہاں دکھائی دیں گی۔</string>
     <string name="local_media_permission_title">اجازت درکار ہے</string>
-    <string name="local_media_permission_body">Flow کو مقامی ویڈیوز اور موسیقی تلاش کرنے اور چلانے کے لیے اپنی میڈیا فائلوں تک رسائی کی اجازت دیں۔</string>
+    <string name="local_media_permission_body">VoxTube کو مقامی ویڈیوز اور موسیقی تلاش کرنے اور چلانے کے لیے اپنی میڈیا فائلوں تک رسائی کی اجازت دیں۔</string>
     <string name="local_media_grant">رسائی کی اجازت دیں</string>
     <string name="library_settings_data_header"><![CDATA[ترتیبات اور ڈیٹا]]></string>
     <string name="library_manage_data_label">ڈیٹا کا نظم کریں</string>
@@ -118,7 +118,7 @@
     <string name="saved_to_library">لائبریری میں محفوظ کر لیا گیا</string>
     <string name="subscriptions_video_section_title">ویڈیو سبسکرپشنز</string>
     <string name="subscriptions_music_section_title">میوزک سبسکرپشنز</string>
-    <string name="app_name_uppercase">FLOW</string>
+    <string name="app_name_uppercase">VOXTUBE</string>
     <string name="deep_flow_mode_subtitle">براؤز کرتے وقت سیکھنے کو روک دیں۔</string>
     <string name="player_appearance_haptics_subtitle">پلیئر ٹیپس اور اشاروں پر ہلکے سے وائبریٹ کریں۔</string>
     <string name="lyrics_provider_youtube_music_desc">سادہ متن · دھن کا ٹیب</string>
@@ -135,7 +135,7 @@
     <string name="linked_title">منسلک آلات</string>
     <string name="play_on_subtitle">منتخب کریں کہ یہ کہاں کھیلتا ہے۔</string>
     <string name="play_on_manage_summary">آلات کا نام تبدیل کریں اور منتخب کریں کہ کون سا یہاں چل سکتا ہے۔</string>
-    <string name="linked_intro">اپنے Flow سنک سرور، WebDAV فولڈر، یا اپنے Wi-Fi نیٹ ورک کے ذریعے اس ڈیوائس کو اپنے دوسرے آلات کے ساتھ مطابقت پذیر رکھیں۔ ہر چیز آپ کے آلات پر خفیہ کردہ ہے۔ کوئی سرور اسے نہیں پڑھ سکتا۔</string>
+    <string name="linked_intro">اپنے VoxTube سنک سرور، WebDAV فولڈر، یا اپنے Wi-Fi نیٹ ورک کے ذریعے اس ڈیوائس کو اپنے دوسرے آلات کے ساتھ مطابقت پذیر رکھیں۔ ہر چیز آپ کے آلات پر خفیہ کردہ ہے۔ کوئی سرور اسے نہیں پڑھ سکتا۔</string>
     <string name="linked_join_request">%1$s شامل ہونا چاہتا ہے۔</string>
     <string name="linked_join_notification_text">%1$s نے آپ کے لنک کردہ آلات میں شامل ہونے کو کہا۔ قبول یا مسترد کرنے کے لیے لنکڈ ڈیوائسز کھولیں۔</string>
     <string name="linked_server">سرور</string>

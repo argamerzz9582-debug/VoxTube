@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Flow</string>
+    <string name="app_name">VoxTube</string>
     <string name="subscriptions_search_placeholder">Претражи претплате...</string>
     <string name="subscriptions_sort_label">Сортирај канале</string>
     <string name="subscriptions_sort_default">Подразумевано</string>
@@ -16,7 +16,7 @@
     <string name="copy_logs">Копирај логове</string>
     <string name="logs_copied">Логови копирани</string>
     <string name="logs_copy_failed">Копирање логова није успело</string>
-    <string name="channel_error_log_clip_label">Flow лог грешке канала</string>
+    <string name="channel_error_log_clip_label">VoxTube лог грешке канала</string>
     <string name="shorts">Shorts</string>
     <string name="failed_to_load_channel">Није успело учитавање канала</string>
     <string name="subscribers">Претплатници</string>
@@ -42,7 +42,7 @@
     <string name="local_media_empty_title">Ниједан %1$s нађен</string>
     <string name="local_media_empty_body">Видеи и музика преузети на овај уређај ће се овде појавити.</string>
     <string name="local_media_permission_title">Потребна је дозвола.</string>
-    <string name="local_media_permission_body">Дозволите приступ вашим медијима како би Flow могао да пушта преузете снимке и музику.</string>
+    <string name="local_media_permission_body">Дозволите приступ вашим медијима како би VoxTube могао да пушта преузете снимке и музику.</string>
     <string name="local_media_grant">Одобрите приступ</string>
     <string name="library_settings_data_header"><![CDATA[Подешавања и подаци]]></string>
     <string name="library_manage_data_label">Управљајте подацима</string>
@@ -151,7 +151,7 @@
     <string name="subscriptions_music_badge_cd">Претплате музике</string>
     <string name="no_subscriptions_found">Нису нађене претплате</string>
     <string name="live_chat">Ћаскање уживо</string>
-    <string name="app_name_uppercase">FLOW</string>
+    <string name="app_name_uppercase">VOXTUBE</string>
     <string name="deep_flow_mode_subtitle">Паузирајте учење док прегледате</string>
     <string name="player_appearance_haptics_subtitle">Лагано вибрирајте на додире и покрете играча</string>
     <string name="lyrics_provider_youtube_music_desc">Обичан текст · картица Лирицс</string>
@@ -168,7 +168,7 @@
     <string name="linked_title">Повезани уређаји</string>
     <string name="play_on_subtitle">Изаберите где се игра</string>
     <string name="play_on_manage_summary">Преименујте уређаје и изаберите који могу да играју овде</string>
-    <string name="linked_intro">Одржавајте синхронизацију овог уређаја са вашим другим уређајима преко сопственог сервера за синхронизацију Flow, ВебДАВ фасцикле или ваше Ви-Фи мреже. Све је шифровано на вашим уређајима; ниједан сервер не може да га прочита.</string>
+    <string name="linked_intro">Одржавајте синхронизацију овог уређаја са вашим другим уређајима преко сопственог сервера за синхронизацију VoxTube, ВебДАВ фасцикле или ваше Ви-Фи мреже. Све је шифровано на вашим уређајима; ниједан сервер не може да га прочита.</string>
     <string name="linked_join_request">%1$s жели да се придружи</string>
     <string name="linked_join_notification_text">%1$s је затражио да се придружи вашим повезаним уређајима. Отворите Повезани уређаји да бисте прихватили или одбили.</string>
     <string name="linked_server">Сервер</string>

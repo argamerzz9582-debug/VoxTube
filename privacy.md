@@ -50,7 +50,7 @@ device and scanning it with the other, so the key never travels over the wire. T
 is bound only while that screen is open, frames are decoded locally by ZXing, and no image is
 stored or transmitted.
 
-Requested at: `app/src/main/java/io/github/aedev/flow/ui/screens/sync/SyncSetupContent.kt`
+Requested at: `app/src/main/java/com/voxtube/app/ui/screens/sync/SyncSetupContent.kt`
 
 Users who never open Device Sync are never asked for it.
 
@@ -63,9 +63,9 @@ audio fingerprint on device, and sends only that fingerprint to Shazam's public 
 uploaded. Recording stops as soon as the query is made or the screen is left. There is no
 background or passive listening.
 
-Requested at: `app/src/main/java/io/github/aedev/flow/ui/screens/recognition/RecognitionScreen.kt`
+Requested at: `app/src/main/java/com/voxtube/app/ui/screens/recognition/RecognitionScreen.kt`
 
-Gated at: `app/src/main/java/io/github/aedev/flow/data/recognition/MusicRecognitionRepository.kt`
+Gated at: `app/src/main/java/com/voxtube/app/data/recognition/MusicRecognitionRepository.kt`
 
 ### `READ_MEDIA_AUDIO`
 
@@ -91,10 +91,10 @@ permission is checked before that path is taken, and if it has not been granted 
 native PiP or with no popup at all. It is never used to draw over other apps for any other purpose,
 and no overlay exists outside an active playback session.
 
-Checked at: `app/src/main/java/io/github/aedev/flow/player/PictureInPictureHelper.kt`,
-`app/src/main/java/io/github/aedev/flow/service/VideoPlayerService.kt`
+Checked at: `app/src/main/java/com/voxtube/app/player/PictureInPictureHelper.kt`,
+`app/src/main/java/com/voxtube/app/service/VideoPlayerService.kt`
 
-Window created at: `app/src/main/java/io/github/aedev/flow/player/PopupPlayerWindow.kt`
+Window created at: `app/src/main/java/com/voxtube/app/player/PopupPlayerWindow.kt`
 
 ## The remaining permissions
 
@@ -156,7 +156,7 @@ still follow the phone's main vibration switch, its media vibration level and ba
 the setting off, Flow's vibrations go through the normal touch feedback path and this permission is
 unused.
 
-Used at: `app/src/main/java/io/github/aedev/flow/ui/components/shared/TouchFeedbackOverride.kt`
+Used at: `app/src/main/java/com/voxtube/app/ui/components/shared/TouchFeedbackOverride.kt`
 
 ### Battery
 
@@ -166,7 +166,7 @@ because several OEM battery managers put the app in a restricted App Standby buc
 background network access, which silently starves the periodic subscription check. Declining leaves
 everything working while the app is open.
 
-Used at: `app/src/main/java/io/github/aedev/flow/notification/BackgroundWorkPolicy.kt`
+Used at: `app/src/main/java/com/voxtube/app/notification/BackgroundWorkPolicy.kt`
 
 ### Legacy
 
