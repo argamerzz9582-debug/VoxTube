@@ -31,11 +31,12 @@ class DiscordTokenStoreInstrumentedTest {
 
     @Test
     fun tokenRoundTripsThroughKeystoreEncryptedStorage() {
-        val tokens = DiscordAuthTokens(
-            accessToken = "account-token",
-            refreshToken = "",
-            expiresAtEpochSeconds = Long.MAX_VALUE,
-        )
+        val tokens =
+            DiscordAuthTokens(
+                accessToken = "account-token",
+                refreshToken = "",
+                expiresAtEpochSeconds = Long.MAX_VALUE,
+            )
 
         store.save(tokens)
 
@@ -56,7 +57,8 @@ class DiscordTokenStoreInstrumentedTest {
         assertFalse(androidKeyStore().containsAlias("flow_discord_tokens_v1"))
     }
 
-    private fun androidKeyStore(): KeyStore = KeyStore.getInstance("AndroidKeyStore").apply {
-        load(null)
-    }
+    private fun androidKeyStore(): KeyStore =
+        KeyStore.getInstance("AndroidKeyStore").apply {
+            load(null)
+        }
 }

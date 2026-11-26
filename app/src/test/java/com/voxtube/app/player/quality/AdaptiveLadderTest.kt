@@ -7,8 +7,7 @@ import com.voxtube.app.player.stream.VideoCodecUtils
 import org.junit.Test
 
 class AdaptiveLadderTest {
-    private fun heights(rungs: List<com.voxtube.app.player.stream.model.VideoStream>) =
-        rungs.map(VideoCodecUtils::qualityHeightFromStream)
+    private fun heights(rungs: List<com.voxtube.app.player.stream.model.VideoStream>) = rungs.map(VideoCodecUtils::qualityHeightFromStream)
 
     @Test
     fun `a ladder holds every height of the anchor's codec, lowest bitrate first`() {

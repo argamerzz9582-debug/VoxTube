@@ -15,8 +15,7 @@ class AutoQualityPolicyTest {
             h264(1080, 4_500_000),
         )
 
-    private fun height(stream: com.voxtube.app.player.stream.model.VideoStream?) =
-        stream?.let(VideoCodecUtils::qualityHeightFromStream)
+    private fun height(stream: com.voxtube.app.player.stream.model.VideoStream?) = stream?.let(VideoCodecUtils::qualityHeightFromStream)
 
     @Test
     fun `starts at the tallest quality whose bitrate fits 70 percent of the estimate`() {

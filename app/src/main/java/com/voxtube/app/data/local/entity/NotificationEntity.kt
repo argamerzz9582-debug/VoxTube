@@ -13,5 +13,5 @@ data class NotificationEntity(
     val thumbnailUrl: String?,
     val timestamp: Long = System.currentTimeMillis(),
     val isRead: Boolean = false,
-    val type: String = "NEW_VIDEO" // NEW_VIDEO, GENERAL, etc.
+    val type: String = "NEW_VIDEO", // NEW_VIDEO, GENERAL, etc.
 )

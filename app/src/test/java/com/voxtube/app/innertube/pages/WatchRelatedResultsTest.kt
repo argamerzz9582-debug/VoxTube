@@ -89,7 +89,10 @@ class WatchRelatedResultsTest {
 
     @Test
     fun `a Mix keeps its badge and the lines YouTube prints under its title`() {
-        val mix = watch(results = listOf(mixLockup("RDa"))).watchRelatedResults(hl = "en").entries.single() as WatchRelatedEntry.PlaylistCard
+        val mix =
+            watch(
+                results = listOf(mixLockup("RDa")),
+            ).watchRelatedResults(hl = "en").entries.single() as WatchRelatedEntry.PlaylistCard
 
         assertThat(mix.labels.badge).isEqualTo("Mix")
         assertThat(mix.labels.byline).isEqualTo("Toto, Cyndi Lauper, and more")
@@ -99,7 +102,13 @@ class WatchRelatedResultsTest {
 
     @Test
     fun `a playlist drops its link to the full playlist and keeps its count`() {
-        val rows = "[" + row(part("Rick Astley", "UCuAXFkgsw1L7xaCfnd5JJOw"), part("Playlist")) + "," + row(part("View full playlist", "VLPLabc")) + "]"
+        val rows =
+            "[" +
+                row(
+                    part("Rick Astley", "UCuAXFkgsw1L7xaCfnd5JJOw"),
+                    part("Playlist"),
+                ) + "," + row(part("View full playlist", "VLPLabc")) +
+                "]"
 
         val card =
             watch(results = listOf(playlistLockup("PLabc", rows, badge = "25 videos")))
@@ -117,7 +126,10 @@ class WatchRelatedResultsTest {
     fun `every part after the byline joins with YouTube's own delimiter`() {
         val rows = "[" + row(part("Rick Astley")) + "," + row(part("Updated today"), part("Playlist")) + "]"
 
-        val card = watch(results = listOf(playlistLockup("PLabc", rows))).watchRelatedResults(hl = "en").entries.single() as WatchRelatedEntry.PlaylistCard
+        val card =
+            watch(
+                results = listOf(playlistLockup("PLabc", rows)),
+            ).watchRelatedResults(hl = "en").entries.single() as WatchRelatedEntry.PlaylistCard
 
         assertThat(card.labels.badge).isNull()
         assertThat(card.labels.byline).isEqualTo("Rick Astley")
@@ -126,7 +138,10 @@ class WatchRelatedResultsTest {
 
     @Test
     fun `a playlist with no metadata rows has no lines to show`() {
-        val card = watch(results = listOf(playlistLockup("PLabc", "[]", badge = "Mix"))).watchRelatedResults(hl = "en").entries.single() as WatchRelatedEntry.PlaylistCard
+        val card =
+            watch(
+                results = listOf(playlistLockup("PLabc", "[]", badge = "Mix")),
+            ).watchRelatedResults(hl = "en").entries.single() as WatchRelatedEntry.PlaylistCard
 
         assertThat(card.labels.badge).isEqualTo("Mix")
         assertThat(card.labels.byline).isNull()
@@ -167,10 +182,15 @@ class WatchRelatedResultsTest {
             {"lockupViewModel":{"contentId":"$id","contentType":"LOCKUP_CONTENT_TYPE_PLAYLIST",
               "contentImage":{"collectionThumbnailViewModel":{"primaryThumbnail":{"thumbnailViewModel":{
                 "image":{"sources":[{"url":"https://i.ytimg.com/vi/x/hqdefault.jpg","width":336,"height":188}]},
-                "overlays":[${badge?.let { """{"thumbnailOverlayBadgeViewModel":{"thumbnailBadges":[{"thumbnailBadgeViewModel":{"text":"$it"}}]}}""" }.orEmpty()}]}}}},
+                "overlays":[${badgeOverlay(badge)}]}}}},
               "metadata":{"lockupMetadataViewModel":{"title":{"content":"Playlist $id"},
                 "metadata":{"contentMetadataViewModel":{"delimiter":" · ","metadataRows":$rows}}}}}}
             """.trimIndent()
+
+        private fun badgeOverlay(badge: String?) =
+            badge
+                ?.let { """{"thumbnailOverlayBadgeViewModel":{"thumbnailBadges":[{"thumbnailBadgeViewModel":{"text":"$it"}}]}}""" }
+                .orEmpty()
 
         private fun part(
             text: String,
