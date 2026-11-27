@@ -23,7 +23,6 @@ import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -40,10 +39,10 @@ import com.voxtube.app.data.local.ThumbnailQuality
 import com.voxtube.app.innertube.pages.reel.reelPosterUrl
 import com.voxtube.app.ui.components.shared.LocalThumbnailQuality
 import com.voxtube.app.ui.components.shared.VideoThumbnailImage
+import com.voxtube.app.ui.components.videoplayer.controls.playerGlass
 import com.voxtube.app.ui.theme.PlayerScrim
 import com.voxtube.app.ui.theme.PlayerScrimContent
 import com.voxtube.app.ui.theme.PlayerScrimImmersiveBackdrop
-import com.voxtube.app.ui.theme.PlayerScrimPanel
 import com.voxtube.app.utils.ThumbnailUrlResolver
 import kotlinx.coroutines.delay
 
@@ -112,7 +111,7 @@ internal fun ShortsAutoScrollBadge(
         exit = fadeOut(MaterialTheme.motionScheme.defaultEffectsSpec()),
         modifier = modifier,
     ) {
-        Surface(color = PlayerScrimPanel, shape = CircleShape) {
+        Box(modifier = playerGlass(CircleShape)) {
             Row(
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                 verticalAlignment = Alignment.CenterVertically,

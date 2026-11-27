@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -45,8 +46,8 @@ import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
 import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
 import com.voxtube.app.ui.components.shared.videoMetadataLine
+import com.voxtube.app.ui.components.videoplayer.controls.playerGlass
 import com.voxtube.app.ui.theme.PlayerScrimContent
-import com.voxtube.app.ui.theme.PlayerScrimPanel
 import com.voxtube.app.utils.YouTubeLink
 
 private val AvatarSize = 36.dp
@@ -234,9 +235,11 @@ private fun ShortsLinkedVideoChip(linkedVideo: ShortLinkedVideo) {
                 modifier = Modifier.size(AssistChipDefaults.IconSize),
             )
         },
+        shape = CircleShape,
+        modifier = Modifier.then(playerGlass(CircleShape)),
         colors =
             AssistChipDefaults.assistChipColors(
-                containerColor = PlayerScrimPanel,
+                containerColor = Color.Transparent,
                 labelColor = PlayerScrimContent,
                 leadingIconContentColor = PlayerScrimContent,
             ),
@@ -249,7 +252,11 @@ private fun ShortsSoundPill(
     title: String,
     animate: Boolean,
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    // The sound rides on a small pane of glass, like the reference's audio pill.
+    Row(
+        modifier = Modifier.then(playerGlass(CircleShape)).padding(horizontal = 10.dp, vertical = 5.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
         PlayingWaveform(
             color = PlayerScrimContent,
             animate = animate,

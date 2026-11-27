@@ -1,6 +1,7 @@
 package com.voxtube.app.ui.screens.subscriptions
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -44,10 +46,12 @@ import com.voxtube.app.ui.components.shared.ChannelGroupBadge
 import com.voxtube.app.ui.components.shared.VoxTubeNewBadge
 import com.voxtube.app.ui.components.shared.flowArtistShape
 import com.voxtube.app.ui.components.shared.focusLift
+import com.voxtube.app.ui.components.shared.pressScale
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
 import com.voxtube.app.ui.components.shared.titleMarquee
 import com.voxtube.app.ui.components.shared.titleMarqueeOverflow
 import com.voxtube.app.ui.components.shared.toOrganizeTarget
+import com.voxtube.app.ui.theme.glass.glassHairline
 
 private val AvatarItemWidth = 64.dp
 private val AvatarSize = 56.dp
@@ -80,6 +84,7 @@ internal fun ChannelAvatarItem(
         modifier =
             modifier
                 .width(AvatarItemWidth)
+                .pressScale(interactionSource)
                 .focusLift(interactionSource)
                 .combinedClickable(
                     interactionSource = interactionSource,
@@ -106,13 +111,15 @@ internal fun ChannelAvatarItem(
             modifier = Modifier.size(AvatarSize),
             contentAlignment = Alignment.Center,
         ) {
+            val avatarShape = subscriptionAvatarShape(channel.isMusic)
             ChannelAvatarImage(
                 url = channel.thumbnailUrl,
                 contentDescription = channel.name,
                 modifier =
                     Modifier
                         .size(AvatarSize)
-                        .clip(subscriptionAvatarShape(channel.isMusic))
+                        .then(if (hasNewUploads) newUploadsRing(avatarShape) else glassHairline(avatarShape))
+                        .clip(avatarShape)
                         .background(MaterialTheme.colorScheme.surfaceVariant),
             )
             ChannelGroupBadge(channelId = channel.id)
@@ -145,6 +152,20 @@ internal fun ChannelAvatarItem(
         }
     }
 }
+
+/**
+ * A channel with uploads you have not seen wears a ring in the accent, the way a story ring reads on
+ * iOS: the avatar sits inside it with a gap of page between.
+ */
+@Composable
+private fun newUploadsRing(shape: Shape): Modifier {
+    val scheme = MaterialTheme.colorScheme
+    val brush = remember(scheme.primary, scheme.tertiary) { Brush.sweepGradient(listOf(scheme.primary, scheme.tertiary, scheme.primary)) }
+    return Modifier.border(NewUploadsRingWidth, brush, shape).padding(NewUploadsRingGap)
+}
+
+private val NewUploadsRingWidth = 2.dp
+private val NewUploadsRingGap = 3.5.dp
 
 @Composable
 internal fun AllSubscriptionsAvatarItem(

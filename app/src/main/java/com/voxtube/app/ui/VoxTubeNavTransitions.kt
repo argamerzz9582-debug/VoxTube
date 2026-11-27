@@ -8,6 +8,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
 import androidx.navigation.NavBackStackEntry
 import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.theme.NavigationMotion
@@ -49,7 +50,8 @@ internal fun navTransitionKind(
 
 /**
  * The NavHost's transitions. A page slides in over the page it came from, which drifts a quarter
- * of the way out underneath. Only translation changes, so neither page needs an offscreen layer.
+ * of the way out underneath. Only translation changes, so neither page needs an offscreen layer; a tab
+ * fades through and settles in from a slightly smaller scale.
  * With [reducedMotion] (a low-RAM phone, battery saver) tabs swap at once and pages slide briskly.
  */
 internal class VoxTubeNavTransitions(
@@ -59,6 +61,13 @@ internal class VoxTubeNavTransitions(
     private fun pageSlide() = if (reducedMotion()) NavigationMotion.PageSlideBrisk else NavigationMotion.PageSlide
 
     private var tabTapTargetId: String? = null
+
+    /**
+     * The arriving tab fades in while it settles up from a hair smaller, the way iOS 26 lifts a tab's
+     * content into place. Scale and alpha share the fade's timing, so they finish together.
+     */
+    private fun tabEnter(): EnterTransition =
+        fadeIn(NavigationMotion.TabFadeIn) + scaleIn(NavigationMotion.TabFadeIn, initialScale = TAB_ENTER_SCALE)
 
     /**
      * Called right after a tab tap navigates, with the entry it landed on. A tab can reopen on a
@@ -90,7 +99,7 @@ internal class VoxTubeNavTransitions(
     val enter: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition = {
         when (kind()) {
             NavTransitionKind.NONE -> EnterTransition.None
-            NavTransitionKind.TAB -> fadeIn(NavigationMotion.TabFadeIn)
+            NavTransitionKind.TAB -> tabEnter()
             NavTransitionKind.PAGE -> slideIntoContainer(SlideDirection.Start, pageSlide())
         }
     }
@@ -106,7 +115,7 @@ internal class VoxTubeNavTransitions(
     val popEnter: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition = {
         when (kind()) {
             NavTransitionKind.NONE -> EnterTransition.None
-            NavTransitionKind.TAB -> fadeIn(NavigationMotion.TabFadeIn)
+            NavTransitionKind.TAB -> tabEnter()
             NavTransitionKind.PAGE -> slideIntoContainer(SlideDirection.End, pageSlide()) { it / UNDERNEATH_SHARE }
         }
     }
@@ -143,3 +152,4 @@ internal class VoxTubeNavTransitions(
 
 private const val PREDICTIVE_BACK_DURATION_MS = 300
 private const val UNDERNEATH_SHARE = 4
+private const val TAB_ENTER_SCALE = 0.97f

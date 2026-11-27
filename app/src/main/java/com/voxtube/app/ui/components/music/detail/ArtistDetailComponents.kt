@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -40,11 +41,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedToggleButton
-import androidx.compose.material3.OutlinedToggleButtonDefaults
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Text
-import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.material3.TooltipAnchorPosition
 import androidx.compose.material3.TooltipBox
 import androidx.compose.material3.TooltipDefaults
@@ -54,6 +52,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -72,7 +71,9 @@ import coil3.request.crossfade
 import com.voxtube.app.R
 import com.voxtube.app.data.music.model.ArtistDetails
 import com.voxtube.app.data.music.model.MusicTextLink
+import com.voxtube.app.ui.components.shared.GlassPillButton
 import com.voxtube.app.ui.components.shared.flowWindowWidth
+import com.voxtube.app.ui.theme.glass.contentGlass
 import com.voxtube.app.utils.formatViewCount
 
 private val HeroMaxHeight = 400.dp
@@ -150,15 +151,10 @@ fun ArtistHero(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            OutlinedToggleButton(
-                checked = artist.isSubscribed,
-                onCheckedChange = { onFollowClick() },
-                shapes = ToggleButtonDefaults.shapesFor(ButtonDefaults.MinHeight),
-                colors =
-                    OutlinedToggleButtonDefaults.colors(
-                        checkedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        checkedContentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    ),
+            // Follow is a pill of glass over the hero's bleed; the accent stays on Play, the page's main action.
+            GlassPillButton(
+                onClick = onFollowClick,
+                height = ButtonDefaults.MinHeight,
                 modifier = Modifier.weight(1f, fill = false),
             ) {
                 Icon(
@@ -254,7 +250,12 @@ private fun ArtistQueueButton(
         FilledTonalIconButton(
             onClick = onClick,
             shapes = IconButtonDefaults.shapes(),
-            modifier = Modifier.size(IconButtonDefaults.smallContainerSize()),
+            colors =
+                IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = Color.Transparent,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
+                ),
+            modifier = Modifier.size(IconButtonDefaults.smallContainerSize()).then(contentGlass(CircleShape)),
         ) {
             if (starting) {
                 CircularProgressIndicator(

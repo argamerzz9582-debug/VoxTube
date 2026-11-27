@@ -1,8 +1,11 @@
 package com.voxtube.app.ui.screens.library
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +16,7 @@ import com.voxtube.app.R
 import com.voxtube.app.ui.components.library.LibraryNavigationRow
 import com.voxtube.app.ui.components.library.LibrarySection
 import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
+import com.voxtube.app.ui.theme.glass.contentGlass
 
 @Composable
 internal fun LibrarySectionList(
@@ -22,11 +26,31 @@ internal fun LibrarySectionList(
 ) {
     Column(modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).padding(horizontal = 16.dp)) {
         LibrarySectionHeader(stringResource(R.string.library_section_header))
-        sections.forEach { section ->
-            LibrarySectionRow(section, counts) { onOpenSection(section) }
+        LibraryGlassGroup {
+            sections.forEach { section ->
+                LibrarySectionRow(section, counts) { onOpenSection(section) }
+            }
         }
     }
 }
+
+/**
+ * Rows grouped on one pane of glass, the way iOS groups a list's rows into an inset card, so a section
+ * reads as one block instead of loose lines on the page.
+ */
+@Composable
+internal fun LibraryGlassGroup(content: @Composable ColumnScope.() -> Unit) {
+    Column(
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .then(contentGlass(LibraryGroupShape))
+                .padding(vertical = 4.dp),
+        content = content,
+    )
+}
+
+private val LibraryGroupShape = RoundedCornerShape(22.dp)
 
 @Composable
 internal fun LibrarySectionHeader(text: String) {

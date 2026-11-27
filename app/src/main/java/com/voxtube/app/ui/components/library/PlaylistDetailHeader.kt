@@ -71,6 +71,8 @@ import com.voxtube.app.ui.components.shared.VoxTubePairAction
 import com.voxtube.app.ui.components.shared.VoxTubeSortChip
 import com.voxtube.app.ui.components.shared.connectedButtonShapes
 import com.voxtube.app.ui.components.shared.thumbnailUrlOrNull
+import com.voxtube.app.ui.theme.CapsuleShape
+import com.voxtube.app.ui.theme.glass.contentGlass
 
 private val HeaderPadding: Dp = 16.dp
 private const val DESCRIPTION_COLLAPSED_LINES = 2
@@ -291,7 +293,11 @@ private fun PlaylistSecondaryActions(
     state: PlaylistHeaderState,
     actions: PlaylistHeaderActions,
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    // The lesser actions share one capsule of glass, like a toolbar group on iOS 26.
+    Row(
+        modifier = contentGlass(CapsuleShape).padding(horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
         val progress = state.downloadProgress
         IconButton(onClick = actions.onDownloadAll, enabled = progress == null) {
             if (progress != null) {

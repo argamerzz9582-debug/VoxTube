@@ -1,15 +1,19 @@
 package com.voxtube.app.ui.components.channel
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.focusGroup
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryScrollableTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -17,10 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
 import com.voxtube.app.ui.theme.extendedColors
+import com.voxtube.app.ui.theme.glass.glassHairline
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,11 +52,15 @@ internal fun ChannelTabRow(
             edgePadding = 0.dp,
             containerColor = MaterialTheme.colorScheme.background,
             contentColor = MaterialTheme.colorScheme.onSurface,
+            // The open tab sits in a soft pill of glass that glides between tabs, as in iOS 26's segmented strips.
             indicator = {
-                TabRowDefaults.SecondaryIndicator(
-                    modifier = Modifier.tabIndicatorOffset(selectedIndex),
-                    height = 2.dp,
-                    color = MaterialTheme.colorScheme.primary,
+                Box(
+                    modifier =
+                        Modifier
+                            .tabIndicatorOffset(selectedIndex, matchContentSize = false)
+                            .fillMaxHeight()
+                            .padding(horizontal = 2.dp, vertical = 5.dp)
+                            .then(selectedTabPill()),
                 )
             },
             divider = {},
@@ -78,4 +89,21 @@ internal fun ChannelTabRow(
             thickness = 0.5.dp,
         )
     }
+}
+
+private val TabPillShape = RoundedCornerShape(percent = 50)
+private const val TAB_PILL_DARK_ALPHA = 0.12f
+private const val TAB_PILL_LIGHT_ALPHA = 0.06f
+private const val DARK_SURFACE_LUMINANCE = 0.5f
+
+@Composable
+private fun selectedTabPill(): Modifier {
+    val scheme = MaterialTheme.colorScheme
+    val fill =
+        if (scheme.surface.luminance() < DARK_SURFACE_LUMINANCE) {
+            Color.White.copy(alpha = TAB_PILL_DARK_ALPHA)
+        } else {
+            Color.Black.copy(alpha = TAB_PILL_LIGHT_ALPHA)
+        }
+    return Modifier.background(fill, TabPillShape).then(glassHairline(TabPillShape))
 }

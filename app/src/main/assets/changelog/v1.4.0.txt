@@ -1,0 +1,21 @@
+VOXTUBE CHANGE LOG
+VERSION: 1.4.0
+DATE: 2026-11-27
+STATUS: stable
+
+NEW
+- Subscriptions ring channels with new uploads in your accent colour
+- The selected option in a menu sits on a soft rounded pill
+
+IMPROVED
+- Shorts sound disc, sound name, linked video and timer are glass
+- Now Playing title and Live Lyrics header float on glass
+- Music speed dial tiles are glass
+- Filter chips are glass pills; the picked one takes your accent colour
+- Thumbnails have rounder corners and a fine edge
+- Library rows are grouped on glass cards
+- Channel tabs show the open tab on a glass pill
+- Playlist and album pages use Play and Shuffle capsules
+- Artist Subscribe, Shuffle and Radio buttons are glass
+- Your taste cards are glass and the taste shape grows into place
+- Smoother tab switches and press feedback

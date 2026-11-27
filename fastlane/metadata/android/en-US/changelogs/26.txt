@@ -1,0 +1,5 @@
+VoxTube 1.4.0, the iOS 27 Liquid Glass redesign (phases B and C):
+- Glass on Shorts, Now Playing, Live Lyrics and Music speed dial
+- Glass filter chips, rounder thumbnails and glass menu selection
+- Glass Library, Channel tabs, Playlist, Album, Artist and Your taste
+- New upload rings in Subscriptions and smoother tab switches

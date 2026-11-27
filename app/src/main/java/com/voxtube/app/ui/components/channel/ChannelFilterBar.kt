@@ -15,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.innertube.pages.channel.ChannelFilterGroup
 import com.voxtube.app.ui.components.shared.GlassDropdownMenu
+import com.voxtube.app.ui.components.shared.GlassMenuItem
 import com.voxtube.app.ui.components.shared.VoxTubeDropdownFilterChip
 import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 import com.voxtube.app.ui.components.shared.VoxTubeSearchField
@@ -161,8 +161,9 @@ private fun ChannelFilterDropdown(
         )
         GlassDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             group.options.forEachIndexed { index, option ->
-                DropdownMenuItem(
+                GlassMenuItem(
                     text = { Text(option.label) },
+                    selected = index == activeIndex,
                     onClick = {
                         expanded = false
                         onSelected(index)

@@ -1,9 +1,9 @@
-# VoxTube v1.3.0
+# VoxTube v1.4.0
 
 **Release date:** 2026-11-27
 **Status:** Stable
 
-The iOS 27 Liquid Glass redesign, phase A: a lens tab bar with its own search button, the Inter font, the Obsidian Glass theme, and a glass video player and watch page.
+The iOS 27 Liquid Glass redesign, phases B and C: glass on Shorts, the music player and lyrics, and on Subscriptions, Library, Channel, Playlist, Album, Artist and Your taste, with smoother motion across the app.
 
 ## Download
 
@@ -16,27 +16,32 @@ The iOS 27 Liquid Glass redesign, phase A: a lens tab bar with its own search bu
 | `checksums.txt` | SHA-256 of every APK |
 | Source code (zip / tar.gz) | The full source of this release |
 
-Android 8.0 or newer. Updates over VoxTube 1.2.0, 1.1.1, 1.1.0 and 1.0.0 in place.
+Android 8.0 or newer. Updates over VoxTube 1.3.0, 1.2.0, 1.1.1, 1.1.0 and 1.0.0 in place.
 
 ## New
 
-- The floating tab bar selects with a Liquid Glass lens that magnifies and lights up the icons under it, and swells while you drag it (Android 13 and newer)
-- Search has its own round glass button beside the tab bar, with a switch in Settings > Appearance > Navigation bar
-- Inter is the new app font, with Device font still available in Settings > Appearance > Font
-- Obsidian Glass is the new default theme: deep blue-black behind the glass with a red accent
+- Subscriptions ring the avatars of channels with new uploads in your accent colour
+- The selected option in a menu sits on a soft rounded pill
 
 ## Improved
 
-- Player buttons, the time pill and the top actions are glass with a lit rim, like the iOS 26 player
-- The watch page like, save, share and comments sit on glass pills and cards over the video's ambient colours
-- Menus are rounded glass sheets with a soft rim and shadow
-- Ambient mode is on by default, so the watch page takes on the video's colours
-- Large titles are set a little tighter, the way iOS sets them
+- Shorts: the sound disc, the sound name, the linked video and the auto scroll timer are glass
+- Now Playing shows its title on a glass pill, and Live Lyrics float the song and the back button on glass
+- Speed dial tiles in Music are glass and sink a little when pressed
+- Filter chips are glass pills, and the picked one is tinted and ringed in your accent colour
+- Video thumbnails have rounder corners and a fine edge that keeps dark frames in shape
+- Library groups its rows on glass cards with rounded icon tiles
+- Channel tabs show the open tab on a glass pill
+- Playlist and album pages use Play and Shuffle capsules, with the other actions grouped on one glass capsule
+- The artist Subscribe button and the Shuffle and Radio buttons are glass
+- Your taste shows its cards on glass, and the taste shape grows into place
+- Switching tabs settles the new tab into place with a gentle scale
+- Channel avatars in Subscriptions sink a little when pressed
 
 ## Direct links
 
-- APK (recommended): [voxtube.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.3.0/voxtube.apk)
-- APK (arm64): [voxtube-arm64-v8a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.3.0/voxtube-arm64-v8a.apk)
-- APK (32-bit): [voxtube-armeabi-v7a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.3.0/voxtube-armeabi-v7a.apk)
-- APK (FOSS): [voxtube-foss.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.3.0/voxtube-foss.apk)
-- Source code: [zip](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.3.0.zip) · [tar.gz](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.3.0.tar.gz)
+- APK (recommended): [voxtube.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.4.0/voxtube.apk)
+- APK (arm64): [voxtube-arm64-v8a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.4.0/voxtube-arm64-v8a.apk)
+- APK (32-bit): [voxtube-armeabi-v7a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.4.0/voxtube-armeabi-v7a.apk)
+- APK (FOSS): [voxtube-foss.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.4.0/voxtube-foss.apk)
+- Source code: [zip](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.4.0.zip) · [tar.gz](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.4.0.tar.gz)

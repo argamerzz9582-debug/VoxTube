@@ -68,6 +68,7 @@ import com.voxtube.app.data.local.LYRICS_ALIGN_LEFT
 import com.voxtube.app.data.local.LYRICS_ALIGN_RIGHT
 import com.voxtube.app.ui.components.PlayingWaveform
 import com.voxtube.app.ui.components.shared.VoxTubeSpinner
+import com.voxtube.app.ui.theme.glass.contentGlass
 import kotlinx.coroutines.delay
 
 internal fun lyricsTextAlignFor(pref: String): TextAlign =
@@ -99,8 +100,8 @@ internal fun LyricsTrackPill(
         Row(
             modifier =
                 Modifier
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                    // The header floats over the lyrics as a pill of glass, after iOS 26's Live Lyrics.
+                    .then(contentGlass(CircleShape))
                     .animateContentSize()
                     .padding(start = 6.dp, end = 18.dp, top = 6.dp, bottom = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -186,11 +187,11 @@ internal fun LyricsBottomBar(
                     .graphicsLayer {
                         scaleX = backScale
                         scaleY = backScale
-                    },
+                    }.then(contentGlass(CircleShape)),
             shape = CircleShape,
             colors =
                 IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                    containerColor = Color.Transparent,
                     contentColor = MaterialTheme.colorScheme.onSurface,
                 ),
             interactionSource = backInteraction,

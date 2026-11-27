@@ -171,25 +171,27 @@ fun LibraryScreen(
                 item(key = "settings-data", contentType = "navigation-section") {
                     Column(modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).padding(horizontal = 16.dp)) {
                         LibrarySectionHeader(stringResource(R.string.library_settings_data_header))
-                        if (emptyLibraryDownloads) {
-                            LibraryNavigationRow(
-                                icon = LibrarySection.DOWNLOADS.icon,
-                                title = LibrarySection.DOWNLOADS.title,
-                                subtitle = stringResource(R.string.empty_downloads),
-                                onClick = onNavigateToDownloads,
-                            )
-                        }
-                        settingsSections.forEach { section ->
-                            val notes = notesCount
-                            if (section == LibrarySection.NOTES && notes != null && notes > 0) {
+                        LibraryGlassGroup {
+                            if (emptyLibraryDownloads) {
                                 LibraryNavigationRow(
-                                    icon = section.icon,
-                                    title = section.title,
-                                    subtitle = pluralStringResource(R.plurals.notes_count, notes, notes),
-                                    onClick = onNavigateToNotes,
+                                    icon = LibrarySection.DOWNLOADS.icon,
+                                    title = LibrarySection.DOWNLOADS.title,
+                                    subtitle = stringResource(R.string.empty_downloads),
+                                    onClick = onNavigateToDownloads,
                                 )
-                            } else {
-                                LibrarySectionRow(section = section, counts = null, onClick = { openSection(section) })
+                            }
+                            settingsSections.forEach { section ->
+                                val notes = notesCount
+                                if (section == LibrarySection.NOTES && notes != null && notes > 0) {
+                                    LibraryNavigationRow(
+                                        icon = section.icon,
+                                        title = section.title,
+                                        subtitle = pluralStringResource(R.plurals.notes_count, notes, notes),
+                                        onClick = onNavigateToNotes,
+                                    )
+                                } else {
+                                    LibrarySectionRow(section = section, counts = null, onClick = { openSection(section) })
+                                }
                             }
                         }
                         Spacer(modifier = Modifier.height(8.dp))

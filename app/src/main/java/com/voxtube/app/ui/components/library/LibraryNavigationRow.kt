@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
@@ -27,6 +27,9 @@ import androidx.compose.ui.unit.dp
 private val IconContainerSize = 48.dp
 private val IconSize = 24.dp
 
+/** A rounded tile, as iOS draws a grouped row's icon. */
+private val IconContainerShape = RoundedCornerShape(14.dp)
+
 @Composable
 internal fun LibraryNavigationRow(
     icon: ImageVector,
@@ -40,7 +43,7 @@ internal fun LibraryNavigationRow(
             modifier
                 .fillMaxWidth()
                 .clickable(onClick = onClick)
-                .padding(horizontal = 8.dp, vertical = 12.dp),
+                .padding(horizontal = 12.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -48,7 +51,7 @@ internal fun LibraryNavigationRow(
             modifier =
                 Modifier
                     .size(IconContainerSize)
-                    .clip(CircleShape)
+                    .clip(IconContainerShape)
                     .background(MaterialTheme.colorScheme.secondaryContainer),
             contentAlignment = Alignment.Center,
         ) {
