@@ -60,8 +60,8 @@ android {
         applicationId = "com.voxtube.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 24
-        versionName = "1.2.0"
+        versionCode = 25
+        versionName = "1.3.0"
 
         buildConfigField("int", "NIGHTLY_RUN", "0")
         buildConfigField("String", "APP_LANGUAGE_TAGS", "\"${(listOf("en") + translatedLocaleTags()).joinToString(",")}\"")

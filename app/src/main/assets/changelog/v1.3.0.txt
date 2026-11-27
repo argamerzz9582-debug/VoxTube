@@ -1,0 +1,17 @@
+VOXTUBE CHANGE LOG
+VERSION: 1.3.0
+DATE: 2026-11-27
+STATUS: stable
+
+NEW
+- The floating tab bar selects with a Liquid Glass lens that magnifies the icons under it
+- Search has its own round glass button beside the tab bar
+- Inter is the new app font; Device font is still in Appearance > Font
+- Obsidian Glass is the new default theme
+
+IMPROVED
+- Player buttons, the time pill and the top actions are glass with a lit rim
+- The watch page actions and comments sit on glass pills and cards
+- Menus are rounded glass sheets
+- Ambient mode is on by default
+- Large titles are set a little tighter
