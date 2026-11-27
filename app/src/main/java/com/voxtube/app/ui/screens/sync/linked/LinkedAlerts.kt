@@ -5,7 +5,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.PersonAdd
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
 import com.voxtube.app.sync2.service.LinkedError
 import com.voxtube.app.ui.components.settings.SettingsNotice
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import com.voxtube.app.ui.screens.sync.SyncActionRow
 
 /**
@@ -154,7 +154,7 @@ private fun RecoveryNotice(
         NoticeButton(stringResource(R.string.linked_recovery_notice_mine), !state.busy, warning = true, onClick = onAnswer)
     }
     if (removing && device != null) {
-        AlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { removing = false },
             title = { Text(stringResource(R.string.linked_remove_title, name)) },
             text = { Text(stringResource(R.string.linked_remove_body)) },

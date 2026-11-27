@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -24,6 +23,7 @@ import com.voxtube.app.sync2.service.LocalProfile
 import com.voxtube.app.sync2.service.OtherProfile
 import com.voxtube.app.sync2.service.ProfileChoices
 import com.voxtube.app.ui.components.settings.SettingsNotice
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.screens.sync.SyncRowGroup
@@ -97,7 +97,7 @@ internal fun LinkedProfilesCard(
         }
     }
     choices.local.firstOrNull { it.id == switching }?.let { profile ->
-        AlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { switching = null },
             title = { Text(stringResource(R.string.linked_profile_start_title, profile.name)) },
             text = { Text(stringResource(R.string.linked_profile_switch_body)) },
@@ -126,7 +126,7 @@ internal fun LinkedProfilesCard(
     }
     choices.others.firstOrNull { it.link == adding }?.let { other ->
         val name = label(other)
-        AlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { adding = null },
             title = { Text(stringResource(R.string.linked_profile_add_title, name)) },
             text = {
@@ -160,7 +160,7 @@ private fun StartDialog(
     onDismiss: () -> Unit,
     onLink: (link: String) -> Unit,
 ) {
-    AlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.linked_profile_start_title, profile.name)) },
         text = {
@@ -187,7 +187,7 @@ private fun StopDialog(
     onHere: () -> Unit,
     onEverywhere: () -> Unit,
 ) {
-    AlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.linked_profile_stop_title, profile.name)) },
         text = {

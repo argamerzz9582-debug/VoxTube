@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Devices
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.sync2.live.ConsentAnswer
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsSheet
 
@@ -92,7 +92,7 @@ fun PlayOnHost(onManageDevices: (() -> Unit)? = null) {
     }
     request?.let { asking ->
         val name = viewModel.nameOf(asking.did)
-        AlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { viewModel.answer(asking, ConsentAnswer.DECLINE) },
             icon = { Icon(Icons.Outlined.Devices, contentDescription = null) },
             title = { Text(stringResource(R.string.play_on_consent_title, name)) },

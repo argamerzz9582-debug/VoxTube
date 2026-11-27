@@ -61,6 +61,8 @@ import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.format.DateTimeFormatter
@@ -103,8 +105,9 @@ internal fun ChangelogSheet(onDismiss: () -> Unit) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = glassWindowContainerColor(MaterialTheme.colorScheme.surface),
     ) {
+        GlassWindowBlur()
         VoxTubeSheetHeader(
             title = stringResource(R.string.about_changelog),
             subtitle = stringResource(R.string.whats_new_in_flow),

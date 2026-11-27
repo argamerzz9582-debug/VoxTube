@@ -39,6 +39,9 @@ import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassSheetBase
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -67,7 +70,9 @@ fun AudioSettingsSheet(onDismiss: () -> Unit) {
         sheetState = rememberFlowSheetState(),
         modifier = VoxTubeModalSheetDefaults.modifier,
         contentWindowInsets = VoxTubeModalSheetDefaults.contentWindowInsets,
+        containerColor = glassWindowContainerColor(glassSheetBase()),
     ) {
+        GlassWindowBlur()
         Column(
             modifier =
                 Modifier

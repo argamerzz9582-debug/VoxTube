@@ -34,6 +34,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 
 private val SheetBottomPadding: Dp = 24.dp
 private val HeaderPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
@@ -64,8 +66,9 @@ fun MergeIntoCollectionSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = glassWindowContainerColor(MaterialTheme.colorScheme.surface),
     ) {
+        GlassWindowBlur()
         Column(
             modifier =
                 Modifier

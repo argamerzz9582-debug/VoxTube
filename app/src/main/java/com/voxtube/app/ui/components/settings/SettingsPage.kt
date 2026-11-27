@@ -30,9 +30,11 @@ import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeGlobalActionsMode
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeScrollAwayLayout
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
 import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
+import com.voxtube.app.ui.utils.reachUnderStatusBar
 import kotlinx.coroutines.flow.first
 
 internal val SettingsMaxContentWidth = VoxTubeMaxContentWidth
@@ -78,32 +80,32 @@ fun SettingsPage(
         if (index >= 0) listState.animateScrollToItem(index, HIGHLIGHT_VISIBLE_OFFSET_PX)
     }
 
+    // The page runs under a pinned Liquid Glass header (top bar plus any [header]), which frosts and
+    // bends the options as they scroll beneath it.
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.reachUnderStatusBar(),
         contentWindowInsets = WindowInsets(0.dp),
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = {
-            VoxTubeTopBar(
-                title = title,
-                subtitle = subtitle,
-                onBack = onBack,
-                actions = actions,
-                globalActions = VoxTubeGlobalActionsMode.None,
-            )
-        },
         snackbarHost = {
             snackbarHostState?.let { SnackbarHost(it, Modifier.floatAboveBottomChrome(LocalFlowBottomInsets.current)) }
         },
     ) { padding ->
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-        ) {
-            if (header != null) {
-                SettingsColumnFrame(Modifier.padding(horizontal = SettingsHorizontalPadding)) { header() }
-            }
+        VoxTubeScrollAwayLayout(
+            modifier = Modifier.padding(padding),
+            hideOnScroll = false,
+            header = {
+                VoxTubeTopBar(
+                    title = title,
+                    subtitle = subtitle,
+                    onBack = onBack,
+                    actions = actions,
+                    globalActions = VoxTubeGlobalActionsMode.None,
+                )
+                if (header != null) {
+                    SettingsColumnFrame(Modifier.padding(horizontal = SettingsHorizontalPadding)) { header() }
+                }
+            },
+        ) { topPadding ->
             val onTv = LocalDpadNavigation.current
             CompositionLocalProvider(LocalSettingsHighlight provides highlight) {
                 LazyColumn(
@@ -111,7 +113,7 @@ fun SettingsPage(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(SettingsRowGap),
                     contentPadding =
-                        PaddingValues(bottom = flowBottomContentPadding(SettingsBottomSpacing)),
+                        PaddingValues(top = topPadding, bottom = flowBottomContentPadding(SettingsBottomSpacing)),
                 ) {
                     keys.reset()
                     SettingsListScope(this, keys, onTv = onTv).content()

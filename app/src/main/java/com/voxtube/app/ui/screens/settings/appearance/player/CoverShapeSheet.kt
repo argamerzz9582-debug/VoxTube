@@ -44,6 +44,8 @@ import com.voxtube.app.ui.components.musicplayer.mini.coverPolygon
 import com.voxtube.app.ui.components.musicplayer.mini.coverShapeLabel
 import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 
 private val ShapeSize = 52.dp
 private val CellMinWidth = 88.dp
@@ -66,8 +68,9 @@ internal fun CoverShapeSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = glassWindowContainerColor(MaterialTheme.colorScheme.surface),
     ) {
+        GlassWindowBlur()
         VoxTubeSheetHeader(title = title, subtitle = subtitle, onClose = onDismiss, showDragHandle = false)
         LazyVerticalGrid(
             columns = GridCells.Adaptive(CellMinWidth),

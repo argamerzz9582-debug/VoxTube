@@ -22,6 +22,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
+import com.voxtube.app.ui.theme.glass.glassWindowRim
 
 private val HeaderSpacing = 16.dp
 private val ButtonSpacing = 8.dp
@@ -40,7 +43,7 @@ object VoxTubeDialogDefaults {
 
 /**
  * The app's alert dialog: Material 3's `AlertDialog`, the same slots, tokens and button order, with
- * a tighter gap above the actions.
+ * a tighter gap above the actions, drawn as Liquid Glass over the frosted app where the device allows.
  *
  * Hand-rolled on [BasicAlertDialog] because `AlertDialog` fixes that gap at 24 dp through the
  * internal `AlertDialogDefaults.textPadding`, with no parameter to change it; together with a text
@@ -59,11 +62,14 @@ fun VoxTubeAlertDialog(
     properties: DialogProperties = DialogProperties(),
 ) {
     BasicAlertDialog(onDismissRequest = onDismissRequest, modifier = modifier, properties = properties) {
+        // Liquid Glass: the app behind is frosted by the system and the dialog is translucent over it.
+        GlassWindowBlur()
         Surface(
             modifier = Modifier.ignoreHeldOk(),
             shape = AlertDialogDefaults.shape,
-            color = AlertDialogDefaults.containerColor,
+            color = glassWindowContainerColor(AlertDialogDefaults.containerColor),
             tonalElevation = AlertDialogDefaults.TonalElevation,
+            border = glassWindowRim(),
         ) {
             Column(
                 modifier =

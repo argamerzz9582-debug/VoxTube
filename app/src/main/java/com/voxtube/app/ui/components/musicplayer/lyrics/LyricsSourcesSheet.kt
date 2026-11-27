@@ -36,6 +36,9 @@ import com.voxtube.app.R
 import com.voxtube.app.data.lyrics.LyricsCandidate
 import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassSheetBase
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -49,7 +52,9 @@ internal fun LyricsSourcesSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
+        containerColor = glassWindowContainerColor(glassSheetBase()),
     ) {
+        GlassWindowBlur()
         Column(
             modifier =
                 Modifier

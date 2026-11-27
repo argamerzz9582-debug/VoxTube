@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -176,6 +177,7 @@ internal fun VoxTubeFloatingNavigationBar(
                         scaleY = scrubScale
                         transformOrigin = TransformOrigin(0.5f, 1f)
                     }.then(themedGlass(GlassShapes.Capsule))
+                    .heightIn(min = VoxTubeNavigationDefaults.BarHeight)
                     .padding(horizontal = sidePadding),
         ) {
             FloatingNavRow(

@@ -80,7 +80,8 @@ import com.voxtube.app.ui.screens.update.UPDATE_ROUTE
 import com.voxtube.app.ui.screens.update.UpdateLaunchEffect
 import com.voxtube.app.ui.theme.ThemeMode
 import com.voxtube.app.ui.theme.ThemeVariant
-import com.voxtube.app.ui.theme.glass.ProvideGlassBackdrop
+import com.voxtube.app.ui.theme.glass.LocalGlassBackdrop
+import com.voxtube.app.ui.theme.glass.LocalLiquidGlassEnabled
 import com.voxtube.app.ui.theme.glass.rememberGlassBackdrop
 import com.voxtube.app.ui.utils.rememberPowerSaveMode
 import com.voxtube.app.ui.utils.rememberTouchExplorationEnabled
@@ -559,7 +560,10 @@ fun VoxTubeApp(
             } else {
                 with(density) { navBarBottomInset.toDp() }
             }
-        ProvideGlassBackdrop(glassBackdrop.takeIf { glassEnabled }) {
+        CompositionLocalProvider(
+            LocalGlassBackdrop provides glassBackdrop.takeIf { glassEnabled },
+            LocalLiquidGlassEnabled provides glassEnabled,
+        ) {
             VoxTubePlayerOverlays(
                 navController = navController,
                 mediaNavigator = mediaNavigator,

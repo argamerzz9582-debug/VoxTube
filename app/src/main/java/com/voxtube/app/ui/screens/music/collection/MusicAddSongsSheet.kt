@@ -33,6 +33,9 @@ import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.theme.Dimensions
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassSheetBase
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 
 private val ResultsMinHeight = 240.dp
 
@@ -50,7 +53,12 @@ internal fun MusicAddSongsSheet(
     onPreview: (MusicTrack) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        containerColor = glassWindowContainerColor(glassSheetBase()),
+    ) {
+        GlassWindowBlur()
         Text(
             text = stringResource(R.string.ui_add_songs),
             style = MaterialTheme.typography.titleLarge,

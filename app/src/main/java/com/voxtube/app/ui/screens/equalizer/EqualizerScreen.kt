@@ -61,6 +61,9 @@ import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBarOverflow
 import com.voxtube.app.ui.components.shared.VoxTubeModalSheetDefaults
 import com.voxtube.app.ui.components.shared.rememberFlowPaneState
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassSheetBase
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 import com.voxtube.app.utils.shareLink
 import kotlinx.coroutines.launch
 
@@ -228,7 +231,9 @@ private fun BandSheet(
         sheetState = rememberFlowSheetState(),
         modifier = VoxTubeModalSheetDefaults.modifier,
         contentWindowInsets = VoxTubeModalSheetDefaults.contentWindowInsets,
+        containerColor = glassWindowContainerColor(glassSheetBase()),
     ) {
+        GlassWindowBlur()
         EqBandEditor(
             index = index,
             bands = state.active.curve.bands,
