@@ -17,8 +17,7 @@ Always update to the newest release before reporting a security issue.
 **Do not report security vulnerabilities through public GitHub issues.**
 
 Report privately through
-[GitHub Security Advisories](https://github.com/Flow-Tube/Flow/security/advisories/new).
-If you cannot use that form, email <contact@flow-tube.org>.
+[GitHub Security Advisories](https://github.com/argamerzz9582-debug/VoxTube/security/advisories/new).
 
 Please include:
 
@@ -35,24 +34,18 @@ Please do not disclose the issue publicly until a fix has shipped.
 
 ## Verifying release APKs
 
-Official Flow builds are signed with a single release key. Any APK that does
-not match the fingerprint below is not an official build, regardless of where
-it was downloaded.
+Releases are currently signed with the **public fallback key** described in
+[`.github/signing/README.md`](.github/signing/README.md). Its private key is in
+this repository, so the fingerprint below does not prove who built an APK.
+Only install VoxTube from the
+[GitHub Releases page](https://github.com/argamerzz9582-debug/VoxTube/releases),
+and compare the file with the `checksums.txt` attached to the same release.
 
 ```
-SHA-256: 43:22:29:4E:D4:CA:A2:D4:29:41:40:09:58:18:08:0F:FE:8A:CC:1F:BE:3C:DC:76:10:7D:F4:5C:52:86:BE:40
+SHA-256: 37:9C:1A:5E:DC:DF:4C:DE:21:B7:67:7F:5B:D5:E1:54:CE:A1:F5:33:9C:1C:75:D2:CF:A3:E3:BF:15:3C:A4:43
 ```
-
-Verify a downloaded APK with the Android SDK build tools:
 
 ```bash
-apksigner verify --print-certs flow-foss.apk
+apksigner verify --print-certs voxtube.apk
+sha256sum voxtube.apk   # compare with checksums.txt
 ```
-
-The reported `Signer #1 certificate SHA-256 digest` must equal the fingerprint
-above (lower case, without colons).
-
-Official distribution channels are the
-[GitHub Releases page](https://github.com/Flow-Tube/Flow/releases) and
-[IzzyOnDroid](https://apt.izzysoft.de/packages/com.voxtube.app). Builds
-obtained anywhere else are unverified.

@@ -24,8 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowNavRow
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.dpadReadThrough
 import com.voxtube.app.ui.screens.sync.QrCodeImage
 import com.voxtube.app.ui.screens.sync.SyncActionRow

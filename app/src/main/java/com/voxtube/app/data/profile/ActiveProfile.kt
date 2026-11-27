@@ -7,7 +7,7 @@ import java.io.File
 import java.io.IOException
 
 /**
- * The profile this process runs as. [attach] reads it as the first statement of `FlowApplication.attachBaseContext`,
+ * The profile this process runs as. [attach] reads it as the first statement of `VoxTubeApplication.attachBaseContext`,
  * before ContentProviders, WorkManager and Hilt can open a store, and it never changes afterwards: a switch restarts
  * the process. A process that never runs [attach], such as a restore under the system's own Application, reads it
  * on first use instead.

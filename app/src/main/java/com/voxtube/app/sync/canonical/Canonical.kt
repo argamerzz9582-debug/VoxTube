@@ -402,7 +402,7 @@ data class BrainFlags(
 )
 
 /**
- * The canonical brain — a field-for-field mirror of the desktop's `FlowNeuroBrainSnapshot`
+ * The canonical brain — a field-for-field mirror of the desktop's `VoxTubeNeuroBrainSnapshot`
  * (desktop plan §6.5). It is shipped as this device's contribution snapshot; the receiver merges it
  * into its own. Counters are G-Counters, sets are OR-Sets, `lwwMaps` entries are HLC-stamped
  * registers, and `perVideo` progress is a max-register.

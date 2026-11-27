@@ -65,8 +65,8 @@ import com.voxtube.app.data.stats.RecapPeriod
 import com.voxtube.app.data.stats.RecapSummary
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.shared.FittedShareCard
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.drawSegmentedProgress
 import com.voxtube.app.ui.components.stats.spentTimeLabel
 import com.voxtube.app.ui.screens.recap.RecapSource
@@ -102,7 +102,7 @@ internal fun RecapStoryScreen(
     val locale = ConfigurationCompat.getLocales(LocalConfiguration.current)[0] ?: Locale.getDefault()
 
     if (summary == null) {
-        Box(Modifier.fillMaxSize()) { FlowLoadingIndicator() }
+        Box(Modifier.fillMaxSize()) { VoxTubeLoadingIndicator() }
     } else {
         StoryPager(summary, periodLabel(period, locale), locale, onClose)
     }

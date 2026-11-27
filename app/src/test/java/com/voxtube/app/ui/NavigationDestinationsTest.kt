@@ -1,7 +1,7 @@
 package com.voxtube.app.ui
 
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
 import com.voxtube.app.ui.components.layout.navigation.NavigationVisibility
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.components.layout.navigation.visibleFlowTabs
 import com.voxtube.app.ui.screens.update.UPDATE_ROUTE
 import org.junit.Assert.assertEquals
@@ -13,33 +13,33 @@ import org.junit.Test
 class NavigationDestinationsTest {
     @Test
     fun tabRootsMapToTheirTab() {
-        FlowTab.entries.filter { it != FlowTab.Shorts }.forEach { tab ->
+        VoxTubeTab.entries.filter { it != VoxTubeTab.Shorts }.forEach { tab ->
             assertEquals(tab, flowTabForDestination(tab.route, shortsSourceArg = null))
         }
     }
 
     @Test
     fun onlyTheShortsFeedIsTheShortsTab() {
-        assertEquals(FlowTab.Shorts, flowTabForDestination(SHORTS_ROUTE_PATTERN, shortsSourceArg = null))
-        assertEquals(FlowTab.Shorts, flowTabForDestination(SHORTS_ROUTE_PATTERN, shortsSourceArg = "feed"))
+        assertEquals(VoxTubeTab.Shorts, flowTabForDestination(SHORTS_ROUTE_PATTERN, shortsSourceArg = null))
+        assertEquals(VoxTubeTab.Shorts, flowTabForDestination(SHORTS_ROUTE_PATTERN, shortsSourceArg = "feed"))
         assertNull(flowTabForDestination(SHORTS_ROUTE_PATTERN, shortsSourceArg = "feed:dQw4w9WgXcQ"))
         assertNull(flowTabForDestination(SHORTS_ROUTE_PATTERN, shortsSourceArg = "saved:"))
     }
 
     @Test
     fun aVideoOpenedFromShortsPlaysOverTheFirstOtherTab() {
-        assertEquals(FlowTab.Music, exitTab(listOf(FlowTab.Shorts, FlowTab.Music, FlowTab.Library), FlowTab.Shorts))
-        assertEquals(FlowTab.Home, exitTab(listOf(FlowTab.Home, FlowTab.Shorts), FlowTab.Shorts))
-        assertEquals(FlowTab.Home, exitTab(listOf(FlowTab.Shorts), FlowTab.Shorts))
-        assertEquals(FlowTab.Home, exitTab(emptyList(), FlowTab.Shorts))
+        assertEquals(VoxTubeTab.Music, exitTab(listOf(VoxTubeTab.Shorts, VoxTubeTab.Music, VoxTubeTab.Library), VoxTubeTab.Shorts))
+        assertEquals(VoxTubeTab.Home, exitTab(listOf(VoxTubeTab.Home, VoxTubeTab.Shorts), VoxTubeTab.Shorts))
+        assertEquals(VoxTubeTab.Home, exitTab(listOf(VoxTubeTab.Shorts), VoxTubeTab.Shorts))
+        assertEquals(VoxTubeTab.Home, exitTab(emptyList(), VoxTubeTab.Shorts))
     }
 
     @Test
     fun backFromSearchAsTheOpeningTabLandsOnAVisibleTab() {
         val homeHidden =
             visibleFlowTabs(listOf(5, 0, 3, 4), NavigationVisibility(home = false, shorts = false, music = false, search = true))
-        assertEquals(FlowTab.Search, homeHidden.first())
-        assertEquals(FlowTab.Subscriptions, exitTab(homeHidden, FlowTab.Search))
+        assertEquals(VoxTubeTab.Search, homeHidden.first())
+        assertEquals(VoxTubeTab.Subscriptions, exitTab(homeHidden, VoxTubeTab.Search))
     }
 
     @Test
@@ -51,8 +51,8 @@ class NavigationDestinationsTest {
 
     @Test
     fun routesFromOutsideTheGraphResolveToTheirTab() {
-        assertEquals(FlowTab.Search, flowTabForRoute("search", downloadsTab = false))
-        assertEquals(FlowTab.Music, flowTabForRoute("music", downloadsTab = false))
+        assertEquals(VoxTubeTab.Search, flowTabForRoute("search", downloadsTab = false))
+        assertEquals(VoxTubeTab.Music, flowTabForRoute("music", downloadsTab = false))
         listOf("downloads", "history", "musicRecognize", "musicPlayer/abc", "settings").forEach { route ->
             assertNull(flowTabForRoute(route, downloadsTab = false))
         }
@@ -60,22 +60,22 @@ class NavigationDestinationsTest {
 
     @Test
     fun theDownloadsPageOpensAsTheTabOnlyWhenTheBarHasIt() {
-        assertEquals(FlowTab.Downloads, flowTabForRoute("downloads", downloadsTab = true))
+        assertEquals(VoxTubeTab.Downloads, flowTabForRoute("downloads", downloadsTab = true))
         assertNull(flowTabForRoute("downloads", downloadsTab = false))
         assertNull(flowTabForDestination("downloads", shortsSourceArg = null))
     }
 
     @Test
     fun searchIsTheOnlyTabWithoutTheBar() {
-        FlowTab.entries.forEach { tab -> assertEquals(tab != FlowTab.Search, tab.showsNavigationBar()) }
-        assertFalse((null as FlowTab?).showsNavigationBar())
-        assertTrue(FlowTab.Home.showsNavigationBar())
+        VoxTubeTab.entries.forEach { tab -> assertEquals(tab != VoxTubeTab.Search, tab.showsNavigationBar()) }
+        assertFalse((null as VoxTubeTab?).showsNavigationBar())
+        assertTrue(VoxTubeTab.Home.showsNavigationBar())
     }
 
     @Test
     fun theSwitchPutsTheBarOnSearchOnly() {
-        FlowTab.entries.forEach { tab -> assertTrue(tab.showsNavigationBar(onSearch = true)) }
-        assertFalse((null as FlowTab?).showsNavigationBar(onSearch = true))
+        VoxTubeTab.entries.forEach { tab -> assertTrue(tab.showsNavigationBar(onSearch = true)) }
+        assertFalse((null as VoxTubeTab?).showsNavigationBar(onSearch = true))
     }
 
     @Test
@@ -120,10 +120,10 @@ class NavigationDestinationsTest {
 
     @Test
     fun aTabTappedOnSearchOpenedAsAPageLeavesSearchFirst() {
-        FlowTab.entries.filter { it != FlowTab.Search }.forEach { tapped ->
+        VoxTubeTab.entries.filter { it != VoxTubeTab.Search }.forEach { tapped ->
             assertEquals(
                 TabTap.LEAVE_SEARCH,
-                tabTapAction(tapped, FlowTab.Search, selectedTab = FlowTab.Home, searchIsTab = false, startTab = FlowTab.Home),
+                tabTapAction(tapped, VoxTubeTab.Search, selectedTab = VoxTubeTab.Home, searchIsTab = false, startTab = VoxTubeTab.Home),
             )
         }
     }
@@ -132,11 +132,23 @@ class NavigationDestinationsTest {
     fun withASearchTabInTheBarOtherTabsSwitchAndKeepItsResults() {
         assertEquals(
             TabTap.SWITCH,
-            tabTapAction(FlowTab.Music, FlowTab.Search, selectedTab = FlowTab.Search, searchIsTab = true, startTab = FlowTab.Home),
+            tabTapAction(
+                VoxTubeTab.Music,
+                VoxTubeTab.Search,
+                selectedTab = VoxTubeTab.Search,
+                searchIsTab = true,
+                startTab = VoxTubeTab.Home,
+            ),
         )
         assertEquals(
             TabTap.SCROLL_TO_TOP,
-            tabTapAction(FlowTab.Search, FlowTab.Search, selectedTab = FlowTab.Search, searchIsTab = true, startTab = FlowTab.Home),
+            tabTapAction(
+                VoxTubeTab.Search,
+                VoxTubeTab.Search,
+                selectedTab = VoxTubeTab.Search,
+                searchIsTab = true,
+                startTab = VoxTubeTab.Home,
+            ),
         )
     }
 
@@ -144,15 +156,33 @@ class NavigationDestinationsTest {
     fun theStartTabLeavesTheSearchTabLikeBack() {
         assertEquals(
             TabTap.LEAVE_SEARCH,
-            tabTapAction(FlowTab.Home, FlowTab.Search, selectedTab = FlowTab.Search, searchIsTab = true, startTab = FlowTab.Home),
+            tabTapAction(
+                VoxTubeTab.Home,
+                VoxTubeTab.Search,
+                selectedTab = VoxTubeTab.Search,
+                searchIsTab = true,
+                startTab = VoxTubeTab.Home,
+            ),
         )
         assertEquals(
             TabTap.LEAVE_SEARCH,
-            tabTapAction(FlowTab.Music, FlowTab.Search, selectedTab = FlowTab.Search, searchIsTab = true, startTab = FlowTab.Music),
+            tabTapAction(
+                VoxTubeTab.Music,
+                VoxTubeTab.Search,
+                selectedTab = VoxTubeTab.Search,
+                searchIsTab = true,
+                startTab = VoxTubeTab.Music,
+            ),
         )
         assertEquals(
             TabTap.SCROLL_TO_TOP,
-            tabTapAction(FlowTab.Search, FlowTab.Search, selectedTab = FlowTab.Search, searchIsTab = true, startTab = FlowTab.Search),
+            tabTapAction(
+                VoxTubeTab.Search,
+                VoxTubeTab.Search,
+                selectedTab = VoxTubeTab.Search,
+                searchIsTab = true,
+                startTab = VoxTubeTab.Search,
+            ),
         )
     }
 
@@ -160,11 +190,17 @@ class NavigationDestinationsTest {
     fun theTabAlreadyOnItsFirstScreenScrollsToTheTop() {
         assertEquals(
             TabTap.SCROLL_TO_TOP,
-            tabTapAction(FlowTab.Home, FlowTab.Home, selectedTab = FlowTab.Home, searchIsTab = false, startTab = FlowTab.Home),
+            tabTapAction(VoxTubeTab.Home, VoxTubeTab.Home, selectedTab = VoxTubeTab.Home, searchIsTab = false, startTab = VoxTubeTab.Home),
         )
         assertEquals(
             TabTap.SCROLL_TO_TOP,
-            tabTapAction(FlowTab.Music, FlowTab.Music, selectedTab = FlowTab.Music, searchIsTab = true, startTab = FlowTab.Home),
+            tabTapAction(
+                VoxTubeTab.Music,
+                VoxTubeTab.Music,
+                selectedTab = VoxTubeTab.Music,
+                searchIsTab = true,
+                startTab = VoxTubeTab.Home,
+            ),
         )
     }
 
@@ -172,11 +208,23 @@ class NavigationDestinationsTest {
     fun theHighlightedTabOnAPageInsideItGoesBackToItsFirstScreen() {
         assertEquals(
             TabTap.POP_TO_ROOT,
-            tabTapAction(FlowTab.Home, currentTab = null, selectedTab = FlowTab.Home, searchIsTab = false, startTab = FlowTab.Home),
+            tabTapAction(
+                VoxTubeTab.Home,
+                currentTab = null,
+                selectedTab = VoxTubeTab.Home,
+                searchIsTab = false,
+                startTab = VoxTubeTab.Home,
+            ),
         )
         assertEquals(
             TabTap.SWITCH,
-            tabTapAction(FlowTab.Music, currentTab = null, selectedTab = FlowTab.Home, searchIsTab = false, startTab = FlowTab.Home),
+            tabTapAction(
+                VoxTubeTab.Music,
+                currentTab = null,
+                selectedTab = VoxTubeTab.Home,
+                searchIsTab = false,
+                startTab = VoxTubeTab.Home,
+            ),
         )
     }
 
@@ -184,7 +232,7 @@ class NavigationDestinationsTest {
     fun anotherTabSwitches() {
         assertEquals(
             TabTap.SWITCH,
-            tabTapAction(FlowTab.Music, FlowTab.Home, selectedTab = FlowTab.Home, searchIsTab = false, startTab = FlowTab.Home),
+            tabTapAction(VoxTubeTab.Music, VoxTubeTab.Home, selectedTab = VoxTubeTab.Home, searchIsTab = false, startTab = VoxTubeTab.Home),
         )
     }
 
@@ -203,15 +251,15 @@ class NavigationDestinationsTest {
 
     @Test
     fun tabRootsAndSearchKeepTheirOwnRules() {
-        assertTrue(navigationBarShown(FlowTab.Home, "home", onSearch = false, onInnerPages = false))
-        assertFalse(navigationBarShown(FlowTab.Search, "search", onSearch = false, onInnerPages = true))
-        assertTrue(navigationBarShown(FlowTab.Search, "search", onSearch = true, onInnerPages = false))
+        assertTrue(navigationBarShown(VoxTubeTab.Home, "home", onSearch = false, onInnerPages = false))
+        assertFalse(navigationBarShown(VoxTubeTab.Search, "search", onSearch = false, onInnerPages = true))
+        assertTrue(navigationBarShown(VoxTubeTab.Search, "search", onSearch = true, onInnerPages = false))
     }
 
     @Test
     fun everySearchPageIsTheSearchTab() {
         assertEquals(
-            FlowTab.Search,
+            VoxTubeTab.Search,
             flowTabForDestination(com.voxtube.app.ui.screens.search.SEARCH_ROUTE_PATTERN, shortsSourceArg = null),
         )
     }

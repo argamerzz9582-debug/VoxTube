@@ -2,8 +2,8 @@ package com.voxtube.app.data.engagement
 
 import android.content.Context
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.InteractionType
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.YouTubeRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
  * The learning signals an engagement action feeds the recommendation engine.
  *
- * [FlowNeuroEngine] is still reached through a context-keyed global, so this is the one place that
+ * [VoxTubeNeuroEngine] is still reached through a context-keyed global, so this is the one place that
  * touches it: every engagement caller injects this instead, which keeps the global access isolated
  * behind a dependency a test can replace.
  */
@@ -25,12 +25,12 @@ class VideoEngagementSignals
             channelId: String,
             channelName: String,
             subscribed: Boolean,
-        ) = FlowNeuroEngine.onChannelSubscriptionChanged(context, channelId, channelName, subscribed)
+        ) = VoxTubeNeuroEngine.onChannelSubscriptionChanged(context, channelId, channelName, subscribed)
 
         suspend fun videoInteraction(
             video: Video,
             interactionType: InteractionType,
-        ) = FlowNeuroEngine.onVideoInteraction(context, video, interactionType)
+        ) = VoxTubeNeuroEngine.onVideoInteraction(context, video, interactionType)
 
         /** Learns a newly subscribed channel's declared keyword tags. */
         suspend fun channelTagsLearned(channelId: String) = repository.learnChannelTags(context, channelId)

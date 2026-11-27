@@ -24,8 +24,8 @@ import com.voxtube.app.player.EnhancedPlayerState
 import com.voxtube.app.player.QualityOption
 import com.voxtube.app.ui.components.equalizer.EqQuickPanel
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
-import com.voxtube.app.ui.components.shared.FlowBottomSheet
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeBottomSheet
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.defaultSheetExpandedHeight
 import com.voxtube.app.ui.components.shared.rememberFlowBottomSheetState
 import com.voxtube.app.ui.components.videoplayer.subtitle.SubtitleCustomizer
@@ -111,7 +111,7 @@ fun SettingsMenuDialog(
         currentPage = initialPage
     }
 
-    FlowBottomSheet(
+    VoxTubeBottomSheet(
         onDismiss = onDismiss,
         modifier = modifier,
         state = sheetState,
@@ -124,7 +124,7 @@ fun SettingsMenuDialog(
         onBack = backPage?.let { page -> { currentPage = page } },
         onProgressChange = onSheetProgressChange,
         header = { dragModifier ->
-            FlowSheetHeader(
+            VoxTubeSheetHeader(
                 inSidePane = !enableVerticalDismiss,
                 title = currentTitle,
                 onClose = { sheetState.dismiss() },

@@ -16,15 +16,15 @@ class TopicPreferencesRepository
     constructor(
         @ApplicationContext private val context: Context,
     ) {
-        suspend fun preferredTopics(): Set<String> = FlowNeuroEngine.getPreferredTopics()
+        suspend fun preferredTopics(): Set<String> = VoxTubeNeuroEngine.getPreferredTopics()
 
-        suspend fun blockedTopics(): Set<String> = FlowNeuroEngine.getBlockedTopics()
+        suspend fun blockedTopics(): Set<String> = VoxTubeNeuroEngine.getBlockedTopics()
 
-        suspend fun addPreferred(topic: String) = FlowNeuroEngine.addPreferredTopic(context, topic)
+        suspend fun addPreferred(topic: String) = VoxTubeNeuroEngine.addPreferredTopic(context, topic)
 
-        suspend fun removePreferred(topic: String) = FlowNeuroEngine.removePreferredTopic(context, topic)
+        suspend fun removePreferred(topic: String) = VoxTubeNeuroEngine.removePreferredTopic(context, topic)
 
-        suspend fun addBlocked(topic: String) = FlowNeuroEngine.addBlockedTopic(context, topic)
+        suspend fun addBlocked(topic: String) = VoxTubeNeuroEngine.addBlockedTopic(context, topic)
 
-        suspend fun removeBlocked(topic: String) = FlowNeuroEngine.removeBlockedTopic(context, topic)
+        suspend fun removeBlocked(topic: String) = VoxTubeNeuroEngine.removeBlockedTopic(context, topic)
     }

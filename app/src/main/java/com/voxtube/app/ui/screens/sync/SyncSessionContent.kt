@@ -48,8 +48,8 @@ import androidx.compose.ui.unit.sp
 import com.voxtube.app.R
 import com.voxtube.app.sync.SyncState
 import com.voxtube.app.sync.protocol.ApplyStats
-import com.voxtube.app.ui.components.shared.FlowSpinner
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.utils.copyPlainText
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -323,7 +323,7 @@ internal fun SyncBusyContent(label: String) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        FlowSpinner()
+        VoxTubeSpinner()
         Text(
             text = label,
             style = MaterialTheme.typography.bodyLarge,

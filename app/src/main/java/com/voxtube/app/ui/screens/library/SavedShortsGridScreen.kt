@@ -23,11 +23,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.rememberFeedGridLayout
-import com.voxtube.app.ui.components.shared.FlowEmptyState
 import com.voxtube.app.ui.components.shared.MediaShortCard
 import com.voxtube.app.ui.components.shared.ShortCardDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 
 private val GridPadding = 16.dp
 
@@ -44,7 +44,7 @@ fun SavedShortsGridScreen(
         modifier = modifier.fillMaxSize(),
         contentWindowInsets = WindowInsets(0.dp),
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = stringResource(R.string.library_saved_shorts_label),
                 onBack = onBackClick,
             )
@@ -52,7 +52,7 @@ fun SavedShortsGridScreen(
         containerColor = MaterialTheme.colorScheme.background,
     ) { padding ->
         if (savedShorts.isEmpty()) {
-            FlowEmptyState(
+            VoxTubeEmptyState(
                 modifier = Modifier.padding(padding),
                 title = stringResource(R.string.empty_saved_shorts),
                 icon = Icons.Default.PlayArrow,

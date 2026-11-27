@@ -45,12 +45,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.voxtube.app.ui.components.shared.FlowModalSheetDefaults
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
-import com.voxtube.app.ui.components.shared.FlowSheetPresenter
 import com.voxtube.app.ui.components.shared.LocalFlowSheetPresenter
+import com.voxtube.app.ui.components.shared.VoxTubeModalSheetDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSheetPresenter
 import com.voxtube.app.ui.components.shared.connectedButtonShapes
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.ignoreHeldOk
@@ -134,8 +134,8 @@ fun QuickActionsSheet(
         onDismissRequest = dismissRequest,
         sheetState = sheetState,
         properties = properties,
-        modifier = FlowModalSheetDefaults.modifier,
-        contentWindowInsets = FlowModalSheetDefaults.contentWindowInsets,
+        modifier = VoxTubeModalSheetDefaults.modifier,
+        contentWindowInsets = VoxTubeModalSheetDefaults.contentWindowInsets,
     ) {
         BackHandler(enabled = onBack != null) { onBack?.invoke() }
         Column(
@@ -153,7 +153,7 @@ fun QuickActionsSheet(
 /** A presenter has no hide animation of its own to wait for, so every way out closes at once. */
 @Composable
 private fun PresentedQuickActionsSheet(
-    presenter: FlowSheetPresenter,
+    presenter: VoxTubeSheetPresenter,
     onDismiss: () -> Unit,
     page: Any?,
     onBack: (() -> Unit)?,
@@ -225,7 +225,7 @@ fun QuickActionsPageHeader(
     onBack: (() -> Unit)?,
     onClose: () -> Unit,
 ) {
-    FlowSheetHeader(
+    VoxTubeSheetHeader(
         title = title,
         onClose = onClose,
         onBack = onBack,
@@ -329,8 +329,8 @@ fun QuickActionsGroup(
     rows: List<QuickActionRow>,
 ) {
     if (rows.isEmpty()) return
-    if (title != null) FlowSectionHeader(text = title)
-    FlowRowGroup {
+    if (title != null) VoxTubeSectionHeader(text = title)
+    VoxTubeRowGroup {
         rows.forEachIndexed { index, row ->
             key(row.key) { row.content(flowRowGroupShape(index = index, count = rows.size)) }
         }

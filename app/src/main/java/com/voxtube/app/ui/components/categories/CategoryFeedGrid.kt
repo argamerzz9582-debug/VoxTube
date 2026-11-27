@@ -28,9 +28,9 @@ import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.shared.FeedGridSkeleton
 import com.voxtube.app.ui.components.shared.FeedGridTopPadding
 import com.voxtube.app.ui.components.shared.FeedPagingFooter
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
 import com.voxtube.app.ui.components.shared.RetryWhenBackOnline
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
 import com.voxtube.app.ui.components.shared.card.MediaVideoCard
 import com.voxtube.app.ui.components.shared.rememberFeedGridPlan
 import com.voxtube.app.utils.LoadErrorKind
@@ -59,7 +59,7 @@ internal fun CategoryPagedGrid(
             }
 
             refresh is LoadState.Error -> {
-                FlowErrorState(
+                VoxTubeErrorState(
                     error = stringResource(LoadErrorKind.of(refresh.error).messageRes(R.string.error_failed_to_load_videos)),
                     onRetry = pagingItems::retry,
                     modifier = modifier,
@@ -67,7 +67,7 @@ internal fun CategoryPagedGrid(
             }
 
             refresh.endOfPaginationReached -> {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(R.string.error_no_videos_for_category),
                     modifier = modifier,
                 )

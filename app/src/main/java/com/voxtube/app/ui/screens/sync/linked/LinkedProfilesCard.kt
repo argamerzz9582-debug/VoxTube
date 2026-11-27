@@ -24,8 +24,8 @@ import com.voxtube.app.sync2.service.LocalProfile
 import com.voxtube.app.sync2.service.OtherProfile
 import com.voxtube.app.sync2.service.ProfileChoices
 import com.voxtube.app.ui.components.settings.SettingsNotice
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.screens.sync.SyncRowGroup
 import com.voxtube.app.ui.screens.sync.SyncSection
 
@@ -61,7 +61,7 @@ internal fun LinkedProfilesCard(
         SyncRowGroup(count = choices.local.size + choices.others.size) { index, shape ->
             val profile = choices.local.getOrNull(index)
             if (profile != null) {
-                FlowSwitchRow(
+                VoxTubeSwitchRow(
                     title = profile.name,
                     checked = profile.link != null,
                     onCheckedChange = { on ->
@@ -79,7 +79,7 @@ internal fun LinkedProfilesCard(
                 )
             } else {
                 val other = choices.others[index - choices.local.size]
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = label(other),
                     onClick = { adding = other.link },
                     supportingText = stringResource(R.string.linked_profile_other),

@@ -11,8 +11,8 @@ import com.voxtube.app.data.music.model.MusicArtist
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.data.music.model.toMusicTrack
 import com.voxtube.app.data.music.model.toVideo
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
 import com.voxtube.app.ui.components.layout.navigation.MediaNavigator
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.screens.music.EnhancedMusicScreen
 import com.voxtube.app.ui.screens.music.MusicViewModel
 import com.voxtube.app.ui.screens.music.sharedMusicPlayerViewModel
@@ -57,8 +57,8 @@ internal fun NavGraphBuilder.musicRoutes(
                 navController.navigate("playlists?kind=${com.voxtube.app.ui.components.shared.MediaKind.Music.name}")
             },
             onAllSubscriptionsClick = {
-                currentRoute.value = FlowTab.Subscriptions.route
-                navController.navigateToTab(FlowTab.Subscriptions, defaultStartRoute)
+                currentRoute.value = VoxTubeTab.Subscriptions.route
+                navController.navigateToTab(VoxTubeTab.Subscriptions, defaultStartRoute)
                 navController.currentBackStackEntry?.savedStateHandle?.set(OPEN_MUSIC_SUBSCRIPTIONS, true)
             },
             onMoodsClick = { item ->

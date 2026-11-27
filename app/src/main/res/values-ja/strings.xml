@@ -273,7 +273,7 @@
     <string name="library_local_media_subtitle">このデバイスで動画や音楽を再生する</string>
     <string name="local_media_empty_title">%1$s が見つかりませんでした</string>
     <string name="local_media_empty_body">このデバイスに保存されている動画や音楽はここに表示されます。</string>
-    <string name="local_media_permission_body">Flowがローカルの動画や音楽を見つけて再生できるように、メディアへのアクセスを許可してください。</string>
+    <string name="local_media_permission_body">VoxTubeがローカルの動画や音楽を見つけて再生できるように、メディアへのアクセスを許可してください。</string>
     <string name="local_media_grant">アクセスを許可</string>
     <string name="cancel">キャンセル</string>
     <string name="empty_watch_history">視聴履歴がありません</string>
@@ -729,7 +729,7 @@
     <string name="settings_reset_everything">すべてをリセット</string>
     <string name="settings_analyzing_interactions">インタラクションを分析しています...</string>
     <string name="settings_view_analytics">分析を見る</string>
-    <string name="deep_flow_mode_title">Deep Flow モード</string>
+    <string name="deep_flow_mode_title">Deep Focus モード</string>
     <string name="deep_flow_mode_subtitle">閲覧中に学習と履歴への記録を一時停止</string>
     <string name="deep_flow_learning_paused">学習が一時停止されました</string>
     <string name="deep_flow_expires_in">%s で期限切れになります</string>
@@ -737,18 +737,18 @@
     <string name="deep_flow_expire_duration_subtitle">%s の後に学習が自動的に再開されます</string>
     <string name="deep_flow_save_history_title">視聴履歴には保存</string>
     <string name="deep_flow_save_history_subtitle">おすすめを教えずに視聴履歴を保存する</string>
-    <string name="deep_flow_scrobble_title">Deep Flow 中のスクロブル</string>
-    <string name="taste_learning_paused">Deep Flow がオンになり、学習が一時停止されます</string>
+    <string name="deep_flow_scrobble_title">Deep Focus 中のスクロブル</string>
+    <string name="taste_learning_paused">Deep Focus がオンになり、学習が一時停止されます</string>
     <string name="deep_flow_scrobble_subtitle">Last.fm、Libre.fm、ListenBrainz にリッスンを送信し続けます</string>
     <string name="deep_flow_on_search_title">検索時に表示</string>
-    <string name="deep_flow_on_search_subtitle">最近の検索 の上にDeep Flow スイッチを表示</string>
-    <string name="deep_flow_long_press_hint">ホーム上の VoxTube ロゴまたは名前を長押しして Deep Flow を切り替えます</string>
+    <string name="deep_flow_on_search_subtitle">最近の検索 の上にDeep Focus スイッチを表示</string>
+    <string name="deep_flow_long_press_hint">ホーム上の VoxTube ロゴまたは名前を長押しして Deep Focus を切り替えます</string>
     <string name="deep_flow_dialog_title">一時停止の期間</string>
     <string name="deep_flow_dialog_body">どれくらいの時間学習を一時停止しますか？</string>
-    <string name="deep_flow_enabled_message">Deep Flow が有効になりました</string>
-    <string name="deep_flow_disabled_message">Deep Flow が無効になっています</string>
-    <string name="deep_flow_expired_message">Deep Flow タイマーが終了しました</string>
-    <string name="deep_flow_active_until_disabled">Deep Flow はオフにするまでアクティブのままです</string>
+    <string name="deep_flow_enabled_message">Deep Focus が有効になりました</string>
+    <string name="deep_flow_disabled_message">Deep Focus が無効になっています</string>
+    <string name="deep_flow_expired_message">Deep Focus タイマーが終了しました</string>
+    <string name="deep_flow_active_until_disabled">Deep Focus はオフにするまでアクティブのままです</string>
     <string name="deep_flow_duration_never">なし</string>
     <string name="settings_header_appearance">外観</string>
     <string name="settings_header_content_playback">コンテンツと再生</string>
@@ -814,10 +814,7 @@
     <string name="settings_item_export_data_subtitle">データをバックアップする</string>
     <string name="settings_item_import_data">データのインポート</string>
     <string name="settings_item_import_data_subtitle">バックアップから復元または他のアプリからインポート</string>
-    <string name="settings_item_about_flow">Flowについて</string>
-    <string name="settings_item_about_flow_subtitle">バージョン、ライセンス、寄稿者</string>
-    <string name="settings_item_support">サポートと寄付</string>
-    <string name="settings_item_support_subtitle">VoxTube の開発サポートを支援する</string>
+    <string name="settings_item_about_flow">VoxTubeについて</string>
     <string name="settings_region_dialog_title">地域の選択</string>
     <string name="settings_language_dialog_title">アプリ言語の選択</string>
     <string name="settings_language_system_default">システムのデフォルト</string>
@@ -893,7 +890,6 @@
     <string name="app_icon_picker_subtitle">ランチャーアイコンのスタイルを選択します。変更はすぐに有効になり、ランチャーが短時間更新されます。</string>
     <string name="app_icon_picker_warning">アイコンを変更すると、VoxTube がホーム画面から一時的に削除される場合があります。必要に応じて、アプリドロワーから再度追加します。</string>
     <string name="app_icon_apply_toast">アイコンが更新されました - ランチャーが更新されます</string>
-    <string name="icon_name_flow_red">VoxTube Red</string>
     <string name="icon_name_flow_light">VoxTube Light</string>
     <string name="icon_name_flow_play">VoxTube Play</string>
     <string name="icon_name_amoled">AMOLED ダーク</string>
@@ -1043,7 +1039,7 @@
     <string name="theme_desc_sky_blue">明るく開放的なスカイブルーのパレット。</string>
     <string name="theme_name_cream_paper">クリームペーパー</string>
     <string name="theme_desc_cream_paper">温かみのある紙調で、日中の快適な読書に最適です。</string>
-    <string name="theme_name_classic_dark">Flowのデフォルト</string>
+    <string name="theme_name_classic_dark">VoxTubeのデフォルト</string>
     <string name="theme_desc_classic_dark">YouTube の赤いアクセントが付いたオリジナルの VoxTube パレット。</string>
     <string name="theme_name_true_black">トゥルーブラック</string>
     <string name="theme_desc_true_black">ピュアOLED</string>
@@ -1160,7 +1156,7 @@
     <string name="content_settings_home_subscriptions_subtitle">登録しているチャンネルの動画をホームにミックスします</string>
     <string name="settings_section_watch_history">視聴履歴</string>
     <string name="pause_watch_history_title">視聴履歴を一時停止する</string>
-    <string name="pause_watch_history_subtitle">視聴したものを保存しないようにします。また、Deep Flow モードも学習を一時停止します</string>
+    <string name="pause_watch_history_subtitle">視聴したものを保存しないようにします。また、Deep Focus モードも学習を一時停止します</string>
     <string name="content_settings_show_app_logo_title">アプリのロゴアイコンを表示</string>
     <string name="content_settings_show_app_logo_subtitle">ホームのトップバーに VoxTube ロゴを表示する</string>
     <string name="content_settings_header_shorts">Shorts</string>
@@ -1278,7 +1274,7 @@
     <string name="player_settings_background_play">バックグラウンド再生</string>
     <string name="pip_listen_in_background">バックグラウンドで聞く</string>
     <string name="player_settings_background_play_subtitle">アプリがバックグラウンドでも再生を続ける</string>
-    <string name="player_settings_keep_playing_after_swipe">Flowを閉じた後も再生を続けます</string>
+    <string name="player_settings_keep_playing_after_swipe">VoxTubeを閉じた後も再生を続けます</string>
     <string name="player_settings_keep_playing_after_swipe_subtitle">VoxTube をスワイプして最近使用したアプリから離れると、再生が続行されます</string>
     <string name="player_settings_shorts_background_play">Shorts バックグラウンド再生</string>
     <string name="player_settings_shorts_background_play_subtitle">アプリがバックグラウンドで動作しているときに Shorts の再生を続ける</string>
@@ -1748,26 +1744,8 @@
     <plurals name="threads_count_label">
         <item quantity="other">%1$d スレッド</item>
     </plurals>
-    <string name="support_donations_title">サポートと寄付</string>
-    <string name="support_flow_dev_title">Flow開発をサポート</string>
-    <string name="support_flow_dev_desc">Flow が役立つ場合は、Open Collective、Patreon、または以下の暗号でサポートできます。ありがとう！</string>
-    <string name="support_flow_open_collective">Open Collective で Flow をサポート</string>
-    <string name="support_flow_patreon">Patreon で Flow をサポート</string>
     <string name="thank_you_support_message">ご支援ありがとうございます! ❤️</string>
     <string name="address_copied_toast">アドレスをクリップボードにコピーしました</string>
-    <string name="donation_address_clip_label">寄付先住所</string>
-    <string name="donation_prompt_title">Flow をお楽しみですか?</string>
-    <string name="donation_prompt_message">Flow は無料、オープンソース、広告なしです。あなたの携帯電話にスポットを当てたら、少しのサポートがそれを継続させます。</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">サポート開発</string>
-    <string name="donation_prompt_later">たぶん後で</string>
-    <string name="donation_prompt_never">二度と表示しない</string>
-    <string name="about_creator">クリエイター</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website">ウェブサイト</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="github_subtitle">ソースコードと問題点</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">コア抽出ライブラリ</string>
@@ -1798,7 +1776,6 @@
     <string name="section_legal">法律</string>
     <string name="section_device">デバイス</string>
     <string name="donate_item_title">寄付する</string>
-    <string name="support_dev_subtitle">サポート開発</string>
     <string name="btn_ok">わかりました</string>
     <string name="btn_copy">コピー</string>
     <string name="github_label">GitHub</string>
@@ -2285,7 +2262,7 @@
     <string name="download_menu_style_compact_desc">編集可能なタイトル、ドロップダウン、スレッド数</string>
     <string name="download_ask_every_time_title">毎回尋ねる</string>
     <string name="download_ask_every_time_summary">オフの場合、ダウンロードではダウンロード品質が使用されます</string>
-    <string name="share_download_with_flow">Flowでダウンロード</string>
+    <string name="share_download_with_flow">VoxTubeでダウンロード</string>
     <string name="share_download_not_a_video">共有リンクからダウンロードできるのは動画のみです</string>
     <string name="downloads_storage_card_title">ストレージの概要</string>
     <string name="downloads_storage_card_summary">ダウンロードの上部に使用済みスペースと空きスペースを表示します</string>
@@ -3045,7 +3022,7 @@
     <string name="no_match_found">一致するものが見つかりませんでした</string>
     <string name="recognition_error">認識に失敗しました</string>
     <string name="try_again">もう一度やり直してください</string>
-    <string name="search_in_flow">Flowで検索</string>
+    <string name="search_in_flow">VoxTubeで検索</string>
     <string name="recognition_search_history">認識された曲を検索</string>
     <string name="recognition_history_empty">認識された曲がここに表示されます</string>
     <string name="recognition_clear_history">履歴をクリアしますか？</string>
@@ -3083,7 +3060,7 @@
     <string name="discord_error_not_initialized">Discord リッチ プレゼンスが初期化されていません。</string>
     <string name="discord_error_enable_before_connect">アカウントを接続する前に、Discord リッチ プレゼンスを有効にしてください。</string>
     <string name="discord_error_unavailable">このビルドでは Discord リッチ プレゼンスは利用できません。</string>
-    <string name="discord_error_open_flow">Discordに接続する前にFlowを開いてください。</string>
+    <string name="discord_error_open_flow">Discordに接続する前にVoxTubeを開いてください。</string>
     <string name="discord_error_connection_in_progress">Discord 接続はすでに進行中です。</string>
     <string name="discord_error_login_timeout">Discordのサインインがタイムアウトになりました。</string>
     <string name="discord_error_login_cancelled">Discordの接続が解除されました。</string>
@@ -3097,7 +3074,7 @@
     <string name="discord_error_heartbeat_unacknowledged">Discord Gateway のハートビートが認識されませんでした。</string>
     <string name="discord_error_heartbeat_failed">Discord ゲートウェイのハートビートが失敗しました。</string>
     <string name="discord_account_fallback">Discordユーザー</string>
-    <string name="discord_presence_playing_fallback">Flowで再生中</string>
+    <string name="discord_presence_playing_fallback">VoxTubeで再生中</string>
     <string name="discord_presence_by_creator">%1$s によって</string>
     <string name="settings_item_interface_mode">インターフェースモード</string>
     <string name="settings_item_interface_mode_subtitle">自動、モバイル、または TV レイアウトを選択します</string>
@@ -3205,7 +3182,7 @@
     <string name="ui_navigate">ナビゲート</string>
     <string name="ui_options">オプション</string>
     <string name="ui_selected">選択済み</string>
-    <string name="ui_flow_logo">Flowロゴ</string>
+    <string name="ui_flow_logo">VoxTubeロゴ</string>
     <string name="ui_list_view">リストビュー</string>
     <string name="ui_grid_view">グリッドビュー</string>
     <string name="ui_back">戻る</string>
@@ -3502,7 +3479,6 @@
     <string name="settings_search_no_results">「%1$s」の設定が見つかりません</string>
     <string name="settings_lyrics_provider_order_description">上から下まで試してみました。ドラッグして並べ替えます。</string>
     <string name="import_running_background">この画面から離れても構いません。インポートは実行を続けます。</string>
-    <string name="donations_cryptocurrency">暗号通貨</string>
     <string name="import_no_history_entries">ファイル内に視聴履歴エントリが見つかりません</string>
     <string name="import_no_videos">再生リスト ファイルに動画が見つかりません</string>
     <string name="import_no_likes">高評価した動画は見つかりませんでした。英語の Google アカウントを使用して、YouTube のマイ アクティビティを JSON としてエクスポートします。</string>
@@ -3700,7 +3676,7 @@
     <string name="settings_backup_tab_auto">自動</string>
     <string name="settings_backup_full">完全バックアップ</string>
     <string name="settings_backup_individual">個別にエクスポート</string>
-    <string name="settings_backup_restore_flow">Flowから復元</string>
+    <string name="settings_backup_restore_flow">VoxTubeから復元</string>
     <string name="settings_backup_source_youtube">YouTube と Google Takeout （Google データのアーカイブ）</string>
     <string name="settings_backup_source_newpipe">NewPipe</string>
     <string name="settings_backup_source_libretube">LibreTube</string>
@@ -3762,7 +3738,6 @@
     <string name="settings_changelog_all_releases">GitHub のすべてのリリース</string>
     <string name="settings_changelog_expand">変更を表示</string>
     <string name="settings_changelog_collapse">変更を非表示にする</string>
-    <string name="settings_creator_role">Flow の作成者および開発者</string>
     <string name="device_info_section_device">デバイス</string>
     <string name="device_info_section_system">システム</string>
     <string name="device_info_section_display">画面</string>
@@ -3813,7 +3788,6 @@
     <string name="settings_custom_theme_start_from">ここから始める</string>
     <string name="settings_custom_theme_count">%1$d/%2$d テーマ</string>
     <string name="settings_custom_theme_empty">カスタムテーマはまだありません</string>
-    <string name="settings_custom_theme_empty_body">任意のパレットから開始するか、Flow Desktop で作成したパレットをインポートします。</string>
     <string name="settings_custom_theme_import_failed">そのファイルには有効なテーマがありません</string>
     <string name="settings_custom_theme_limit">最大 %1$d 個のテーマを保持できます</string>
     <string name="settings_custom_theme_exported">テーマがエクスポートされました</string>
@@ -3901,7 +3875,7 @@
     <string name="recap_source_all">すべて</string>
     <string name="recap_source_video">動画</string>
     <string name="recap_source_music">音楽</string>
-    <string name="recap_total_time">Flowの時間</string>
+    <string name="recap_total_time">VoxTubeの時間</string>
     <string name="recap_delta_up">以前よりも %1$s 増加</string>
     <string name="recap_delta_down">以前よりも %1$s 減少</string>
     <string name="recap_delta_same">前回とほぼ同じ</string>
@@ -4005,7 +3979,7 @@
     <string name="recap_story_next">次へ</string>
     <string name="recap_story_previous">前へ</string>
     <string name="recap_story_page">ページ %1$d/%2$d</string>
-    <string name="recap_story_made_with">Flowによる作成</string>
+    <string name="recap_story_made_with">VoxTubeによる作成</string>
     <string name="recap_story_pause">一時停止</string>
     <string name="recap_story_play">再生</string>
     <string name="recap_summary_top_channel">トップチャンネル</string>
@@ -4265,5 +4239,5 @@
     <string name="settings_quality_lower_when_small">ミニプレイヤー・ピクチャーインピクチャーでは低画質</string>
     <string name="quality_auto_with_resolution">自動 (%1$s)</string>
     <string name="export_playlists_title">再生リスト</string>
-    <string name="export_playlists_desc">再生リスト、後で見る、高評価した動画や保存したショート動画などをまとめ、Flowが認識できるデータにします</string>
+    <string name="export_playlists_desc">再生リスト、後で見る、高評価した動画や保存したショート動画などをまとめ、VoxTubeが認識できるデータにします</string>
 </resources>

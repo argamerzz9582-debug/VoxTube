@@ -11,11 +11,11 @@ import com.voxtube.app.data.local.dao.WatchHistoryDao
 import com.voxtube.app.data.recommendation.BlockedChannelNames
 import com.voxtube.app.data.recommendation.ChannelMemoryRepository
 import com.voxtube.app.data.recommendation.ContentVector
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
-import com.voxtube.app.data.recommendation.FlowPersona
 import com.voxtube.app.data.recommendation.NeighbourChannelsRepository
 import com.voxtube.app.data.recommendation.TimeBucket
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubePersona
 import com.voxtube.app.data.recommendation.music.MusicBrainEngine
 import com.voxtube.app.data.recommendation.snapshot.HomeSnapshotStore
 import com.voxtube.app.data.stats.VideoStatsRecorder
@@ -108,7 +108,7 @@ data class HiddenContent(
 @Immutable
 data class TasteState(
     val loading: Boolean = true,
-    val persona: FlowPersona? = null,
+    val persona: VoxTubePersona? = null,
     val maturity: Float = 0f,
     val profile: TasteTraits? = null,
     val now: TasteTraits? = null,
@@ -182,16 +182,16 @@ class TasteViewModel
             topic: String,
             preferred: Boolean,
         ) = act {
-            if (preferred) FlowNeuroEngine.addPreferredTopic(context, topic) else FlowNeuroEngine.removePreferredTopic(context, topic)
+            if (preferred) VoxTubeNeuroEngine.addPreferredTopic(context, topic) else VoxTubeNeuroEngine.removePreferredTopic(context, topic)
         }
 
-        fun blockTopic(topic: String) = act { FlowNeuroEngine.addBlockedTopic(context, topic) }
+        fun blockTopic(topic: String) = act { VoxTubeNeuroEngine.addBlockedTopic(context, topic) }
 
-        fun unblockTopic(topic: String) = act { FlowNeuroEngine.removeBlockedTopic(context, topic) }
+        fun unblockTopic(topic: String) = act { VoxTubeNeuroEngine.removeBlockedTopic(context, topic) }
 
         fun blockChannel(channelId: String) =
             act {
-                FlowNeuroEngine.blockChannel(context, channelId)
+                VoxTubeNeuroEngine.blockChannel(context, channelId)
                 _state.value.channels
                     .firstOrNull { it.id == channelId && it.name != channelId }
                     ?.let { blockedNames.remember(channelId, it.name) }
@@ -199,7 +199,7 @@ class TasteViewModel
 
         fun unblockChannel(channelId: String) =
             act {
-                FlowNeuroEngine.unblockChannel(context, channelId)
+                VoxTubeNeuroEngine.unblockChannel(context, channelId)
                 blockedNames.forget(channelId)
             }
 
@@ -219,7 +219,7 @@ class TasteViewModel
                     if (missing.isEmpty()) return@launch
                     _state.update { it.copy(hidden = it.hidden.copy(resolvingNames = true)) }
                     try {
-                        val blocked = FlowNeuroEngine.getSavedBrainSnapshot().blockedChannels
+                        val blocked = VoxTubeNeuroEngine.getSavedBrainSnapshot().blockedChannels
                         blockedNames.resolve(missing, blocked) { names ->
                             _state.update { state ->
                                 val channels = state.hidden.channels.map { item -> names[item.id]?.let { item.copy(name = it) } ?: item }
@@ -244,7 +244,7 @@ class TasteViewModel
 
         fun resetVideoProfile() =
             act {
-                FlowNeuroEngine.resetBrain(context)
+                VoxTubeNeuroEngine.resetBrain(context)
                 preferences.setOnboardingDone(false)
                 homeSnapshots.clear()
                 neighbours.clear()
@@ -270,24 +270,24 @@ class TasteViewModel
         }
 
         private suspend fun load(): TasteState {
-            FlowNeuroEngine.initialize(context)
-            val brain = FlowNeuroEngine.getSavedBrainSnapshot()
+            VoxTubeNeuroEngine.initialize(context)
+            val brain = VoxTubeNeuroEngine.getSavedBrainSnapshot()
             val names = channelNames()
             val profile = runCatching { musicBrain.tasteProfile() }.getOrNull()
             return TasteState(
                 loading = false,
-                persona = FlowNeuroEngine.getPersona(brain),
+                persona = VoxTubeNeuroEngine.getPersona(brain),
                 maturity = (brain.totalInteractions / MATURE_INTERACTIONS).coerceIn(0f, 1f),
                 profile = brain.globalVector.traits(),
                 now = (brain.timeVectors[TimeBucket.current()] ?: ContentVector()).traits(),
-                picks = tastePicks(brain, FlowNeuroEngine.pickKeysByLabel(brain)),
-                topics = tasteTopics(brain, TOPIC_COUNT, FlowNeuroEngine.pickKeys(brain), FlowNeuroEngine::specificity),
+                picks = tastePicks(brain, VoxTubeNeuroEngine.pickKeysByLabel(brain)),
+                topics = tasteTopics(brain, TOPIC_COUNT, VoxTubeNeuroEngine.pickKeys(brain), VoxTubeNeuroEngine::specificity),
                 groups =
                     tasteGroups(
                         brain,
-                        runCatching { FlowNeuroEngine.interestClusters(brain) }.getOrDefault(emptyList()),
-                        FlowNeuroEngine.pickKeys(brain),
-                        FlowNeuroEngine::specificity,
+                        runCatching { VoxTubeNeuroEngine.interestClusters(brain) }.getOrDefault(emptyList()),
+                        VoxTubeNeuroEngine.pickKeys(brain),
+                        VoxTubeNeuroEngine::specificity,
                         GROUP_COUNT,
                     ),
                 channels = tasteChannels(brain, names),

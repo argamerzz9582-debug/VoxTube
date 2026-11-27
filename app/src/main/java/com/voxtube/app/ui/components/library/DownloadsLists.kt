@@ -36,9 +36,9 @@ import com.voxtube.app.data.music.DownloadedTrack
 import com.voxtube.app.data.video.DownloadProgressUpdate
 import com.voxtube.app.data.video.DownloadedVideo
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowPullToRefreshBox
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubePullToRefreshBox
 import com.voxtube.app.ui.components.shared.animateMediaGridItem
 
 private val GridSpacing = 12.dp
@@ -98,7 +98,7 @@ internal fun VideosDownloadsList(
     onHomeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    FlowPullToRefreshBox(
+    VoxTubePullToRefreshBox(
         isRefreshing = isRefreshing,
         onRefresh = onRefresh,
         state = rememberPullToRefreshState(),
@@ -106,7 +106,7 @@ internal fun VideosDownloadsList(
     ) {
         if (totalCount == 0 && incomplete.isEmpty()) {
             DownloadsEmptyState(kind = MediaKind.Videos, onHomeClick = onHomeClick)
-            return@FlowPullToRefreshBox
+            return@VoxTubePullToRefreshBox
         }
         BoxWithConstraints(Modifier.fillMaxSize()) {
             val grid = remember(maxWidth) { libraryGridLayoutFor(maxWidth) }
@@ -177,7 +177,7 @@ internal fun MusicDownloadsList(
     onHomeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    FlowPullToRefreshBox(
+    VoxTubePullToRefreshBox(
         isRefreshing = isRefreshing,
         onRefresh = onRefresh,
         state = rememberPullToRefreshState(),
@@ -185,7 +185,7 @@ internal fun MusicDownloadsList(
     ) {
         if (totalCount == 0 && incomplete.isEmpty()) {
             DownloadsEmptyState(kind = MediaKind.Music, onHomeClick = onHomeClick)
-            return@FlowPullToRefreshBox
+            return@VoxTubePullToRefreshBox
         }
         LazyVerticalGrid(
             columns = GridCells.Fixed(columns),
@@ -287,7 +287,7 @@ private fun DownloadsSectionHeader(
 
 @Composable
 private fun NoResults(query: String) {
-    FlowEmptyState(
+    VoxTubeEmptyState(
         title = stringResource(R.string.downloads_no_results, query.trim()),
         icon = Icons.Outlined.SearchOff,
         modifier = Modifier.padding(top = 48.dp),

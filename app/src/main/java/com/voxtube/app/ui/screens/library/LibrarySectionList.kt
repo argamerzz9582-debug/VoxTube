@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.library.LibraryNavigationRow
 import com.voxtube.app.ui.components.library.LibrarySection
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
 
 @Composable
 internal fun LibrarySectionList(
@@ -20,7 +20,7 @@ internal fun LibrarySectionList(
     counts: LibraryCounts?,
     onOpenSection: (LibrarySection) -> Unit,
 ) {
-    Column(modifier = Modifier.widthIn(max = FlowMaxContentWidth).padding(horizontal = 16.dp)) {
+    Column(modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).padding(horizontal = 16.dp)) {
         LibrarySectionHeader(stringResource(R.string.library_section_header))
         sections.forEach { section ->
             LibrarySectionRow(section, counts) { onOpenSection(section) }

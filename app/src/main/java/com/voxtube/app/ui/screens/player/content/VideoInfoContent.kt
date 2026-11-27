@@ -19,8 +19,8 @@ import com.voxtube.app.data.localmedia.LocalMediaIds
 import com.voxtube.app.data.model.Comment
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.player.EnhancedPlayerManager
-import com.voxtube.app.ui.components.shared.FlowNoteEditorDialog
 import com.voxtube.app.ui.components.shared.SaveVideoSheet
+import com.voxtube.app.ui.components.shared.VoxTubeNoteEditorDialog
 import com.voxtube.app.ui.components.shared.rememberVideoShareAction
 import com.voxtube.app.ui.components.shared.shareMediaFiles
 import com.voxtube.app.ui.components.shared.subscribedCollaboratorIds
@@ -230,7 +230,7 @@ internal fun VideoInfoContent(
 
     if (showNoteEditor && videoNotesEnabled) {
         val insertPositionMs = remember { EnhancedPlayerManager.getInstance().getCurrentPosition().takeUnless { video.isLive } }
-        FlowNoteEditorDialog(
+        VoxTubeNoteEditorDialog(
             initialText = videoNote.orEmpty(),
             title = stringResource(R.string.note_video_title),
             onSave = { text -> viewModel.saveVideoNote(video.id, text) },

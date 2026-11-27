@@ -21,7 +21,7 @@ import com.voxtube.app.R
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.option
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.components.shared.rememberDateLabels
 import com.voxtube.app.ui.screens.settings.index.DateTimeIndex
 import com.voxtube.app.utils.DateContext
@@ -84,10 +84,10 @@ internal fun DateTimeScreen(
         }
     val overrideOptions =
         listOf(
-            FlowToggleOption(DateContextMode.DEFAULT, stringResource(R.string.datetime_override_default)),
-            FlowToggleOption(DateContextMode.RELATIVE, stringResource(R.string.datetime_override_relative)),
-            FlowToggleOption(DateContextMode.EXACT, stringResource(R.string.datetime_override_exact)),
-            FlowToggleOption(DateContextMode.BOTH, stringResource(R.string.datetime_override_both)),
+            VoxTubeToggleOption(DateContextMode.DEFAULT, stringResource(R.string.datetime_override_default)),
+            VoxTubeToggleOption(DateContextMode.RELATIVE, stringResource(R.string.datetime_override_relative)),
+            VoxTubeToggleOption(DateContextMode.EXACT, stringResource(R.string.datetime_override_exact)),
+            VoxTubeToggleOption(DateContextMode.BOTH, stringResource(R.string.datetime_override_both)),
         )
 
     SettingsPage(

@@ -41,17 +41,17 @@ import com.voxtube.app.ui.TabScrollEventBus
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
-import com.voxtube.app.ui.components.layout.topbar.FlowScrollAwayLayout
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeScrollAwayLayout
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.layout.topbar.rememberFlowScrollAwayState
 import com.voxtube.app.ui.components.music.section.HomeSectionType
 import com.voxtube.app.ui.components.music.section.MusicHomeLibrary
 import com.voxtube.app.ui.components.music.section.musicHomeFeed
 import com.voxtube.app.ui.components.music.sheet.LocalMusicMenus
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowPullToRefreshBox
 import com.voxtube.app.ui.components.shared.MusicScreenShimmerLoading
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubePullToRefreshBox
 import com.voxtube.app.ui.utils.reachUnderStatusBar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
@@ -165,7 +165,7 @@ fun EnhancedMusicScreen(
     val bottomInsets = LocalFlowBottomInsets.current
     val headerState = rememberFlowScrollAwayState()
     val headerSpec = MaterialTheme.motionScheme.fastSpatialSpec<Float>()
-    OnTabReselected(FlowTab.Music.route) { headerState.show(headerSpec) }
+    OnTabReselected(VoxTubeTab.Music.route) { headerState.show(headerSpec) }
 
     Scaffold(
         modifier = Modifier.reachUnderStatusBar(),
@@ -182,12 +182,12 @@ fun EnhancedMusicScreen(
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = WindowInsets(0.dp),
     ) { paddingValues ->
-        FlowScrollAwayLayout(
+        VoxTubeScrollAwayLayout(
             modifier = Modifier.padding(paddingValues),
             state = headerState,
             hideOnScroll = topBarHideOnScroll,
             header = {
-                FlowTopBar(
+                VoxTubeTopBar(
                     title = stringResource(R.string.screen_title_music),
                     actions = {
                         IconButton(onClick = onSearchClick) {
@@ -205,7 +205,7 @@ fun EnhancedMusicScreen(
                 }
 
                 uiState.error != null && uiState.trendingSongs.isEmpty() -> {
-                    FlowErrorState(
+                    VoxTubeErrorState(
                         error = uiState.error ?: stringResource(R.string.error_occurred),
                         onRetry = { viewModel.retry() },
                         modifier = Modifier.padding(top = topPadding),
@@ -235,7 +235,7 @@ fun EnhancedMusicScreen(
                         }
                     val pullState = rememberPullToRefreshState()
 
-                    FlowPullToRefreshBox(
+                    VoxTubePullToRefreshBox(
                         isRefreshing = uiState.isLoading || uiState.homeChipPage?.status == MusicHomeChipStatus.REFRESHING,
                         onRefresh = { viewModel.refresh() },
                         state = pullState,

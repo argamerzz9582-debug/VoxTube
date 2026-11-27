@@ -24,7 +24,7 @@ import com.voxtube.app.ui.components.settings.SettingsGroupScope
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.screens.settings.index.ScrobblingIndex
 
 /** Last.fm, Libre.fm and ListenBrainz accounts, the viewer's own Last.fm key, and what gets sent. */
@@ -163,7 +163,7 @@ private fun SettingsGroupScope.account(
                 !ready -> labels.needsKey
                 else -> labels.notSignedIn
             }
-        FlowNavRow(
+        VoxTubeNavRow(
             title = stringResource(ScrobblingIndex.account(service).title),
             supportingText = value,
             enabled = account != null || ready,

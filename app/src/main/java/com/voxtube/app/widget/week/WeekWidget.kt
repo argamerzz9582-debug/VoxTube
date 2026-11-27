@@ -42,7 +42,7 @@ import com.voxtube.app.widget.core.action.WidgetDeepLink
 import com.voxtube.app.widget.core.image.ShapeDecor
 import com.voxtube.app.widget.core.image.WidgetImageLoader
 import com.voxtube.app.widget.core.image.WidgetShape
-import com.voxtube.app.widget.core.theme.FlowGlanceTheme
+import com.voxtube.app.widget.core.theme.VoxTubeGlanceTheme
 import com.voxtube.app.widget.core.theme.WidgetDimens
 import com.voxtube.app.widget.core.theme.WidgetText
 import com.voxtube.app.widget.core.theme.dpToPx
@@ -72,7 +72,7 @@ class WeekWidget : GlanceAppWidget() {
         val initialColors = colorsFlow.first()
         provideContent {
             val colors by colorsFlow.collectAsState(initialColors)
-            FlowGlanceTheme(colors) { WeekContent(week, portrait) }
+            VoxTubeGlanceTheme(colors) { WeekContent(week, portrait) }
         }
     }
 
@@ -82,7 +82,7 @@ class WeekWidget : GlanceAppWidget() {
     ) {
         val week = withContext(Dispatchers.IO) { widgetEntryPoint(context).weekSource().load() }
         val colors = widgetColorsFlow(context).first()
-        provideContent { FlowGlanceTheme(colors) { WeekContent(week, portrait = null) } }
+        provideContent { VoxTubeGlanceTheme(colors) { WeekContent(week, portrait = null) } }
     }
 
     internal companion object {

@@ -17,9 +17,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSelectionRow
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionRow
 
 /**
  * Where a kind of download is saved: the default folder, a preset, a folder picked with the system
@@ -55,7 +55,7 @@ internal fun DownloadLocationDialog(
         }
     val selected = current?.takeUnless { it == defaultPath }
 
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
@@ -68,7 +68,7 @@ internal fun DownloadLocationDialog(
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 Text(stringResource(R.string.location_dialog_subtitle))
                 presets.forEach { (path, label, supporting) ->
-                    FlowSelectionRow(
+                    VoxTubeSelectionRow(
                         title = label,
                         supportingText = supporting,
                         selected = selected == path,
@@ -80,7 +80,7 @@ internal fun DownloadLocationDialog(
                     )
                 }
                 onBrowse?.let { browse ->
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = stringResource(R.string.location_custom_saf_label),
                         supportingText = stringResource(R.string.location_custom_saf_desc),
                         leadingIcon = Icons.Outlined.CreateNewFolder,
@@ -88,7 +88,7 @@ internal fun DownloadLocationDialog(
                         onClick = browse,
                     )
                 }
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.location_custom_manual_label),
                     supportingText = stringResource(R.string.location_custom_manual_desc),
                     leadingIcon = Icons.Outlined.Edit,
@@ -108,7 +108,7 @@ private fun ManualPathDialog(
     onDismiss: () -> Unit,
 ) {
     var path by rememberSaveable { mutableStateOf(initial) }
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.location_manual_dialog_title)) },
         text = {

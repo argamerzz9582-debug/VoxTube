@@ -11,7 +11,7 @@ import com.voxtube.app.data.local.dao.SubscriptionGroupDao
 import com.voxtube.app.data.local.entity.SubscriptionGroupEntity
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.FeedExclusions
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.subscriptions.SubscriptionFeedRefreshProgress
 import com.voxtube.app.data.subscriptions.SubscriptionFeedRepository
 import com.voxtube.app.data.subscriptions.SubscriptionRefreshPlan
@@ -51,7 +51,7 @@ class SubscriptionsViewModelTest {
     private val database: AppDatabase = mockk(relaxed = true)
     private val playerPreferences: PlayerPreferences = mockk(relaxed = true)
     private val subscriptionGroupDao: SubscriptionGroupDao = mockk(relaxed = true)
-    private val neuroEngine: FlowNeuroEngine = mockk(relaxed = true)
+    private val neuroEngine: VoxTubeNeuroEngine = mockk(relaxed = true)
 
     private lateinit var viewModel: SubscriptionsViewModel
     private val viewModelStore = ViewModelStore()

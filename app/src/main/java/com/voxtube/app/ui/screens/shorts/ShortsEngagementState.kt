@@ -4,8 +4,8 @@ import com.voxtube.app.data.engagement.VideoEngagementUseCase
 import com.voxtube.app.data.local.PlaylistRepository
 import com.voxtube.app.data.model.ShortVideo
 import com.voxtube.app.data.model.toVideo
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.InteractionType
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.utils.PerformanceDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -92,7 +92,7 @@ internal class ShortsEngagementState(
             } else {
                 playlistRepository.addToSavedShorts(video)
                 runCatching {
-                    FlowNeuroEngine.onVideoInteraction(video.copy(isShort = true), InteractionType.SAVED)
+                    VoxTubeNeuroEngine.onVideoInteraction(video.copy(isShort = true), InteractionType.SAVED)
                 }
             }
         }

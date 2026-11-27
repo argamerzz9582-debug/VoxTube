@@ -2,7 +2,7 @@ package com.voxtube.app.ui
 
 import com.voxtube.app.ui.components.layout.navigation.DOWNLOADS_ROUTE
 import com.voxtube.app.ui.components.layout.navigation.DOWNLOADS_TAB_ROUTE
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.screens.recap.RecapRoutes
 import com.voxtube.app.ui.screens.search.SEARCH_ROUTE_PATTERN
 import com.voxtube.app.ui.screens.update.UPDATE_ROUTE
@@ -13,7 +13,7 @@ import org.junit.Test
 class RouteKeysTest {
     @Test
     fun everyTabRootIsItsOwnKey() {
-        FlowTab.entries.filter { it != FlowTab.Shorts && it != FlowTab.Search }.forEach { tab ->
+        VoxTubeTab.entries.filter { it != VoxTubeTab.Shorts && it != VoxTubeTab.Search }.forEach { tab ->
             assertEquals(tab.route, routeKeyFor(tab.route))
         }
     }

@@ -40,7 +40,7 @@ fun CollectionEditDialog(
     var name by remember(initialName) { mutableStateOf(initialName) }
     var description by remember(initialDescription) { mutableStateOf(initialDescription) }
 
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         icon =
             if (icon != null) {
@@ -100,7 +100,7 @@ fun DeleteCollectionDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         icon = {
             Icon(

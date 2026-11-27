@@ -50,7 +50,7 @@ import com.voxtube.app.ui.components.music.item.MusicCollectionCard
 import com.voxtube.app.ui.components.music.item.MusicItemDensity
 import com.voxtube.app.ui.components.music.item.MusicTrackItem
 import com.voxtube.app.ui.components.shared.ChartRankBadge
-import com.voxtube.app.ui.components.shared.FlowFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 import com.voxtube.app.ui.components.shared.flowArtistShape
 import com.voxtube.app.ui.components.shared.flowGridCellWidth
 import com.voxtube.app.ui.components.shared.flowGridColumns
@@ -419,7 +419,7 @@ fun MusicHomeChipRow(
     ) {
         items(items = chips.distinctBy { it.title }, key = { it.title }) { chip ->
             val isSelected = selectedChipTitle == chip.title
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 label = chip.title,
                 selected = isSelected,
                 onClick = { onChipToggle(if (isSelected) null else chip) },

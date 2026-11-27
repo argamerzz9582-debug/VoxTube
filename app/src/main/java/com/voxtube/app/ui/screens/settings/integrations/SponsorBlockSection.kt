@@ -31,10 +31,10 @@ import com.voxtube.app.data.model.SponsorBlockCategories
 import com.voxtube.app.ui.components.settings.SettingsListScope
 import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowNavRow
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.skipDpadFocus
 import com.voxtube.app.ui.screens.settings.index.IntegrationsIndex
 import com.voxtube.app.ui.theme.defaultSponsorBlockColor
@@ -64,7 +64,7 @@ internal fun SettingsListScope.sponsorBlockSection(
         switch(IntegrationsIndex.contribute, viewModel.submitButton, viewModel::setSubmitButton, enabled = enabled)
         if (submitButton) {
             row(IntegrationsIndex.userId.key) { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(IntegrationsIndex.userId.title),
                     supportingText =
                         userId?.let { stringResource(R.string.settings_truncated, it.take(USER_ID_PREVIEW_LENGTH)) }
@@ -134,11 +134,11 @@ private fun SegmentRow(
         Text(label)
     }
     if (menuOpen) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = label,
             options =
                 SponsorBlockCategories.actionsFor(category).map {
-                    FlowChoice(it, segmentActionLabel(category, it), segmentActionDetail(category, it))
+                    VoxTubeChoice(it, segmentActionLabel(category, it), segmentActionDetail(category, it))
                 },
             selected = action,
             onSelect = onActionSelected,
@@ -147,7 +147,7 @@ private fun SegmentRow(
             footer =
                 if (LocalDpadNavigation.current) {
                     {
-                        FlowNavRow(
+                        VoxTubeNavRow(
                             title = stringResource(R.string.settings_segment_colour, label),
                             onClick = {
                                 menuOpen = false

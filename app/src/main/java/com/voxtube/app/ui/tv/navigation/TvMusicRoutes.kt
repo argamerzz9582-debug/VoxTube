@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.music.model.toVideo
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.components.shared.MediaKind
 import com.voxtube.app.ui.screens.music.ArtistItemsScreen
 import com.voxtube.app.ui.screens.music.ArtistRoute
@@ -27,18 +27,18 @@ internal fun NavGraphBuilder.tvMusicRoutes(
     onPlayVideo: (Video) -> Unit,
     onSelectRoot: (String) -> Unit,
 ) {
-    composable(FlowTab.Music.route) {
+    composable(VoxTubeTab.Music.route) {
         TvScreenFrame {
             EnhancedMusicScreen(
                 onSongClick = musicPlayerViewModel::loadAndPlayTrack,
                 onVideoClick = { track -> onPlayVideo(track.toVideo()) },
                 onArtistClick = { navController.navigate(TvRoutes.musicArtist(it)) },
-                onSearchClick = { onSelectRoot(FlowTab.Search.route) },
+                onSearchClick = { onSelectRoot(VoxTubeTab.Search.route) },
                 onAlbumClick = { navController.navigate(TvRoutes.musicCollection(it)) },
                 onMoodsClick = { item -> navController.navigate(item?.let(TvRoutes::musicBrowse) ?: TvRoutes.MOODS) },
                 onPlaylistClick = { navController.navigate(TvRoutes.musicCollection(it)) },
                 onAllPlaylistsClick = { navController.navigate(TvRoutes.playlists(MediaKind.Music)) },
-                onAllSubscriptionsClick = { onSelectRoot(FlowTab.Subscriptions.route) },
+                onAllSubscriptionsClick = { onSelectRoot(VoxTubeTab.Subscriptions.route) },
                 showRecognize = false,
             )
         }

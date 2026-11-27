@@ -156,14 +156,14 @@ val LocalExtendedColors =
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun FlowTheme(
+fun VoxTubeTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM,
     themeVariant: ThemeVariant = ThemeVariant.DARK,
     customTheme: CustomTheme? = null,
     systemLightThemeMode: ThemeMode = ThemeMode.DARK,
     systemDarkThemeMode: ThemeMode = ThemeMode.DARK,
     systemDarkThemeVariant: ThemeVariant = ThemeVariant.DARK,
-    fontFamily: FontFamily = FlowFontFamily,
+    fontFamily: FontFamily = VoxTubeFontFamily,
     content: @Composable () -> Unit,
 ) {
     val colorScheme =
@@ -202,7 +202,7 @@ fun FlowTheme(
 
 /**
  * Non-composable resolution of the app's active color scheme. Single source of truth
- * shared by [FlowTheme] and the home-screen widgets, so widgets always render in the
+ * shared by [VoxTubeTheme] and the home-screen widgets, so widgets always render in the
  * exact palette the user selected in-app (including custom and Material You themes).
  */
 fun resolveFlowColorScheme(
@@ -231,13 +231,13 @@ fun resolveFlowColorScheme(
         }
 
         else -> {
-            FlowPalettes.forMode(effectiveThemeMode).colorsFor(effectiveVariant).toColorScheme(effectiveVariant)
+            VoxTubePalettes.forMode(effectiveThemeMode).colorsFor(effectiveVariant).toColorScheme(effectiveVariant)
         }
     }
 }
 
 /** The palette and variant the app shows while the system is in one night mode. */
-data class FlowThemeSlot(
+data class VoxTubeThemeSlot(
     val mode: ThemeMode,
     val variant: ThemeVariant,
 )
@@ -249,8 +249,8 @@ fun resolveFlowThemeSlot(
     systemLightThemeMode: ThemeMode,
     systemDarkThemeMode: ThemeMode,
     systemDarkThemeVariant: ThemeVariant,
-): FlowThemeSlot =
-    FlowThemeSlot(
+): VoxTubeThemeSlot =
+    VoxTubeThemeSlot(
         mode = themeMode.resolveSystemDefault(isSystemDark, systemLightThemeMode, systemDarkThemeMode),
         variant =
             if (themeMode == ThemeMode.SYSTEM) {

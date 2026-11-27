@@ -27,8 +27,8 @@ import androidx.lifecycle.viewModelScope
 import com.voxtube.app.R
 import com.voxtube.app.data.newmusic.InnertubeMusicService
 import com.voxtube.app.innertube.models.MediaInfo
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.rememberDateDisplaySettings
 import com.voxtube.app.ui.components.shared.rememberDateLabels
 import com.voxtube.app.utils.DateContext
@@ -102,7 +102,7 @@ fun MediaDetailsPage(
     MediaDetailRows(details = mediaDetailLines(subject, state), quickActions = quickActions)
     if (state.isLoading) {
         Box(modifier = Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
-            FlowLoadingIndicator()
+            VoxTubeLoadingIndicator()
         }
     }
 }
@@ -120,7 +120,7 @@ fun MediaDetailRows(
         rows =
             details.map { (label, value) ->
                 QuickActionRow(key = label) { shape ->
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = value,
                         supportingText = label,
                         onClick = {

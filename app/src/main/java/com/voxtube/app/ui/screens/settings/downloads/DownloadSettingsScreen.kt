@@ -67,9 +67,9 @@ import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.slider
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 import com.voxtube.app.ui.screens.settings.index.DownloadsIndex
 import com.voxtube.app.ui.screens.settings.quality.MusicQualities
@@ -159,8 +159,8 @@ internal fun DownloadSettingsScreen(
         stringResource(if (access.allFiles) R.string.files_access_granted_subtitle else R.string.files_access_denied_subtitle)
     val menuStyles =
         listOf(
-            FlowToggleOption(DownloadDialogStyle.FULL, stringResource(R.string.download_menu_style_classic)),
-            FlowToggleOption(DownloadDialogStyle.COMPACT, stringResource(R.string.download_menu_style_compact)),
+            VoxTubeToggleOption(DownloadDialogStyle.FULL, stringResource(R.string.download_menu_style_classic)),
+            VoxTubeToggleOption(DownloadDialogStyle.COMPACT, stringResource(R.string.download_menu_style_compact)),
         )
 
     SettingsPage(
@@ -290,9 +290,9 @@ internal fun DownloadSettingsScreen(
 
     when (picker) {
         DownloadPicker.QUALITY -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_quick_download_quality),
-                options = VideoQualities.drop(1).map { FlowChoice(it, stringResource(videoQualityLabel(it))) },
+                options = VideoQualities.drop(1).map { VoxTubeChoice(it, stringResource(videoQualityLabel(it))) },
                 selected = quickQuality,
                 onSelect = viewModel::setQuickQuality,
                 onDismiss = { picker = null },
@@ -300,11 +300,11 @@ internal fun DownloadSettingsScreen(
         }
 
         DownloadPicker.CODEC -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.default_download_codec_label),
                 options =
                     VideoCodec.entries.map { codecOption ->
-                        FlowChoice(
+                        VoxTubeChoice(
                             codecOption,
                             codecLabel(codecOption),
                             if (codecOption == VideoCodec.AUTO) stringResource(R.string.default_download_codec_auto_subtitle) else null,
@@ -317,11 +317,11 @@ internal fun DownloadSettingsScreen(
         }
 
         DownloadPicker.MUSIC_QUALITY -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_music_download_quality),
                 options =
                     MusicQualities.filter { it != MusicAudioQuality.AUTO }.map {
-                        FlowChoice(
+                        VoxTubeChoice(
                             it,
                             stringResource(musicQualityLabel(it)),
                         )
@@ -333,9 +333,9 @@ internal fun DownloadSettingsScreen(
         }
 
         DownloadPicker.AUTO_DOWNLOAD -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_auto_download_opened_title),
-                options = AutoDownloadMode.entries.map { FlowChoice(it, stringResource(autoDownloadLabel(it))) },
+                options = AutoDownloadMode.entries.map { VoxTubeChoice(it, stringResource(autoDownloadLabel(it))) },
                 selected = autoDownloadOpened,
                 onSelect = viewModel::setAutoDownloadOpened,
                 onDismiss = { picker = null },

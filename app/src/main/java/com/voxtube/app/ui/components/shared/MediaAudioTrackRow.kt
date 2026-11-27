@@ -23,7 +23,7 @@ fun MediaAudioTrackRow(
     supportingText: String? = null,
     shape: Shape = RectangleShape,
 ) {
-    FlowSelectionRow(
+    VoxTubeSelectionRow(
         title = label,
         selected = selected,
         onClick = onClick,

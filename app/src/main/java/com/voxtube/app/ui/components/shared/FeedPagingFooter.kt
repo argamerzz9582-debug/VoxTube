@@ -33,7 +33,7 @@ fun FeedPagingFooter(
 ) {
     when {
         appendState is LoadState.Loading -> {
-            FlowFeedProgress(modifier)
+            VoxTubeFeedProgress(modifier)
         }
 
         appendState is LoadState.Error -> {

@@ -75,7 +75,7 @@ class CommentUiTest {
     ) {
         rule.setContent {
             MaterialTheme {
-                FlowCommentItem(
+                VoxTubeCommentItem(
                     comment = comment,
                     onSeekMs = onSeekMs,
                     onLoadReplies = {},

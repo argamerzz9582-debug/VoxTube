@@ -47,13 +47,13 @@ import com.voxtube.app.data.video.downloader.work.DownloadWaitReason
 import com.voxtube.app.ui.components.music.sheet.LocalMusicMenus
 import com.voxtube.app.ui.components.shared.ArtworkThumbnail
 import com.voxtube.app.ui.components.shared.ExplicitBadge
-import com.voxtube.app.ui.components.shared.FlowEmptyState
 import com.voxtube.app.ui.components.shared.MediaKind
 import com.voxtube.app.ui.components.shared.MediaRow
 import com.voxtube.app.ui.components.shared.MediaRowAction
 import com.voxtube.app.ui.components.shared.MediaRowDefaults
 import com.voxtube.app.ui.components.shared.MediaThumbnail
 import com.voxtube.app.ui.components.shared.MediaThumbnailDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 import com.voxtube.app.ui.components.shared.card.LocalVideoCardPreferences
 import com.voxtube.app.ui.components.shared.quickactions.VideoQuickActionsBottomSheet
 import com.voxtube.app.utils.formatYouTubeRelativeTime
@@ -306,7 +306,7 @@ internal fun DownloadsEmptyState(
 ) {
     val label = stringResource(kind.labelRes)
     Box(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-        FlowEmptyState(
+        VoxTubeEmptyState(
             title = stringResource(R.string.empty_offline_title, label),
             subtitle = stringResource(R.string.empty_offline_body, label),
             icon = kind.icon,

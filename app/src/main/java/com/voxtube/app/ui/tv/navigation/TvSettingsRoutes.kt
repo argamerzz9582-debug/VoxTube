@@ -15,7 +15,6 @@ import com.voxtube.app.ui.screens.recap.RecapScreen
 import com.voxtube.app.ui.screens.recap.story.RecapStoryScreen
 import com.voxtube.app.ui.screens.settings.SettingsHost
 import com.voxtube.app.ui.screens.settings.SettingsHostOptions
-import com.voxtube.app.ui.screens.settings.about.DonationsScreen
 import com.voxtube.app.ui.screens.sync.SyncScreen
 import com.voxtube.app.ui.screens.update.UPDATE_ROUTE
 import com.voxtube.app.ui.screens.update.UpdateScreen
@@ -30,9 +29,6 @@ internal fun NavGraphBuilder.tvSettingsRoutes(navController: NavHostController) 
         arguments = listOf(navArgument(TvRoutes.SETTINGS_PAGE_ARG) { type = NavType.StringType }),
     ) { entry ->
         TvSettings(start = SettingsTarget.decode(entry.arguments?.getString(TvRoutes.SETTINGS_PAGE_ARG)), navController = navController)
-    }
-    composable(TvRoutes.DONATIONS) {
-        TvScreenFrame { DonationsScreen(onNavigateBack = { navController.popBackStack() }) }
     }
     composable(UPDATE_ROUTE) {
         TvScreenFrame { UpdateScreen(onClose = { navController.popBackStack() }) }
@@ -100,7 +96,6 @@ private fun TvSettings(
         SettingsHost(
             start = start,
             onExit = { navController.popBackStack() },
-            onOpenDonations = { navController.navigate(TvRoutes.DONATIONS) },
             onOpenRecap = { navController.navigate(RecapRoutes.stats()) },
             onOpenUpdate = { navController.navigate(UPDATE_ROUTE) },
             options = options,

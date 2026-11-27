@@ -23,8 +23,8 @@ import com.voxtube.app.ui.components.applock.rememberAppUnlock
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
 import com.voxtube.app.ui.screens.settings.index.SecurityIndex
 
 /**
@@ -95,10 +95,10 @@ internal fun SecurityScreen(
     }
 
     if (choosingDelay) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.app_lock_after_title),
             description = stringResource(R.string.app_lock_after_description),
-            options = APP_LOCK_DELAYS_MINUTES.map { FlowChoice(it, delayLabel(it)) },
+            options = APP_LOCK_DELAYS_MINUTES.map { VoxTubeChoice(it, delayLabel(it)) },
             selected = delayMinutes,
             onSelect = viewModel::setDelayMinutes,
             onDismiss = { choosingDelay = false },

@@ -56,7 +56,7 @@ class SharedArtworkImages {
  */
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun FlowSharedTransitions(
+fun VoxTubeSharedTransitions(
     enabled: Boolean,
     content: @Composable () -> Unit,
 ) {

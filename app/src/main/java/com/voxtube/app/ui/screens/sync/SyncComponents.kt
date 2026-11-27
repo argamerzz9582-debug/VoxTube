@@ -29,9 +29,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 
 // The sync flow's building blocks. Every step is a header, a body of the same segmented rows the
@@ -88,7 +88,7 @@ internal fun SyncSection(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        FlowSectionHeader(text = title, modifier = Modifier.offset(x = SectionLabelShift))
+        VoxTubeSectionHeader(text = title, modifier = Modifier.offset(x = SectionLabelShift))
         content()
     }
 }
@@ -100,7 +100,7 @@ internal fun SyncRowGroup(
     modifier: Modifier = Modifier,
     row: @Composable (index: Int, shape: Shape) -> Unit,
 ) {
-    Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap)) {
+    Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap)) {
         repeat(count) { index -> row(index, flowSegmentShape(index = index, count = count)) }
     }
 }
@@ -118,7 +118,7 @@ internal class SyncOption(
 internal fun SyncOptions(options: List<SyncOption>) {
     SyncRowGroup(count = options.size) { index, shape ->
         val option = options[index]
-        FlowNavRow(
+        VoxTubeNavRow(
             title = option.title,
             supportingText = option.body,
             leadingIcon = option.icon,
@@ -128,7 +128,7 @@ internal fun SyncOptions(options: List<SyncOption>) {
     }
 }
 
-// The same padding and icon size as the FlowNavRows it sits among.
+// The same padding and icon size as the VoxTubeNavRows it sits among.
 private val InfoItemPadding = PaddingValues(horizontal = 16.dp, vertical = 14.dp)
 private val InfoItemIconSize = 22.dp
 

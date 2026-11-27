@@ -44,10 +44,10 @@ import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.innertube.pages.MoodAndGenres
 import com.voxtube.app.ui.components.search.SearchSuggestionsPanel
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowSearchField
-import com.voxtube.app.ui.components.shared.FlowToggleOption
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.components.shared.quickactions.sharedQuickActionsViewModel
 import com.voxtube.app.ui.screens.music.MusicSearchBody
 import com.voxtube.app.ui.screens.music.MusicSearchViewModel
@@ -96,7 +96,7 @@ fun TvSearchScreen(
     val pagingItems = viewModel.searchResults.collectAsLazyPagingItems()
     val gridState = rememberLazyGridState()
     val text = state.textFieldState
-    val kinds = MediaKind.entries.map { FlowToggleOption(it, stringResource(it.labelRes), it.icon) }
+    val kinds = MediaKind.entries.map { VoxTubeToggleOption(it, stringResource(it.labelRes), it.icon) }
 
     // As on the phone: a query edited over finished results goes back to those results first.
     BackHandler(enabled = kind != MediaKind.Music && state.isTyping && uiState.query.isNotBlank()) { state.stopTyping() }
@@ -136,7 +136,7 @@ fun TvSearchScreen(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                FlowSearchField(
+                VoxTubeSearchField(
                     state = text,
                     placeholder = stringResource(R.string.search_videos_channels_placeholder),
                     onSearch = { submit() },
@@ -148,7 +148,7 @@ fun TvSearchScreen(
                         Icon(imageVector = Icons.Rounded.Mic, contentDescription = stringResource(R.string.voice_search_cd))
                     }
                 }
-                FlowConnectedToggleGroup(
+                VoxTubeConnectedToggleGroup(
                     options = kinds,
                     selected = kind,
                     onSelected = { kind = it },

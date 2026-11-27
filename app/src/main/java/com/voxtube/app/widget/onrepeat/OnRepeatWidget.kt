@@ -34,7 +34,7 @@ import com.voxtube.app.widget.core.component.coverSizeFor
 import com.voxtube.app.widget.core.image.WidgetImageSpec
 import com.voxtube.app.widget.core.image.preloadWidgetImages
 import com.voxtube.app.widget.core.image.rememberWidgetImages
-import com.voxtube.app.widget.core.theme.FlowGlanceTheme
+import com.voxtube.app.widget.core.theme.VoxTubeGlanceTheme
 import com.voxtube.app.widget.core.theme.WidgetDimens
 import com.voxtube.app.widget.core.theme.bakedCornerRadiusPx
 import com.voxtube.app.widget.core.theme.dpToPx
@@ -58,7 +58,7 @@ class OnRepeatWidget : GlanceAppWidget() {
     ) {
         val tracks = withContext(Dispatchers.IO) { widgetEntryPoint(context).onRepeatSource().tracks() }
         val colors = widgetColorsFlow(context).first()
-        provideContent { FlowGlanceTheme(colors) { OnRepeatContent(tracks.map { it.toItem(context, emptyMap()) }) } }
+        provideContent { VoxTubeGlanceTheme(colors) { OnRepeatContent(tracks.map { it.toItem(context, emptyMap()) }) } }
     }
 
     override suspend fun provideGlance(
@@ -80,7 +80,7 @@ class OnRepeatWidget : GlanceAppWidget() {
         provideContent {
             val colors by colorsFlow.collectAsState(initialColors)
             val images by rememberWidgetImages(context, specs, preloaded)
-            FlowGlanceTheme(colors) {
+            VoxTubeGlanceTheme(colors) {
                 OnRepeatContent(tracks.map { it.toItem(context, images) })
             }
         }

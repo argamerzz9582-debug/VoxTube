@@ -57,7 +57,7 @@ import com.voxtube.app.data.music.DownloadedTrack
 import com.voxtube.app.data.video.DownloadedVideo
 import com.voxtube.app.data.video.storage.StorageAccess
 import com.voxtube.app.ui.components.layout.LocalFlowSnackbarHostState
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.library.ActiveDownloadActions
 import com.voxtube.app.ui.components.library.DownloadCollectionsShelf
 import com.voxtube.app.ui.components.library.DownloadsRecoveryCard
@@ -68,11 +68,11 @@ import com.voxtube.app.ui.components.library.MusicDownloadsList
 import com.voxtube.app.ui.components.library.RemoveDownloadCollectionDialog
 import com.voxtube.app.ui.components.library.VideosDownloadsList
 import com.voxtube.app.ui.components.library.libraryHeaderIsOneRow
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowSelectionAction
-import com.voxtube.app.ui.components.shared.FlowSelectionToolbar
-import com.voxtube.app.ui.components.shared.FlowSortChip
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionAction
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionToolbar
+import com.voxtube.app.ui.components.shared.VoxTubeSortChip
 import com.voxtube.app.ui.components.shared.dismissKeyboardOnPress
 import com.voxtube.app.ui.components.shared.flowGridColumns
 import kotlinx.coroutines.flow.collectLatest
@@ -172,7 +172,7 @@ fun DownloadsScreen(
             onCancelAll = { removeIncompleteOf = selectedKind },
         )
     val sortChip: @Composable () -> Unit = {
-        FlowSortChip(
+        VoxTubeSortChip(
             options = DownloadSort.entries,
             selected = uiState.sort,
             default = DownloadSort.NEWEST,
@@ -200,7 +200,7 @@ fun DownloadsScreen(
         modifier = modifier.fillMaxSize(),
         contentWindowInsets = WindowInsets(0.dp),
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title =
                     if (selectionMode) {
                         pluralStringResource(R.plurals.selected_count_template, selectedIds.size, selectedIds.size)
@@ -315,12 +315,12 @@ fun DownloadsScreen(
                     }
                 }
             }
-            FlowSelectionToolbar(
+            VoxTubeSelectionToolbar(
                 visible = selectionMode && selectedIds.isNotEmpty(),
                 summary = pluralStringResource(R.plurals.selected_count_template, selectedIds.size, selectedIds.size),
                 actions =
                     listOf(
-                        FlowSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) {
+                        VoxTubeSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) {
                             delete(PendingDeletion(selectedIds, title = null))
                         },
                     ),
@@ -357,7 +357,7 @@ fun DownloadsScreen(
 
     removeIncompleteOf?.let { kind ->
         val count = if (kind == MediaKind.Videos) uiState.incompleteVideoDownloads.size else uiState.incompleteMusicDownloads.size
-        FlowAlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { removeIncompleteOf = null },
             title = { Text(stringResource(R.string.remove_incomplete_downloads)) },
             text = { Text(pluralStringResource(R.plurals.remove_incomplete_downloads_message, count, count)) },

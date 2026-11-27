@@ -13,7 +13,7 @@ import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.data.recommendation.music.MusicArtistInsights
 import com.voxtube.app.ui.components.music.header.MusicSectionAction
 import com.voxtube.app.ui.components.music.item.MusicTrackItem
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.theme.Dimensions
 import com.voxtube.app.utils.formatViewCount
@@ -39,7 +39,7 @@ internal fun LazyListScope.segmentedTracks(
             modifier =
                 Modifier
                     .padding(horizontal = Dimensions.ContentPaddingHorizontal)
-                    .padding(bottom = FlowSegmentedGap),
+                    .padding(bottom = VoxTubeSegmentedGap),
         )
     }
 }

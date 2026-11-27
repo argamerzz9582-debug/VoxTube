@@ -38,7 +38,7 @@ fun DlnaDevicePickerDialog(
     onStopCasting: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {

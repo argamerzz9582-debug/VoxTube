@@ -21,8 +21,8 @@ import com.voxtube.app.data.local.SPEED_SWIPE_STEPS
 import com.voxtube.app.data.local.SpeedSwipeSide
 import com.voxtube.app.player.crossfade.CrossfadePolicy
 import com.voxtube.app.player.stream.CaptionTrackResolver
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
 import com.voxtube.app.utils.LanguageCatalog
 import com.voxtube.app.utils.formatMultiplierLabel
 import kotlin.math.roundToInt
@@ -40,10 +40,10 @@ internal fun PlaybackDialogs(
     when (dialog) {
         PlaybackDialog.AUTOPLAY_COUNTDOWN -> {
             val seconds by viewModel.autoplayCountdown.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_settings_autoplay_countdown_title),
                 description = stringResource(R.string.player_settings_autoplay_countdown_dialog_body),
-                options = AutoplayCountdownOptions.map { FlowChoice(it, countdownLabel(it)) },
+                options = AutoplayCountdownOptions.map { VoxTubeChoice(it, countdownLabel(it)) },
                 selected = seconds,
                 onSelect = viewModel::setAutoplayCountdown,
                 onDismiss = onDismiss,
@@ -52,9 +52,9 @@ internal fun PlaybackDialogs(
 
         PlaybackDialog.LONG_PRESS_SPEED -> {
             val speed by viewModel.longPressSpeed.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_appearance_long_press_speed_title),
-                options = LongPressSpeedOptions.map { FlowChoice(it, longPressSpeedLabel(it)) },
+                options = LongPressSpeedOptions.map { VoxTubeChoice(it, longPressSpeedLabel(it)) },
                 selected = if (speed <= 0f) 0f else speed,
                 onSelect = viewModel::setLongPressSpeed,
                 onDismiss = onDismiss,
@@ -63,10 +63,10 @@ internal fun PlaybackDialogs(
 
         PlaybackDialog.DOUBLE_TAP_SEEK -> {
             val seconds by viewModel.doubleTapSeek.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_settings_double_tap_seek_dialog_title),
                 description = stringResource(R.string.player_settings_double_tap_seek_dialog_body),
-                options = DoubleTapSeekOptions.map { FlowChoice(it, doubleTapSeekLabel(it)) },
+                options = DoubleTapSeekOptions.map { VoxTubeChoice(it, doubleTapSeekLabel(it)) },
                 selected = seconds,
                 onSelect = viewModel::setDoubleTapSeek,
                 onDismiss = onDismiss,
@@ -75,10 +75,10 @@ internal fun PlaybackDialogs(
 
         PlaybackDialog.SPEED_SWIPE_SIDE -> {
             val side by viewModel.speedSwipeSide.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_settings_speed_swipe),
                 description = stringResource(R.string.player_settings_speed_swipe_dialog_body),
-                options = SpeedSwipeSide.entries.map { FlowChoice(it, speedSwipeSideLabel(it)) },
+                options = SpeedSwipeSide.entries.map { VoxTubeChoice(it, speedSwipeSideLabel(it)) },
                 selected = side,
                 onSelect = viewModel::setSpeedSwipeSide,
                 onDismiss = onDismiss,
@@ -87,10 +87,10 @@ internal fun PlaybackDialogs(
 
         PlaybackDialog.SPEED_SWIPE_STEP -> {
             val step by viewModel.speedSwipeStep.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_settings_speed_swipe_step),
                 description = stringResource(R.string.player_settings_speed_swipe_step_dialog_body),
-                options = SPEED_SWIPE_STEPS.map { FlowChoice(it, formatMultiplierLabel(it)) },
+                options = SPEED_SWIPE_STEPS.map { VoxTubeChoice(it, formatMultiplierLabel(it)) },
                 selected = step,
                 onSelect = viewModel::setSpeedSwipeStep,
                 onDismiss = onDismiss,
@@ -110,12 +110,12 @@ internal fun PlaybackDialogs(
 
         PlaybackDialog.AUDIO_LANGUAGE -> {
             val code by viewModel.audioLanguage.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_settings_audio_language_dialog_title),
                 description = stringResource(R.string.player_settings_audio_language_dialog_body),
                 options =
                     listOf(
-                        FlowChoice(
+                        VoxTubeChoice(
                             PlaybackSettingsViewModel.ORIGINAL_AUDIO,
                             stringResource(R.string.player_settings_audio_original),
                             stringResource(R.string.player_settings_audio_original_desc),
@@ -129,12 +129,12 @@ internal fun PlaybackDialogs(
 
         PlaybackDialog.SUBTITLE_LANGUAGE -> {
             val code by viewModel.subtitleLanguage.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_settings_subtitle_language_dialog_title),
                 description = stringResource(R.string.player_settings_subtitle_language_dialog_body),
                 options =
                     listOf(
-                        FlowChoice(
+                        VoxTubeChoice(
                             CaptionTrackResolver.NO_PREFERRED_LANGUAGE,
                             stringResource(R.string.player_settings_subtitle_language_none),
                             stringResource(R.string.player_settings_subtitle_language_none_desc),
@@ -156,9 +156,9 @@ internal fun PlaybackDialogs(
 
         PlaybackDialog.CROSSFADE_DURATION -> {
             val ms by viewModel.crossfadeMs.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_crossfade_duration_title),
-                options = CrossfadePolicy.DURATIONS_MS.map { FlowChoice(it, crossfadeDurationLabel(it)) },
+                options = CrossfadePolicy.DURATIONS_MS.map { VoxTubeChoice(it, crossfadeDurationLabel(it)) },
                 selected = ms.toLong(),
                 onSelect = viewModel::setCrossfadeMs,
                 onDismiss = onDismiss,
@@ -168,9 +168,9 @@ internal fun PlaybackDialogs(
 
         PlaybackDialog.CROSSFADE_CURVE -> {
             val curve by viewModel.crossfadeCurve.collectAsStateWithLifecycle()
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_crossfade_curve_title),
-                options = CrossfadeCurve.entries.map { FlowChoice(it, crossfadeCurveLabel(it), crossfadeCurveDetail(it)) },
+                options = CrossfadeCurve.entries.map { VoxTubeChoice(it, crossfadeCurveLabel(it), crossfadeCurveDetail(it)) },
                 selected = curve,
                 onSelect = viewModel::setCrossfadeCurve,
                 onDismiss = onDismiss,
@@ -212,13 +212,13 @@ private fun crossfadeCurveDetail(curve: CrossfadeCurve): String =
     )
 
 @Composable
-private fun languageChoices(): List<FlowChoice<String>> =
+private fun languageChoices(): List<VoxTubeChoice<String>> =
     remember {
         LanguageCatalog.codes
             .map { code ->
                 val localized = LanguageCatalog.displayName(code)
                 val native = LanguageCatalog.nativeName(code)
-                FlowChoice(code, localized, native.takeIf { it != localized })
+                VoxTubeChoice(code, localized, native.takeIf { it != localized })
             }.sortedBy { it.label }
     }
 
@@ -234,14 +234,17 @@ private fun ShortsModeDialog(
     val mode by viewModel.shortsPlaybackMode.collectAsStateWithLifecycle()
     val seconds by viewModel.shortsAutoScrollSeconds.collectAsStateWithLifecycle()
     var draft by remember(seconds) { mutableFloatStateOf(seconds.toFloat()) }
-    FlowChoiceDialog(
+    VoxTubeChoiceDialog(
         title = stringResource(R.string.player_settings_shorts_playback_mode_dialog_title),
         description = stringResource(R.string.player_settings_shorts_playback_mode_dialog_body),
         options =
             listOf(
-                FlowChoice(ShortsPlaybackModes.LOOP, stringResource(R.string.player_settings_shorts_playback_mode_loop)),
-                FlowChoice(ShortsPlaybackModes.AUTO_NEXT, stringResource(R.string.player_settings_shorts_playback_mode_auto_next)),
-                FlowChoice(ShortsPlaybackModes.AUTO_INTERVAL, stringResource(R.string.player_settings_shorts_playback_mode_auto_interval)),
+                VoxTubeChoice(ShortsPlaybackModes.LOOP, stringResource(R.string.player_settings_shorts_playback_mode_loop)),
+                VoxTubeChoice(ShortsPlaybackModes.AUTO_NEXT, stringResource(R.string.player_settings_shorts_playback_mode_auto_next)),
+                VoxTubeChoice(
+                    ShortsPlaybackModes.AUTO_INTERVAL,
+                    stringResource(R.string.player_settings_shorts_playback_mode_auto_interval),
+                ),
             ),
         selected = mode,
         onSelect = viewModel::setShortsPlaybackMode,

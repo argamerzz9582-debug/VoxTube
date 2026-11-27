@@ -20,8 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.innertube.pages.explore.ExploreDestination
-import com.voxtube.app.ui.components.shared.FlowDropdownFilterChip
-import com.voxtube.app.ui.components.shared.FlowFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeDropdownFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 import com.voxtube.app.ui.screens.categories.CATEGORY_TABS
 import com.voxtube.app.ui.screens.categories.CategorySubTab
 
@@ -39,7 +39,7 @@ internal fun CategoryTabBar(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         items(CATEGORY_TABS, key = { it.destination.name }) { tab ->
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 label = stringResource(tab.labelRes),
                 selected = selected == tab.destination,
                 onClick = { onSelect(tab.destination) },
@@ -67,7 +67,7 @@ internal fun CategorySubTabMenu(
     val current = subTabs.firstOrNull { it.title == selected } ?: subTabs.first()
 
     Box(modifier = modifier.padding(horizontal = RowHorizontalPadding)) {
-        FlowDropdownFilterChip(
+        VoxTubeDropdownFilterChip(
             label = current.title,
             selected = current.title != subTabs.first().title,
             onClick = { expanded = true },

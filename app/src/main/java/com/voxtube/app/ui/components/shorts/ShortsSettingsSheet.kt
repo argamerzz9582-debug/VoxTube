@@ -43,15 +43,15 @@ import com.voxtube.app.player.shorts.ShortsCaptionState
 import com.voxtube.app.player.shorts.ShortsPlayerPool
 import com.voxtube.app.player.state.SubtitleOption
 import com.voxtube.app.player.stream.VideoCodecUtils
-import com.voxtube.app.ui.components.shared.FlowBottomSheet
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
-import com.voxtube.app.ui.components.shared.FlowSpinner
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
 import com.voxtube.app.ui.components.shared.MediaAudioTrackRow
 import com.voxtube.app.ui.components.shared.MediaPlaybackSpeedPicker
+import com.voxtube.app.ui.components.shared.VoxTubeBottomSheet
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.audioTrackBitrateLabel
 import com.voxtube.app.ui.components.shared.audioTrackFallbackLabel
 import com.voxtube.app.ui.components.shared.defaultSheetExpandedHeight
@@ -158,7 +158,7 @@ internal fun ShortsSettingsSheet(
         withStreams { state.availableAudioTracks = viewModel.availableAudioTracks(short.id) }
     }
 
-    FlowBottomSheet(
+    VoxTubeBottomSheet(
         onDismiss = onDismiss,
         state = sheetState,
         expandedHeight = expandedHeight ?: defaultSheetExpandedHeight(),
@@ -168,7 +168,7 @@ internal fun ShortsSettingsSheet(
         onBack = backPage?.let { page -> { state.page = page } },
         onProgressChange = onSheetProgressChange,
         header = { dragModifier ->
-            FlowSheetHeader(
+            VoxTubeSheetHeader(
                 title = title,
                 onClose = { sheetState.dismiss() },
                 modifier = dragModifier,
@@ -286,28 +286,28 @@ private fun ShortsSettingsMainPage(
     onCaptions: () -> Unit,
     onAmbientModeToggle: (Boolean) -> Unit,
 ) {
-    FlowSectionHeader(stringResource(R.string.shorts_settings_this_short))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.shorts_settings_this_short))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Rounded.ThumbUp,
             title = stringResource(R.string.action_want_more),
             shape = flowRowGroupShape(0, THIS_SHORT_ROWS),
             onClick = onWantMore,
         )
-        FlowNavRow(
+        VoxTubeNavRow(
             leadingIcon = Icons.Rounded.NotInterested,
             title = stringResource(R.string.action_not_interested),
             shape = flowRowGroupShape(1, THIS_SHORT_ROWS),
             onClick = onNotInterested,
         )
-        FlowNavRow(
+        VoxTubeNavRow(
             leadingIcon = Icons.Rounded.Block,
             title = stringResource(R.string.dont_show_channel),
             supportingText = stringResource(R.string.dont_show_channel_desc),
             shape = flowRowGroupShape(2, THIS_SHORT_ROWS),
             onClick = onBlockChannel,
         )
-        FlowNavRow(
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.Download,
             title = stringResource(R.string.download_video),
             shape = flowRowGroupShape(3, THIS_SHORT_ROWS),
@@ -315,15 +315,15 @@ private fun ShortsSettingsMainPage(
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.video))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.video))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.HighQuality,
             title = stringResource(R.string.shorts_quality),
             shape = flowRowGroupShape(0, VIDEO_ROWS),
             onClick = onQuality,
         )
-        FlowNavRow(
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.ClosedCaption,
             title = stringResource(R.string.captions),
             trailingText = captionLabel,
@@ -332,9 +332,9 @@ private fun ShortsSettingsMainPage(
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.playback_header))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.playback_header))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.Speed,
             title = stringResource(R.string.shorts_playback_speed),
             trailingText = playbackSpeedLabel(settings.playbackSpeed),
@@ -343,9 +343,9 @@ private fun ShortsSettingsMainPage(
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.audio_settings_title))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.audio_settings_title))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.AudioFile,
             title = stringResource(R.string.shorts_audio_track),
             shape = flowRowGroupShape(0, 1),
@@ -353,9 +353,9 @@ private fun ShortsSettingsMainPage(
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.player_settings_display))
-    FlowRowGroup {
-        FlowSwitchRow(
+    VoxTubeSectionHeader(stringResource(R.string.player_settings_display))
+    VoxTubeRowGroup {
+        VoxTubeSwitchRow(
             leadingIcon = ImageVector.vectorResource(R.drawable.ic_ambient_mode),
             title = stringResource(R.string.player_settings_ambient_mode),
             checked = settings.ambientModeEnabled,
@@ -430,7 +430,7 @@ private fun ShortsAudioPage(
         )
         return
     }
-    FlowRowGroup {
+    VoxTubeRowGroup {
         tracks.forEachIndexed { index, track ->
             MediaAudioTrackRow(
                 label = track.label.ifBlank { audioTrackFallbackLabel(index) },
@@ -453,7 +453,7 @@ private fun SheetLoading() {
                 .padding(LoadingPadding),
         contentAlignment = Alignment.Center,
     ) {
-        FlowSpinner()
+        VoxTubeSpinner()
     }
 }
 

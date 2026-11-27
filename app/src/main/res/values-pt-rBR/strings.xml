@@ -375,9 +375,6 @@
     <string name="settings_item_search_history_subtitle">Limpar histórico, gerenciar sugestões</string>
     <string name="settings_item_time_management">Gerenciamento de Tempo</string>
     <string name="settings_item_about_flow">Sobre o VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">Versão, Licença, Colaboradores</string>
-    <string name="settings_item_support">Apoio &amp; Doações</string>
-    <string name="settings_item_support_subtitle">Apoie o desenvolvimento do VoxTube</string>
     <string name="settings_region_dialog_title">Selecione a Região</string>
     <string name="settings_language_dialog_title">Selecione o Idioma do Aplicativo</string>
     <string name="settings_language_system_default">Padrão do sistema</string>
@@ -462,7 +459,6 @@
     <string name="appearance_role_secondary">Secundário</string>
     <string name="appearance_role_background">Plano de fundo</string>
     <string name="appearance_role_outline">Contorno</string>
-    <string name="icon_name_flow_red">VoxTube Vermelho</string>
     <string name="icon_name_amoled">Preto AMOLED</string>
     <string name="settings_item_player_appearance_subtitle">Personalizar o estilo da barra de progresso</string>
     <string name="player_fullscreen_seekbar_width_full">Largura total</string>
@@ -1223,25 +1219,8 @@
     <string name="location_badge_recommended">Recomendado</string>
     <string name="location_badge_active">Ativo</string>
     <string name="select_threads_count_desc">Selecione a quantidade de núcleos (1-8):</string>
-    <string name="support_donations_title">Apoio &amp; Doações</string>
-    <string name="support_flow_dev_title">Apoie o Desenvolvimento do Flow</string>
-    <string name="support_flow_dev_desc">Se o Flow é útil para ti, você pode apoiar seu desenvolvimento no Open Collective, Patreon ou criptomoedas abaixo. Obrigado!</string>
-    <string name="support_flow_patreon">Apoie o Flow no Patreon</string>
     <string name="thank_you_support_message">Obrigada pelo seu apoio! ❤️</string>
     <string name="address_copied_toast">Endereço copiado para a área de transferência</string>
-    <string name="donation_address_clip_label">Endereço para doações</string>
-    <string name="donation_prompt_title">Está Curtindo o Flow?</string>
-    <string name="donation_prompt_message">O Flow é gratuito, de código aberto e sem anúncios. Se ele conquistou um lugar no seu celular, um pequeno suporte ajuda o a continuar.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Apoiar o desenvolvimento</string>
-    <string name="donation_prompt_later">Talvez mais tarde</string>
-    <string name="donation_prompt_never">Não mostrar novamente</string>
-    <string name="about_creator">Criador</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website">Site</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="github_subtitle">Código-fonte &amp; problemas</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Biblioteca de extração principal</string>
@@ -1270,7 +1249,6 @@
     <string name="section_legal">Jurídico</string>
     <string name="section_device">Dispositivo</string>
     <string name="donate_item_title">Doar</string>
-    <string name="support_dev_subtitle">Apoiar o desenvolvimento</string>
     <string name="btn_ok">OK</string>
     <string name="btn_copy">Copiar</string>
     <string name="github_label">GitHub</string>
@@ -2241,7 +2219,6 @@
     <string name="settings_search_no_results">Nenhuma configuração para %1$s foi encontrada</string>
     <string name="settings_lyrics_provider_order_description">Começa de cima para baixo. Arraste para reordenar.</string>
     <string name="import_running_background">Você pode deixar esta tela. A importação continua funcionando.</string>
-    <string name="donations_cryptocurrency">CRIPTOMOEDAS</string>
     <string name="import_no_history_entries">Nenhuma entrada de histórico de visualização encontrada no arquivo</string>
     <string name="import_no_videos">Nenhum vídeo encontrado no arquivo da playlist</string>
     <string name="import_no_content">Nenhum conteúdo importável foi encontrado neste backup</string>
@@ -3329,7 +3306,7 @@
     <string name="content_settings_video_card_progress_subtitle">Uma barra na capa do vídeo mostrando quanto você assistiu</string>
     <string name="content_settings_home_subscriptions_title">Inscrições no Início</string>
     <string name="content_settings_home_subscriptions_subtitle">Misturar os vídeos dos canais que você segue na tela de Início</string>
-    <string name="pause_watch_history_subtitle">Para de guardar o que assisti. Deep Flow também faz uma pausa no aprendizado</string>
+    <string name="pause_watch_history_subtitle">Para de guardar o que assisti. Deep Focus também faz uma pausa no aprendizado</string>
     <string name="content_settings_subs_collaborations_title">Colaborações</string>
     <string name="content_settings_subs_collaborations_subtitle">Vídeos feitos com canais que você segue</string>
     <string name="proxy_settings_bypass_vpn">Ignorar proxy ao usar VPN</string>
@@ -3396,7 +3373,7 @@
         <item quantity="many">%d de notas deletadas</item>
         <item quantity="other">%d notas deletadas</item>
     </plurals>
-    <string name="taste_learning_paused">Deep Flow está ativado, aprendizado está pausado</string>
+    <string name="taste_learning_paused">Deep Focus está ativado, aprendizado está pausado</string>
     <string name="deep_flow_scrobble_subtitle">Continue enviando audições para Last.fm, Libre.fm e ListenBrainz</string>
     <string name="notif_type_shorts">Shorts</string>
     <string name="notif_type_shorts_subtitle">Incluir Shorts nos alertas de novos vídeos de inscrições</string>
@@ -3767,7 +3744,6 @@
     <string name="lyrics_provider_kugou">KuGou</string>
     <string name="notif_check_interval_off_new_videos">Desligado enquanto Novos Vídeos estiver desligado</string>
     <string name="queue_move_to_end">Ir para o final</string>
-    <string name="support_flow_open_collective">Apoie o Flow no Open Collective</string>
     <string name="settings_music_resume_summary">Inciar faixas de mais de 10 minutos a partir de onde você parou</string>
     <string name="settings_music_side_swipes_title">Gestos de velocidade e volume</string>
     <string name="auto_tab_for_you">Para você</string>
@@ -3866,7 +3842,6 @@
     <string name="settings_changelog_all_releases">Todos os releases no GitHub</string>
     <string name="settings_changelog_expand">Mostrar mudanças</string>
     <string name="settings_changelog_collapse">Ocultar mudanças</string>
-    <string name="settings_creator_role">Criador e desenvolvedor do Flow</string>
     <string name="device_info_section_device">Dispositivo</string>
     <string name="device_info_section_system">Sistema</string>
     <string name="device_info_section_display">Tela</string>
@@ -4002,7 +3977,6 @@
     <string name="settings_custom_theme_name">Nome do tema</string>
     <string name="settings_custom_theme_count">%1$d de %2$d temas</string>
     <string name="settings_custom_theme_empty">Sem temas personalizados</string>
-    <string name="settings_custom_theme_empty_body">Comece a partir de qualquer paleta, ou importe uma feita no VoxTube para computador.</string>
     <string name="settings_custom_theme_import_failed">Sem temas válidos neste arquivo</string>
     <string name="settings_custom_theme_limit">Você pode manter até %1$d temas</string>
     <string name="settings_custom_theme_exported">Tema exportado</string>
@@ -5240,15 +5214,12 @@
     <string name="ai_lists_status_count">%1$s canais e %2$s artistas, atualizado %3$s</string>
     <string name="ai_lists_status_count_now">%1$s canais e %2$s artistas, atualizado agora</string>
     <string name="ai_music_attribution_soul_title">Lista de música por Soul Over AI</string>
-    <string name="ai_music_attribution_soul_summary">CC BY 4.0, alterado pelo Flow</string>
     <string name="ai_music_attribution_blocker_title">Lista de música por Spotify AI Blocker</string>
     <string name="ai_list_source_title">Fonte de listas</string>
-    <string name="ai_list_source_dialog_body">Use outro servidor que publique a lista, como um que seja seu. Deixe a URL vazia para usar o do Flow.</string>
     <string name="ai_list_source_url_hint">URL do servidor</string>
     <string name="ai_list_source_key_hint">Chave pública (opcional)</string>
     <string name="ai_list_source_key_help">Necessária apenas quando o servidor assina a lista com a sua própria chave</string>
     <string name="ai_list_source_invalid">Insira uma URL https e, se fornecida, uma chave pública Ed25519 válida</string>
-    <string name="ai_list_source_reset">Use a do Flow</string>
     <string name="ai_report_header">Denunciar canais de IA</string>
     <string name="ai_report_enabled_title">Denunciar a partir do menu de vídeo</string>
     <string name="ai_report_enabled_summary">Adiciona Denunciar canal de IA para o menu de cada vídeo</string>

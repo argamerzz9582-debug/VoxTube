@@ -29,13 +29,13 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.topbar.FlowGlobalActionsMode
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeGlobalActionsMode
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
 import kotlinx.coroutines.flow.first
 
-internal val SettingsMaxContentWidth = FlowMaxContentWidth
+internal val SettingsMaxContentWidth = VoxTubeMaxContentWidth
 internal val SettingsHorizontalPadding = 16.dp
 private val SettingsBottomSpacing = 32.dp
 private const val HIGHLIGHT_VISIBLE_OFFSET_PX = -160
@@ -83,12 +83,12 @@ fun SettingsPage(
         contentWindowInsets = WindowInsets(0.dp),
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = title,
                 subtitle = subtitle,
                 onBack = onBack,
                 actions = actions,
-                globalActions = FlowGlobalActionsMode.None,
+                globalActions = VoxTubeGlobalActionsMode.None,
             )
         },
         snackbarHost = {

@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.music.MusicCastViewModel
 import com.voxtube.app.ui.screens.playon.LocalPlayOn
 import com.voxtube.app.ui.screens.playon.PlayOnButton
@@ -96,11 +96,11 @@ internal fun PlayerModeSwitch(
     onSelect: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    FlowConnectedToggleGroup(
+    VoxTubeConnectedToggleGroup(
         options =
             listOf(
-                FlowToggleOption(false, stringResource(R.string.music_player_mode_song)),
-                FlowToggleOption(true, stringResource(R.string.music_player_mode_video)),
+                VoxTubeToggleOption(false, stringResource(R.string.music_player_mode_song)),
+                VoxTubeToggleOption(true, stringResource(R.string.music_player_mode_video)),
             ),
         selected = showsVideo,
         onSelected = onSelect,

@@ -25,7 +25,6 @@ import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material.icons.outlined.ViewAgenda
 import androidx.compose.material.icons.outlined.VisibilityOff
-import androidx.compose.material.icons.outlined.VolunteerActivism
 import androidx.compose.material.icons.outlined.Widgets
 import androidx.compose.material.icons.outlined.WorkHistory
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -64,5 +63,4 @@ internal object HomeRowIcons {
     val DeepFlowScrobble: ImageVector = Icons.Outlined.CloudUpload
     val DeepFlowOnSearch: ImageVector = Icons.AutoMirrored.Outlined.ManageSearch
     val Updates: ImageVector = Icons.Outlined.Update
-    val Support: ImageVector = Icons.Outlined.VolunteerActivism
 }

@@ -38,9 +38,9 @@ import com.voxtube.app.data.model.Channel
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
 import com.voxtube.app.ui.components.shared.ChannelOrganizeActions
-import com.voxtube.app.ui.components.shared.FlowSubscribeButton
-import com.voxtube.app.ui.components.shared.FlowSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.MediaArtworkTint
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.card.MediaVideoCard
 import com.voxtube.app.ui.components.shared.feedStripCardWidth
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
@@ -200,7 +200,7 @@ private fun ChannelActions(
         horizontalArrangement = Arrangement.spacedBy(ActionSpacing),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        FlowSubscribeButton(
+        VoxTubeSubscribeButton(
             isSubscribed = isSubscribed,
             onSubscribeClick = onSubscribeToggle,
             onUnsubscribeClick = onSubscribeToggle,
@@ -208,7 +208,7 @@ private fun ChannelActions(
             onNotificationChange = onNotificationChange,
             onAddNote = organize.onAddNote,
             onManageGroups = organize.onManageGroups,
-            size = FlowSubscribeButtonSize.Wide,
+            size = VoxTubeSubscribeButtonSize.Wide,
             tint = tint,
             modifier = if (isSubscribed) Modifier else Modifier.weight(1f),
         )

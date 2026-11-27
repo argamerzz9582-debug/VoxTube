@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.voxtube.app.data.community.PostCommentsLoader
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.subscriptions.SubscriptionPost
 import com.voxtube.app.data.subscriptions.SubscriptionPostsPagingSource
 import com.voxtube.app.data.subscriptions.SubscriptionPostsRepository
@@ -31,7 +31,7 @@ class SubscriptionPostsViewModel
     @Inject
     constructor(
         private val repository: SubscriptionPostsRepository,
-        private val neuroEngine: FlowNeuroEngine,
+        private val neuroEngine: VoxTubeNeuroEngine,
     ) : ViewModel() {
         private val scope = MutableStateFlow<PostsScope?>(null)
 

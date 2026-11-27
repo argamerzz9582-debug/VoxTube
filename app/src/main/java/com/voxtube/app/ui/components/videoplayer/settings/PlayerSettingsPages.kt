@@ -21,13 +21,13 @@ import com.voxtube.app.player.QualityOption
 import com.voxtube.app.player.SubtitleOption
 import com.voxtube.app.player.state.SubtitleOrigin
 import com.voxtube.app.player.stream.VideoCodecUtils
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSelectionRow
 import com.voxtube.app.ui.components.shared.MediaAudioTrackRow
 import com.voxtube.app.ui.components.shared.MediaPlaybackSpeedPicker
 import com.voxtube.app.ui.components.shared.MediaQualitySelectorContent
 import com.voxtube.app.ui.components.shared.MediaQualitySelectorOption
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionRow
 import com.voxtube.app.ui.components.shared.audioTrackFallbackLabel
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.playbackSpeedLabel
@@ -114,9 +114,9 @@ internal fun PlayerSettingsSphericalDragSpeedPage(
     currentSpeed: Float,
     onSpeedSelected: (Float) -> Unit,
 ) {
-    FlowRowGroup {
+    VoxTubeRowGroup {
         SPHERICAL_DRAG_SPEEDS.forEachIndexed { index, speed ->
-            FlowSelectionRow(
+            VoxTubeSelectionRow(
                 title = playbackSpeedLabel(speed),
                 selected = speed == currentSpeed,
                 shape = flowRowGroupShape(index, SPHERICAL_DRAG_SPEEDS.size),
@@ -132,7 +132,7 @@ internal fun PlayerSettingsAudioPage(
     currentAudioTrack: Int,
     onTrackSelected: (Int) -> Unit,
 ) {
-    FlowRowGroup {
+    VoxTubeRowGroup {
         availableAudioTracks.forEachIndexed { index, track ->
             MediaAudioTrackRow(
                 label = audioTrackDisplayLabel(track, index),
@@ -158,15 +158,15 @@ internal fun PlayerSettingsSubtitlesPage(
     onSubtitleOffsetChange: ((Long) -> Unit)? = null,
 ) {
     val rowCount = availableSubtitles.size + 1
-    FlowRowGroup {
-        FlowSelectionRow(
+    VoxTubeRowGroup {
+        VoxTubeSelectionRow(
             title = stringResource(R.string.off),
             selected = !subtitlesEnabled,
             shape = flowRowGroupShape(0, rowCount),
             onClick = onDisableSubtitles,
         )
         availableSubtitles.forEachIndexed { index, subtitle ->
-            FlowSelectionRow(
+            VoxTubeSelectionRow(
                 title = subtitleRowTitle(subtitle, index),
                 supportingText =
                     when (subtitle.origin) {
@@ -195,16 +195,16 @@ internal fun PlayerSettingsSubtitlesPage(
     }
     Spacer(modifier = Modifier.height(SubtitleStyleRowSpacing))
     val navRows = if (onAddSubtitleFile != null) 2 else 1
-    FlowRowGroup {
+    VoxTubeRowGroup {
         if (onAddSubtitleFile != null) {
-            FlowNavRow(
+            VoxTubeNavRow(
                 title = stringResource(R.string.subtitle_add_file),
                 leadingIcon = Icons.Filled.FileOpen,
                 shape = flowRowGroupShape(0, navRows),
                 onClick = onAddSubtitleFile,
             )
         }
-        FlowNavRow(
+        VoxTubeNavRow(
             title = stringResource(R.string.subtitle_style),
             leadingIcon = Icons.Filled.Tune,
             shape = flowRowGroupShape(navRows - 1, navRows),

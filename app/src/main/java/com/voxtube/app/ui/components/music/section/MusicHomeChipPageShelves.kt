@@ -12,9 +12,9 @@ import com.voxtube.app.R
 import com.voxtube.app.data.music.model.MUSIC_GENRE_SOURCE_PREFIX
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.ui.components.music.header.MusicSectionAction
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowFeedProgress
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeFeedProgress
 import com.voxtube.app.ui.screens.music.MusicHomeChipPage
 import com.voxtube.app.ui.screens.music.MusicHomeChipStatus
 import com.voxtube.app.ui.screens.music.isSongShelf
@@ -35,13 +35,13 @@ internal fun LazyListScope.musicHomeChipPage(
 ) {
     when {
         page.status == MusicHomeChipStatus.LOADING -> {
-            item(key = "chip_loading", contentType = MusicShelfContentType.ChipStatus) { FlowFeedProgress() }
+            item(key = "chip_loading", contentType = MusicShelfContentType.ChipStatus) { VoxTubeFeedProgress() }
             return
         }
 
         page.status == MusicHomeChipStatus.FAILED -> {
             item(key = "chip_failed", contentType = MusicShelfContentType.ChipStatus) {
-                FlowErrorState(
+                VoxTubeErrorState(
                     error = stringResource(R.string.music_chip_load_failed, page.chip.title),
                     onRetry = onRetry,
                     modifier = Modifier.fillParentMaxHeight(STATE_HEIGHT_FRACTION),
@@ -52,7 +52,7 @@ internal fun LazyListScope.musicHomeChipPage(
 
         page.sections.isEmpty() && page.continuation == null -> {
             item(key = "chip_empty", contentType = MusicShelfContentType.ChipStatus) {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(R.string.music_chip_empty),
                     modifier = Modifier.fillParentMaxHeight(STATE_HEIGHT_FRACTION),
                 )
@@ -94,7 +94,7 @@ internal fun LazyListScope.musicHomeChipPage(
     page.continuation?.let { continuation ->
         item(key = "chip_continuation", contentType = MusicShelfContentType.Continuation) {
             LaunchedEffect(continuation) { onLoadMore() }
-            if (page.isMoreLoading) FlowFeedProgress() else Box(modifier = Modifier.height(0.dp))
+            if (page.isMoreLoading) VoxTubeFeedProgress() else Box(modifier = Modifier.height(0.dp))
         }
     }
 }

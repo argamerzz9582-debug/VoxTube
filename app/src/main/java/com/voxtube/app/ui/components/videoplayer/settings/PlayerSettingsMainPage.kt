@@ -27,10 +27,10 @@ import androidx.compose.ui.res.vectorResource
 import com.voxtube.app.R
 import com.voxtube.app.player.EnhancedPlayerState
 import com.voxtube.app.ui.components.equalizer.equalizerSummary
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.playbackSpeedLabel
 import com.voxtube.app.utils.formatDurationMillis
@@ -81,9 +81,9 @@ internal fun PlayerSettingsMainPage(
             effectiveQuality = playerState.effectiveQuality,
             options = playerState.availableQualities,
         )
-    FlowSectionHeader(stringResource(R.string.video))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.video))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.HighQuality,
             title = stringResource(R.string.quality),
             trailingText =
@@ -97,23 +97,23 @@ internal fun PlayerSettingsMainPage(
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.playback_header))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.playback_header))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.Speed,
             title = stringResource(R.string.playback_speed),
             trailingText = playbackSpeedLabel(playerState.playbackSpeed),
             shape = flowRowGroupShape(0, playbackRows),
             onClick = { onNavigateToPage(PlayerSettingsPage.Speed) },
         )
-        FlowSwitchRow(
+        VoxTubeSwitchRow(
             leadingIcon = Icons.Rounded.Repeat,
             title = stringResource(R.string.loop_video),
             checked = playerState.isLooping,
             shape = flowRowGroupShape(1, playbackRows),
             onCheckedChange = onLoopToggle,
         )
-        FlowSwitchRow(
+        VoxTubeSwitchRow(
             leadingIcon = Icons.Filled.SkipNext,
             title = stringResource(R.string.autoplay_next),
             checked = autoplayEnabled,
@@ -122,7 +122,7 @@ internal fun PlayerSettingsMainPage(
             onCheckedChange = onAutoplayToggle,
         )
         if (sponsorBlockSegmentCount > 0) {
-            FlowSwitchRow(
+            VoxTubeSwitchRow(
                 leadingIcon = ImageVector.vectorResource(R.drawable.ic_block),
                 title = stringResource(R.string.player_settings_sponsorblock_video),
                 supportingText =
@@ -135,9 +135,9 @@ internal fun PlayerSettingsMainPage(
     }
 
     if (notePositionMs != null) {
-        FlowSectionHeader(stringResource(R.string.note_title))
-        FlowRowGroup {
-            FlowNavRow(
+        VoxTubeSectionHeader(stringResource(R.string.note_title))
+        VoxTubeRowGroup {
+            VoxTubeNavRow(
                 leadingIcon = Icons.Outlined.MoreTime,
                 title = stringResource(R.string.note_at_time, formatDurationMillis(notePositionMs)),
                 shape = flowRowGroupShape(0, 1),
@@ -146,9 +146,9 @@ internal fun PlayerSettingsMainPage(
         }
     }
 
-    FlowSectionHeader(stringResource(R.string.audio_settings_title))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.audio_settings_title))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.AudioFile,
             title = stringResource(R.string.audio_track),
             trailingText =
@@ -161,9 +161,9 @@ internal fun PlayerSettingsMainPage(
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.captions))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.captions))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.Subtitles,
             title = stringResource(R.string.filter_subtitles),
             trailingText =
@@ -171,7 +171,7 @@ internal fun PlayerSettingsMainPage(
             shape = flowRowGroupShape(0, CAPTION_ROWS),
             onClick = { onNavigateToPage(PlayerSettingsPage.Subtitles) },
         )
-        FlowNavRow(
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.Tune,
             title = stringResource(R.string.subtitle_style),
             shape = flowRowGroupShape(1, CAPTION_ROWS),
@@ -179,21 +179,21 @@ internal fun PlayerSettingsMainPage(
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.player_settings_overlay_controls))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.player_settings_overlay_controls))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.Cast,
             title = stringResource(R.string.cast_to_tv),
             shape = flowRowGroupShape(0, OVERLAY_ROWS),
             onClick = onCastClick,
         )
-        FlowNavRow(
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.PictureInPicture,
             title = stringResource(R.string.pip_mode),
             shape = flowRowGroupShape(1, OVERLAY_ROWS),
             onClick = onPipClick,
         )
-        FlowNavRow(
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.Bedtime,
             title = stringResource(R.string.sleep_timer),
             shape = flowRowGroupShape(2, OVERLAY_ROWS),
@@ -201,23 +201,23 @@ internal fun PlayerSettingsMainPage(
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.audio_effects))
-    FlowRowGroup {
-        FlowNavRow(
+    VoxTubeSectionHeader(stringResource(R.string.audio_effects))
+    VoxTubeRowGroup {
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.Equalizer,
             title = stringResource(R.string.equalizer),
             trailingText = equalizerSummary(),
             shape = flowRowGroupShape(0, EFFECT_ROWS),
             onClick = { onNavigateToPage(PlayerSettingsPage.Equalizer) },
         )
-        FlowSwitchRow(
+        VoxTubeSwitchRow(
             leadingIcon = Icons.Rounded.GraphicEq,
             title = stringResource(R.string.player_settings_skip_silence),
             checked = playerState.isSkipSilenceEnabled,
             shape = flowRowGroupShape(1, EFFECT_ROWS),
             onCheckedChange = onSkipSilenceToggle,
         )
-        FlowSwitchRow(
+        VoxTubeSwitchRow(
             leadingIcon = Icons.AutoMirrored.Rounded.VolumeUp,
             title = stringResource(R.string.player_settings_normalize_volume),
             checked = playerState.isVolumeNormalizationEnabled,
@@ -229,9 +229,9 @@ internal fun PlayerSettingsMainPage(
     val glowRows = if (ambientGlowEnabled != null) 1 else 0
     val sphericalRows = listOfNotNull(sphericalViewEnabled, sphericalMotionEnabled, sphericalDragSpeed).size
     val displayRows = DISPLAY_ROWS + glowRows + sphericalRows
-    FlowSectionHeader(stringResource(R.string.player_settings_display))
-    FlowRowGroup {
-        FlowSwitchRow(
+    VoxTubeSectionHeader(stringResource(R.string.player_settings_display))
+    VoxTubeRowGroup {
+        VoxTubeSwitchRow(
             leadingIcon = ImageVector.vectorResource(R.drawable.ic_ambient_mode),
             title = stringResource(R.string.player_settings_ambient_mode),
             supportingText = stringResource(R.string.player_settings_ambient_mode_subtitle).takeIf { ambientGlowEnabled != null },
@@ -240,7 +240,7 @@ internal fun PlayerSettingsMainPage(
             onCheckedChange = onAmbientModeToggle,
         )
         if (ambientGlowEnabled != null) {
-            FlowSwitchRow(
+            VoxTubeSwitchRow(
                 leadingIcon = Icons.Filled.WbTwilight,
                 title = stringResource(R.string.player_settings_ambient_glow),
                 supportingText = stringResource(R.string.player_settings_ambient_glow_subtitle),
@@ -250,7 +250,7 @@ internal fun PlayerSettingsMainPage(
             )
         }
         if (sphericalViewEnabled != null) {
-            FlowSwitchRow(
+            VoxTubeSwitchRow(
                 leadingIcon = Icons.AutoMirrored.Filled._360,
                 title = stringResource(R.string.player_settings_spherical_view),
                 supportingText = stringResource(R.string.player_settings_spherical_view_summary),
@@ -260,7 +260,7 @@ internal fun PlayerSettingsMainPage(
             )
         }
         if (sphericalMotionEnabled != null) {
-            FlowSwitchRow(
+            VoxTubeSwitchRow(
                 leadingIcon = Icons.Filled.ScreenRotation,
                 title = stringResource(R.string.player_settings_spherical_motion),
                 supportingText = stringResource(R.string.player_settings_spherical_motion_summary),
@@ -270,7 +270,7 @@ internal fun PlayerSettingsMainPage(
             )
         }
         if (sphericalDragSpeed != null) {
-            FlowNavRow(
+            VoxTubeNavRow(
                 leadingIcon = Icons.Filled.Speed,
                 title = stringResource(R.string.player_settings_spherical_drag_speed),
                 trailingText = playbackSpeedLabel(sphericalDragSpeed),
@@ -278,7 +278,7 @@ internal fun PlayerSettingsMainPage(
                 onClick = { onNavigateToPage(PlayerSettingsPage.SphericalDragSpeed) },
             )
         }
-        FlowNavRow(
+        VoxTubeNavRow(
             leadingIcon = Icons.Filled.QueryStats,
             title = stringResource(R.string.stats_for_nerds),
             shape = flowRowGroupShape(displayRows - 1, displayRows),

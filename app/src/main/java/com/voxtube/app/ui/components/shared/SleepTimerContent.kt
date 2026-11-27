@@ -372,7 +372,7 @@ private fun InactiveTimerContent(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-                FlowSwitch(
+                VoxTubeSwitch(
                     checked = closeAppOnExpiry,
                     onCheckedChange = onCloseAppToggle,
                 )

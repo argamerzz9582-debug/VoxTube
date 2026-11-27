@@ -33,15 +33,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.data.music.model.PlaylistDetails
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.music.common.rememberMusicCollectionColorScheme
 import com.voxtube.app.ui.components.music.sheet.LocalMusicMenus
 import com.voxtube.app.ui.components.music.sheet.musicCollectionShareUrl
 import com.voxtube.app.ui.components.music.sheet.toCollectionActionItem
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowSelectionToolbar
-import com.voxtube.app.ui.components.shared.FlowSidePanes
-import com.voxtube.app.ui.components.shared.FlowSortChip
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionToolbar
+import com.voxtube.app.ui.components.shared.VoxTubeSidePanes
+import com.voxtube.app.ui.components.shared.VoxTubeSortChip
 import com.voxtube.app.ui.components.shared.quickactions.sharedQuickActionsViewModel
 import com.voxtube.app.ui.components.shared.rememberFlowPaneState
 import com.voxtube.app.ui.components.shared.rememberShareLinksWithoutText
@@ -93,7 +93,7 @@ fun MusicCollectionScreen(
 
         state.isLoading -> {
             Scaffold(
-                topBar = { FlowTopBar(title = "", onBack = callbacks.onBackClick) },
+                topBar = { VoxTubeTopBar(title = "", onBack = callbacks.onBackClick) },
                 contentWindowInsets = WindowInsets(0.dp),
                 containerColor = MaterialTheme.colorScheme.background,
             ) { padding ->
@@ -103,11 +103,11 @@ fun MusicCollectionScreen(
 
         else -> {
             Scaffold(
-                topBar = { FlowTopBar(title = "", onBack = callbacks.onBackClick) },
+                topBar = { VoxTubeTopBar(title = "", onBack = callbacks.onBackClick) },
                 contentWindowInsets = WindowInsets(0.dp),
                 containerColor = MaterialTheme.colorScheme.background,
             ) { padding ->
-                FlowErrorState(
+                VoxTubeErrorState(
                     error = stringResource(R.string.error_failed_to_load_playlist),
                     onRetry = viewModel::retry,
                     modifier = Modifier.padding(padding),
@@ -264,7 +264,7 @@ private fun CollectionContent(
                 ),
         )
     val sortChip: @Composable () -> Unit = {
-        FlowSortChip(
+        VoxTubeSortChip(
             options = MusicSortOrder.availableFor(state.kind, state.addedAt.isNotEmpty(), details.tracks.any { it.album.isNotBlank() }),
             selected = sortOrder,
             default = MusicSortOrder.COLLECTION,
@@ -346,7 +346,7 @@ private fun CollectionContent(
                         onReachedEnd = { if (state.showsSuggestions && !isSearching) viewModel.requestSuggestions() },
                     )
                 }
-                FlowSidePanes(
+                VoxTubeSidePanes(
                     panes = panes,
                     sidePaneWidth = HeaderPaneWidth,
                     sidePane = { MusicCollectionHeaderPane(headerState, headerActions) },
@@ -369,7 +369,7 @@ private fun CollectionContent(
                         }
                     },
                 )
-                FlowSelectionToolbar(
+                VoxTubeSelectionToolbar(
                     visible = selected != null && selected.isNotEmpty(),
                     summary = pluralStringResource(R.plurals.selected_count_template, selected?.size ?: 0, selected?.size ?: 0),
                     actions =

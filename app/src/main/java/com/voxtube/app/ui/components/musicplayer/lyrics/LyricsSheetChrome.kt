@@ -67,7 +67,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.local.LYRICS_ALIGN_LEFT
 import com.voxtube.app.data.local.LYRICS_ALIGN_RIGHT
 import com.voxtube.app.ui.components.PlayingWaveform
-import com.voxtube.app.ui.components.shared.FlowSpinner
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import kotlinx.coroutines.delay
 
 internal fun lyricsTextAlignFor(pref: String): TextAlign =
@@ -137,7 +137,7 @@ internal fun LyricsTrackPill(
                 )
             }
             if (isLoading) {
-                FlowSpinner(
+                VoxTubeSpinner(
                     modifier = Modifier.size(24.dp),
                     color = MaterialTheme.colorScheme.primary,
                 )

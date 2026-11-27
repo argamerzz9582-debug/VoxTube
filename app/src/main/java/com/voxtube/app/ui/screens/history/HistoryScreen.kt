@@ -39,14 +39,14 @@ import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.data.shorts.queue.ShortsQueueSource
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBarMenuItem
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBarOverflow
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBarMenuItem
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBarOverflow
 import com.voxtube.app.ui.components.library.HistoryFilterRow
 import com.voxtube.app.ui.components.library.HistoryList
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
 import kotlinx.coroutines.launch
 
 private val SearchFieldPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
@@ -92,16 +92,16 @@ fun HistoryScreen(
     Scaffold(
         contentWindowInsets = WindowInsets(0.dp),
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = stringResource(R.string.library_history_label),
                 onBack = onBackClick,
                 actions = {
-                    FlowTopBarOverflow(
+                    VoxTubeTopBarOverflow(
                         items =
                             buildList {
                                 if (uiState.shortsEnabled) {
                                     add(
-                                        FlowTopBarMenuItem(
+                                        VoxTubeTopBarMenuItem(
                                             label = stringResource(R.string.history_delete_shorts),
                                             enabled = uiState.historyEntries.any { it.isShort },
                                             onClick = { showClearShortsDialog = true },
@@ -109,7 +109,7 @@ fun HistoryScreen(
                                     )
                                 }
                                 add(
-                                    FlowTopBarMenuItem(
+                                    VoxTubeTopBarMenuItem(
                                         label = stringResource(R.string.clear_all),
                                         enabled = uiState.historyEntries.isNotEmpty(),
                                         onClick = { showClearDialog = true },
@@ -132,7 +132,7 @@ fun HistoryScreen(
                     .background(MaterialTheme.colorScheme.background)
                     .padding(paddingValues),
         ) {
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = searchQuery,
                 onQueryChange = viewModel::setSearchQuery,
                 placeholder = stringResource(R.string.search_watch_history),
@@ -170,7 +170,7 @@ fun HistoryScreen(
                 }
 
                 displayEntries.isEmpty() -> {
-                    FlowEmptyState(
+                    VoxTubeEmptyState(
                         modifier = Modifier.fillMaxSize(),
                         title =
                             if (uiState.historyEntries.isEmpty()) {
@@ -204,7 +204,7 @@ fun HistoryScreen(
     }
 
     if (showClearDialog) {
-        FlowAlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { showClearDialog = false },
             title = { Text(stringResource(R.string.clear_watch_history_alert_title)) },
             text = { Text(stringResource(R.string.clear_watch_history_alert_body)) },
@@ -227,7 +227,7 @@ fun HistoryScreen(
     }
 
     if (showClearShortsDialog) {
-        FlowAlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { showClearShortsDialog = false },
             title = { Text(stringResource(R.string.history_delete_shorts_title)) },
             text = { Text(stringResource(R.string.history_delete_shorts_body)) },

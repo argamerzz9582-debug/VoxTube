@@ -9,7 +9,7 @@ import com.voxtube.app.data.music.MusicCache
 import com.voxtube.app.data.repository.YouTubeRepository
 import com.voxtube.app.di.ApplicationScope
 import com.voxtube.app.player.factory.PlayerBuffers
-import com.voxtube.app.utils.FlowCrashHandler
+import com.voxtube.app.utils.VoxTubeCrashHandler
 import dagger.Lazy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +46,7 @@ class HeapSampler
             val used = runtime.totalMemory() - runtime.freeMemory()
             val max = runtime.maxMemory()
             if (!HeapPressure.isHigh(used, max)) return
-            FlowCrashHandler.recordPhase("heap", HeapPressure.describe(used, max, holdings()))
+            VoxTubeCrashHandler.recordPhase("heap", HeapPressure.describe(used, max, holdings()))
         }
 
         @OptIn(UnstableApi::class)

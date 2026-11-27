@@ -36,8 +36,8 @@ import com.voxtube.app.R
 import com.voxtube.app.sync.SyncState
 import com.voxtube.app.sync.protocol.SyncRole
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
-import com.voxtube.app.ui.components.layout.topbar.FlowGlobalActionsMode
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeGlobalActionsMode
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.settings.SettingsNotice
 import com.voxtube.app.ui.components.shared.dpadFocusOnEnter
 import com.voxtube.app.ui.screens.sync.linked.LinkedDevicesSection
@@ -167,10 +167,10 @@ fun SyncScreen(
         contentWindowInsets = WindowInsets(0.dp),
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = state.title(step),
                 onBack = if (atStart && onBack == null) null else ::goBack,
-                globalActions = FlowGlobalActionsMode.None,
+                globalActions = VoxTubeGlobalActionsMode.None,
             )
         },
     ) { padding ->

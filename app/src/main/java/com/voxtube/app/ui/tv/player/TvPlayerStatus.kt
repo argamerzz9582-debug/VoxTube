@@ -14,8 +14,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 
 private val ErrorMaxWidth = 560.dp
 
@@ -34,14 +34,14 @@ internal fun TvPlayerStatus(
     errorFocusRequester: FocusRequester,
     modifier: Modifier = Modifier,
 ) {
-    if (loading) FlowLoadingIndicator(modifier = modifier)
+    if (loading) VoxTubeLoadingIndicator(modifier = modifier)
     if (error != null) {
         Surface(
             modifier = modifier.widthIn(max = ErrorMaxWidth).focusRequester(errorFocusRequester),
             shape = MaterialTheme.shapes.extraLarge,
             color = MaterialTheme.colorScheme.surfaceContainerHigh,
         ) {
-            FlowErrorState(
+            VoxTubeErrorState(
                 error = error,
                 onRetry = onRetry,
                 secondaryAction =

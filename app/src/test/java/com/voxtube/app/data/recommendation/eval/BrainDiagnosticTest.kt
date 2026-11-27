@@ -20,7 +20,7 @@ import java.io.File
  *
  * Usage: export the engine profile on the device (Settings → Export Data →
  * engine profile, or Flow Personality → export), copy the JSON to
- * `diagnostics/brain.json` at the repo root (or pass -Dflow.brainPath=...),
+ * `diagnostics/brain.json` at the repo root (or pass -Dvoxtube.brainPath=...),
  * then run this test. Reports land in app/build/reports/neuro-benchmark/
  * as brain-diagnostic.txt and brain-diagnostic.json.
  *
@@ -28,7 +28,7 @@ import java.io.File
  */
 class BrainDiagnosticTest {
     private fun locateBrainFile(): File? {
-        System.getProperty("flow.brainPath")?.let { override ->
+        System.getProperty("voxtube.brainPath")?.let { override ->
             val f = File(override)
             if (f.isFile) return f
         }

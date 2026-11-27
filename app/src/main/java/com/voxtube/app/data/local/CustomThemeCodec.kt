@@ -3,9 +3,9 @@ package com.voxtube.app.data.local
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.voxtube.app.ui.theme.CustomTheme
-import com.voxtube.app.ui.theme.FlowPalettes
 import com.voxtube.app.ui.theme.PaletteColors
 import com.voxtube.app.ui.theme.ThemeVariant
+import com.voxtube.app.ui.theme.VoxTubePalettes
 import com.voxtube.app.ui.theme.mixColors
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -207,7 +207,7 @@ internal fun legacyCustomTheme(
     name: String,
 ): CustomTheme {
     fun palette(variant: ThemeVariant): PaletteColors {
-        val fallback = FlowPalettes.default.colorsFor(variant)
+        val fallback = VoxTubePalettes.default.colorsFor(variant)
         val roles = stored[variant].orEmpty()
 
         fun role(

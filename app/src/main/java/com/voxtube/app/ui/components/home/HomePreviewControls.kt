@@ -43,10 +43,10 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.player.stream.StoryboardLevel
 import com.voxtube.app.player.stream.StoryboardSpec
-import com.voxtube.app.ui.components.shared.FlowSpinner
 import com.voxtube.app.ui.components.shared.MediaSeekBar
 import com.voxtube.app.ui.components.shared.MediaTextBadge
 import com.voxtube.app.ui.components.shared.MediaThumbnailDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.videoplayer.controls.SeekPreviewThumbnail
 import com.voxtube.app.ui.components.videoplayer.controls.anchoredToThumb
 import com.voxtube.app.ui.components.videoplayer.gesture.DOUBLE_TAP_SEEK_WINDOW_MS
@@ -202,7 +202,7 @@ internal fun HomePreviewControls(
                 horizontalArrangement = Arrangement.spacedBy(MediaThumbnailDefaults.BadgePadding),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (state.buffering) FlowSpinner(modifier = Modifier.size(SpinnerSize), color = PlayerScrimContent)
+                if (state.buffering) VoxTubeSpinner(modifier = Modifier.size(SpinnerSize), color = PlayerScrimContent)
                 MediaTextBadge(text = formatDuration(remaining))
             }
         }

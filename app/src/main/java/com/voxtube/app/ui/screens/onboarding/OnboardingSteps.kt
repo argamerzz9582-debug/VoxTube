@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.data.backup.BackupOperation
 import com.voxtube.app.data.backup.ImportKind
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
 import com.voxtube.app.ui.utils.LocalWindowSizeClass
 import com.voxtube.app.ui.utils.isExpandedWidth
 
@@ -195,7 +195,7 @@ private fun StepBody(
 @Composable
 private fun Readable(content: @Composable () -> Unit) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
-        Box(Modifier.widthIn(max = FlowMaxContentWidth).fillMaxSize()) { content() }
+        Box(Modifier.widthIn(max = VoxTubeMaxContentWidth).fillMaxSize()) { content() }
     }
 }
 

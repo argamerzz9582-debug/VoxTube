@@ -21,7 +21,7 @@ import javax.inject.Singleton
 private val Context.brainCrdtDataStore by safePreferencesDataStore(name = "sync_brain_crdt", scope = StoreScope.PROFILE_PRIVATE)
 
 /**
- * The sync-owned CRDT state that the FlowNeuro brain itself cannot hold, persisted alongside it:
+ * The sync-owned CRDT state that the VoxTubeNeuro brain itself cannot hold, persisted alongside it:
  *
  * - **G-Counter sub-counts** for the additive counters (idf docs/interactions/word-freq). This is
  *   what makes the sums idempotent: each device only ever increments its OWN sub-count (via

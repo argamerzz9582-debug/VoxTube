@@ -1,7 +1,6 @@
 # Working with VoxTube as an AI agent
 
-VoxTube (`com.voxtube.app`) is an Android music/video app, a rebranded and redesigned fork of
-[Flow](https://github.com/Flow-Tube/Flow) (GPL-3.0; keep upstream license headers and credits intact). It is written in Kotlin with Jetpack Compose, Hilt, and Media3/ExoPlayer. It plays YouTube content via a native InnerTube client with a NewPipe-based fallback extraction path, supports local media playback, offline downloads, casting, lyrics, a device-to-device sync feature, and an on-device recommendation engine (FlowNeuroEngine). It follows Material 3 design guidelines closely.
+VoxTube (`com.voxtube.app`) is an Android music/video app licensed under GPL-3.0 (keep the license headers in source files intact). It is written in Kotlin with Jetpack Compose, Hilt, and Media3/ExoPlayer. It plays YouTube content via a native InnerTube client with a NewPipe-based fallback extraction path, supports local media playback, offline downloads, casting, lyrics, a device-to-device sync feature, and an on-device recommendation engine (VoxTubeNeuroEngine). It follows Material 3 design guidelines closely.
 
 Product flavors: `github` (default, in-app updater enabled) and `foss` (no updater). Always use flavor-prefixed Gradle tasks — e.g. `assembleGithubDebug`, `compileFossDebugKotlin` — never bare `assembleDebug`/`compileDebugKotlin`.
 
@@ -153,7 +152,7 @@ A legitimate hand-rolled component must therefore:
 
 ## Performance, battery, and thermals — non-negotiable
 
-Flow is a media player that runs for hours at a time. Jank, dropped frames, playback stutter,
+VoxTube is a media player that runs for hours at a time. Jank, dropped frames, playback stutter,
 device heat, and battery drain are critical bugs, not cosmetic issues. Every rule below is
 anchored in a real shipped regression that had to be found and fixed on-device — treat them as
 hard constraints, not suggestions.
@@ -254,7 +253,7 @@ hard constraints, not suggestions.
 
 ## Dependency injection and service-locator migration
 
-Flow uses Hilt, but some legacy app-owned classes are still reached through static/companion
+VoxTube uses Hilt, but some legacy app-owned classes are still reached through static/companion
 `getInstance()` calls. Treat those calls as migration debt, not as the pattern for new code. The
 goal is explicit, testable dependencies while preserving object identity, lifecycle, startup cost,
 and playback behavior.
@@ -404,8 +403,8 @@ Split by **responsibility**, never by line count. In order of preference:
 
 ### Naming conventions (already in force — match them)
 
-- `shared/` primitives with no domain meaning take the **`Flow`** prefix: `FlowFilterChip`,
-  `FlowSearchField`, `FlowEmptyState`, `FlowLoadingIndicator`.
+- `shared/` primitives with no domain meaning take the **`VoxTube`** prefix: `VoxTubeFilterChip`,
+  `VoxTubeSearchField`, `VoxTubeEmptyState`, `VoxTubeLoadingIndicator`.
 - `shared/` components in the media vocabulary take the **`Media`** prefix: `MediaRow`,
   `MediaThumbnail`, `MediaBadges`, `MediaKindSelector`.
 - Feature components take the **feature** prefix: `LibraryShelf`, `MusicTrackItem`,
@@ -438,8 +437,8 @@ identical before and after, unless the task explicitly asked for a visual change
 The route composable, its state hoisting, its effects and its layout. Not: bespoke cards, bespoke
 rows, bespoke empty/error states, bespoke badges, bespoke formatters, or a second copy of a
 `shared/` component. Before writing any of those, run `graphify query` and read
-`ui/components/shared/` — the app already has `FlowEmptyState`, `FlowErrorState`, `MediaRow`,
-`MediaThumbnail`, `MediaBadges`, `FlowSearchField`, `ShimmerLoading` and `FastScrollbar`.
+`ui/components/shared/` — the app already has `VoxTubeEmptyState`, `VoxTubeErrorState`, `MediaRow`,
+`MediaThumbnail`, `MediaBadges`, `VoxTubeSearchField`, `ShimmerLoading` and `FastScrollbar`.
 
 ### ViewModels
 
@@ -544,7 +543,7 @@ the same files, so foss and nightly startup match github release.
 **Regenerate when:**
 
 1. Before tagging a release, if the profile has not been regenerated since the last one.
-2. After changing the cold-start path — `MainActivity.onCreate`, `FlowApp`, app-level DI graph,
+2. After changing the cold-start path — `MainActivity.onCreate`, `VoxTubeApp`, app-level DI graph,
    theme resolution, or player/cache initialization.
 3. After changing a journey the generator exercises (app launch, Home feed scroll), or after
    editing `BaselineProfileGenerator` itself.

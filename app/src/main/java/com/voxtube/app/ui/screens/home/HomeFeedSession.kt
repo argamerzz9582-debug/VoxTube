@@ -5,8 +5,8 @@ import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.local.SubscriptionRepository
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.FeedExclusions
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.RankTrace
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import java.util.concurrent.ConcurrentHashMap
@@ -58,7 +58,7 @@ internal class HomeFeedSession(
         )
 
     suspend fun feedExclusions(): FeedExclusions =
-        runCatching { FlowNeuroEngine.feedExclusions() }
+        runCatching { VoxTubeNeuroEngine.feedExclusions() }
             .getOrDefault(FeedExclusions.NONE)
             .hidingChannels(subscriptionScope().hidden)
 

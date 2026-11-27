@@ -40,7 +40,7 @@ private const val READ_STEP_FRACTION = 1f / 3f
  * shows no focus, so on a D-pad the text is drawn as is.
  */
 @Composable
-fun FlowSelectionContainer(content: @Composable () -> Unit) {
+fun VoxTubeSelectionContainer(content: @Composable () -> Unit) {
     if (LocalDpadNavigation.current) content() else SelectionContainer(content = content)
 }
 

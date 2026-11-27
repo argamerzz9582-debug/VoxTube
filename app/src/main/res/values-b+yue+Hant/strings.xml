@@ -749,9 +749,6 @@
     <string name="settings_item_import_data">匯入數據</string>
     <string name="settings_item_import_data_subtitle">由備份還原或者由其他應用程式匯入</string>
     <string name="settings_item_about_flow">關於 VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">版本、授權、貢獻者</string>
-    <string name="settings_item_support">支持同捐款</string>
-    <string name="settings_item_support_subtitle">幫手支持 VoxTube 嘅開發</string>
     <string name="settings_region_dialog_title">揀地區</string>
     <string name="settings_language_dialog_title">揀應用程式語言</string>
     <string name="settings_language_system_default">系統預設</string>
@@ -830,7 +827,6 @@
     <string name="app_icon_picker_subtitle">揀個啟動器圖示樣式。呢個變動會即刻生效，啟動器會短暫刷新。</string>
     <string name="app_icon_picker_warning">更改圖示可能會喺主畫面移除 VoxTube 一陣。如果需要，可以喺應用程式抽屜加返佢。</string>
     <string name="app_icon_apply_toast">圖示更新咗 - 你嘅啟動器會重新整理</string>
-    <string name="icon_name_flow_red">VoxTube 紅色</string>
     <string name="icon_name_flow_light">VoxTube 光</string>
     <string name="icon_name_flow_play">VoxTube 玩</string>
     <string name="icon_name_amoled">AMOLED 深色</string>
@@ -1748,26 +1744,8 @@
     <plurals name="threads_count_label">
         <item quantity="other">%1$d絲</item>
     </plurals>
-    <string name="support_donations_title">支持同捐款</string>
-    <string name="support_flow_dev_title">支持 Flow 開發</string>
-    <string name="support_flow_dev_desc">如果 Flow 對你有用，你可以喺 Open Collective 、 Patreon 或者下面嘅加密貨幣上面支援佢。多謝你！</string>
-    <string name="support_flow_open_collective">喺 Open Collective 上面支援 Flow</string>
-    <string name="support_flow_patreon">喺 Patreon 上面支援 Flow</string>
     <string name="thank_you_support_message">多謝你嘅支持！ ❤ ️</string>
     <string name="address_copied_toast">地址複製咗去剪貼簿</string>
-    <string name="donation_address_clip_label">捐款地址</string>
-    <string name="donation_prompt_title">享受緊 Flow ？</string>
-    <string name="donation_prompt_message">Flow 係免費嘅，開放源碼同埋冇廣告。如果佢喺你部手機上面搵到一個位置，少少支持就可以令佢繼續運作。</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">支持發展</string>
-    <string name="donation_prompt_later">可能遲啲</string>
-    <string name="donation_prompt_never">唔好再顯示</string>
-    <string name="about_creator">創造者</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website">網站</string>
-    <string name="about_website_address">流管 . org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="github_subtitle">源碼同問題</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">核心提取庫</string>
@@ -1798,7 +1776,6 @@
     <string name="section_legal">法律</string>
     <string name="section_device">設備</string>
     <string name="donate_item_title">捐</string>
-    <string name="support_dev_subtitle">支持發展</string>
     <string name="btn_ok">得</string>
     <string name="btn_copy">複製</string>
     <string name="github_label">GitHub</string>
@@ -3657,7 +3634,6 @@
     <string name="settings_search_no_results">搵唔到「 %1$s 」嘅設定</string>
     <string name="settings_lyrics_provider_order_description">由上到下試過。拖曳就可以重新排序。</string>
     <string name="import_running_background">你可以離開呢個畫面。匯入繼續執行。</string>
-    <string name="donations_cryptocurrency">加密貨幣</string>
     <string name="import_no_history_entries">喺檔案入面搵唔到任何觀看記錄項目</string>
     <string name="import_no_videos">喺播放清單檔案入面搵唔到影片</string>
     <string name="import_no_likes">搵唔到讚好。將我嘅 YouTube 活動匯出為 JSON ，同埋用英文嘅 Google 帳戶。</string>
@@ -3922,7 +3898,6 @@
     <string name="settings_changelog_all_releases">所有發佈都係喺 GitHub 上面發佈</string>
     <string name="settings_changelog_expand">顯示變更</string>
     <string name="settings_changelog_collapse">隱藏變更</string>
-    <string name="settings_creator_role">Flow 嘅創作者同開發者</string>
     <string name="device_info_section_device">設備</string>
     <string name="device_info_section_system">系統</string>
     <string name="device_info_section_display">佈置</string>
@@ -3973,7 +3948,6 @@
     <string name="settings_custom_theme_start_from">由</string>
     <string name="settings_custom_theme_count">%1$d嘅 %2$d主題</string>
     <string name="settings_custom_theme_empty">仲未有自訂主題</string>
-    <string name="settings_custom_theme_empty_body">由任何調色板開始，或者匯入用 VoxTube 桌面製作嘅調色板。</string>
     <string name="settings_custom_theme_import_failed">嗰個檔案入面冇有效嘅主題</string>
     <string name="settings_custom_theme_limit">你最多可以保留 %1$d嘅主題</string>
     <string name="settings_custom_theme_exported">主題已經匯出</string>

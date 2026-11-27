@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.scrobble.AudioscrobblerKeys
 import com.voxtube.app.data.scrobble.ScrobbleService
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 
 private val FieldSpacing = 8.dp
 
@@ -52,7 +52,7 @@ internal fun SignInDialog(
     var secret by rememberSaveable { mutableStateOf("") }
     LaunchedEffect(state) { if (state == SignInState.Done) onDismiss() }
     val working = state == SignInState.Working
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.scrobbling_sign_in_title, service.label())) },
         text = {
@@ -105,7 +105,7 @@ internal fun SignOutDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.scrobbling_sign_out_title, service.label())) },
         text = { Text(stringResource(R.string.scrobbling_sign_out_body)) },
@@ -126,7 +126,7 @@ internal fun ImportOfferDialog(
     onImport: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.scrobbling_import_offer_title, service.label())) },
         text = { Text(stringResource(R.string.scrobbling_import_offer_body)) },
@@ -148,7 +148,7 @@ internal fun OwnKeyDialog(
 ) {
     var apiKey by rememberSaveable { mutableStateOf(current.apiKey) }
     var secret by rememberSaveable { mutableStateOf(current.secret) }
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.scrobbling_own_key_dialog_title)) },
         text = {

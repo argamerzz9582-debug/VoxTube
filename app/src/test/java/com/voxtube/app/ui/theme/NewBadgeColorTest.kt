@@ -9,7 +9,7 @@ class NewBadgeColorTest {
         ThemeCatalog.palettes
             .map { it.mode }
             .filterNot { it == ThemeMode.MATERIAL_YOU }
-            .map { it to FlowPalettes.forMode(it) }
+            .map { it to VoxTubePalettes.forMode(it) }
 
     @Test
     fun `the dot reads on every palette surface`() {

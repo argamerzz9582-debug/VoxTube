@@ -334,9 +334,6 @@
     <string name="settings_item_import_data">Импорт данных</string>
     <string name="settings_item_import_data_subtitle">Восстановление из копии или импорт из других приложений</string>
     <string name="settings_item_about_flow">О VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">Версия, лицензия, авторы</string>
-    <string name="settings_item_support">Поддержка и донаты</string>
-    <string name="settings_item_support_subtitle">Поддержите разработку VoxTube</string>
     <string name="settings_region_dialog_title">Выберите регион</string>
     <string name="settings_export_success">Данные успешно экспортированы</string>
     <string name="settings_export_failed">Ошибка экспорта: %1$s</string>
@@ -351,7 +348,6 @@
     <string name="app_icon_picker_subtitle">Выберите стиль значка. Изменения вступят в силу сразу, а рабочий стол перезапустится.</string>
     <string name="app_icon_picker_warning">Изменение значка может на мгновение удалит VoxTube с главного экрана. При необходимости добавьте его обратно из панели приложений.</string>
     <string name="app_icon_apply_toast">Иконка обновлена - рабочий стол обновится</string>
-    <string name="icon_name_flow_red">VoxTube Red</string>
     <string name="icon_name_amoled">AMOLED Dark</string>
     <string name="icon_name_monochrome">Монохром</string>
     <string name="icon_name_ghost">Призрак</string>
@@ -707,10 +703,10 @@
     <string name="deep_flow_expire_duration_subtitle">Обучение возобновится автоматически через: %s</string>
     <string name="deep_flow_dialog_title">Продолжительность паузы</string>
     <string name="deep_flow_dialog_body">На какое время приостановить обучение?</string>
-    <string name="deep_flow_enabled_message">Включена функция Deep Flow</string>
-    <string name="deep_flow_disabled_message">Функция Deep Flow отключена</string>
-    <string name="deep_flow_expired_message">Истекло время таймера Deep Flow</string>
-    <string name="deep_flow_active_until_disabled">Deep Flow остается активным, пока вы его не выключите</string>
+    <string name="deep_flow_enabled_message">Включена функция Deep Focus</string>
+    <string name="deep_flow_disabled_message">Функция Deep Focus отключена</string>
+    <string name="deep_flow_expired_message">Истекло время таймера Deep Focus</string>
+    <string name="deep_flow_active_until_disabled">Deep Focus остается активным, пока вы его не выключите</string>
     <string name="deep_flow_duration_never">Никогда</string>
     <string name="deep_flow_duration_1h">1 час</string>
     <string name="deep_flow_duration_2h">2 часа</string>
@@ -742,7 +738,7 @@
     <string name="appearance_role_on_background">На фоне</string>
     <string name="appearance_role_surface">Поверхность</string>
     <string name="appearance_role_on_surface">На поверхности</string>
-    <string name="deep_flow_mode_title">Режим Deep Flow</string>
+    <string name="deep_flow_mode_title">Режим Deep Focus</string>
     <string name="done">Готово</string>
     <string name="next_up">Следующий</string>
     <string name="cast_to_tv">Транслировать на ТВ</string>
@@ -1084,10 +1080,6 @@
     <string name="location_dialog_subtitle">Выбор места для сохранения скачанных файлов.</string>
     <string name="location_preset_header">Предустановленные папки</string>
     <string name="location_custom_header">Другая папка</string>
-    <string name="donation_prompt_support">Поддержать разработку</string>
-    <string name="donation_prompt_later">Возможно, позже</string>
-    <string name="donation_prompt_never">Больше не показывать</string>
-    <string name="about_website">Веб-сайт</string>
     <string name="github_subtitle">Исходный код и проблемы</string>
     <string name="gnu_license_full_title">GNU General Public License</string>
     <string name="error_license_load">Не удалось загрузить файл лицензии.</string>
@@ -1098,7 +1090,6 @@
     <string name="model_label">Модель: %1$s</string>
     <string name="section_device">Устройство</string>
     <string name="donate_item_title">Поддержать</string>
-    <string name="support_dev_subtitle">Поддержать разработку</string>
     <string name="btn_ok">OK</string>
     <string name="btn_copy">Копировать</string>
     <string name="github_label">GitHub</string>
@@ -1278,7 +1269,6 @@
     <string name="tap_to_recognize">Нажмите, чтобы распознать</string>
     <string name="no_match_found">Совпадений не найдено</string>
     <string name="try_again">Попробуйте снова</string>
-    <string name="donation_prompt_message">Flow бесплатен, имеет открытый исходный код и не содержит рекламы. Если оно заслужило место на вашем телефоне, небольшая поддержка сохранит его.</string>
     <string name="sync_consent_note">Сначала создается резервная копия. При объединении данные никогда не перезаписываются и не дублируются.</string>
     <string name="import_yt_history_empty_error">В этом файле не найдена история просмотра. Убедитесь, что это файл watch-history.html из YouTube Архиватора.</string>
     <string name="import_yt_playlist_empty_error">Файл CSV не содержит данных о видео. Убедитесь, что это CSV-файл плейлиста из YouTube Архиватора.</string>
@@ -1317,10 +1307,6 @@
     <string name="player_settings_overlay_comments_subtitle">Открыть комментарии в боковой панели в полноэкранном режиме</string>
     <string name="play_next_video_desc">Воспроизводить после текущего видео</string>
     <string name="add_video_to_queue_desc">Добавить в конец очереди</string>
-    <string name="support_donations_title">Поддержка и донаты</string>
-    <string name="support_flow_dev_title">Поддержка разработки Flow</string>
-    <string name="support_flow_dev_desc">Если Flow вам полезен, вы можете поддержать его на Open Collective, Patreon или с помощью криптовалюты ниже. Спасибо!</string>
-    <string name="support_flow_patreon">Поддержать Flow на Patreon</string>
     <string name="thank_you_support_message">Спасибо за вашу поддержку! ❤️</string>
     <string name="deep_flow_save_history_subtitle">Сохранять историю просмотров, не используя её для формирования рекомендаций</string>
     <string name="deep_flow_save_history_title">Записывать историю просмотра</string>
@@ -1438,7 +1424,6 @@
     <string name="location_badge_active">Активный</string>
     <string name="select_threads_count_desc">Выберите количество потоков (1-8):</string>
     <string name="address_copied_toast">Адрес скопирован в буфер обмена</string>
-    <string name="donation_address_clip_label">Адрес для пожертвований</string>
     <string name="similar_to">Похоже на</string>
     <string name="section_top_albums">Лучшие альбомы</string>
     <string name="section_similar_to">Похоже на %1$s</string>
@@ -1633,9 +1618,6 @@
     <string name="sleep_window">Период сна:</string>
     <string name="frequency_description">Как часто напоминать</string>
     <string name="tools_subtitle">Установите напоминания, чтобы сбалансировать свои зрительские привычки</string>
-    <string name="donation_prompt_title">Нравится Flow?</string>
-    <string name="donation_prompt_methods">Открытый коллектив · Patreon · Биткойн · Эфириум · Солана · USDT · Monero</string>
-    <string name="about_creator">Автор</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Основная библиотека парсинга</string>
     <string name="about_license">Лицензия</string>
@@ -1916,10 +1898,6 @@
     <string name="content_settings_restored_music_mini_player_subtitle">Покажите свой последний музыкальный сеанс после его восстановления</string>
     <string name="content_settings_hide_unplayable_subscriptions_title">Скрывать неподдерживаемые видео из подписок</string>
     <string name="content_settings_hide_unplayable_subscriptions_subtitle">Скрыть частные, удаленные и ограниченные видео, которые не воспроизводятся</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="equalizer">Эквалайзер</string>
     <string name="action_save_preset">Сохранить пресет</string>
@@ -2273,7 +2251,6 @@
     <string name="settings_search_no_results">Ничего не найдено по запросу: %1$s</string>
     <string name="settings_lyrics_provider_order_description">Попробовано сверху донизу. Перетаскивайте, чтобы изменить порядок.</string>
     <string name="import_running_background">Вы можете покинуть этот экран. Импорт продолжится.</string>
-    <string name="donations_cryptocurrency">КРИПТОВАЛЮТА</string>
     <string name="import_no_history_entries">В файле не найдена история просмотра</string>
     <string name="import_no_videos">В файле плейлиста не найдены видео</string>
     <string name="import_no_content">В резервной копии не найдены данные для импорта</string>
@@ -2762,11 +2739,11 @@
         <item quantity="other">Это удалит %d уведомлений. Отменить это действие будет невозможно.</item>
     </plurals>
     <string name="notifications_clear_confirm">Очистить всё</string>
-    <string name="deep_flow_scrobble_title">Скробблить во время Deep Flow</string>
-    <string name="taste_learning_paused">Deep Flow включен, обучение приостановлено</string>
+    <string name="deep_flow_scrobble_title">Скробблить во время Deep Focus</string>
+    <string name="taste_learning_paused">Deep Focus включен, обучение приостановлено</string>
     <string name="deep_flow_scrobble_subtitle">Продолжайте отправлять данные о прослушиваниях в Last.fm, Libre.fm и ListenBrainz</string>
     <string name="deep_flow_on_search_title">Показать в результатах поиска</string>
-    <string name="deep_flow_on_search_subtitle">Переключатель Deep Flow над списком недавних поисковых запросов</string>
+    <string name="deep_flow_on_search_subtitle">Переключатель Deep Focus над списком недавних поисковых запросов</string>
     <string name="notif_type_shorts">Шортсы</string>
     <string name="notif_check_interval_off_new_videos">Выключено, пока функция «Новые видео» отключена</string>
     <string name="icon_name_expressive_scallop">Волнистый</string>
@@ -2832,7 +2809,7 @@
     <string name="content_settings_home_subscriptions_subtitle">Смешивайте видео с каналов, на которые вы подписаны, на главной странице.</string>
     <string name="settings_section_watch_history">История просмотров</string>
     <string name="pause_watch_history_title">Пауза, просмотр истории</string>
-    <string name="pause_watch_history_subtitle">Прекратить сохранять просмотренные материалы. Deep Flow также приостанавливает обучение.</string>
+    <string name="pause_watch_history_subtitle">Прекратить сохранять просмотренные материалы. Deep Focus также приостанавливает обучение.</string>
     <string name="content_settings_channel_shorts_tab_title">Вкладка «Шортс» на каналах</string>
     <string name="content_settings_channel_shorts_tab_subtitle">Сохраняйте вкладку «Шортс» на канале, пока короткие видео скрыты.</string>
     <string name="content_settings_hide_watched_shorts_title">Скрыть просмотренные шортсы</string>
@@ -2968,7 +2945,6 @@
     <string name="concurrent_downloads_title">Загрузок за один раз</string>
     <string name="concurrent_downloads_summary">Сколько файлов загрузить одновременно</string>
     <string name="download_location_not_writable">Сохранить там невозможно. Использовать %1$s</string>
-    <string name="support_flow_open_collective">Поддержка Flow на Open Collective</string>
     <string name="about_notices">Уведомления об открытом исходном коде</string>
     <string name="about_notices_summary">Списки слов и код из других проектов.</string>
     <string name="playlist_downloading_template">Загрузка: %1$s</string>
@@ -3938,7 +3914,6 @@
     <string name="settings_diagnostics_share_summary">Сведения об устройстве, предупреждения и отчеты о сбоях</string>
     <string name="settings_custom_theme_default_name">Моя тема</string>
     <string name="settings_changelog_version">Версия %1$s</string>
-    <string name="settings_creator_role">Создатель и разработчик Flow</string>
     <string name="settings_sleep_window_summary">Окно для сна: %1$s</string>
     <string name="settings_custom_theme_editor_title">Изменить тему</string>
     <string name="settings_diagnostics_android_value">Android %1$s (SDK %2$d)</string>
@@ -4014,7 +3989,6 @@
     <string name="recap_total_time">Время в VoxTube</string>
     <string name="recap_saves">Сохранено</string>
     <string name="playlist_import_not_a_playlist">Этот файл не является плейлистом VoxTube</string>
-    <string name="settings_custom_theme_empty_body">Начните с любой палитры или импортируйте палитру, созданную в Flow Desktop.</string>
     <string name="recap_not_interested">Не интересует</string>
     <string name="settings_custom_theme_delete_body">Это нельзя отменить.</string>
     <string name="taste_topic_unboost">Хватит заниматься бустингом</string>

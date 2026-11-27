@@ -44,11 +44,11 @@ import com.voxtube.app.data.model.toVideo
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.shared.FastScrollbar
-import com.voxtube.app.ui.components.shared.FlowFilterChip
 import com.voxtube.app.ui.components.shared.MediaRowAction
 import com.voxtube.app.ui.components.shared.MediaShortCard
 import com.voxtube.app.ui.components.shared.MediaThumbnailDefaults
 import com.voxtube.app.ui.components.shared.ShortCardDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 import com.voxtube.app.ui.components.shared.animateMediaListItem
 import com.voxtube.app.ui.screens.history.HistoryContentFilter
 import com.voxtube.app.ui.screens.history.HistorySort
@@ -89,7 +89,7 @@ internal fun HistoryFilterRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(items = visibleFilters, key = { it.name }) { filter ->
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 label = filter.label(),
                 selected = selectedFilter == filter,
                 onClick = { onFilterSelected(filter) },
@@ -98,7 +98,7 @@ internal fun HistoryFilterRow(
 
         item(key = "sort") {
             Box {
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = selectedSort.label(),
                     selected = selectedSort != HistorySort.Newest,
                     onClick = { sortExpanded = true },
@@ -122,7 +122,7 @@ internal fun HistoryFilterRow(
 
         item(key = "year") {
             Box {
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = selectedYear?.toString() ?: stringResource(R.string.history_filter_all_years),
                     selected = selectedYear != null,
                     onClick = { yearExpanded = true },

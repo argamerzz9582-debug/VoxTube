@@ -5,10 +5,10 @@ import com.voxtube.app.data.local.HomeFeedCacheRepository
 import com.voxtube.app.data.local.SubscriptionRepository
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.ChannelMemoryRepository
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.NeighbourChannel
 import com.voxtube.app.data.recommendation.NeighbourChannelsRepository
 import com.voxtube.app.data.recommendation.NeuroScoring
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.subscriptions.HomeSubscriptionUploads
 import com.voxtube.app.data.subscriptions.SubscriptionFeedRepository
 import com.voxtube.app.innertube.pages.renderer.FeedItemOwner
@@ -82,7 +82,7 @@ internal class HomeLateMerges(
                     }
                 if (uploads.isEmpty()) return@launch
                 // Passive channel profiling: upload titles teach the engine what each channel is about.
-                runCatching { FlowNeuroEngine.onChannelUploadsObserved(uploads) }
+                runCatching { VoxTubeNeuroEngine.onChannelUploadsObserved(uploads) }
                 subscriptionFeedRepository.mergeChannelTabUploads(uploads)
                 mergeLateSubscriptions(uploads, userSubs)
             }
@@ -104,7 +104,7 @@ internal class HomeLateMerges(
                 .values
                 .flatMap { uploads -> uploads.sortedByDescending { it.timestamp }.take(LATE_SUBS_PER_CHANNEL) }
         val late =
-            FlowNeuroEngine
+            VoxTubeNeuroEngine
                 .rank(candidates, userSubs)
                 .distinctBy { it.channelId }
                 .take(LATE_SUBS_MAX)
@@ -151,10 +151,10 @@ internal class HomeLateMerges(
                     }
                 if (fresh.isEmpty()) return@launch
                 val now = System.currentTimeMillis()
-                val brain = FlowNeuroEngine.getBrainSnapshot()
+                val brain = VoxTubeNeuroEngine.getBrainSnapshot()
                 val exclusions = session.feedExclusions()
                 val ranked =
-                    FlowNeuroEngine.rank(
+                    VoxTubeNeuroEngine.rank(
                         fresh
                             .filterValid()
                             .filterWatched(session.watchedVideoIds.value)
@@ -241,7 +241,7 @@ internal class HomeLateMerges(
                     val cooldown = feedSources.activeSavedSeedCooldown(now)
                     val seedInputs = savedInterestSeedInputs(feedSources.gatherSavedSeedSources(), cooldown)
                     val longTermInputs = feedSources.longTermSeedInputs().filterNot { it.id in cooldown }
-                    val seeds = FlowNeuroEngine.selectRelatedSeeds(seedInputs, MAX_SAVED_SEEDS, longTermInputs)
+                    val seeds = VoxTubeNeuroEngine.selectRelatedSeeds(seedInputs, MAX_SAVED_SEEDS, longTermInputs)
                     if (seeds.isEmpty()) return@launch
                     feedSources.markSeedsUsed(seeds, now)
 
@@ -258,11 +258,11 @@ internal class HomeLateMerges(
                     val existing = uiState.value.videos.mapTo(HashSet()) { it.id }
                     val relatedMetadata = relatedCandidates.associateBy { it.video.id }
                     val enriched =
-                        FlowNeuroEngine
+                        VoxTubeNeuroEngine
                             .shareByInterest(
                                 demoteByFit(
                                     applyGraphBoost(
-                                        FlowNeuroEngine.rank(
+                                        VoxTubeNeuroEngine.rank(
                                             relatedCandidates
                                                 .map { it.video }
                                                 .filterNot { existing.contains(it.id) },

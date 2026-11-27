@@ -15,7 +15,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.model.SponsorBlockCategories
 import com.voxtube.app.data.repository.SponsorBlockRepository
-import com.voxtube.app.ui.components.shared.FlowDialogDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeDialogDefaults
 import com.voxtube.app.utils.formatDurationMillis
 import com.voxtube.app.utils.parseTimestampMs
 import com.voxtube.app.utils.sponsorCategoryLabelRes
@@ -58,12 +58,12 @@ internal fun SbSubmitSegmentDialog(
                     Modifier
                         .fillMaxWidth()
                         .padding(
-                            start = FlowDialogDefaults.ContentPadding,
-                            top = FlowDialogDefaults.ContentPadding,
-                            end = FlowDialogDefaults.ContentPadding,
-                            bottom = FlowDialogDefaults.BottomPadding,
+                            start = VoxTubeDialogDefaults.ContentPadding,
+                            top = VoxTubeDialogDefaults.ContentPadding,
+                            end = VoxTubeDialogDefaults.ContentPadding,
+                            bottom = VoxTubeDialogDefaults.BottomPadding,
                         ),
-                verticalArrangement = Arrangement.spacedBy(FlowDialogDefaults.ActionsSpacing),
+                verticalArrangement = Arrangement.spacedBy(VoxTubeDialogDefaults.ActionsSpacing),
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     // Title

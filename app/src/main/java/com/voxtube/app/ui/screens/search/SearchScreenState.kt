@@ -211,7 +211,7 @@ fun rememberSearchState(
     return state
 }
 
-// Debug builds only, beside FlowRequestLog's network lines: the length, never the text, of what was typed.
+// Debug builds only, beside VoxTubeRequestLog's network lines: the length, never the text, of what was typed.
 private fun logSuggestTiming(
     outcome: String,
     typed: String,
@@ -219,5 +219,5 @@ private fun logSuggestTiming(
 ) {
     if (!BuildConfig.DEBUG) return
     val waited = SystemClock.elapsedRealtime() - startedAt + SUGGESTION_DEBOUNCE_MS
-    Log.d("FlowRequests", "suggest len=${typed.trim().length} $outcome ${waited}ms after keystroke")
+    Log.d("VoxTubeRequests", "suggest len=${typed.trim().length} $outcome ${waited}ms after keystroke")
 }

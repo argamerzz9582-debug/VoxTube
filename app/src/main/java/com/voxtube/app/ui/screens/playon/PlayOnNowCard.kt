@@ -33,8 +33,8 @@ import com.voxtube.app.sync2.live.LiveMessage
 import com.voxtube.app.ui.components.musicplayer.common.rememberSplitTransport
 import com.voxtube.app.ui.components.musicplayer.controls.ExpressivePlayerSlider
 import com.voxtube.app.ui.components.musicplayer.controls.expressiveSliderSpec
-import com.voxtube.app.ui.components.shared.FlowEmptyState
 import com.voxtube.app.ui.components.shared.MediaPlaybackControls
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 import com.voxtube.app.ui.components.shared.deviceKindIcon
 
 private val CardPadding = 16.dp
@@ -175,7 +175,7 @@ internal fun PlayOnNothingCard(modifier: Modifier = Modifier) {
         shape = MaterialTheme.shapes.extraLarge,
         modifier = modifier,
     ) {
-        FlowEmptyState(
+        VoxTubeEmptyState(
             title = stringResource(R.string.play_on_nothing),
             subtitle = stringResource(R.string.play_on_nothing_hint),
             icon = Icons.Outlined.SpeakerGroup,

@@ -14,7 +14,7 @@ import java.io.File
 
 /**
  * Every profile opens its own file of the same AppDatabase class, so no profile ever needs a schema change or a
- * migration of its own. The test runner's Application skips FlowApplication, so the active profile is read lazily
+ * migration of its own. The test runner's Application skips VoxTubeApplication, so the active profile is read lazily
  * from the registry, as in a restore.
  */
 @RunWith(AndroidJUnit4::class)

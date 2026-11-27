@@ -38,7 +38,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.pressScale
 import com.voxtube.app.ui.theme.PlayerScrimAffordance
 import com.voxtube.app.ui.theme.PlayerScrimContent
@@ -160,7 +160,7 @@ internal fun PlayerTransportControls(
                     label = "transportIcon",
                 ) { icon ->
                     if (icon == TransportIcon.Buffering) {
-                        FlowLoadingIndicator(modifier = Modifier.size(BufferingIndicatorSlot))
+                        VoxTubeLoadingIndicator(modifier = Modifier.size(BufferingIndicatorSlot))
                     } else {
                         Icon(
                             imageVector =

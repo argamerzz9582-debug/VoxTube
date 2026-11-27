@@ -27,8 +27,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
-import com.voxtube.app.ui.components.shared.FlowActionButton
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
+import com.voxtube.app.ui.components.shared.VoxTubeActionButton
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
 
 private val BarPadding = 20.dp
 private val BarSpacing = 12.dp
@@ -46,7 +46,7 @@ internal fun UpdateActionBar(
         contentAlignment = Alignment.Center,
     ) {
         Row(
-            modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth().padding(BarPadding),
+            modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).fillMaxWidth().padding(BarPadding),
             horizontalArrangement = Arrangement.spacedBy(BarSpacing, Alignment.End),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -64,7 +64,7 @@ internal fun UpdateActionBar(
                     is UpdateStage.Installing -> stage.progress ?: 0f
                     else -> null
                 }
-            FlowActionButton(
+            VoxTubeActionButton(
                 text = action.label(),
                 onClick = onPrimary,
                 enabled = action.enabled,

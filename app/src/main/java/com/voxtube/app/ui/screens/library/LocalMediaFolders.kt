@@ -14,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 
 /** A folder on the settings row kit: its name, how many files and how much space, selected when open. */
@@ -36,7 +36,7 @@ internal fun LocalFolderRow(
             folder.items.size,
             folder.items.size,
         )
-    FlowNavRow(
+    VoxTubeNavRow(
         title = folder.name,
         supportingText = "$files $separator ${Formatter.formatShortFileSize(context, folder.sizeBytes)}",
         leadingIcon = Icons.Outlined.Folder,
@@ -55,7 +55,7 @@ internal fun LocalFolderList(
 ) {
     LazyColumn(
         contentPadding = PaddingValues(start = 12.dp, end = 12.dp, top = 8.dp, bottom = flowBottomContentPadding()),
-        verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+        verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap),
     ) {
         itemsIndexed(state.folders, key = { _, folder -> folder.id }) { index, folder ->
             LocalFolderRow(

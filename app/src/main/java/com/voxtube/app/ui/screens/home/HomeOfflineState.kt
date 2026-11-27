@@ -26,9 +26,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.shared.FlowErrorState
 import com.voxtube.app.ui.components.shared.MediaRow
 import com.voxtube.app.ui.components.shared.MediaThumbnail
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
 
 /**
  * Home's error state. With nothing cached and something downloaded, the downloads follow the
@@ -45,12 +45,12 @@ internal fun HomeErrorState(
 ) {
     val downloads by viewModel.downloads.collectAsStateWithLifecycle()
     if (downloads.isEmpty()) {
-        FlowErrorState(error = error, onRetry = onRetry, modifier = modifier)
+        VoxTubeErrorState(error = error, onRetry = onRetry, modifier = modifier)
         return
     }
     LazyColumn(modifier = modifier.fillMaxSize()) {
         item(key = "error") {
-            FlowErrorState(error = error, onRetry = onRetry, modifier = Modifier.fillMaxWidth())
+            VoxTubeErrorState(error = error, onRetry = onRetry, modifier = Modifier.fillMaxWidth())
         }
         item(key = "downloads_header") {
             DownloadsHeader(onOpenDownloads)

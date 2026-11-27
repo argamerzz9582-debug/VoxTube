@@ -26,7 +26,7 @@ import com.voxtube.app.data.local.AppFontPreferences
 import com.voxtube.app.data.local.LocalDataManager
 import com.voxtube.app.data.local.WatchProgressStore
 import com.voxtube.app.data.playlist.PlaylistTransfer
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.DeArrowRepository
 import com.voxtube.app.data.repository.OriginalTitleRepository
 import com.voxtube.app.data.translation.TextTranslator
@@ -47,12 +47,12 @@ import com.voxtube.app.ui.IncomingLinks
 import com.voxtube.app.ui.components.shared.HardwareKeyboardState
 import com.voxtube.app.ui.components.shared.LocalHardwareKeyboard
 import com.voxtube.app.ui.components.shared.LocalTextTranslator
-import com.voxtube.app.ui.startup.FlowRoot
 import com.voxtube.app.ui.startup.SplashController
 import com.voxtube.app.ui.startup.ThemeSettings
+import com.voxtube.app.ui.startup.VoxTubeRoot
 import com.voxtube.app.ui.startup.themeSettings
 import com.voxtube.app.utils.AppLanguageManager
-import com.voxtube.app.utils.FlowCrashHandler
+import com.voxtube.app.utils.VoxTubeCrashHandler
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -147,7 +147,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun videoLifecycleLog(message: String) {
-        Log.w("FlowVideoLifecycle", "$message | ${lifecyclePlaybackSnapshot()}")
+        Log.w("VoxTubeVideoLifecycle", "$message | ${lifecyclePlaybackSnapshot()}")
     }
 
     override fun attachBaseContext(newBase: Context) {
@@ -199,13 +199,13 @@ class MainActivity : ComponentActivity() {
 
         // Initialize Neuro Engine (Recommendation System)
         lifecycleScope.launch(Dispatchers.IO) {
-            FlowNeuroEngine.initialize(applicationContext)
+            VoxTubeNeuroEngine.initialize(applicationContext)
         }
 
         val dataManager = LocalDataManager(applicationContext)
 
         lifecycleScope.launch {
-            com.voxtube.app.widget.core.FlowWidgets
+            com.voxtube.app.widget.core.VoxTubeWidgets
                 .observeThemeChanges(applicationContext)
         }
         lifecycleScope.launch(Dispatchers.Default) {
@@ -221,7 +221,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             CompositionLocalProvider(LocalHardwareKeyboard provides hardwareKeyboard, LocalTextTranslator provides textTranslator) {
-                FlowRoot(
+                VoxTubeRoot(
                     storedTheme = storedTheme,
                     links = links,
                     splashController = splashController,
@@ -363,7 +363,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        FlowCrashHandler.recordPhase("activity", "onResume pip=$isInPictureInPictureMode")
+        VoxTubeCrashHandler.recordPhase("activity", "onResume pip=$isInPictureInPictureMode")
         videoLifecycleLog("onResume")
         // GlobalPlayerState outlives this Activity, so an instance destroyed straight out of PiP
         // without an onPictureInPictureModeChanged(false) would leave the flag latched true for
@@ -419,7 +419,7 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         DiscordPresenceRuntime.setAppForeground(false)
         super.onStop()
-        FlowCrashHandler.recordPhase(
+        VoxTubeCrashHandler.recordPhase(
             "activity",
             "onStop pip=$isInPictureInPictureMode " +
                 "backgroundPlay=${lifecyclePlaybackPreferences.settings.backgroundPlayEnabled} " +
@@ -457,7 +457,7 @@ class MainActivity : ComponentActivity() {
         if (cachedAppUiRoot == AppUiRoot.TV) return
         val explicitBackgroundPlaybackActive =
             GlobalPlayerState.isExplicitBackgroundPlaybackActive.value
-        FlowCrashHandler.recordPhase(
+        VoxTubeCrashHandler.recordPhase(
             "activity",
             "onUserLeaveHint autoPip=${lifecyclePlaybackPreferences.settings.autoPipEnabled} " +
                 "explicitBackground=$explicitBackgroundPlaybackActive",
@@ -552,7 +552,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun handOffVideoPlaybackToBackground() {
-        FlowCrashHandler.recordPhase("background-handoff", "handOffVideoPlaybackToBackground")
+        VoxTubeCrashHandler.recordPhase("background-handoff", "handOffVideoPlaybackToBackground")
         videoLifecycleLog("handOffVideoPlaybackToBackground")
         val playerManager =
             com.voxtube.app.player.EnhancedPlayerManager
@@ -574,7 +574,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun handleBackgroundPlaybackOnStop() {
-        FlowCrashHandler.recordPhase("background-handoff", "handleBackgroundPlaybackOnStop")
+        VoxTubeCrashHandler.recordPhase("background-handoff", "handleBackgroundPlaybackOnStop")
         videoLifecycleLog("handleBackgroundPlaybackOnStop")
         val playerManager =
             com.voxtube.app.player.EnhancedPlayerManager

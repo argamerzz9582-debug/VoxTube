@@ -10,7 +10,6 @@ package com.voxtube.app.data.recommendation.eval
 import com.voxtube.app.data.recommendation.ContentVector
 import com.voxtube.app.data.recommendation.FeedEntry
 import com.voxtube.app.data.recommendation.FeedImpressionLedger
-import com.voxtube.app.data.recommendation.FlowPersona
 import com.voxtube.app.data.recommendation.NeuroDiscovery
 import com.voxtube.app.data.recommendation.NeuroScoring
 import com.voxtube.app.data.recommendation.NeuroTokenizer
@@ -18,6 +17,7 @@ import com.voxtube.app.data.recommendation.NeuroTopicCatalog
 import com.voxtube.app.data.recommendation.ScoredVideo
 import com.voxtube.app.data.recommendation.TopicEvidence
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubePersona
 import com.voxtube.app.data.recommendation.WatchEntry
 import java.util.Random
 
@@ -278,7 +278,7 @@ internal object NeuroBenchmark {
             // 1. Discovery decides what to search for (the real production selector),
             //    with cluster rotation advanced between refreshes as the engine does.
             val discoveryBrain = brain.copy(clusterRotation = clusterRotation)
-            val discoveryQueries = discovery.generateQueries(discoveryBrain, now) { FlowPersona.EXPLORER }.take(8)
+            val discoveryQueries = discovery.generateQueries(discoveryBrain, now) { VoxTubePersona.EXPLORER }.take(8)
             val queries =
                 discoveryQueries.map { it.query }.ifEmpty { universe.groups.take(4).map { it.topics[0] } }
             queriesPerRefresh += queries
@@ -410,7 +410,7 @@ internal object NeuroBenchmark {
         repeat(sessions) { round ->
             val discoveryBrain = brain.copy(clusterRotation = clusterRotation)
             // Round index doubles as tree depth — models refresh + successive pages.
-            val sessionResult = discovery.generateQueries(discoveryBrain, now, depth = round) { FlowPersona.EXPLORER }
+            val sessionResult = discovery.generateQueries(discoveryBrain, now, depth = round) { VoxTubePersona.EXPLORER }
             val queries = sessionResult.map { it.query }
             val servedClusters = sessionResult.mapNotNull { it.clusterKey }.toSet()
             if (servedClusters.isNotEmpty()) {

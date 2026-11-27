@@ -14,7 +14,7 @@ import com.voxtube.app.data.local.dao.WatchHistoryDao
 import com.voxtube.app.data.model.Channel
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.model.toUiModel
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.subscriptions.SubscriptionFeedRepository
 import com.voxtube.app.data.subscriptions.SubscriptionRefreshPlan
 import com.voxtube.app.data.subscriptions.SubscriptionWatchedVideos
@@ -58,7 +58,7 @@ class SubscriptionsViewModel
         private val playerPreferences: PlayerPreferences,
         private val subscriptionGroupDao: SubscriptionGroupDao,
         private val subscriptionWatchedVideos: SubscriptionWatchedVideos,
-        private val neuroEngine: FlowNeuroEngine,
+        private val neuroEngine: VoxTubeNeuroEngine,
         private val backupCoordinator: BackupCoordinator,
         private val watchHistoryDao: WatchHistoryDao,
     ) : ViewModel() {
@@ -83,7 +83,7 @@ class SubscriptionsViewModel
 
         /**
          * Starts the preference/feed collectors. Deliberately not run from `init`: the TV shell
-         * hoists this ViewModel at launch (see `FlowTvApp`), so constructing it would kick off the
+         * hoists this ViewModel at launch (see `VoxTubeTvApp`), so constructing it would kick off the
          * subscription RSS fetch before the user ever opens Subscriptions. Called from the screens
          * instead, so the work still begins exactly when the feed becomes visible.
          *

@@ -50,7 +50,7 @@ fun CommentSortChips(
                         else -> index < sortOptions.size
                     }
                 if (!offered) return@forEach
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = index?.let { sortOptions.getOrNull(it)?.title?.takeIf(String::isNotBlank) } ?: stringResource(filter.labelRes),
                     selected = selected == filter,
                     onClick = {

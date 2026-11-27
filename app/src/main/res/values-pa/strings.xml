@@ -772,9 +772,6 @@
     <string name="settings_item_import_data">ਡਾਟਾ ਆਯਾਤ ਕਰੋ</string>
     <string name="settings_item_import_data_subtitle">ਬੈਕਅੱਪ ਤੋਂ ਰੀਸਟੋਰ ਕਰੋ ਜਾਂ ਹੋਰ ਐਪਸ ਤੋਂ ਆਯਾਤ ਕਰੋ</string>
     <string name="settings_item_about_flow">VoxTube ਬਾਰੇ</string>
-    <string name="settings_item_about_flow_subtitle">ਸੰਸਕਰਣ, ਲਾਇਸੈਂਸ, ਯੋਗਦਾਨੀ</string>
-    <string name="settings_item_support">ਸਹਾਇਤਾ ਅਤੇ ਦਾਨ</string>
-    <string name="settings_item_support_subtitle">VoxTube ਦੇ ਵਿਕਾਸ ਦਾ ਸਮਰਥਨ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰੋ</string>
     <string name="settings_region_dialog_title">ਖੇਤਰ ਚੁਣੋ</string>
     <string name="settings_language_dialog_title">ਐਪ ਭਾਸ਼ਾ ਚੁਣੋ</string>
     <string name="settings_language_system_default">ਸਿਸਟਮ ਪੂਰਵ-ਨਿਰਧਾਰਤ</string>
@@ -854,7 +851,6 @@
     <string name="app_icon_picker_subtitle">ਇੱਕ ਲਾਂਚਰ ਆਈਕਨ ਸ਼ੈਲੀ ਚੁਣੋ। ਤਬਦੀਲੀ ਤੁਰੰਤ ਲਾਗੂ ਹੁੰਦੀ ਹੈ ਅਤੇ ਲਾਂਚਰ ਥੋੜ੍ਹੇ ਸਮੇਂ ਲਈ ਰਿਫ੍ਰੈਸ਼ ਹੋ ਜਾਵੇਗਾ।</string>
     <string name="app_icon_picker_warning">ਆਈਕਨ ਨੂੰ ਬਦਲਣ ਨਾਲ ਤੁਹਾਡੀ ਹੋਮ ਸਕ੍ਰੀਨ ਤੋਂ VoxTube ਨੂੰ ਇੱਕ ਪਲ ਲਈ ਹਟਾ ਦਿੱਤਾ ਜਾ ਸਕਦਾ ਹੈ। ਜੇਕਰ ਲੋੜ ਹੋਵੇ ਤਾਂ ਇਸਨੂੰ ਐਪ ਦਰਾਜ਼ ਤੋਂ ਵਾਪਸ ਸ਼ਾਮਲ ਕਰੋ।</string>
     <string name="app_icon_apply_toast">ਆਈਕਨ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ - ਤੁਹਾਡਾ ਲਾਂਚਰ ਤਾਜ਼ਾ ਹੋ ਜਾਵੇਗਾ</string>
-    <string name="icon_name_flow_red">VoxTube ਲਾਲ</string>
     <string name="icon_name_flow_light">VoxTube ਲਾਈਟ</string>
     <string name="icon_name_flow_play">VoxTube ਪਲੇ</string>
     <string name="icon_name_amoled">AMOLED ਗੂੜ੍ਹਾ</string>
@@ -1797,26 +1793,8 @@
         <item quantity="one">%1$d ਥ੍ਰੈੱਡ</item>
         <item quantity="other">%1$d ਥ੍ਰੈੱਡ</item>
     </plurals>
-    <string name="support_donations_title">ਸਹਾਇਤਾ ਅਤੇ ਦਾਨ</string>
-    <string name="support_flow_dev_title">Flow ਵਿਕਾਸ ਦਾ ਸਮਰਥਨ ਕਰੋ</string>
-    <string name="support_flow_dev_desc">ਜੇਕਰ Flow ਤੁਹਾਡੇ ਲਈ ਲਾਭਦਾਇਕ ਹੈ, ਤਾਂ ਤੁਸੀਂ Open Collective, Patreon ਜਾਂ ਹੇਠਾਂ ਕ੍ਰਿਪਟੋ ਦੇ ਨਾਲ ਇਸਦਾ ਸਮਰਥਨ ਕਰ ਸਕਦੇ ਹੋ। ਤੁਹਾਡਾ ਧੰਨਵਾਦ!</string>
-    <string name="support_flow_open_collective">Open Collective \'ਤੇ Flow ਦਾ ਸਮਰਥਨ ਕਰੋ</string>
-    <string name="support_flow_patreon">Patreon \'ਤੇ Flow ਦਾ ਸਮਰਥਨ ਕਰੋ</string>
     <string name="thank_you_support_message">ਤੁਹਾਡੇ ਸਮਰਥਨ ਲਈ ਧੰਨਵਾਦ! ❤️</string>
     <string name="address_copied_toast">ਪਤਾ ਕਲਿੱਪਬੋਰਡ \'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ</string>
-    <string name="donation_address_clip_label">ਦਾਨ ਦਾ ਪਤਾ</string>
-    <string name="donation_prompt_title">Flow ਦਾ ਆਨੰਦ ਮਾਣ ਰਹੇ ਹੋ?</string>
-    <string name="donation_prompt_message">Flow ਮੁਫ਼ਤ, ਓਪਨ ਸੋਰਸ ਅਤੇ ਵਿਗਿਆਪਨ-ਮੁਕਤ ਹੈ। ਜੇਕਰ ਇਸਨੇ ਤੁਹਾਡੇ ਫ਼ੋਨ \'ਤੇ ਇੱਕ ਸਥਾਨ ਹਾਸਲ ਕੀਤਾ ਹੈ, ਤਾਂ ਥੋੜਾ ਜਿਹਾ ਸਮਰਥਨ ਇਸਨੂੰ ਜਾਰੀ ਰੱਖਦਾ ਹੈ।</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">ਵਿਕਾਸ ਦਾ ਸਮਰਥਨ ਕਰੋ</string>
-    <string name="donation_prompt_later">ਸ਼ਾਇਦ ਬਾਅਦ ਵਿੱਚ</string>
-    <string name="donation_prompt_never">ਦੁਬਾਰਾ ਨਾ ਦਿਖਾਓ</string>
-    <string name="about_creator">ਸਿਰਜਣਹਾਰ</string>
-    <string name="about_creator_name">ਏ-ਈਡੀਵ</string>
-    <string name="about_website">ਵੈੱਬਸਾਈਟ</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="github_subtitle">ਸਰੋਤ ਕੋਡ ਅਤੇ ਮੁੱਦੇ</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">ਕੋਰ ਐਕਸਟਰੈਕਸ਼ਨ ਲਾਇਬ੍ਰੇਰੀ</string>
@@ -1847,7 +1825,6 @@
     <string name="section_legal">ਕਾਨੂੰਨੀ</string>
     <string name="section_device">ਡਿਵਾਈਸ</string>
     <string name="donate_item_title">ਦਾਨ ਕਰੋ</string>
-    <string name="support_dev_subtitle">ਵਿਕਾਸ ਦਾ ਸਮਰਥਨ ਕਰੋ</string>
     <string name="btn_ok">ਠੀਕ ਹੈ</string>
     <string name="btn_copy">ਕਾਪੀ ਕਰੋ</string>
     <string name="github_label">GitHub</string>
@@ -3739,7 +3716,6 @@
     <string name="settings_search_no_results">\"%1$s\" ਲਈ ਕੋਈ ਸੈਟਿੰਗ ਨਹੀਂ ਮਿਲੀ</string>
     <string name="settings_lyrics_provider_order_description">ਉਪਰ ਤੋਂ ਹੇਠਾਂ ਤੱਕ ਕੋਸ਼ਿਸ਼ ਕੀਤੀ। ਮੁੜ ਕ੍ਰਮਬੱਧ ਕਰਨ ਲਈ ਘਸੀਟੋ।</string>
     <string name="import_running_background">ਤੁਸੀਂ ਇਸ ਸਕ੍ਰੀਨ ਨੂੰ ਛੱਡ ਸਕਦੇ ਹੋ। ਆਯਾਤ ਚੱਲਦਾ ਰਹਿੰਦਾ ਹੈ।</string>
-    <string name="donations_cryptocurrency">ਕ੍ਰਿਪਟੋਕਰੰਸੀ</string>
     <string name="import_no_history_entries">ਫਾਈਲ ਵਿੱਚ ਕੋਈ ਵਾਚ-ਇਤਿਹਾਸ ਐਂਟਰੀਆਂ ਨਹੀਂ ਮਿਲੀਆਂ</string>
     <string name="import_no_videos">ਪਲੇਲਿਸਟ ਫਾਈਲ ਵਿੱਚ ਕੋਈ ਵੀਡੀਓ ਨਹੀਂ ਮਿਲੇ</string>
     <string name="import_no_likes">ਕੋਈ ਪਸੰਦ ਨਹੀਂ ਮਿਲੀ। YouTube ਲਈ ਮੇਰੀ ਗਤੀਵਿਧੀ ਨੂੰ JSON ਵਜੋਂ, ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਆਪਣੇ Google ਖਾਤੇ ਨਾਲ ਨਿਰਯਾਤ ਕਰੋ।</string>
@@ -4006,7 +3982,6 @@
     <string name="settings_changelog_all_releases">GitHub \'ਤੇ ਸਾਰੇ ਰੀਲੀਜ਼</string>
     <string name="settings_changelog_expand">ਬਦਲਾਅ ਦਿਖਾਓ</string>
     <string name="settings_changelog_collapse">ਤਬਦੀਲੀਆਂ ਨੂੰ ਲੁਕਾਓ</string>
-    <string name="settings_creator_role">Flow ਦਾ ਸਿਰਜਣਹਾਰ ਅਤੇ ਵਿਕਾਸਕਾਰ</string>
     <string name="device_info_section_device">ਡਿਵਾਈਸ</string>
     <string name="device_info_section_system">ਸਿਸਟਮ</string>
     <string name="device_info_section_display">ਡਿਸਪਲੇ</string>
@@ -4057,7 +4032,6 @@
     <string name="settings_custom_theme_start_from">ਤੋਂ ਸ਼ੁਰੂ ਕਰੋ</string>
     <string name="settings_custom_theme_count">%2$d ਥੀਮ ਵਿੱਚੋਂ %1$d</string>
     <string name="settings_custom_theme_empty">ਅਜੇ ਤੱਕ ਕੋਈ ਕਸਟਮ ਥੀਮ ਨਹੀਂ ਹਨ</string>
-    <string name="settings_custom_theme_empty_body">ਕਿਸੇ ਵੀ ਪੈਲੇਟ ਤੋਂ ਸ਼ੁਰੂ ਕਰੋ, ਜਾਂ VoxTube ਡੈਸਕਟਾਪ ਵਿੱਚ ਬਣੇ ਇੱਕ ਨੂੰ ਆਯਾਤ ਕਰੋ।</string>
     <string name="settings_custom_theme_import_failed">ਉਸ ਫ਼ਾਈਲ ਵਿੱਚ ਕੋਈ ਵੈਧ ਥੀਮ ਨਹੀਂ ਹਨ</string>
     <string name="settings_custom_theme_limit">ਤੁਸੀਂ %1$d ਥੀਮ ਰੱਖ ਸਕਦੇ ਹੋ</string>
     <string name="settings_custom_theme_exported">ਥੀਮ ਨਿਰਯਾਤ ਕੀਤਾ ਗਿਆ</string>

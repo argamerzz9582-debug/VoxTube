@@ -5,7 +5,7 @@ import com.voxtube.app.data.model.Video
 
 /**
  * What the viewer asked not to see, read from the brain in one snapshot for the surfaces that never
- * pass through [FlowNeuroEngine.rank]: Subscriptions, the subscription Shorts queue, search, the
+ * pass through [VoxTubeNeuroEngine.rank]: Subscriptions, the subscription Shorts queue, search, the
  * player's related list and autoplay, and the Home feed restored from cache.
  *
  * Two strengths, because not every surface should hide the same things (owner decision D5):
@@ -63,7 +63,7 @@ internal fun suppressVideo(
     suppressed: Map<String, Long>,
     videoId: String,
     now: Long,
-    max: Int = FlowNeuroEngine.MAX_SUPPRESSED_VIDEOS,
+    max: Int = VoxTubeNeuroEngine.MAX_SUPPRESSED_VIDEOS,
 ): Map<String, Long> {
     val updated = suppressed + (videoId to now)
     if (updated.size <= max) return updated

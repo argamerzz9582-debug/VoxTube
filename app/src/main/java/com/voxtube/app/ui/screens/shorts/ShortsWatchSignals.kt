@@ -4,8 +4,8 @@ import android.util.Log
 import com.voxtube.app.data.model.ShortVideo
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.model.toVideo
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.InteractionType
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.shorts.ShortWatchClassifier
 import com.voxtube.app.data.shorts.ShortsWatchHistory
 import com.voxtube.app.data.stats.VideoStatsRecorder
@@ -57,9 +57,9 @@ internal class ShortsWatchSignals(
             )
             signal ?: return@launch
             runCatching {
-                FlowNeuroEngine.onVideoInteraction(video.copy(isShort = true), signal.interaction, percentWatched = signal.percent)
-                FlowNeuroEngine.recordSeenShorts(listOf(video.id))
-            }.onFailure { e -> Log.w(TAG, "Failed to record abandoned short in FlowNeuro", e) }
+                VoxTubeNeuroEngine.onVideoInteraction(video.copy(isShort = true), signal.interaction, percentWatched = signal.percent)
+                VoxTubeNeuroEngine.recordSeenShorts(listOf(video.id))
+            }.onFailure { e -> Log.w(TAG, "Failed to record abandoned short in VoxTubeNeuro", e) }
         }
     }
 
@@ -75,9 +75,9 @@ internal class ShortsWatchSignals(
             watchHistory.save(short, signal.position, signal.safeDuration)
 
             runCatching {
-                FlowNeuroEngine.onVideoInteraction(video.copy(isShort = true), signal.interaction, percentWatched = signal.percent)
-                FlowNeuroEngine.recordSeenShorts(listOf(video.id))
-            }.onFailure { e -> Log.w(TAG, "Failed to record watched short in FlowNeuro", e) }
+                VoxTubeNeuroEngine.onVideoInteraction(video.copy(isShort = true), signal.interaction, percentWatched = signal.percent)
+                VoxTubeNeuroEngine.recordSeenShorts(listOf(video.id))
+            }.onFailure { e -> Log.w(TAG, "Failed to record watched short in VoxTubeNeuro", e) }
         }
     }
 

@@ -26,7 +26,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.utils.FlowDiagnostics
+import com.voxtube.app.utils.VoxTubeDiagnostics
 import com.voxtube.app.utils.copyPlainText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -107,12 +107,12 @@ internal fun SubscriptionFeedErrorCard(
                             val report =
                                 withContext(Dispatchers.IO) {
                                     buildSubscriptionFailureReport(
-                                        deviceInfo = FlowDiagnostics.buildDeviceInfo(context),
+                                        deviceInfo = VoxTubeDiagnostics.buildDeviceInfo(context),
                                         failedChannelNames = failedChannelNames,
                                         failedChannelIds = failedChannelIds,
                                         failedChannelReasons = failedChannelReasons,
                                         sessionLogs =
-                                            FlowDiagnostics.readSessionLogs(SUBSCRIPTION_FAILURE_LOG_LINES),
+                                            VoxTubeDiagnostics.readSessionLogs(SUBSCRIPTION_FAILURE_LOG_LINES),
                                     )
                                 }
                             clipboard.copyPlainText(

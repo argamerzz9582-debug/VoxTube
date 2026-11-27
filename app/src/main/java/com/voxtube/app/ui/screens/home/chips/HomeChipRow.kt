@@ -15,7 +15,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 
 private val ChipRowHeight = 48.dp
 private val ChipRowPadding = 12.dp
@@ -40,7 +40,7 @@ internal fun HomeChipRow(
         items(state.chips, key = { it.key }) { chip ->
             val label = chip.label()
             val description = stringResource(R.string.home_chip_description, label)
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 label = label,
                 selected = chip.key == state.selected,
                 onClick = { onSelect(chip.key) },

@@ -11,7 +11,7 @@ import com.voxtube.app.data.playlist.PlaylistTransfer
 import com.voxtube.app.data.profile.ProfileRegistry
 import com.voxtube.app.data.profile.ProfileSlices
 import com.voxtube.app.data.profile.TooManyProfiles
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.recommendation.music.MusicBrainEngine
 import com.voxtube.app.notification.NotificationHelper
 import com.voxtube.app.sync2.service.LinkedReset
@@ -109,7 +109,7 @@ class BackupCoordinator
 
         fun exportEngine(uri: Uri) =
             exportTo(uri, R.string.export_engine_success, R.string.export_engine_failed) {
-                writeStream(uri) { out -> FlowNeuroEngine.exportBrainToStream(out) }
+                writeStream(uri) { out -> VoxTubeNeuroEngine.exportBrainToStream(out) }
             }
 
         fun exportMusicBrain(uri: Uri) =
@@ -217,7 +217,7 @@ class BackupCoordinator
 
         fun importEngine(uri: Uri) =
             run(context.getString(R.string.import_engine_data)) {
-                val ok = readStream(uri) { input -> FlowNeuroEngine.importBrainFromStream(context, input) } == true
+                val ok = readStream(uri) { input -> VoxTubeNeuroEngine.importBrainFromStream(context, input) } == true
                 if (ok) {
                     BackupOperation.Succeeded(context.getString(R.string.import_engine_success))
                 } else {

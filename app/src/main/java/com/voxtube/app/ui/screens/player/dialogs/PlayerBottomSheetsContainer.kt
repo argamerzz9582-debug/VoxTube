@@ -21,10 +21,10 @@ import com.voxtube.app.player.EnhancedPlayerManager
 import com.voxtube.app.player.EnhancedPlayerState
 import com.voxtube.app.player.SleepTimerManager
 import com.voxtube.app.ui.components.shared.CommentSortFilter
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowCommentsBottomSheet
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeCommentsBottomSheet
 import com.voxtube.app.ui.components.shared.oldestCommentsNote
-import com.voxtube.app.ui.components.videoplayer.sheet.FlowLiveChatBottomSheet
+import com.voxtube.app.ui.components.videoplayer.sheet.VoxTubeLiveChatBottomSheet
 import com.voxtube.app.ui.screens.player.VideoPlayerViewModel
 import com.voxtube.app.ui.screens.player.state.PlayerCommentsUiState
 import com.voxtube.app.ui.screens.player.state.PlayerScreenState
@@ -76,7 +76,7 @@ internal fun PlayerBottomSheetsContainer(
 
     // Comments Bottom Sheet
     if (screenState.activeSheet == PlayerSheet.Comments() && commentsEnabled && !hostedInSidePanel) {
-        FlowCommentsBottomSheet(
+        VoxTubeCommentsBottomSheet(
             comments = visibleComments,
             isLoading = commentsUiState.isLoading,
             selectedFilter = screenState.commentSortFilter,
@@ -108,7 +108,7 @@ internal fun PlayerBottomSheetsContainer(
     }
 
     if (screenState.activeSheet == PlayerSheet.LiveChat() && uiState.isLiveChatAvailable) {
-        FlowLiveChatBottomSheet(
+        VoxTubeLiveChatBottomSheet(
             messages = uiState.liveChatMessages,
             isLoading = uiState.isLiveChatLoading,
             expandedHeight = mediaSheetExpandedHeight,
@@ -211,7 +211,7 @@ private fun ShortsSuggestionDialog(
     onPlayAsShort: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         icon = { Icon(Icons.Outlined.SmartDisplay, null) },
         title = {

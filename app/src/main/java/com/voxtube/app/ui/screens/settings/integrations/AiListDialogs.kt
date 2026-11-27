@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 
 private val FieldSpacing = 8.dp
 
@@ -38,7 +38,7 @@ internal fun AiListSourceDialog(
     val save = { newUrl: String, newKey: String ->
         onSave(newUrl, newKey) { saved -> if (saved) onDismiss() else invalid = true }
     }
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.ai_list_source_title)) },
         text = {
@@ -89,7 +89,7 @@ internal fun AiReportNameDialog(
     onDismiss: () -> Unit,
 ) {
     var name by rememberSaveable { mutableStateOf(initial) }
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.ai_report_name_title)) },
         text = {

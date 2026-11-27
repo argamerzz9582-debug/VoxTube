@@ -17,7 +17,7 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.settings.isNew
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.screens.settings.index.PlaybackIndex
 import kotlinx.coroutines.flow.StateFlow
 
@@ -44,7 +44,7 @@ internal fun LockScreenPlayerSwitch(
             if (canDraw) onCheckedChange(true)
         }
     val entry = PlaybackIndex.lockScreenPlayer
-    FlowSwitchRow(
+    VoxTubeSwitchRow(
         title = stringResource(entry.title),
         supportingText =
             stringResource(

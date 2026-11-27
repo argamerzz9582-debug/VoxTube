@@ -25,8 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.utils.DeviceDetails
 import com.voxtube.app.utils.DeviceFactGroup
 import com.voxtube.app.utils.copyPlainText
@@ -51,13 +51,13 @@ internal fun DeviceInfoDialog(onDismiss: () -> Unit) {
         value = withContext(Dispatchers.IO) { DeviceDetails.collect(context) }
     }
 
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = {
             val loaded = groups
             if (loaded == null) {
-                Box(Modifier.fillMaxWidth().height(LoadingHeight), contentAlignment = Alignment.Center) { FlowLoadingIndicator() }
+                Box(Modifier.fillMaxWidth().height(LoadingHeight), contentAlignment = Alignment.Center) { VoxTubeLoadingIndicator() }
             } else {
                 SelectionContainer(Modifier.heightIn(max = ContentMaxHeight).verticalScroll(rememberScrollState())) {
                     Column(verticalArrangement = Arrangement.spacedBy(GroupSpacing)) {

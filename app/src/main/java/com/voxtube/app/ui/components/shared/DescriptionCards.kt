@@ -155,7 +155,7 @@ private fun DescriptionTextBlock(
     onOverflow: () -> Unit,
 ) {
     var layout by remember { mutableStateOf<TextLayoutResult?>(null) }
-    FlowSelectionContainer {
+    VoxTubeSelectionContainer {
         BasicText(
             text = text,
             inlineContent = inlineContent,

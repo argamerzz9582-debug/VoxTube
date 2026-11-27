@@ -10,10 +10,10 @@ import com.voxtube.app.ui.components.shared.LocalClassicLoadingIndicator
 import com.voxtube.app.ui.components.shared.LocalMarqueeEnabled
 import com.voxtube.app.ui.components.shared.LocalSkeletonGradientEnabled
 import com.voxtube.app.ui.theme.CustomTheme
-import com.voxtube.app.ui.theme.FlowFontFamily
-import com.voxtube.app.ui.theme.FlowTheme
 import com.voxtube.app.ui.theme.ThemeMode
 import com.voxtube.app.ui.theme.ThemeVariant
+import com.voxtube.app.ui.theme.VoxTubeFontFamily
+import com.voxtube.app.ui.theme.VoxTubeTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
@@ -26,7 +26,7 @@ data class ThemeSettings(
     val systemLightThemeMode: ThemeMode = ThemeMode.DARK,
     val systemDarkThemeMode: ThemeMode = ThemeMode.DARK,
     val systemDarkThemeVariant: ThemeVariant = ThemeVariant.DARK,
-    val fontFamily: FontFamily = FlowFontFamily,
+    val fontFamily: FontFamily = VoxTubeFontFamily,
     val skeletonGradient: Boolean = false,
     val marqueeEnabled: Boolean = true,
     val classicLoadingIndicator: Boolean = false,
@@ -42,10 +42,10 @@ fun LocalDataManager.themeSettings(fonts: AppFontPreferences): Flow<ThemeSetting
         .combine(classicLoadingIndicator) { settings, classic -> settings.copy(classicLoadingIndicator = classic) }
 
 @Composable
-fun FlowTheme(
+fun VoxTubeTheme(
     settings: ThemeSettings,
     content: @Composable () -> Unit,
-) = FlowTheme(
+) = VoxTubeTheme(
     themeMode = settings.themeMode,
     themeVariant = settings.themeVariant,
     customTheme = settings.customTheme,

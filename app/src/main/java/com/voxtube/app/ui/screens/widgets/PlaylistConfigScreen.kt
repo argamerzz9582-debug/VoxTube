@@ -15,7 +15,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.settings.SettingsPage
-import com.voxtube.app.ui.components.shared.FlowSelectionRow
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionRow
 import com.voxtube.app.widget.playlist.PlaylistWidgetConfig
 import com.voxtube.app.widget.playlist.PlaylistWidgetSource
 import kotlinx.coroutines.launch
@@ -38,7 +38,7 @@ internal fun PlaylistConfigScreen(
         group(key = "playlist.choose", header = R.string.widget_config_playlist) {
             options.forEach { playlist ->
                 row("playlist.${playlist.id}") { shape ->
-                    FlowSelectionRow(
+                    VoxTubeSelectionRow(
                         title = playlist.name,
                         selected = playlist.id == current,
                         onClick = {

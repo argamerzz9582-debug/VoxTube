@@ -8,7 +8,6 @@
 package com.voxtube.app.data.recommendation.eval
 
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.IdfSnapshot
 import com.voxtube.app.data.recommendation.InteractionType
 import com.voxtube.app.data.recommendation.NeuroCategoryStore
@@ -19,6 +18,7 @@ import com.voxtube.app.data.recommendation.NeuroStorage
 import com.voxtube.app.data.recommendation.NeuroTokenizer
 import com.voxtube.app.data.recommendation.NeuroVectorMath
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -26,7 +26,7 @@ import kotlinx.coroutines.runBlocking
 import kotlin.math.ln
 
 /**
- * Offline model of how the engine LEARNS, driving the real [FlowNeuroEngine] (learning, rejection,
+ * Offline model of how the engine LEARNS, driving the real [VoxTubeNeuroEngine] (learning, rejection,
  * ranking and discovery) with storage mocked out. It answers the #907 reports in numbers:
  *  - retention: months of comedy, tech and cooking, then a Shorts binge and two guitar playalongs.
  *    Does comedy survive, and does guitar take over?
@@ -326,7 +326,7 @@ internal object NeuroLearningBenchmark {
         random: java.util.Random = java.util.Random(JITTER_SEED),
         categoryStore: NeuroCategoryStore = NeuroCategoryStore(mockk(relaxed = true)),
         coWatchStore: NeuroCoWatchStore = NeuroCoWatchStore(mockk(relaxed = true)),
-    ): FlowNeuroEngine {
+    ): VoxTubeNeuroEngine {
         val storage: NeuroStorage =
             mockk(relaxed = true) {
                 coEvery { load() } returns brain
@@ -335,7 +335,7 @@ internal object NeuroLearningBenchmark {
             mockk(relaxed = true) {
                 every { topicsFor(any()) } returns null
             }
-        return FlowNeuroEngine(mockk(relaxed = true), storage, contentStore, categoryStore, coWatchStore, learningPaused = {
+        return VoxTubeNeuroEngine(mockk(relaxed = true), storage, contentStore, categoryStore, coWatchStore, learningPaused = {
             false
         }, rankRandom = random)
     }
@@ -345,7 +345,7 @@ internal object NeuroLearningBenchmark {
             override fun nextDouble() = 0.0
         }
 
-    suspend fun FlowNeuroEngine.watch(
+    suspend fun VoxTubeNeuroEngine.watch(
         video: Video,
         percent: Float = 0.9f,
     ) {
@@ -354,7 +354,7 @@ internal object NeuroLearningBenchmark {
     }
 
     /** Months of mixed watching: comedy, tech and cooking interleaved, 40 of each. */
-    suspend fun FlowNeuroEngine.longHistory() {
+    suspend fun VoxTubeNeuroEngine.longHistory() {
         for (i in 0 until 40) {
             watch(comedy(i))
             watch(tech(i))
@@ -364,12 +364,12 @@ internal object NeuroLearningBenchmark {
 
     private val profile = setOf(Family.COMEDY, Family.TECH, Family.COOKING)
 
-    suspend fun FlowNeuroEngine.shareInTop(
+    suspend fun VoxTubeNeuroEngine.shareInTop(
         family: Family,
         n: Int = TOP_N,
     ): Double = shareInTop(setOf(family), n)
 
-    suspend fun FlowNeuroEngine.shareInTop(
+    suspend fun VoxTubeNeuroEngine.shareInTop(
         families: Set<Family>,
         n: Int = TOP_N,
     ): Double {
@@ -454,7 +454,7 @@ internal object NeuroLearningBenchmark {
 
     private fun noveltyWeight(brain: UserBrain): Double = 0.2 + (brain.consecutiveSkips / 20.0).coerceIn(0.0, 0.5)
 
-    private suspend fun phonkWatcher(): FlowNeuroEngine {
+    private suspend fun phonkWatcher(): VoxTubeNeuroEngine {
         val engine = engine()
         engine.longHistory()
         for (i in 0 until 3) engine.watch(phonk(i), percent = 0.6f)

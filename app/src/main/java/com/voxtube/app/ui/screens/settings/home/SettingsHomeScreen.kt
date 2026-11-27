@@ -32,10 +32,10 @@ import com.voxtube.app.ui.components.settings.SettingEntry
 import com.voxtube.app.ui.components.settings.SettingsDestination
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.SettingsTarget
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 import com.voxtube.app.ui.screens.settings.index.HomeIndex
 import com.voxtube.app.ui.screens.settings.index.SettingsSearch
@@ -50,7 +50,6 @@ private val SearchFieldBottomPadding = 8.dp
 internal fun SettingsHomeScreen(
     selected: SettingsDestination?,
     onOpen: (SettingsTarget) -> Unit,
-    onOpenDonations: () -> Unit,
     onOpenUpdate: () -> Unit,
     onBack: () -> Unit,
     selectedRowFocus: FocusRequester? = null,
@@ -84,7 +83,6 @@ internal fun SettingsHomeScreen(
         query = ""
         val page = DestinationIndex.destinationOf(entry)
         when {
-            entry.key == HomeIndex.support.key -> onOpenDonations()
             entry.key == HomeIndex.checkForUpdates.key -> viewModel.checkForUpdates()
             page != null -> onOpen(SettingsTarget(page))
             entry.destination == SettingsDestination.HOME -> highlight = entry.key
@@ -98,7 +96,7 @@ internal fun SettingsHomeScreen(
         highlight = highlight,
         snackbarHostState = snackbarHostState,
         header = {
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = query,
                 onQueryChange = { query = it },
                 placeholder = stringResource(R.string.ui_search_settings),
@@ -126,7 +124,6 @@ internal fun SettingsHomeScreen(
                 actions =
                     SettingsHomeActions(
                         onOpen = onOpen,
-                        onOpenDonations = onOpenDonations,
                         onDeepFlowChange = viewModel::setDeepFlowEnabled,
                         onDurationClick = { showDurationDialog = true },
                         onSaveHistoryChange = viewModel::setDeepFlowSaveToHistory,
@@ -139,11 +136,11 @@ internal fun SettingsHomeScreen(
     }
 
     if (showDurationDialog) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.deep_flow_dialog_title),
             description = stringResource(R.string.deep_flow_dialog_body),
             icon = Icons.Outlined.Timer,
-            options = DeepFlowDurations.map { FlowChoice(it, deepFlowDurationLabel(it)) },
+            options = DeepFlowDurations.map { VoxTubeChoice(it, deepFlowDurationLabel(it)) },
             selected = deepFlow.expireHours,
             onSelect = viewModel::setDeepFlowExpireHours,
             onDismiss = { showDurationDialog = false },

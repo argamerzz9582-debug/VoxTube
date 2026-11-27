@@ -23,12 +23,12 @@ import java.io.File
  *
  *   adb shell run-as com.voxtube.app.debug cat files/datastore/flow_music_brain_v1.json > diagnostics/music-brain.json
  *
- * then run this test (or pass -Dflow.musicBrainPath=...). Skips when no file
+ * then run this test (or pass -Dvoxtube.musicBrainPath=...). Skips when no file
  * exists so CI stays green. Reports go to build/reports/music-brain-diagnostic/.
  */
 class MusicBrainDiagnosticTest {
     private fun locateBrainFile(): File? {
-        System.getProperty("flow.musicBrainPath")?.let { p ->
+        System.getProperty("voxtube.musicBrainPath")?.let { p ->
             File(p).takeIf { it.isFile }?.let { return it }
         }
         // Unit tests run with the app module as the working directory.

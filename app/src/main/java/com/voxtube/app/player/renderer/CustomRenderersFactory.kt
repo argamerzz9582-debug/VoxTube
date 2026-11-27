@@ -14,7 +14,7 @@ import androidx.media3.exoplayer.text.TextRenderer
 import androidx.media3.exoplayer.video.MediaCodecVideoRenderer
 import androidx.media3.exoplayer.video.VideoRendererEventListener
 import com.voxtube.app.player.config.PlayerConfig
-import com.voxtube.app.player.renderer.subtitle.FlowSubtitleDecoderFactory
+import com.voxtube.app.player.renderer.subtitle.VoxTubeSubtitleDecoderFactory
 import com.voxtube.app.player.subtitle.SubtitleDelay
 import java.util.ArrayList
 
@@ -27,7 +27,7 @@ open class CustomRenderersFactory(
     private val audioProcessors: Array<AudioProcessor> = emptyArray(),
     private val subtitleDelay: SubtitleDelay = SubtitleDelay(),
 ) : DefaultRenderersFactory(context) {
-    private val subtitleDecoderFactory = FlowSubtitleDecoderFactory(subtitleDelay)
+    private val subtitleDecoderFactory = VoxTubeSubtitleDecoderFactory(subtitleDelay)
 
     override fun buildAudioSink(
         context: Context,

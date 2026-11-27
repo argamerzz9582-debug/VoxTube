@@ -66,9 +66,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowActionButtonPair
-import com.voxtube.app.ui.components.shared.FlowPairAction
-import com.voxtube.app.ui.components.shared.FlowSortChip
+import com.voxtube.app.ui.components.shared.VoxTubeActionButtonPair
+import com.voxtube.app.ui.components.shared.VoxTubePairAction
+import com.voxtube.app.ui.components.shared.VoxTubeSortChip
 import com.voxtube.app.ui.components.shared.connectedButtonShapes
 import com.voxtube.app.ui.components.shared.thumbnailUrlOrNull
 
@@ -280,9 +280,9 @@ private fun PlaylistNote(text: String) {
 
 @Composable
 private fun PlaylistPrimaryActions(actions: PlaylistHeaderActions) {
-    FlowActionButtonPair(
-        primary = FlowPairAction(Icons.Filled.PlayArrow, stringResource(R.string.play_all), actions.onPlayAll),
-        secondary = FlowPairAction(Icons.Filled.Shuffle, stringResource(R.string.shuffle), actions.onShuffle),
+    VoxTubeActionButtonPair(
+        primary = VoxTubePairAction(Icons.Filled.PlayArrow, stringResource(R.string.play_all), actions.onPlayAll),
+        secondary = VoxTubePairAction(Icons.Filled.Shuffle, stringResource(R.string.shuffle), actions.onShuffle),
     )
 }
 
@@ -387,7 +387,7 @@ internal fun PlaylistSortChip(
     modifier: Modifier = Modifier,
     default: PlaylistSortOrder = PlaylistSortOrder.MANUAL,
 ) {
-    FlowSortChip(
+    VoxTubeSortChip(
         options = options,
         selected = selected,
         default = default,

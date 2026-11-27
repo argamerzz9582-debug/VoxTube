@@ -568,9 +568,6 @@
     <string name="settings_item_import_data">Verileri İçe Aktar</string>
     <string name="settings_item_import_data_subtitle">Yedekleri geri yükle ya da diğer uygulamadan içe aktar</string>
     <string name="settings_item_about_flow">VoxTube Hakkında</string>
-    <string name="settings_item_about_flow_subtitle">Sürüm, Lisans, Katkıda bulunanlar</string>
-    <string name="settings_item_support">Destek &amp; Bağış</string>
-    <string name="settings_item_support_subtitle">VoxTube\'un geliştirilmesine katkıda bulunun</string>
     <string name="settings_region_dialog_title">Bölge Seç</string>
     <string name="settings_language_dialog_title">Uygulama Dilini Seç</string>
     <string name="settings_language_system_default">Sistem Varsayılanı</string>
@@ -614,7 +611,6 @@
     <string name="app_icon_picker_subtitle">Uygulama simgesi stilini seç. Değişiklik anında uygulanır ve ekran kısa süreliğine yenilenir.</string>
     <string name="app_icon_picker_warning">Uyarı: Simge değişikliği, uygulama kısayolunu ana ekranından kısa bir süreliğine kaldırabilir. Gerekirse kısayolu tekrar ekle.</string>
     <string name="app_icon_apply_toast">Simge değiştirildi - Ana ekranın yenilenecek</string>
-    <string name="icon_name_flow_red">VoxTube Kırmızısı</string>
     <string name="icon_name_flow_light">VoxTube Aydınlık</string>
     <string name="icon_name_amoled">Derin Amoled</string>
     <string name="icon_name_monochrome">Siyah Beyaz</string>
@@ -1045,15 +1041,8 @@
     <string name="location_badge_recommended">Önerilen</string>
     <string name="location_badge_active">Etkin</string>
     <string name="select_threads_count_desc">İş parçacığı sayısını seç (1-8):</string>
-    <string name="support_donations_title">Destek &amp; Bağışlar</string>
-    <string name="support_flow_dev_title">Flow\'un Geliştirilmesine Destek Olun</string>
-    <string name="support_flow_dev_desc">Flow\'u yararlı buluyorsan ve projenin geliştirilmesine destek olmak istiyorsan, Patreon üzerinden destek verebilir veya aşağıdaki kripto adreslerine bağışta bulunabilirsin. Desteğin, projenin devam etmesine önayak olur!</string>
-    <string name="support_flow_patreon">Patreon\'da Flow\'u destekle</string>
     <string name="thank_you_support_message">❤️ Desteğin için teşekkürler! ❤️</string>
     <string name="address_copied_toast">Adres panoya kopyalandı</string>
-    <string name="donation_address_clip_label">Bağış Adresi</string>
-    <string name="about_creator">Geliştirici</string>
-    <string name="about_website">Website</string>
     <string name="github_subtitle">Kaynak kodu &amp; sorunlar</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Çekirdek çıkarma kütüphanesi</string>
@@ -1081,7 +1070,6 @@
     <string name="section_legal">Yasal</string>
     <string name="section_device">Cihaz</string>
     <string name="donate_item_title">Bağış</string>
-    <string name="support_dev_subtitle">Geliştirmeye Destek Ol</string>
     <string name="btn_ok">Tamam</string>
     <string name="btn_copy">Kopyala</string>
     <string name="github_label">GitHub</string>
@@ -1603,14 +1591,8 @@
     <string name="player_settings_video_codec">Varsayılan Video Kodeği</string>
     <string name="player_settings_video_codec_dialog_title">Varsayılan Video Kodeği</string>
     <string name="player_settings_video_codec_auto_desc">Uygulamanın seçmesine izin ver (H.264\'ü tercih eder)</string>
-    <string name="donation_prompt_title">Flow\'dan keyif alıyor musunuz?</string>
-    <string name="donation_prompt_methods">Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Geliştirmeyi destekle</string>
-    <string name="donation_prompt_later">Belki sonra</string>
-    <string name="donation_prompt_never">Tekrar gösterme</string>
     <string name="subscriptions_last_refreshed_time_only_template">Son güncelleme %1$s</string>
     <string name="player_settings_video_codec_dialog_body">Seçilen çözünürlükte varsayılan olarak hangi kodeğin kullanılacağını seçin. Bu, listelenen kaliteleri değiştirmez; kalite seçicisinden yine de herhangi bir kodeği seçebilirsiniz. H.264 çoğu cihazda en uyumlu ve en akıcı olanıdır; AV1/VP9 daha yüksek çözünürlüklerde veri tasarrufu sağlar ancak daha fazla kod çözme gücüne ihtiyaç duyar.</string>
-    <string name="donation_prompt_message">Flow ücretsiz, açık kaynaklı ve reklam veya izleyici içermeyen bir uygulamadır. Eğer cihazınızda yer edindiyse, lütfen geliştirilmesine destek olmayı düşünün — bu, projenin hayatta kalmasına gerçekten yardımcı olur.</string>
     <string name="library_local_media_label">Yerel medya</string>
     <string name="library_local_media_subtitle">Video ve müziği bu cihazda oynat</string>
     <string name="local_media_title">Yerel medya</string>
@@ -2472,12 +2454,12 @@
         <item quantity="other">Bu işlem %d bildirimi silecek. Bu işlemi geri alamazsın.</item>
     </plurals>
     <string name="notifications_clear_confirm">Tümünü temizle</string>
-    <string name="deep_flow_scrobble_title">Deep Flow sırasında scrobble yap</string>
-    <string name="taste_learning_paused">Deep Flow açık, öğrenme duraklatıldı</string>
+    <string name="deep_flow_scrobble_title">Deep Focus sırasında scrobble yap</string>
+    <string name="taste_learning_paused">Deep Focus açık, öğrenme duraklatıldı</string>
     <string name="deep_flow_scrobble_subtitle">Dinlemeleri Last.fm, Libre.fm ve ListenBrainz\'e göndermeye devam et</string>
     <string name="deep_flow_on_search_title">Aramada göster</string>
-    <string name="deep_flow_on_search_subtitle">Son aramaların üzerinde bir Deep Flow anahtarı</string>
-    <string name="deep_flow_long_press_hint">Deep Flow\'a geçmek için Ana Sayfada VoxTube logosuna veya adına uzun bas</string>
+    <string name="deep_flow_on_search_subtitle">Son aramaların üzerinde bir Deep Focus anahtarı</string>
+    <string name="deep_flow_long_press_hint">Deep Focus\'a geçmek için Ana Sayfada VoxTube logosuna veya adına uzun bas</string>
     <plurals name="deep_flow_duration_hours">
         <item quantity="one">%1$d saat</item>
         <item quantity="other">%1$d saat</item>
@@ -2808,11 +2790,6 @@
         <item quantity="one">%1$d iş parçacığı</item>
         <item quantity="other">%1$d iş parçacığı</item>
     </plurals>
-    <string name="support_flow_open_collective">Open Collective\'de Flow\'u destekle</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="about_notices">Açık kaynak bildirimleri</string>
     <string name="about_notices_summary">Diğer projelerden kelime listeleri ve kodlar</string>
     <string name="about_license_name">GNU GPL v3</string>
@@ -3677,7 +3654,6 @@
     <string name="settings_search_no_results">\"%1$s\" için ayar bulunamadı</string>
     <string name="settings_lyrics_provider_order_description">Yukarıdan aşağıya doğru denenir. Sıralamayı değiştirmek için sürükle.</string>
     <string name="import_running_background">Bu ekrandan ayrılabilirsin. İçe aktarma devam eder.</string>
-    <string name="donations_cryptocurrency">KRİPTO PARA</string>
     <string name="import_no_history_entries">Dosyada izleme geçmişi kaydı bulunamadı</string>
     <string name="import_no_videos">Oynatma listesi dosyasında video bulunamadı</string>
     <string name="import_no_likes">Beğeni bulunamadı. YouTube için Etkinliğim verilerini Google hesabın İngilizce seçiliyken JSON olarak dışa aktar.</string>
@@ -3865,7 +3841,6 @@
     <string name="settings_changelog_all_releases">GitHub\'daki tüm sürümler</string>
     <string name="settings_changelog_expand">Değişiklikleri göster</string>
     <string name="settings_changelog_collapse">Değişiklikleri gizle</string>
-    <string name="settings_creator_role">Flow\'un yaratıcısı ve geliştiricisi</string>
     <string name="device_info_section_device">Cihaz</string>
     <string name="device_info_section_system">Sistem</string>
     <string name="device_info_section_display">Ekran</string>
@@ -3916,7 +3891,6 @@
     <string name="settings_custom_theme_start_from">Şununla başla</string>
     <string name="settings_custom_theme_count">%1$d / %2$d tema</string>
     <string name="settings_custom_theme_empty">Henüz özel tema yok</string>
-    <string name="settings_custom_theme_empty_body">Herhangi bir paletle başla ya da Flow Desktop\'ta oluşturulan bir paleti içe aktar.</string>
     <string name="settings_custom_theme_import_failed">Bu dosyada geçerli tema yok</string>
     <string name="settings_custom_theme_limit">En fazla %1$d tema saklayabilirsin</string>
     <string name="settings_custom_theme_exported">Tema dışa aktarıldı</string>
@@ -4972,15 +4946,12 @@
     <string name="ai_lists_status_count">%1$s kanal ve %2$s sanatçı, %3$s itibarıyla güncellendi</string>
     <string name="ai_lists_status_count_now">%1$s kanal ve %2$s sanatçı, az önce güncellendi</string>
     <string name="ai_music_attribution_soul_title">Soul Over AI\'a göre müzik listesi</string>
-    <string name="ai_music_attribution_soul_summary">CC BY 4.0, Flow tarafından değiştirildi</string>
     <string name="ai_music_attribution_blocker_title">Spotify AI Blocker\'a göre müzik listesi</string>
     <string name="ai_list_source_title">Liste kaynağı</string>
-    <string name="ai_list_source_dialog_body">Listeyi yayınlayan başka bir sunucu kullanın; örneğin kendi barındırdığınız bir sunucu. Flow\'un sunucusunu kullanmak için URL\'yi boş bırakın.</string>
     <string name="ai_list_source_url_hint">Sunucu URL\'si</string>
     <string name="ai_list_source_key_hint">Açık anahtar (isteğe bağlı)</string>
     <string name="ai_list_source_key_help">Yalnızca sunucu listeyi kendi anahtarıyla imzaladığında gereklidir</string>
     <string name="ai_list_source_invalid">Bir https URL\'si ve varsa geçerli bir Ed25519 açık anahtarı girin</string>
-    <string name="ai_list_source_reset">Flow\'unkini kullan</string>
     <string name="ai_report_header">Yapay zeka kanallarını bildir</string>
     <string name="ai_report_enabled_title">Video menüsünden bildir</string>
     <string name="ai_report_enabled_summary">Her videonun menüsüne \"Yapay zeka kanalını bildir\" seçeneğini ekler</string>
@@ -5207,7 +5178,6 @@
     <string name="translation_server_lingva">Lingva</string>
     <string name="ai_list_attribution_summary">CC BY-NC 4.0</string>
     <string name="ai_music_attribution_blocker_summary">MIT, © CennoxX</string>
-    <string name="ai_list_source_default">Flow</string>
     <string name="lyrics_repeat_count">(×%1$d)</string>
     <string name="load_error_offline_hint">Tekrar çevrimiçi olduğunuzda yeniden yüklenir</string>
     <string name="search_showing_results_for">%1$s için sonuçlar gösteriliyor</string>

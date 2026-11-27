@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowFilterChip
-import com.voxtube.app.ui.components.shared.FlowSortChip
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeSortChip
 
 /**
  * The chips under the search field: All or Folders, then sort and the filters that apply to this
@@ -30,21 +30,21 @@ internal fun LocalMediaFilterBar(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         item(key = "all") {
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 stringResource(R.string.local_view_all),
                 selected = view == LocalView.ALL,
                 onClick = { onViewChange(LocalView.ALL) },
             )
         }
         item(key = "folders") {
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 stringResource(R.string.local_view_folders),
                 selected = view == LocalView.FOLDERS,
                 onClick = { onViewChange(LocalView.FOLDERS) },
             )
         }
         item(key = "sort") {
-            FlowSortChip(
+            VoxTubeSortChip(
                 options = LocalSort.entries,
                 selected = filters.sort,
                 default = LocalSort.DATE_ADDED,
@@ -53,7 +53,7 @@ internal fun LocalMediaFilterBar(
             )
         }
         item(key = "length") {
-            FlowSortChip(
+            VoxTubeSortChip(
                 options = LengthFilter.entries,
                 selected = filters.length,
                 default = LengthFilter.ANY,
@@ -63,7 +63,7 @@ internal fun LocalMediaFilterBar(
         }
         if (isVideos) {
             item(key = "quality") {
-                FlowSortChip(
+                VoxTubeSortChip(
                     options = QualityFilter.entries,
                     selected = filters.quality,
                     default = QualityFilter.ANY,
@@ -72,14 +72,14 @@ internal fun LocalMediaFilterBar(
                 )
             }
             item(key = "unwatched") {
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     stringResource(R.string.local_filter_unwatched),
                     selected = filters.unwatchedOnly,
                     onClick = { onFiltersChange { it.copy(unwatchedOnly = !it.unwatchedOnly) } },
                 )
             }
             item(key = "portrait") {
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     stringResource(R.string.local_filter_portrait),
                     selected = filters.portraitOnly,
                     onClick = { onFiltersChange { it.copy(portraitOnly = !it.portraitOnly) } },

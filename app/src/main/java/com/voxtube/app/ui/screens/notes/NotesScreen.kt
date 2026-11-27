@@ -60,11 +60,11 @@ import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
 import com.voxtube.app.ui.components.layout.rememberFlowPaneScaffoldDirective
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowNoteEditorDialog
-import com.voxtube.app.ui.components.shared.FlowSelectionAction
-import com.voxtube.app.ui.components.shared.FlowSelectionToolbar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeNoteEditorDialog
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionAction
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionToolbar
 import kotlinx.coroutines.launch
 
 private val PaneCornerInset = 16.dp
@@ -150,11 +150,11 @@ internal fun NotesScreen(
         topBar = {
             when {
                 reordering -> {
-                    FlowTopBar(title = stringResource(R.string.notes_reorder_title), onBack = { reordering = false })
+                    VoxTubeTopBar(title = stringResource(R.string.notes_reorder_title), onBack = { reordering = false })
                 }
 
                 selecting -> {
-                    FlowTopBar(
+                    VoxTubeTopBar(
                         title = pluralStringResource(R.plurals.selected_count_template, selectedKeys.size, selectedKeys.size),
                         onBack = ::exitSelection,
                         actions = {
@@ -169,7 +169,7 @@ internal fun NotesScreen(
                 }
 
                 else -> {
-                    FlowTopBar(
+                    VoxTubeTopBar(
                         title = if (showingDetailAlone) "" else stringResource(R.string.notes_title),
                         onBack = if (showingDetailAlone) ::back else onBackClick,
                         actions = {
@@ -238,7 +238,7 @@ internal fun NotesScreen(
                                 }
                             val note = openNote
                             if (note == null) {
-                                FlowEmptyState(
+                                VoxTubeEmptyState(
                                     title = stringResource(R.string.notes_pick_title),
                                     icon = Icons.Outlined.StickyNote2,
                                     modifier = paneModifier.fillMaxSize(),
@@ -256,14 +256,14 @@ internal fun NotesScreen(
                     },
                 )
             }
-            FlowSelectionToolbar(
+            VoxTubeSelectionToolbar(
                 visible = selecting && selectedKeys.isNotEmpty(),
                 summary = pluralStringResource(R.plurals.selected_count_template, selectedKeys.size, selectedKeys.size),
                 actions =
                     listOf(
-                        FlowSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) { delete(selectedNotes) },
-                        FlowSelectionAction(Icons.Outlined.Share, stringResource(R.string.action_share)) { share(selectedNotes) },
-                        FlowSelectionAction(Icons.Default.SwapVert, stringResource(R.string.notes_reorder)) {
+                        VoxTubeSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) { delete(selectedNotes) },
+                        VoxTubeSelectionAction(Icons.Outlined.Share, stringResource(R.string.action_share)) { share(selectedNotes) },
+                        VoxTubeSelectionAction(Icons.Default.SwapVert, stringResource(R.string.notes_reorder)) {
                             exitSelection()
                             viewModel.startReordering()
                             reordering = true
@@ -276,7 +276,7 @@ internal fun NotesScreen(
 
     val editing = editingKey?.let { key -> state.all?.firstOrNull { it.key == key } }
     if (editing != null) {
-        FlowNoteEditorDialog(
+        VoxTubeNoteEditorDialog(
             initialText = editing.text,
             title = stringResource(if (editing.kind == NoteKind.Video) R.string.note_video_title else R.string.note_channel_title),
             onSave = { text -> viewModel.save(editing, text) },

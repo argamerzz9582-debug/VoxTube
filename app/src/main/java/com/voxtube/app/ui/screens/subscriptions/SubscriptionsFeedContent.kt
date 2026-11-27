@@ -27,8 +27,8 @@ import com.voxtube.app.ui.components.FEED_MAX_AUTO_COLUMNS
 import com.voxtube.app.ui.components.FeedCardMinWidth
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.rememberFeedGridLayout
-import com.voxtube.app.ui.components.shared.FlowPullToRefreshBox
 import com.voxtube.app.ui.components.shared.MediaShortsShelf
+import com.voxtube.app.ui.components.shared.VoxTubePullToRefreshBox
 import com.voxtube.app.ui.components.shared.card.MediaVideoCard
 import com.voxtube.app.ui.components.shared.dpadFocusGroup
 import com.voxtube.app.ui.components.shared.rememberFeedGridPlan
@@ -72,7 +72,7 @@ internal fun SubscriptionsFeedContent(
         }
     }
 
-    FlowPullToRefreshBox(
+    VoxTubePullToRefreshBox(
         isRefreshing = state.isLoading,
         onRefresh = onRefresh,
         state = pullRefreshState,

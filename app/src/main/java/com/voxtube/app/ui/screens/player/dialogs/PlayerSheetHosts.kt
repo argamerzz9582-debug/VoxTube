@@ -42,23 +42,23 @@ import com.voxtube.app.player.RepeatMode
 import com.voxtube.app.player.state.EnhancedPlayerState
 import com.voxtube.app.player.videoRepeatMode
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
-import com.voxtube.app.ui.components.shared.FlowDescriptionBottomSheet
-import com.voxtube.app.ui.components.shared.FlowNoteEditorDialog
 import com.voxtube.app.ui.components.shared.MediaDownloadPrompt
 import com.voxtube.app.ui.components.shared.MediaSheetSlot
 import com.voxtube.app.ui.components.shared.MediaSleepTimerSheet
+import com.voxtube.app.ui.components.shared.VoxTubeDescriptionBottomSheet
+import com.voxtube.app.ui.components.shared.VoxTubeNoteEditorDialog
 import com.voxtube.app.ui.components.shared.commentTimestampToMs
 import com.voxtube.app.ui.components.shared.defaultSheetExpandedHeight
 import com.voxtube.app.ui.components.shared.oldestCommentsNote
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionUndo
 import com.voxtube.app.ui.components.shared.quickactions.sharedQuickActionsViewModel
 import com.voxtube.app.ui.components.shared.rememberDateDisplaySettings
-import com.voxtube.app.ui.components.videoplayer.sheet.FlowChaptersBottomSheet
-import com.voxtube.app.ui.components.videoplayer.sheet.FlowPlaylistQueueBottomSheet
-import com.voxtube.app.ui.components.videoplayer.sheet.FlowTranscriptBottomSheet
 import com.voxtube.app.ui.components.videoplayer.sheet.LiveChatList
 import com.voxtube.app.ui.components.videoplayer.sheet.PlayerCommentsPanel
 import com.voxtube.app.ui.components.videoplayer.sheet.TranscriptChapter
+import com.voxtube.app.ui.components.videoplayer.sheet.VoxTubeChaptersBottomSheet
+import com.voxtube.app.ui.components.videoplayer.sheet.VoxTubePlaylistQueueBottomSheet
+import com.voxtube.app.ui.components.videoplayer.sheet.VoxTubeTranscriptBottomSheet
 import com.voxtube.app.ui.screens.player.VideoPlayerViewModel
 import com.voxtube.app.ui.screens.player.state.PlayerCommentsUiState
 import com.voxtube.app.ui.screens.player.state.PlayerScreenState
@@ -91,7 +91,7 @@ internal fun PlayerChaptersSheetHost(
     val chaptersPositionMs by remember {
         derivedStateOf { (screenState.currentPosition / 1_000L) * 1_000L }
     }
-    FlowChaptersBottomSheet(
+    VoxTubeChaptersBottomSheet(
         chapters = chapters,
         currentPosition = chaptersPositionMs,
         durationMs = screenState.duration,
@@ -125,7 +125,7 @@ internal fun PlayerQueueSheetHost(
     val quickActions = sharedQuickActionsViewModel()
     val removedFromQueue = stringResource(R.string.removed_from_queue)
 
-    FlowPlaylistQueueBottomSheet(
+    VoxTubePlaylistQueueBottomSheet(
         queueVideos = queueVideos,
         currentQueueIndex = currentQueueIndex,
         playlistTitle = playerState.queueTitle,
@@ -176,7 +176,7 @@ internal fun PlayerDescriptionSheetHost(
     LaunchedEffect(video.id) {
         viewModel.loadDescription(video.id)
     }
-    FlowDescriptionBottomSheet(
+    VoxTubeDescriptionBottomSheet(
         video = video,
         onHashtagClick = { tag -> navigator.openSearch("#$tag") },
         descriptionPage = descriptionPage,
@@ -200,7 +200,7 @@ internal fun PlayerDescriptionSheetHost(
 
     if (showNoteEditor && videoNotesEnabled) {
         val insertPositionMs = remember { EnhancedPlayerManager.getInstance().getCurrentPosition().takeUnless { video.isLive } }
-        FlowNoteEditorDialog(
+        VoxTubeNoteEditorDialog(
             initialText = videoNote.orEmpty(),
             title = stringResource(R.string.note_video_title),
             onSave = { text -> viewModel.saveVideoNote(video.id, text) },
@@ -239,7 +239,7 @@ internal fun PlayerTranscriptSheetHost(
                 TranscriptChapter(startMs = chapter.startTimeSeconds.toLong() * 1000L, title = chapter.title)
             }
         }
-    FlowTranscriptBottomSheet(
+    VoxTubeTranscriptBottomSheet(
         cues = transcript.cues,
         isLoading = transcript.isLoading,
         currentPositionMs = { screenState.currentPosition },

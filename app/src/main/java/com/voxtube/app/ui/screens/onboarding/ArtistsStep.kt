@@ -23,11 +23,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.data.recommendation.music.FavouriteArtist
 import com.voxtube.app.data.recommendation.music.FavouriteArtistPicker
-import com.voxtube.app.ui.components.shared.FlowSearchField
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
-import com.voxtube.app.ui.components.shared.FlowSpinner
 import com.voxtube.app.ui.components.shared.MediaArtistToggleRow
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.dismissKeyboardOnPress
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 
@@ -51,7 +51,7 @@ internal fun ArtistsStep(
     ) {
         header()
         item(key = "search") {
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = query,
                 onQueryChange = picker::onQueryChange,
                 placeholder = stringResource(R.string.onboarding_artists_search_placeholder),
@@ -65,7 +65,7 @@ internal fun ArtistsStep(
         val candidates = state.candidates
         if (candidates == null) {
             item(key = "loading") {
-                Box(Modifier.fillMaxWidth().padding(top = SectionTopPadding), contentAlignment = Alignment.Center) { FlowSpinner() }
+                Box(Modifier.fillMaxWidth().padding(top = SectionTopPadding), contentAlignment = Alignment.Center) { VoxTubeSpinner() }
             }
         } else {
             artistSection(
@@ -88,7 +88,7 @@ private fun LazyListScope.artistSection(
 ) {
     if (artists.isEmpty()) return
     item(key = "$key-header") {
-        FlowSectionHeader(stringResource(header), modifier = Modifier.padding(top = SectionTopPadding))
+        VoxTubeSectionHeader(stringResource(header), modifier = Modifier.padding(top = SectionTopPadding))
     }
     itemsIndexed(artists, key = { _, artist -> "$key:${artist.id}" }) { index, artist ->
         MediaArtistToggleRow(
@@ -97,7 +97,7 @@ private fun LazyListScope.artistSection(
             picked = artist.id in pickedIds,
             shape = flowSegmentShape(index, artists.size),
             onToggle = { onToggle(artist, it) },
-            modifier = Modifier.animateItem().padding(bottom = FlowSegmentedGap),
+            modifier = Modifier.animateItem().padding(bottom = VoxTubeSegmentedGap),
         )
     }
 }

@@ -48,15 +48,15 @@ import com.voxtube.app.R
 import com.voxtube.app.data.localmedia.LocalMediaItem
 import com.voxtube.app.data.localmedia.toMusicTrack
 import com.voxtube.app.data.localmedia.toVideo
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.library.LibraryKindHeader
 import com.voxtube.app.ui.components.library.LibrarySelection
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowSelectionAction
-import com.voxtube.app.ui.components.shared.FlowSelectionToolbar
-import com.voxtube.app.ui.components.shared.FlowSidePanes
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionAction
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionToolbar
+import com.voxtube.app.ui.components.shared.VoxTubeSidePanes
 import com.voxtube.app.ui.components.shared.dismissKeyboardOnPress
 import com.voxtube.app.ui.components.shared.flowGridColumns
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionUndo
@@ -283,11 +283,11 @@ fun LocalMediaScreen(
                         }
 
                         state.isLoading -> {
-                            FlowLoadingIndicator()
+                            VoxTubeLoadingIndicator()
                         }
 
                         state.failed -> {
-                            FlowErrorState(error = stringResource(R.string.local_load_failed), onRetry = viewModel::refresh)
+                            VoxTubeErrorState(error = stringResource(R.string.local_load_failed), onRetry = viewModel::refresh)
                         }
 
                         else -> {
@@ -312,7 +312,7 @@ fun LocalMediaScreen(
                                 )
                             }
                             if (twoPaneFolders) {
-                                FlowSidePanes(
+                                VoxTubeSidePanes(
                                     panes = panes,
                                     sidePaneWidth = FolderPaneWidth,
                                     sidePane = { LocalFolderList(state, isVideos, onOpenFolder = viewModel::openFolder) },
@@ -325,19 +325,19 @@ fun LocalMediaScreen(
                     }
                 }
             }
-            FlowSelectionToolbar(
+            VoxTubeSelectionToolbar(
                 visible = selectionMode && selectedIds.isNotEmpty(),
                 summary = pluralStringResource(R.plurals.selected_count_template, selectedIds.size, selectedIds.size),
                 actions =
                     listOf(
-                        FlowSelectionAction(Icons.Outlined.QueuePlayNext, stringResource(R.string.add_to_queue)) {
+                        VoxTubeSelectionAction(Icons.Outlined.QueuePlayNext, stringResource(R.string.add_to_queue)) {
                             state.items.filter { it.mediaId in selectedIds }.forEach(fileActions.onAddToQueue)
                             exitSelection()
                         },
-                        FlowSelectionAction(Icons.Outlined.Share, stringResource(R.string.share)) {
+                        VoxTubeSelectionAction(Icons.Outlined.Share, stringResource(R.string.share)) {
                             shareFiles(state.items.filter { it.mediaId in selectedIds })
                         },
-                        FlowSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) {
+                        VoxTubeSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) {
                             deleteFiles(state.items.filter { it.mediaId in selectedIds })
                         },
                     ),
@@ -362,7 +362,7 @@ private fun LocalMediaTopBar(
     onToggleGrid: () -> Unit,
     onOpenSettings: () -> Unit,
 ) {
-    FlowTopBar(
+    VoxTubeTopBar(
         title = title,
         onBack = onBack,
         actions = {
@@ -370,7 +370,7 @@ private fun LocalMediaTopBar(
                 IconButton(
                     onClick = onSelectAll,
                 ) { Icon(Icons.Default.SelectAll, contentDescription = stringResource(R.string.select_all)) }
-                return@FlowTopBar
+                return@VoxTubeTopBar
             }
             if (showGridToggle) {
                 IconButton(onClick = onToggleGrid) {

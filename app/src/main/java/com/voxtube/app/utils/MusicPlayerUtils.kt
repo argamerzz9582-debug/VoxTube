@@ -1,7 +1,7 @@
 package com.voxtube.app.utils
 
 import android.util.Log
-import com.voxtube.app.FlowApplication
+import com.voxtube.app.VoxTubeApplication
 import com.voxtube.app.data.local.MusicAudioQuality
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.innertube.models.YouTubeClient
@@ -62,13 +62,13 @@ object MusicPlayerUtils {
     )
 
     private suspend fun loadAudioSelectionPreferences(): AudioSelectionPreferences {
-        val playerPreferences = PlayerPreferences(FlowApplication.appContext)
+        val playerPreferences = PlayerPreferences(VoxTubeApplication.appContext)
         return AudioSelectionPreferences(
             preferredAudioLanguage = playerPreferences.preferredAudioLanguage.first(),
             musicAudioQuality =
                 playerPreferences.musicAudioQuality
                     .first()
-                    .resolve(onWifi = NetworkState.isOnWifi(FlowApplication.appContext)),
+                    .resolve(onWifi = NetworkState.isOnWifi(VoxTubeApplication.appContext)),
         )
     }
 

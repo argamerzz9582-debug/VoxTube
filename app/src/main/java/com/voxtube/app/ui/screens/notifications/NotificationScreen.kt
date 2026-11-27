@@ -49,12 +49,12 @@ import com.voxtube.app.data.model.Video
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.components.shared.quickactions.VideoQuickActionsBottomSheet
 import kotlinx.coroutines.launch
@@ -116,7 +116,7 @@ fun NotificationScreen(
             SnackbarHost(snackbarHostState, Modifier.floatAboveBottomChrome(LocalFlowBottomInsets.current))
         },
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = stringResource(R.string.notifications),
                 onBack = onBackClick,
                 actions = {
@@ -138,7 +138,7 @@ fun NotificationScreen(
         }
         Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {
             LazyColumn(
-                modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth(),
+                modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).fillMaxWidth(),
                 contentPadding =
                     PaddingValues(
                         start = GroupPadding,
@@ -148,7 +148,7 @@ fun NotificationScreen(
             ) {
                 sections.forEach { section ->
                     item(key = section.bucket, contentType = "header") {
-                        FlowSectionHeader(stringResource(section.bucket.titleRes))
+                        VoxTubeSectionHeader(stringResource(section.bucket.titleRes))
                     }
                     itemsIndexed(section.items, key = { _, item -> item.id }, contentType = { _, _ -> "row" }) { index, item ->
                         NotificationRow(
@@ -160,7 +160,7 @@ fun NotificationScreen(
                             onLongClick = { scope.launch { menu = NotificationMenu(item, viewModel.videoFor(item)) } },
                             onDismiss = { remove(item) },
                             onSave = { save(item) },
-                            modifier = Modifier.animateItem().padding(bottom = FlowSegmentedGap),
+                            modifier = Modifier.animateItem().padding(bottom = VoxTubeSegmentedGap),
                         )
                     }
                 }
@@ -196,7 +196,7 @@ private fun EmptyInbox(
     onOpenSettings: () -> Unit,
     modifier: Modifier,
 ) {
-    FlowEmptyState(
+    VoxTubeEmptyState(
         title = stringResource(R.string.peace_and_quiet),
         subtitle = stringResource(R.string.notifications_empty_body),
         icon = Icons.Outlined.NotificationsNone,
@@ -216,7 +216,7 @@ private fun ClearAllDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         icon = { Icon(Icons.Outlined.DeleteSweep, contentDescription = null) },
         title = { Text(stringResource(R.string.notifications_clear_title)) },

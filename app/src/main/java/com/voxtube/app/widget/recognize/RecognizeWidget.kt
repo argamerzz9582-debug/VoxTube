@@ -34,7 +34,7 @@ import com.voxtube.app.R
 import com.voxtube.app.widget.core.action.WidgetDeepLink
 import com.voxtube.app.widget.core.image.ShapeDecor
 import com.voxtube.app.widget.core.image.WidgetShape
-import com.voxtube.app.widget.core.theme.FlowGlanceTheme
+import com.voxtube.app.widget.core.theme.VoxTubeGlanceTheme
 import com.voxtube.app.widget.core.theme.WidgetDimens
 import com.voxtube.app.widget.core.theme.WidgetText
 import com.voxtube.app.widget.core.theme.widgetColorsFlow
@@ -50,7 +50,7 @@ class RecognizeWidget : GlanceAppWidget() {
         widgetCategory: Int,
     ) {
         val colors = widgetColorsFlow(context).first()
-        provideContent { FlowGlanceTheme(colors) { RecognizeContent() } }
+        provideContent { VoxTubeGlanceTheme(colors) { RecognizeContent() } }
     }
 
     override suspend fun provideGlance(
@@ -61,7 +61,7 @@ class RecognizeWidget : GlanceAppWidget() {
         val initialColors = colorsFlow.first()
         provideContent {
             val colors by colorsFlow.collectAsState(initialColors)
-            FlowGlanceTheme(colors) {
+            VoxTubeGlanceTheme(colors) {
                 RecognizeContent()
             }
         }

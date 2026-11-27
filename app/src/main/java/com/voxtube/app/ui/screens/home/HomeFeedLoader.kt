@@ -8,10 +8,10 @@ import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.local.SubscriptionRepository
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.ChannelMemoryRepository
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.NeighbourChannelsRepository
 import com.voxtube.app.data.recommendation.NeuroScoring
 import com.voxtube.app.data.recommendation.RankTrace
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.YouTubeRepository
 import com.voxtube.app.data.subscriptions.SubscriptionFeedRepository
 import com.voxtube.app.ui.screens.home.chips.HomeChipFeeds
@@ -81,7 +81,7 @@ internal class HomeFeedLoader(
                 }.getOrElse { emptyList() }
             if (cached.isEmpty()) return@launch
             // Cards the viewer already had on screen are old news; only the rest come back (#1447), unless offline.
-            val feedHistory = runCatching { FlowNeuroEngine.getBrainSnapshot().feedHistory }.getOrDefault(emptyMap())
+            val feedHistory = runCatching { VoxTubeNeuroEngine.getBrainSnapshot().feedHistory }.getOrDefault(emptyMap())
             val launchCards =
                 cachedCardsAtLaunch(
                     cached = cached.filterWatched(session.watchedVideoIds.value),
@@ -136,7 +136,7 @@ internal class HomeFeedLoader(
                     session.searchPages.reset()
                     // A refresh restarts the discovery tree at its roots (broad pass);
                     // load-more regenerations then dig deeper per cluster.
-                    session.discoveryQueries.addAll(FlowNeuroEngine.generateDiscoveryQueries(resetDepth = true))
+                    session.discoveryQueries.addAll(VoxTubeNeuroEngine.generateDiscoveryQueries(resetDepth = true))
                     session.currentQueryIndex = 0
 
                     val userSubs = session.subscriptionScope().boosted
@@ -173,7 +173,7 @@ internal class HomeFeedLoader(
                                         val seedInputs = feedSources.historySeedInputs()
                                         val longTermInputs = feedSources.longTermSeedInputs()
                                         val seedIds =
-                                            FlowNeuroEngine.selectRelatedSeeds(
+                                            VoxTubeNeuroEngine.selectRelatedSeeds(
                                                 seedInputs,
                                                 firstRound.relatedSeeds,
                                                 longTermInputs,
@@ -210,10 +210,10 @@ internal class HomeFeedLoader(
                                 }.associate { it.channelId to it.channelThumbnail }
                         }.getOrElse { emptyMap() }
 
-                    // Extract shorts from all sources for the shelf, ranked by FlowNeuro
+                    // Extract shorts from all sources for the shelf, ranked by VoxTubeNeuro
                     val now = System.currentTimeMillis()
-                    val brain = FlowNeuroEngine.getBrainSnapshot()
-                    val taste = feedTasteProfile(brain, FlowNeuroEngine.getPersona(brain))
+                    val brain = VoxTubeNeuroEngine.getBrainSnapshot()
+                    val taste = feedTasteProfile(brain, VoxTubeNeuroEngine.getPersona(brain))
 
                     val exclusions = session.feedExclusions()
                     // Subscriptions come from the store, which is local: the network top-up runs
@@ -234,7 +234,7 @@ internal class HomeFeedLoader(
                     if (feedShorts.isNotEmpty() && playerPreferences.effectiveHomeShortsShelfEnabled.first()) {
                         // A refresh replaces the shelf; appending kept the same reels at its front.
                         val ranked =
-                            FlowNeuroEngine
+                            VoxTubeNeuroEngine
                                 .rank(feedShorts, userSubs)
                                 .recentlyShownLast { NeuroScoring.isRecentlySeen(brain.feedHistory[it], now) }
                         rankedShorts = ranked
@@ -273,11 +273,11 @@ internal class HomeFeedLoader(
                             now = now,
                             freshSlotTarget = dynamicFreshSubSlots(userSubs.size),
                             subAvatarMap = subAvatarMap,
-                            rank = { pool -> FlowNeuroEngine.rank(pool, userSubs, trace = trace) },
+                            rank = { pool -> VoxTubeNeuroEngine.rank(pool, userSubs, trace = trace) },
                             rankRelevant = { pool ->
-                                FlowNeuroEngine.rank(pool, userSubs, NeuroScoring.LANE_RELEVANCE_FLOOR, trace)
+                                VoxTubeNeuroEngine.rank(pool, userSubs, NeuroScoring.LANE_RELEVANCE_FLOOR, trace)
                             },
-                            share = FlowNeuroEngine::shareByInterest,
+                            share = VoxTubeNeuroEngine::shareByInterest,
                             rawNeighbours = rawNeighbours,
                             searchOf = queriesById(discoveryPairs)::get,
                         )

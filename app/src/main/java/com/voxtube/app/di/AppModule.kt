@@ -17,7 +17,7 @@ import com.voxtube.app.BuildConfig
 import com.voxtube.app.data.images.DrawnSizeImageInterceptor
 import com.voxtube.app.data.localmedia.MediaRetrieverDecoderFactory
 import com.voxtube.app.data.localmedia.MediaStoreThumbnailFetcher
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.innertube.YouTube
 import com.voxtube.app.player.cache.PlayerCacheManager
 import dagger.Module
@@ -46,7 +46,7 @@ object AppModule {
     @Singleton
     fun provideFlowNeuroEngine(
         @ApplicationContext context: Context,
-    ): FlowNeuroEngine = FlowNeuroEngine.getInstance(context)
+    ): VoxTubeNeuroEngine = VoxTubeNeuroEngine.getInstance(context)
 
     @Provides
     @Singleton

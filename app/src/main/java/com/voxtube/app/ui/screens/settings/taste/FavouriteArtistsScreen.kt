@@ -15,10 +15,10 @@ import com.voxtube.app.R
 import com.voxtube.app.data.recommendation.music.FavouriteArtist
 import com.voxtube.app.ui.components.settings.SettingsListScope
 import com.voxtube.app.ui.components.settings.SettingsPage
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowSearchField
 import com.voxtube.app.ui.components.shared.MediaArtistToggleRow
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
 
 private val LoadingHeight = 160.dp
 
@@ -36,7 +36,7 @@ internal fun FavouriteArtistsScreen(
 
     SettingsPage(title = stringResource(R.string.favourite_artists_title), onBack = onBack, highlight = highlight) {
         item("artists.search") {
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = query,
                 onQueryChange = picker::onQueryChange,
                 placeholder = stringResource(R.string.favourite_artists_search),
@@ -50,12 +50,12 @@ internal fun FavouriteArtistsScreen(
         val candidates = state.candidates
         when {
             candidates == null -> {
-                item("artists.loading") { FlowLoadingIndicator(Modifier.fillMaxWidth().height(LoadingHeight)) }
+                item("artists.loading") { VoxTubeLoadingIndicator(Modifier.fillMaxWidth().height(LoadingHeight)) }
             }
 
             candidates.isEmpty() && state.searching -> {
                 item("artists.none") {
-                    FlowEmptyState(title = stringResource(R.string.favourite_artists_none), icon = Icons.Outlined.PersonSearch)
+                    VoxTubeEmptyState(title = stringResource(R.string.favourite_artists_none), icon = Icons.Outlined.PersonSearch)
                 }
             }
 

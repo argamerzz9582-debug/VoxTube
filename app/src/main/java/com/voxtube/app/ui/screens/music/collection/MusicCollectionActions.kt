@@ -16,7 +16,7 @@ import androidx.compose.material.icons.rounded.VideoLibrary
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowSelectionAction
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionAction
 
 /**
  * The header's ⋮ menu: add songs, edit or delete your own playlist, or add all of these to one of yours.
@@ -89,16 +89,16 @@ internal fun selectionActions(
     onAddTo: () -> Unit,
     onDownload: () -> Unit,
     onRemove: () -> Unit,
-): List<FlowSelectionAction> =
+): List<VoxTubeSelectionAction> =
     buildList {
-        add(FlowSelectionAction(Icons.Rounded.QueuePlayNext, stringResource(R.string.play_next), onClick = onPlayNext))
-        add(FlowSelectionAction(Icons.Rounded.AddToQueue, stringResource(R.string.add_to_queue), onClick = onAddToQueue))
-        add(FlowSelectionAction(Icons.AutoMirrored.Rounded.PlaylistAdd, stringResource(R.string.add_to_playlist), onClick = onAddTo))
-        add(FlowSelectionAction(Icons.Rounded.Download, stringResource(R.string.download), onClick = onDownload))
+        add(VoxTubeSelectionAction(Icons.Rounded.QueuePlayNext, stringResource(R.string.play_next), onClick = onPlayNext))
+        add(VoxTubeSelectionAction(Icons.Rounded.AddToQueue, stringResource(R.string.add_to_queue), onClick = onAddToQueue))
+        add(VoxTubeSelectionAction(Icons.AutoMirrored.Rounded.PlaylistAdd, stringResource(R.string.add_to_playlist), onClick = onAddTo))
+        add(VoxTubeSelectionAction(Icons.Rounded.Download, stringResource(R.string.download), onClick = onDownload))
         when (state.kind) {
             MusicCollectionKind.OWN -> {
                 add(
-                    FlowSelectionAction(
+                    VoxTubeSelectionAction(
                         Icons.Rounded.RemoveCircleOutline,
                         stringResource(R.string.remove),
                         onClick = onRemove,
@@ -107,7 +107,7 @@ internal fun selectionActions(
             }
 
             MusicCollectionKind.LIKED -> {
-                add(FlowSelectionAction(Icons.Rounded.HeartBroken, stringResource(R.string.unlike), onClick = onRemove))
+                add(VoxTubeSelectionAction(Icons.Rounded.HeartBroken, stringResource(R.string.unlike), onClick = onRemove))
             }
 
             else -> {

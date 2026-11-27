@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowLogo
+import com.voxtube.app.ui.components.shared.VoxTubeLogo
 
 private val CardPadding = 24.dp
 private val CardSpacing = 14.dp
@@ -98,7 +98,7 @@ internal fun ClassicCard(
         }
         HorizontalDivider(color = content.colors.ink.copy(alpha = DIVIDER_INK))
         CardLines(content, MaterialTheme.typography.headlineSmall, fill)
-        FlowMark(content.colors)
+        VoxTubeMark(content.colors)
     }
 }
 
@@ -122,7 +122,7 @@ internal fun PosterCard(
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(HeaderSpacing)) {
             CardArtwork(content.artwork, FooterArtworkSize, MaterialTheme.shapes.small)
             SongNames(content, Modifier.weight(1f), TextAlign.Start)
-            FlowLogo(modifier = Modifier.width(LogoWidth), shapeColor = content.colors.ink, glyphColor = content.colors.ground)
+            VoxTubeLogo(modifier = Modifier.width(LogoWidth), shapeColor = content.colors.ink, glyphColor = content.colors.ground)
         }
     }
 }
@@ -153,7 +153,7 @@ internal fun ShapeCard(
             CardArtwork(content.artwork, ShapeArtworkSize, MaterialShapes.Clover4Leaf.toShape())
             SongNames(content, Modifier.fillMaxWidth(), TextAlign.Center)
             CardLines(content, MaterialTheme.typography.headlineSmall, fill)
-            FlowMark(content.colors)
+            VoxTubeMark(content.colors)
         }
     }
 }
@@ -250,9 +250,9 @@ private fun SongNames(
 }
 
 @Composable
-private fun FlowMark(colors: LyricsCardColors) {
+private fun VoxTubeMark(colors: LyricsCardColors) {
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(LogoSpacing)) {
-        FlowLogo(modifier = Modifier.width(LogoWidth), shapeColor = colors.ink, glyphColor = colors.ground)
+        VoxTubeLogo(modifier = Modifier.width(LogoWidth), shapeColor = colors.ink, glyphColor = colors.ground)
         Text(
             text = stringResource(R.string.app_name),
             style = MaterialTheme.typography.titleSmall,

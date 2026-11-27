@@ -1,17 +1,17 @@
 package com.voxtube.app.ui.screens.crash
 
 import com.google.common.truth.Truth.assertThat
-import com.voxtube.app.utils.FlowCrashBreadcrumb
-import com.voxtube.app.utils.FlowCrashReportFormatter
-import com.voxtube.app.utils.FlowCrashReportSnapshot
+import com.voxtube.app.utils.VoxTubeCrashBreadcrumb
+import com.voxtube.app.utils.VoxTubeCrashReportFormatter
+import com.voxtube.app.utils.VoxTubeCrashReportSnapshot
 import org.junit.Test
 import java.net.URLDecoder
 import java.time.LocalDateTime
 
 class CrashSummaryTest {
     private val report =
-        FlowCrashReportFormatter.build(
-            FlowCrashReportSnapshot(
+        VoxTubeCrashReportFormatter.build(
+            VoxTubeCrashReportSnapshot(
                 timestampMs = 0,
                 threadName = "main",
                 threadId = 2,
@@ -83,8 +83,8 @@ class CrashSummaryTest {
     @Test
     fun `a wrapped cause names the title, as with a saved state too large to send (1338)`() {
         val wrapped =
-            FlowCrashReportFormatter.build(
-                FlowCrashReportSnapshot(
+            VoxTubeCrashReportFormatter.build(
+                VoxTubeCrashReportSnapshot(
                     timestampMs = 0,
                     threadName = "main",
                     threadId = 2,
@@ -112,8 +112,8 @@ class CrashSummaryTest {
     @Test
     fun `a crash Android wraps twice is named and logged by its innermost cause (1871)`() {
         val wrapped =
-            FlowCrashReportFormatter.build(
-                FlowCrashReportSnapshot(
+            VoxTubeCrashReportFormatter.build(
+                VoxTubeCrashReportSnapshot(
                     timestampMs = 0,
                     threadName = "main",
                     threadId = 2,
@@ -155,8 +155,8 @@ class CrashSummaryTest {
     fun `a long outer trace never pushes the cause out of the logs field`() {
         val outer = (1..40).joinToString("\n") { "\tat some.Outer.frame$it(Outer.kt:$it)" }
         val report =
-            FlowCrashReportFormatter.build(
-                FlowCrashReportSnapshot(
+            VoxTubeCrashReportFormatter.build(
+                VoxTubeCrashReportSnapshot(
                     timestampMs = 0,
                     threadName = "main",
                     threadId = 2,
@@ -177,8 +177,8 @@ class CrashSummaryTest {
     }
 
     private fun releaseCrash(stackTrace: String) =
-        FlowCrashReportFormatter.build(
-            FlowCrashReportSnapshot(
+        VoxTubeCrashReportFormatter.build(
+            VoxTubeCrashReportSnapshot(
                 timestampMs = 0,
                 threadName = "main",
                 threadId = 2,
@@ -261,8 +261,8 @@ class CrashSummaryTest {
     @Test
     fun `the link carries the thread, the heap and the last steps for a memory crash (2258)`() {
         val oom =
-            FlowCrashReportFormatter.build(
-                FlowCrashReportSnapshot(
+            VoxTubeCrashReportFormatter.build(
+                VoxTubeCrashReportSnapshot(
                     timestampMs = 0,
                     threadName = "arch_disk_io_2",
                     threadId = 40,
@@ -273,7 +273,7 @@ class CrashSummaryTest {
                             "\tat androidx.room.util.DBUtil.performBlocking(DBUtil.kt:30)",
                     deviceInfo = "  App Version: 3.0.5 (20)",
                     memoryInfo = "  Used heap: 255 MB\n  Max heap: 256 MB",
-                    breadcrumbs = (1..7).map { FlowCrashBreadcrumb(it * 1_000L, "download", "step $it", heapMb = 200L + it) },
+                    breadcrumbs = (1..7).map { VoxTubeCrashBreadcrumb(it * 1_000L, "download", "step $it", heapMb = 200L + it) },
                 ),
             )
 

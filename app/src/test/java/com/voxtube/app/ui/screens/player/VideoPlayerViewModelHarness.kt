@@ -16,7 +16,7 @@ import com.voxtube.app.data.local.entity.WatchHistoryEntity
 import com.voxtube.app.data.localmedia.LocalSubtitles
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.music.model.MusicTrack
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.LiveChatRepository
 import com.voxtube.app.data.repository.SponsorBlockRepository
 import com.voxtube.app.data.repository.YouTubeRepository
@@ -143,9 +143,9 @@ internal class VideoPlayerViewModelHarness(
         mockkObject(PlayerDiagnostics)
         every { PlayerDiagnostics.logWarning(any(), any()) } just Runs
 
-        mockkObject(FlowNeuroEngine.Companion)
-        coEvery { FlowNeuroEngine.onVideoInteraction(any<Context>(), any(), any(), any()) } just Runs
-        every { FlowNeuroEngine.onVideoInteractionAsync(any(), any(), any(), any()) } just Runs
+        mockkObject(VoxTubeNeuroEngine.Companion)
+        coEvery { VoxTubeNeuroEngine.onVideoInteraction(any<Context>(), any(), any(), any()) } just Runs
+        every { VoxTubeNeuroEngine.onVideoInteractionAsync(any(), any(), any(), any()) } just Runs
 
         every { context.applicationContext } returns context
         every { context.getString(any()) } answers { "res:${firstArg<Int>()}" }

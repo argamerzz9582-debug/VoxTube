@@ -67,7 +67,7 @@ internal fun DownloadSheetFrame(
 ) {
     if (slot == null) {
         QuickActionsSheet(onDismiss = onDismiss, expandFully = true) { sheet ->
-            FlowSheetHeader(title = title, onClose = sheet::close, showDragHandle = false, dividerAlpha = null)
+            VoxTubeSheetHeader(title = title, onClose = sheet::close, showDragHandle = false, dividerAlpha = null)
             content(sheet)
             footer(sheet)
         }
@@ -87,7 +87,7 @@ internal fun DownloadSheetFrame(
                 onDismiss = { latestOnDismiss() },
             )
         }
-    FlowBottomSheet(
+    VoxTubeBottomSheet(
         onDismiss = { handOff?.invoke() ?: latestOnDismiss() },
         modifier = if (slot.asSidePanel) Modifier.fillMaxSize() else Modifier,
         state = sheetState,
@@ -99,7 +99,7 @@ internal fun DownloadSheetFrame(
         containerColor = MaterialTheme.colorScheme.surface,
         onProgressChange = slot.onProgressChange,
         header = { dragModifier ->
-            FlowSheetHeader(
+            VoxTubeSheetHeader(
                 inSidePane = slot.asSidePanel,
                 title = title,
                 onClose = controller::close,

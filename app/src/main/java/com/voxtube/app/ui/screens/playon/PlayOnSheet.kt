@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.sync2.live.ConsentAnswer
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsSheet
 
 private val SheetPadding = 16.dp
@@ -128,7 +128,7 @@ internal fun PlayOnContent(
     val failed by viewModel.failed.collectAsStateWithLifecycle()
     // Reads the players while the sheet shows, on each change rather than on a timer.
     LaunchedEffect(viewModel) { viewModel.watch() }
-    FlowSheetHeader(
+    VoxTubeSheetHeader(
         title = stringResource(R.string.play_on_title),
         onClose = null,
         showDragHandle = false,

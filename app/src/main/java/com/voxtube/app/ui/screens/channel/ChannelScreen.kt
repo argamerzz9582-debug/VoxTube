@@ -91,16 +91,16 @@ import com.voxtube.app.data.model.Video
 import com.voxtube.app.innertube.pages.channel.ChannelHeader
 import com.voxtube.app.innertube.pages.channel.ChannelTabKind
 import com.voxtube.app.ui.components.channel.ChannelBanner
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
 import com.voxtube.app.ui.components.shared.ChannelOrganizeTarget
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowGoneState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowSubscribeButton
 import com.voxtube.app.ui.components.shared.FullSizeImageDialog
 import com.voxtube.app.ui.components.shared.MediaPostCommentsSheet
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeGoneState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
 import com.voxtube.app.ui.components.shared.rememberPostShareAction
 import com.voxtube.app.ui.theme.extendedColors
@@ -171,7 +171,7 @@ fun ChannelScreen(
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background),
         ) {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = {
                     androidx.compose.animation.AnimatedVisibility(
                         visible = showCollapsedChannelTitle && collapsedChannelTitle.isNotBlank(),
@@ -222,11 +222,11 @@ fun ChannelScreen(
             Box(modifier = Modifier.fillMaxSize()) {
                 when {
                     uiState.isLoading -> {
-                        FlowLoadingIndicator()
+                        VoxTubeLoadingIndicator()
                     }
 
                     uiState.isGone -> {
-                        FlowGoneState(
+                        VoxTubeGoneState(
                             message = uiState.error.orEmpty(),
                             icon = Icons.Outlined.PersonOff,
                             onBack = onBackClick,
@@ -235,7 +235,7 @@ fun ChannelScreen(
                     }
 
                     uiState.error != null -> {
-                        FlowErrorState(
+                        VoxTubeErrorState(
                             error = uiState.error ?: stringResource(R.string.failed_to_load_channel),
                             onRetry = { viewModel.loadChannel(channelUrl) },
                             modifier = Modifier.align(Alignment.Center),

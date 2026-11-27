@@ -3,8 +3,8 @@ package com.voxtube.app.ui.screens.home
 import android.util.Log
 import com.voxtube.app.data.local.HomeFeedCacheRepository
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.NeuroScoring
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.utils.PerformanceDispatcher
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -78,10 +78,10 @@ internal class HomeWave2Discovery(
                         if (wave2Valid.isEmpty()) return@wave2
 
                         val wave2Ranked =
-                            FlowNeuroEngine
+                            VoxTubeNeuroEngine
                                 .shareByInterest(
                                     demoteByFit(
-                                        FlowNeuroEngine.rank(
+                                        VoxTubeNeuroEngine.rank(
                                             wave2Valid,
                                             userSubs,
                                             NeuroScoring.LANE_RELEVANCE_FLOOR,
@@ -135,12 +135,12 @@ internal class HomeWave2Discovery(
 internal suspend fun reportQueryNovelty(pairs: List<Pair<String, List<Video>>>) {
     if (pairs.isEmpty()) return
     runCatching {
-        val recentlyShown = FlowNeuroEngine.getRecentlyShownVideoIds(48L)
+        val recentlyShown = VoxTubeNeuroEngine.getRecentlyShownVideoIds(48L)
         if (recentlyShown.isEmpty()) return
         pairs.forEach { (query, queryResults) ->
             if (queryResults.size >= 5) {
                 val novel = queryResults.count { it.id !in recentlyShown }
-                FlowNeuroEngine.reportQueryResultNovelty(
+                VoxTubeNeuroEngine.reportQueryResultNovelty(
                     query,
                     novel.toDouble() / queryResults.size,
                 )

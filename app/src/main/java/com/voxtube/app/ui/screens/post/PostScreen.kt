@@ -19,11 +19,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.shared.MediaPostCard
 import com.voxtube.app.ui.components.shared.MediaPostCommentsSheet
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.rememberPostShareAction
 
 private val PostMaxWidth = 760.dp
@@ -41,17 +41,17 @@ internal fun PostScreen(
     LaunchedEffect(Unit) { viewModel.load() }
 
     Scaffold(
-        topBar = { FlowTopBar(title = stringResource(R.string.post_title), onBack = onBack) },
+        topBar = { VoxTubeTopBar(title = stringResource(R.string.post_title), onBack = onBack) },
         containerColor = MaterialTheme.colorScheme.background,
     ) { padding ->
         Box(Modifier.fillMaxSize().padding(padding)) {
             when (val current = state) {
                 PostUiState.Loading -> {
-                    FlowLoadingIndicator()
+                    VoxTubeLoadingIndicator()
                 }
 
                 PostUiState.Failed -> {
-                    FlowErrorState(error = stringResource(R.string.post_load_failed), onRetry = viewModel::load)
+                    VoxTubeErrorState(error = stringResource(R.string.post_load_failed), onRetry = viewModel::load)
                 }
 
                 is PostUiState.Loaded -> {

@@ -389,7 +389,7 @@
     <string name="settings_reset_everything">Đặt lại mọi thứ</string>
     <string name="settings_analyzing_interactions">Đang phân tích tương tác…</string>
     <string name="settings_view_analytics">Xem phân tích</string>
-    <string name="deep_flow_mode_title">Chế độ Deep Flow</string>
+    <string name="deep_flow_mode_title">Chế độ Deep Focus</string>
     <string name="deep_flow_mode_subtitle">Tạm dừng học hỏi khi bạn duyệt nội dung</string>
     <string name="deep_flow_learning_paused">TẠM DỪNG HỌC HỎI</string>
     <string name="deep_flow_expires_in">Hết hạn sau %s</string>
@@ -399,10 +399,10 @@
     <string name="deep_flow_save_history_subtitle">Lưu lịch sử xem mà không dạy gợi ý</string>
     <string name="deep_flow_dialog_title">Thời gian tạm dừng</string>
     <string name="deep_flow_dialog_body">Tạm dừng học trong bao lâu?</string>
-    <string name="deep_flow_enabled_message">Đã bật Deep Flow</string>
-    <string name="deep_flow_disabled_message">Đã tắt Deep Flow</string>
-    <string name="deep_flow_expired_message">Đã hết thời gian Deep Flow</string>
-    <string name="deep_flow_active_until_disabled">Deep Flow vẫn bật cho đến khi bạn tắt</string>
+    <string name="deep_flow_enabled_message">Đã bật Deep Focus</string>
+    <string name="deep_flow_disabled_message">Đã tắt Deep Focus</string>
+    <string name="deep_flow_expired_message">Đã hết thời gian Deep Focus</string>
+    <string name="deep_flow_active_until_disabled">Deep Focus vẫn bật cho đến khi bạn tắt</string>
     <string name="deep_flow_duration_never">Không bao giờ</string>
     <string name="deep_flow_duration_1h">1 giờ</string>
     <string name="deep_flow_duration_2h">2 giờ</string>
@@ -476,9 +476,6 @@
     <string name="settings_item_import_data">Nhập dữ liệu</string>
     <string name="settings_item_import_data_subtitle">Phục hồi từ bản sao lưu hoặc nhập từ ứng dụng khác</string>
     <string name="settings_item_about_flow">Giới thiệu VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">Phiên bản, giấy phép, người đóng góp</string>
-    <string name="settings_item_support">Hỗ trợ &amp; Quyên góp</string>
-    <string name="settings_item_support_subtitle">Giúp phát triển VoxTube</string>
     <string name="settings_region_dialog_title">Chọn khu vực</string>
     <string name="settings_language_dialog_title">Chọn ngôn ngữ ứng dụng</string>
     <string name="settings_language_system_default">Mặc định hệ thống</string>
@@ -554,7 +551,6 @@
     <string name="app_icon_picker_subtitle">Chọn kiểu biểu tượng khởi chạy. Thay đổi có hiệu lực ngay và màn hình chính sẽ tải lại trong giây lát.</string>
     <string name="app_icon_picker_warning">Việc đổi biểu tượng có thể tạm thời gỡ VoxTube khỏi màn hình chính. Nếu cần, hãy thêm lại từ ngăn kéo ứng dụng.</string>
     <string name="app_icon_apply_toast">Đã cập nhật biểu tượng – màn hình chính sẽ tải lại</string>
-    <string name="icon_name_flow_red">VoxTube Đỏ</string>
     <string name="icon_name_flow_light">VoxTube Sáng</string>
     <string name="icon_name_flow_play">VoxTube Phát</string>
     <string name="icon_name_amoled">AMOLED Tối</string>
@@ -1189,25 +1185,8 @@
     <string name="location_badge_recommended">Được đề xuất</string>
     <string name="location_badge_active">Đang dùng</string>
     <string name="select_threads_count_desc">Chọn số luồng (1-8):</string>
-    <string name="support_donations_title">Hỗ trợ &amp; Quyên góp</string>
-    <string name="support_flow_dev_title">Hỗ trợ phát triển Flow</string>
-    <string name="support_flow_dev_desc">Nếu Flow hữu ích với bạn, bạn có thể ủng hộ trên Open Collective, Patreon hoặc bằng tiền mã hóa bên dưới. Cảm ơn bạn!</string>
-    <string name="support_flow_patreon">Hỗ trợ Flow trên Patreon</string>
     <string name="thank_you_support_message">Cảm ơn bạn đã ủng hộ! ❤️</string>
     <string name="address_copied_toast">Đã sao chép địa chỉ</string>
-    <string name="donation_address_clip_label">Địa chỉ quyên góp</string>
-    <string name="donation_prompt_title">Bạn thích Flow?</string>
-    <string name="donation_prompt_message">Flow miễn phí, mã nguồn mở và không quảng cáo. Nếu Flow xứng đáng có một chỗ trên điện thoại của bạn, một chút hỗ trợ sẽ giúp dự án tiếp tục.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Hỗ trợ phát triển</string>
-    <string name="donation_prompt_later">Để sau</string>
-    <string name="donation_prompt_never">Không hiện lại</string>
-    <string name="about_creator">Tác giả</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website">Trang web</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="github_subtitle">Mã nguồn &amp; báo lỗi</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Thư viện trích xuất cốt lõi</string>
@@ -1236,7 +1215,6 @@
     <string name="section_legal">Pháp lý</string>
     <string name="section_device">Thiết bị</string>
     <string name="donate_item_title">Quyên góp</string>
-    <string name="support_dev_subtitle">Hỗ trợ phát triển</string>
     <string name="btn_ok">OK</string>
     <string name="btn_copy">Sao chép</string>
     <string name="github_label">GitHub</string>
@@ -2262,7 +2240,6 @@
     <string name="settings_search_no_results">Không tìm thấy cài đặt cho “%1$s”</string>
     <string name="settings_lyrics_provider_order_description">Thử từ trên xuống dưới. Kéo để sắp xếp lại.</string>
     <string name="import_running_background">Bạn có thể rời khỏi trang — quá trình nhập vẫn tiếp tục trong nền.</string>
-    <string name="donations_cryptocurrency">TIỀN MÃ HÓA</string>
     <string name="import_no_history_entries">Không tìm thấy lịch sử xem nào trong tệp</string>
     <string name="import_no_videos">Không tìm thấy video nào trong tệp danh sách phát</string>
     <string name="import_no_content">Không tìm thấy nội dung nào có thể nhập trong bản sao lưu này</string>
@@ -2584,12 +2561,12 @@
         <item quantity="other">Thao tác này xóa %d thông báo. Không thể hoàn tác.</item>
     </plurals>
     <string name="notifications_clear_confirm">Xóa tất cả</string>
-    <string name="deep_flow_scrobble_title">Ghi nhận lượt nghe trong Deep Flow</string>
-    <string name="taste_learning_paused">Deep Flow đang bật, đã tạm dừng học hỏi</string>
+    <string name="deep_flow_scrobble_title">Ghi nhận lượt nghe trong Deep Focus</string>
+    <string name="taste_learning_paused">Deep Focus đang bật, đã tạm dừng học hỏi</string>
     <string name="deep_flow_scrobble_subtitle">Tiếp tục gửi lượt nghe đến Last.fm, Libre.fm và ListenBrainz</string>
     <string name="deep_flow_on_search_title">Hiện trên tìm kiếm</string>
-    <string name="deep_flow_on_search_subtitle">Công tắc Deep Flow phía trên tìm kiếm gần đây</string>
-    <string name="deep_flow_long_press_hint">Nhấn giữ logo hoặc tên VoxTube trên Trang chủ để bật/tắt Deep Flow</string>
+    <string name="deep_flow_on_search_subtitle">Công tắc Deep Focus phía trên tìm kiếm gần đây</string>
+    <string name="deep_flow_long_press_hint">Nhấn giữ logo hoặc tên VoxTube trên Trang chủ để bật/tắt Deep Focus</string>
     <plurals name="deep_flow_duration_hours">
         <item quantity="other">%1$d giờ</item>
     </plurals>
@@ -2691,7 +2668,7 @@
     <string name="content_settings_home_subscriptions_subtitle">Trộn video từ các kênh bạn theo dõi vào Trang chủ</string>
     <string name="settings_section_watch_history">Lịch sử xem</string>
     <string name="pause_watch_history_title">Tạm dừng lịch sử xem</string>
-    <string name="pause_watch_history_subtitle">Ngừng lưu nội dung bạn xem. Deep Flow cũng tạm dừng học hỏi</string>
+    <string name="pause_watch_history_subtitle">Ngừng lưu nội dung bạn xem. Deep Focus cũng tạm dừng học hỏi</string>
     <string name="content_settings_channel_shorts_tab_title">Tab Shorts trên kênh</string>
     <string name="content_settings_channel_shorts_tab_subtitle">Giữ tab Shorts của kênh khi Shorts bị ẩn</string>
     <string name="content_settings_hide_watched_shorts_title">Ẩn Shorts đã xem</string>
@@ -2876,7 +2853,6 @@
     <plurals name="threads_count_label">
         <item quantity="other">%1$d luồng</item>
     </plurals>
-    <string name="support_flow_open_collective">Hỗ trợ Flow trên Open Collective</string>
     <string name="about_notices">Thông báo mã nguồn mở</string>
     <string name="about_notices_summary">Danh sách từ và mã từ các dự án khác</string>
     <string name="playlist_downloading_template">Đang tải xuống: %1$s</string>
@@ -4018,7 +3994,6 @@
     <string name="settings_changelog_all_releases">Tất cả bản phát hành trên GitHub</string>
     <string name="settings_changelog_expand">Hiện thay đổi</string>
     <string name="settings_changelog_collapse">Ẩn thay đổi</string>
-    <string name="settings_creator_role">Người tạo và phát triển Flow</string>
     <string name="device_info_section_device">Thiết bị</string>
     <string name="device_info_section_system">Hệ thống</string>
     <string name="device_info_section_display">Màn hình</string>
@@ -4069,7 +4044,6 @@
     <string name="settings_custom_theme_start_from">Bắt đầu từ</string>
     <string name="settings_custom_theme_count">%1$d trên %2$d giao diện</string>
     <string name="settings_custom_theme_empty">Chưa có giao diện tùy chỉnh</string>
-    <string name="settings_custom_theme_empty_body">Bắt đầu từ bất kỳ bảng màu nào, hoặc nhập giao diện được tạo trong Flow Desktop.</string>
     <string name="settings_custom_theme_import_failed">Tệp đó không có giao diện hợp lệ</string>
     <string name="settings_custom_theme_limit">Bạn có thể lưu tối đa %1$d giao diện</string>
     <string name="settings_custom_theme_exported">Đã xuất giao diện</string>

@@ -7,7 +7,6 @@
 
 package com.voxtube.app.data.recommendation.eval
 
-import com.voxtube.app.data.recommendation.FlowPersona
 import com.voxtube.app.data.recommendation.NeuroClusters
 import com.voxtube.app.data.recommendation.NeuroDiscovery
 import com.voxtube.app.data.recommendation.NeuroMaintenance
@@ -16,6 +15,7 @@ import com.voxtube.app.data.recommendation.NeuroStorage
 import com.voxtube.app.data.recommendation.NeuroTokenizer
 import com.voxtube.app.data.recommendation.NeuroTopicCatalog
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubePersona
 import com.voxtube.app.data.recommendation.toUserBrain
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
@@ -104,7 +104,7 @@ internal object BrainDiagnostic {
         val brain = NeuroMaintenance.runIfNeeded(rawBrain, tokenizer)
         val discovery = NeuroDiscovery(NeuroTopicCatalog.TOPIC_CATEGORIES, tokenizer)
         val persona =
-            FlowPersona.entries.find { it.name == brain.lastPersona } ?: FlowPersona.EXPLORER
+            VoxTubePersona.entries.find { it.name == brain.lastPersona } ?: VoxTubePersona.EXPLORER
 
         // ── Clusters, exactly as production builds them ──
         val clusters =

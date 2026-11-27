@@ -19,9 +19,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.innertube.pages.renderer.CommunityPost
-import com.voxtube.app.ui.components.shared.FlowFeedProgress
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
 import com.voxtube.app.ui.components.shared.MediaPostCard
+import com.voxtube.app.ui.components.shared.VoxTubeFeedProgress
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.screens.channel.ChannelRequestErrorState
 
 @Composable
@@ -48,7 +48,7 @@ internal fun ChannelCommunityPosts(
         when {
             isLoading && posts.isEmpty() -> {
                 item(key = "posts_loading") {
-                    FlowLoadingIndicator(modifier = Modifier.fillParentMaxSize())
+                    VoxTubeLoadingIndicator(modifier = Modifier.fillParentMaxSize())
                 }
             }
 
@@ -103,7 +103,7 @@ internal fun ChannelCommunityPosts(
                     item(key = "posts_load_more") {
                         LaunchedEffect(posts.size) { onLoadMore() }
                         if (isLoadingMore) {
-                            FlowFeedProgress()
+                            VoxTubeFeedProgress()
                         } else {
                             Spacer(Modifier.height(16.dp))
                         }

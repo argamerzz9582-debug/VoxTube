@@ -35,11 +35,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.local.DEFAULT_NAV_TAB_ORDER
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.components.layout.navigation.icon
-import com.voxtube.app.ui.components.shared.FlowReorderButtons
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
 import com.voxtube.app.ui.components.shared.ReorderHandle
+import com.voxtube.app.ui.components.shared.VoxTubeReorderButtons
 import sh.calvin.reorderable.ReorderableColumn
 
 private val SectionPadding = 16.dp
@@ -52,14 +52,14 @@ private val RowIconSpacing = 12.dp
 @Composable
 internal fun NavTabOrderList(
     order: List<Int>,
-    enabledTabs: Set<FlowTab>,
-    defaultTab: FlowTab,
+    enabledTabs: Set<VoxTubeTab>,
+    defaultTab: VoxTubeTab,
     onOrderChanged: (List<Int>) -> Unit,
-    onDefaultSelected: (FlowTab) -> Unit,
+    onDefaultSelected: (VoxTubeTab) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val haptic = LocalHapticFeedback.current
-    val persistedTabs = remember(order) { (order + DEFAULT_NAV_TAB_ORDER).distinct().mapNotNull(FlowTab::fromId) }
+    val persistedTabs = remember(order) { (order + DEFAULT_NAV_TAB_ORDER).distinct().mapNotNull(VoxTubeTab::fromId) }
     // Held locally so a drop shows its result at once instead of snapping back until DataStore emits.
     var tabs by remember(persistedTabs) { mutableStateOf(persistedTabs) }
 
@@ -70,7 +70,7 @@ internal fun NavTabOrderList(
         if (from == to || to !in tabs.indices) return false
         val updated = tabs.toMutableList().apply { add(to, removeAt(from)) }
         tabs = updated
-        onOrderChanged(updated.map(FlowTab::id))
+        onOrderChanged(updated.map(VoxTubeTab::id))
         return true
     }
 
@@ -122,7 +122,7 @@ internal fun NavTabOrderList(
                                 modifier = Modifier.weight(1f),
                             )
                             if (LocalDpadNavigation.current) {
-                                FlowReorderButtons(
+                                VoxTubeReorderButtons(
                                     onMoveUp = if (index > 0) ({ move(index, index - 1) }) else null,
                                     onMoveDown = if (index < tabs.lastIndex) ({ move(index, index + 1) }) else null,
                                 )

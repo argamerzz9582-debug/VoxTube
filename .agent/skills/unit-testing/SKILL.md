@@ -1,11 +1,11 @@
 ---
 name: unit-testing
-description: Guidelines, patterns, and best practices for writing Kotlin unit tests for ViewModels, Repositories, and Utilities in the Flow Android project.
+description: Guidelines, patterns, and best practices for writing Kotlin unit tests for ViewModels, Repositories, and Utilities in the VoxTube Android project.
 ---
 
-# Kotlin Unit Testing Guidelines & Best Practices for Flow
+# Kotlin Unit Testing Guidelines & Best Practices for VoxTube
 
-This skill outlines the standards and conventions for writing unit tests in the Flow codebase (`com.voxtube.app`).
+This skill outlines the standards and conventions for writing unit tests in the VoxTube codebase (`com.voxtube.app`).
 
 ## 1. Naming Conventions
 

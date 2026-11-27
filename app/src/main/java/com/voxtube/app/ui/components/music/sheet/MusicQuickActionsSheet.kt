@@ -36,7 +36,7 @@ import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
 import com.voxtube.app.ui.components.shared.ArtworkThumbnail
 import com.voxtube.app.ui.components.shared.ChannelAvatarStack
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.quickactions.MediaDetailsPage
 import com.voxtube.app.ui.components.shared.quickactions.MediaDetailsSubject
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionRow
@@ -164,7 +164,7 @@ fun MusicQuickActionsSheet(
                     rows =
                         listOf(
                             QuickActionRow("details") { shape ->
-                                FlowNavRow(
+                                VoxTubeNavRow(
                                     title = stringResource(R.string.details_metadata),
                                     leadingIcon = Icons.Outlined.Info,
                                     onClick = { page = SongMenuPage.Details },
@@ -345,7 +345,7 @@ private fun goToRows(
             val several = artists.size > 1
             add(
                 QuickActionRow("artist") { shape ->
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = if (several) artists.joinToString { it.name } else artists.first().name.ifBlank { track.artist },
                         onClick = {
                             if (several) {

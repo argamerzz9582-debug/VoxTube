@@ -38,10 +38,10 @@ import com.voxtube.app.ui.components.search.SearchResultActions
 import com.voxtube.app.ui.components.search.SearchResults
 import com.voxtube.app.ui.components.search.SearchShortsGrid
 import com.voxtube.app.ui.components.shared.FeedGridSkeleton
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
 import com.voxtube.app.ui.components.shared.RetryWhenBackOnline
 import com.voxtube.app.ui.components.shared.SubscriptionBellViewModel
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsViewModel
 import com.voxtube.app.ui.components.shared.sharedSubscriptionBellViewModel
 import com.voxtube.app.utils.LoadErrorKind
@@ -163,14 +163,14 @@ internal fun ColumnScope.SearchResultsBody(
             }
 
             refreshState is LoadState.Error && pagingItems.itemCount == 0 -> {
-                FlowErrorState(
+                VoxTubeErrorState(
                     error = stringResource(LoadErrorKind.of(refreshState.error).messageRes(R.string.search_failed)),
                     onRetry = pagingItems::retry,
                 )
             }
 
             pagingItems.itemCount == 0 -> {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(filters.emptyResultsRes()),
                     icon = Icons.Rounded.Search,
                 )

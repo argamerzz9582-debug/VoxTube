@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 /** The system font (Roboto on most devices); the app font when the user has not picked another. */
-val FlowFontFamily: FontFamily = FontFamily.Default
+val VoxTubeFontFamily: FontFamily = FontFamily.Default
 
 /** Material's own scale, for the roles Flow keeps at their Material size. */
 private val MaterialScale = Typography()
@@ -154,4 +154,4 @@ fun flowTypography(family: FontFamily): Typography {
 }
 
 /** The type scale in the system font, for surfaces that cannot take the user's font (widgets). */
-val Typography: Typography = flowTypography(FlowFontFamily)
+val Typography: Typography = flowTypography(VoxTubeFontFamily)

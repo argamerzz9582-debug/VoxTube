@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Channel
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 
 private val ContentHorizontalPadding = 16.dp
 private val SelectorVerticalPadding = 8.dp
@@ -116,15 +116,15 @@ internal fun SubscriptionsManageContent(
     )
 
     Column(modifier = modifier.fillMaxSize()) {
-        FlowConnectedToggleGroup(
+        VoxTubeConnectedToggleGroup(
             options =
                 listOf(
-                    FlowToggleOption(
+                    VoxTubeToggleOption(
                         value = 0,
                         label = stringResource(R.string.video),
                         icon = Icons.Default.OndemandVideo,
                     ),
-                    FlowToggleOption(
+                    VoxTubeToggleOption(
                         value = 1,
                         label = stringResource(R.string.subscriptions_music_chip_label),
                         icon = Icons.Default.MusicNote,

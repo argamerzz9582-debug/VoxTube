@@ -12,7 +12,7 @@ import com.voxtube.app.data.local.AppFontPreferences
 import com.voxtube.app.data.local.LocalDataManager
 import com.voxtube.app.ui.screens.widgets.PlaylistConfigScreen
 import com.voxtube.app.ui.screens.widgets.QuickActionsConfigScreen
-import com.voxtube.app.ui.startup.FlowTheme
+import com.voxtube.app.ui.startup.VoxTubeTheme
 import com.voxtube.app.ui.startup.themeSettings
 import com.voxtube.app.widget.playlist.PlaylistWidgetReceiver
 import com.voxtube.app.widget.quickactions.QuickActionsWidgetReceiver
@@ -50,7 +50,7 @@ class WidgetConfigActivity : ComponentActivity() {
         val theme = LocalDataManager(applicationContext).themeSettings(appFontPreferences)
         setContent {
             val settings = theme.collectAsState(initial = null).value ?: return@setContent
-            FlowTheme(settings) {
+            VoxTubeTheme(settings) {
                 when (provider) {
                     QuickActionsWidgetReceiver::class.java.name -> QuickActionsConfigScreen(glanceId, onDone = ::done)
                     PlaylistWidgetReceiver::class.java.name -> PlaylistConfigScreen(glanceId, onDone = ::done)

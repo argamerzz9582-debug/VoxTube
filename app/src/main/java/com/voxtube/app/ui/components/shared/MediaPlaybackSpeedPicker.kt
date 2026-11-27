@@ -45,9 +45,9 @@ fun MediaPlaybackSpeedPicker(
         remember(customSpeedsEnabled, customSpeedPresetsRaw) {
             playbackSpeedOptions(customSpeedsEnabled, customSpeedPresetsRaw)
         }
-    FlowRowGroup(modifier = modifier.fillMaxWidth()) {
+    VoxTubeRowGroup(modifier = modifier.fillMaxWidth()) {
         speeds.forEachIndexed { index, speed ->
-            FlowSelectionRow(
+            VoxTubeSelectionRow(
                 title = playbackSpeedLabel(speed),
                 selected = speed == currentSpeed,
                 shape = flowRowGroupShape(index, speeds.size),

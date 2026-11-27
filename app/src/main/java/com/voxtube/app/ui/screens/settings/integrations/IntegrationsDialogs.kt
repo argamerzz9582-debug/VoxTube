@@ -42,10 +42,10 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.local.SponsorBlockSkipButtonStyle
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowColorPickerDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeColorPickerDialog
 import com.voxtube.app.ui.theme.SponsorBlockSegmentPresets
 import com.voxtube.app.ui.theme.defaultSponsorBlockColor
 import com.voxtube.app.utils.sponsorCategoryLabelRes
@@ -80,11 +80,11 @@ internal fun IntegrationsDialogs(
 ) {
     when (dialog) {
         IntegrationsDialog.SKIP_BUTTON_STYLE -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.sb_skip_style_title),
                 options =
                     SponsorBlockSkipButtonStyle.entries.map {
-                        FlowChoice(it, stringResource(skipButtonStyleLabel(it)), stringResource(skipButtonStyleDetail(it)))
+                        VoxTubeChoice(it, stringResource(skipButtonStyleLabel(it)), stringResource(skipButtonStyleDetail(it)))
                     },
                 selected = skipButtonStyle,
                 onSelect = viewModel::setSkipButtonStyle,
@@ -94,7 +94,7 @@ internal fun IntegrationsDialogs(
 
         IntegrationsDialog.USER_ID -> {
             var input by rememberSaveable { mutableStateOf(userId.orEmpty()) }
-            FlowAlertDialog(
+            VoxTubeAlertDialog(
                 onDismissRequest = onDismiss,
                 title = { Text(stringResource(R.string.sb_user_id_dialog_title)) },
                 text = {
@@ -119,7 +119,7 @@ internal fun IntegrationsDialogs(
         }
 
         IntegrationsDialog.DISCORD_RISK -> {
-            FlowAlertDialog(
+            VoxTubeAlertDialog(
                 onDismissRequest = onDismiss,
                 title = { Text(stringResource(R.string.discord_presence_risk_dialog_title)) },
                 text = { Text(stringResource(R.string.discord_presence_risk_dialog_body)) },
@@ -164,7 +164,7 @@ internal fun SegmentColourDialog(
     var pickingCustom by rememberSaveable { mutableStateOf(false) }
     if (pickingCustom) {
         val shown = current?.let(::Color) ?: defaultSponsorBlockColor(category)
-        FlowColorPickerDialog(
+        VoxTubeColorPickerDialog(
             title = label,
             initialArgb = shown.toArgb().toLong() and ARGB_MASK,
             allowAlpha = false,
@@ -177,7 +177,7 @@ internal fun SegmentColourDialog(
         return
     }
     val customColour = current?.takeIf { argb -> SponsorBlockSegmentPresets.none { it.toArgb() == argb } }
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.sb_color_picker_title)) },
         text = {

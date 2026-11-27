@@ -2,7 +2,7 @@ package com.voxtube.app.di
 
 import com.voxtube.app.data.localmedia.LocalMediaIds
 import com.voxtube.app.data.localmedia.LocalSubtitles
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.video.OfflineSubtitleStore
 import com.voxtube.app.data.video.VideoDownloadManager
 import com.voxtube.app.player.EnhancedPlayerManager
@@ -41,7 +41,7 @@ object PlayerManagerModule {
     @Provides
     fun provideEnhancedPlayerManager(
         videoDownloadManager: VideoDownloadManager,
-        neuroEngine: Lazy<FlowNeuroEngine>,
+        neuroEngine: Lazy<VoxTubeNeuroEngine>,
         localSubtitles: Lazy<LocalSubtitles>,
         offlineSubtitleStore: Lazy<OfflineSubtitleStore>,
         watchedSuggestions: Lazy<WatchedSuggestions>,

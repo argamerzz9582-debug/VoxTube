@@ -9,12 +9,12 @@ package com.voxtube.app.data.recommendation.eval
 
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.FeedExclusions
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.GraphSeedInput
 import com.voxtube.app.data.recommendation.GraphSeedSelector
 import com.voxtube.app.data.recommendation.GraphSeedSource
 import com.voxtube.app.data.recommendation.NeuroScoring
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.recommendation.eval.NeuroLearningBenchmark.Family
 import com.voxtube.app.ui.screens.home.DURATION_COMFORT_DEFAULT_SEC
 import com.voxtube.app.ui.screens.home.FeedTasteProfile
@@ -138,7 +138,7 @@ internal object HomeLaneBenchmark {
         return (guitar + comedy).sortedByDescending { it.timestamp }
     }
 
-    private suspend fun FlowNeuroEngine.watchHistory() =
+    private suspend fun VoxTubeNeuroEngine.watchHistory() =
         with(NeuroLearningBenchmark) {
             for (i in 0 until 38) watch(comedy(i), 0.45f)
             watch(guitar(0), 1f)

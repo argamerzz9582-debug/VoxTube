@@ -57,7 +57,7 @@ fun MediaPlayPauseButton(
         interactionSource = interactionSource,
     ) {
         if (isBuffering) {
-            FlowSpinner(
+            VoxTubeSpinner(
                 modifier = Modifier.size(28.dp),
                 color = MaterialTheme.colorScheme.onPrimary,
             )

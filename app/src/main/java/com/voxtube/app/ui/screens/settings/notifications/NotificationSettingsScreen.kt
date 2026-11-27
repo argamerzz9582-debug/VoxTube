@@ -29,9 +29,9 @@ import com.voxtube.app.notification.BackgroundWorkPolicy
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.screens.settings.index.NotificationsIndex
 
 private val IntervalOptions =
@@ -93,7 +93,7 @@ internal fun NotificationSettingsScreen(
             )
             if (enabled && !backgroundAllowed) {
                 row("notifications.restricted") { shape ->
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = restrictedTitle,
                         supportingText = restrictedBody,
                         leadingIcon = Icons.Outlined.BatteryAlert,
@@ -173,10 +173,10 @@ internal fun NotificationSettingsScreen(
     }
 
     if (showIntervalDialog) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.notif_check_interval_dialog_title),
             description = stringResource(R.string.notif_check_interval_dialog_body),
-            options = IntervalOptions.map { (minutes, label) -> FlowChoice(minutes, stringResource(label)) },
+            options = IntervalOptions.map { (minutes, label) -> VoxTubeChoice(minutes, stringResource(label)) },
             selected = interval,
             onSelect = viewModel::setInterval,
             onDismiss = { showIntervalDialog = false },

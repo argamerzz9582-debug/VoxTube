@@ -6,9 +6,9 @@
   <h3>A privacy-respecting YouTube and YouTube Music client for Android — with a Liquid Glass UI and a recommendation engine that stays on your phone.</h3>
 
   <p>
-    <a href="https://github.com/argamerzz9582-debug/VoxTube/releases"><b>Download APK</b></a> ·
-    <a href="https://github.com/argamerzz9582-debug/VoxTube/issues"><b>Report a bug</b></a> ·
-    <a href="#license--copyright"><b>License</b></a>
+    <a href="https://github.com/argamerzz9582-debug/VoxTube/releases/latest/download/voxtube.apk"><b>Download APK</b></a> ·
+    <a href="https://github.com/argamerzz9582-debug/VoxTube/releases/latest"><b>Releases</b></a> ·
+    <a href="#license"><b>License</b></a>
   </p>
 </div>
 
@@ -19,8 +19,6 @@
 Most open-source YouTube clients give you playback but no way to discover new content. You either use the official app and get tracked, or you use an alternative and lose recommendations entirely.
 
 VoxTube gives you both. The recommendation engine learns what you like by analyzing your watch behavior locally. It never leaves your device. You can inspect everything it knows about you, adjust it, or wipe it at any time.
-
-VoxTube is a rebranded and redesigned fork of [Flow](https://github.com/Flow-Tube/Flow). It keeps Flow's engine and features and gives them a new Liquid Glass look.
 
 ---
 
@@ -127,12 +125,16 @@ VoxTube is a rebranded and redesigned fork of [Flow](https://github.com/Flow-Tub
 
 ## Download
 
-Get the latest APK from the [Releases page](https://github.com/argamerzz9582-debug/VoxTube/releases).
+Get the latest version from the [Releases page](https://github.com/argamerzz9582-debug/VoxTube/releases/latest):
 
-- **GitHub build:** updates itself from inside the app and supports Discord Rich Presence.
-- **FOSS build:** the same app without the built-in updater and the Discord integration.
+| File | What it is |
+|---|---|
+| [`voxtube.apk`](https://github.com/argamerzz9582-debug/VoxTube/releases/latest/download/voxtube.apk) | Universal GitHub build. Updates itself from inside the app. Pick this if unsure. |
+| [`voxtube-arm64-v8a.apk`](https://github.com/argamerzz9582-debug/VoxTube/releases/latest/download/voxtube-arm64-v8a.apk) | Smaller GitHub build for most modern phones (64-bit ARM). |
+| [`voxtube-armeabi-v7a.apk`](https://github.com/argamerzz9582-debug/VoxTube/releases/latest/download/voxtube-armeabi-v7a.apk) | Smaller GitHub build for older 32-bit phones. |
+| [`voxtube-foss.apk`](https://github.com/argamerzz9582-debug/VoxTube/releases/latest/download/voxtube-foss.apk) | FOSS build: no built-in updater and no Discord integration. Per-ABI FOSS builds are on the release page too. |
 
-VoxTube uses its own application ID (`com.voxtube.app`), so it installs next to Flow and keeps its own data. To move over, export a backup in Flow and import it in VoxTube.
+Each release also links the full source code (zip and tar.gz). The application ID is `com.voxtube.app`.
 
 **Minimum requirement:** Android 8.0+
 
@@ -148,37 +150,12 @@ Always use a flavor-prefixed task. See [CONTRIBUTING.md](CONTRIBUTING.md) and [A
 
 ---
 
-## 🙏 Acknowledgments
-
-VoxTube stands on the shoulders of giants. Special thanks to:
-
-*   **[Flow](https://github.com/Flow-Tube/Flow) by A-EDev:** VoxTube is a fork of Flow. The player, extraction, sync and recommendation engine are Flow's work.
-*   **[Kyant Backdrop / AndroidLiquidGlass](https://github.com/Kyant0/AndroidLiquidGlass):** The Liquid Glass effects behind VoxTube's redesign.
-
-*   **[NewPipeExtractor](https://github.com/TeamNewPipe/NewPipeExtractor):** Where Flow's data extraction began, and the source of the relative-date word lists still shipped.
-*   **[NewPipe](https://github.com/TeamNewPipe/NewPipe):** For inspiration from their solid foundation for YouTube data handling.
-*   **[PipePipe](https://codeberg.org/NullPointerException/PipePipe):** For their SABR and InnerTube playback implementation, which guided the YouTube streaming pipeline.
-*   **[PipePipe Developer Docs](https://priveetee.github.io/Docs-PipePipe/):** For their reference documentation on SABR, BotGuard/PoToken attestation, and InnerTube extraction internals.
-*   **[MetroList](https://github.com/MetrolistGroup/Metrolist):** Inspiration for the Hybrid Music fetching approach, Lyrics handling and some icons design references.
-*   **[LibreTube](https://github.com/LibreTube/LibreTube):** Inspiration for SponsorBlock and DeArrow handling and some icons design references.
-*   **[ExoPlayer](https://github.com/google/ExoPlayer):** The gold standard for Android media playback.
-*   **[Jetpack Compose](https://developer.android.com/jetpack/compose):** For enabling the beautiful, modern UI.
-*   **[Material Design 3](https://m3.material.io/):** For the design system and guidelines.
-
----
-
-<div align="center">
-
----
-
-<a id="license--copyright"></a>
-## 📄 License & Copyright
+<a id="license"></a>
+## License
 
 **VoxTube** is Free Software: you can use, study, share, and improve it at your will.
-It is distributed under the **GNU General Public License v3 (GPLv3)**, the same license as Flow.
+It is distributed under the **GNU General Public License v3 (GPLv3)** — see [License](License).
 
-- VoxTube modifications © 2026 VoxTube contributors
-- Original Flow code **Copyright © 2025-2026 A-EDev** — see [Flow](https://github.com/Flow-Tube/Flow)
+VoxTube is a modified version of Flow (GPLv3). The copyright notices in the source files are kept as the GPLv3 requires.
 
-> 🚨 **For Developers:**
-> The GPLv3 requires that any project using this source code (including the on-device recommendation engine) must also be **Open Source** under the GPLv3. You may not use this code in a proprietary or closed-source application. Keep the upstream license headers and credits intact.
+> **For developers:** the GPLv3 requires that any project using this source code must also be open source under the GPLv3.

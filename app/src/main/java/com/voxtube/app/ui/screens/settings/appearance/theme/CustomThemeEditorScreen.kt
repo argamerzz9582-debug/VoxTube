@@ -46,8 +46,8 @@ import com.voxtube.app.R
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowColorPickerDialog
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeColorPickerDialog
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.appearance.themeVariantLabel
 import com.voxtube.app.ui.screens.settings.index.CustomThemeIndex
 import com.voxtube.app.ui.theme.CustomTheme
@@ -94,7 +94,7 @@ internal fun CustomThemeEditorScreen(
 
     val savedMessage = stringResource(R.string.settings_custom_theme_saved)
     val useLabel = stringResource(R.string.settings_custom_theme_use)
-    val variantOptions = ThemeVariant.entries.map { FlowToggleOption(it, stringResource(themeVariantLabel(it))) }
+    val variantOptions = ThemeVariant.entries.map { VoxTubeToggleOption(it, stringResource(themeVariantLabel(it))) }
     val colors = current?.colorsFor(editing)
     val scheme = remember(colors, editing) { colors?.toColorScheme(editing) }
 
@@ -143,7 +143,7 @@ internal fun CustomThemeEditorScreen(
 
     val theme = current ?: return
     pickingRole?.let { role ->
-        FlowColorPickerDialog(
+        VoxTubeColorPickerDialog(
             title = stringResource(role.labelRes),
             initialArgb = role.read(theme.colorsFor(editing)).toArgb().toLong() and 0xFFFFFFFFL,
             onDismiss = { pickingRole = null },

@@ -6,11 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 
 @Composable
 internal fun HomeFeedDisabledState(modifier: Modifier = Modifier) {
-    FlowEmptyState(
+    VoxTubeEmptyState(
         title = stringResource(R.string.content_settings_home_feed_disabled_title),
         subtitle = stringResource(R.string.content_settings_home_feed_disabled_body),
         icon = Icons.Outlined.SmartDisplay,

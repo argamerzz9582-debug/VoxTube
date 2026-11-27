@@ -63,8 +63,8 @@ import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.ui.components.PlayingWaveform
 import com.voxtube.app.ui.components.musicplayer.common.formatTime
 import com.voxtube.app.ui.components.musicplayer.motion.QueueRowSwipeGestureHandler
-import com.voxtube.app.ui.components.shared.FlowSpinner
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.onMenuKey
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -77,7 +77,7 @@ internal fun RadioLoadingRow() {
                 .padding(vertical = 14.dp),
         horizontalArrangement = Arrangement.Center,
     ) {
-        FlowSpinner(
+        VoxTubeSpinner(
             modifier = Modifier.size(30.dp),
             color = MaterialTheme.colorScheme.primary,
         )

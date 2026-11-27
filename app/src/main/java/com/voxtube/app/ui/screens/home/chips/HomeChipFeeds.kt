@@ -11,10 +11,10 @@ import com.voxtube.app.data.local.dao.VideoDao
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.ChannelMemoryRepository
 import com.voxtube.app.data.recommendation.FeedExclusions
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.GraphSeedInput
 import com.voxtube.app.data.recommendation.GraphSeedSelector
 import com.voxtube.app.data.recommendation.InterestChip
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.YouTubeRepository
 import com.voxtube.app.data.repository.needsChannelMetadata
 import com.voxtube.app.data.stats.VideoStatsRecorder
@@ -115,7 +115,7 @@ class HomeChipFeeds
         fun refreshChips() {
             scope.launch(io) {
                 try {
-                    interests = runCatching { FlowNeuroEngine.interestChips() }.getOrDefault(interests)
+                    interests = runCatching { VoxTubeNeuroEngine.interestChips() }.getOrDefault(interests)
                     hasMixSeeds = mixSeedCandidates().size >= HomeChipParams.MIXES_MIN
                     hasWatched = watchAgainVideos(HomeChipParams.WATCHED_MIN_VIDEOS).size >= HomeChipParams.WATCHED_MIN_VIDEOS
                     publishChips()
@@ -139,7 +139,7 @@ class HomeChipFeeds
                 return
             }
             (chip as? HomeChip.Interest)?.let { interest ->
-                scope.launch { FlowNeuroEngine.noteSessionTopics(interest.interest.topics.take(HomeChipParams.SESSION_TOPICS)) }
+                scope.launch { VoxTubeNeuroEngine.noteSessionTopics(interest.interest.topics.take(HomeChipParams.SESSION_TOPICS)) }
             }
             chipsState.update { it.copy(selected = chip.key, feed = cache.get(chip, System.currentTimeMillis()) ?: ChipFeed.Loading) }
             load(chip, force = false)
@@ -223,7 +223,7 @@ class HomeChipFeeds
                     .filter { !it.isShort }
                     .filterWatched(context.watched())
                     .filterNot(exclusions::hidesFromRecommendations)
-            return if (pool.isEmpty()) pool else withSubscriptionAvatars(FlowNeuroEngine.rank(pool, userSubs()))
+            return if (pool.isEmpty()) pool else withSubscriptionAvatars(VoxTubeNeuroEngine.rank(pool, userSubs()))
         }
 
         /** Subscription-store rows carry no avatar; the subscription list already knows each one. */
@@ -342,24 +342,24 @@ class HomeChipFeeds
         private suspend fun interestVideos(interest: InterestChip): List<Video> {
             val clusters = interest.clusters.toHashSet()
             val history = feedSources.historySeedInputs()
-            val clusterOf = FlowNeuroEngine.clusterKeys(history.map { it.asVideo() })
+            val clusterOf = VoxTubeNeuroEngine.clusterKeys(history.map { it.asVideo() })
             val seeds =
                 GraphSeedSelector
                     .select(history.filter { clusterOf[it.id] in clusters }, HomeChipParams.RELATED_SEEDS)
             val stored = storedUploads().filter { !it.isShort }
-            val storedClusters = FlowNeuroEngine.clusterKeys(stored)
+            val storedClusters = VoxTubeNeuroEngine.clusterKeys(stored)
             val pool =
                 search(interestQueries(interest)) +
                     related(seeds) +
                     stored.filter { storedClusters[it.id] in clusters }
-            val outside = interest.category?.let { FlowNeuroEngine.outsideCategory(pool, it) }.orEmpty()
+            val outside = interest.category?.let { VoxTubeNeuroEngine.outsideCategory(pool, it) }.orEmpty()
             return ranked(pool.filterNot { it.id in outside }).take(HomeChipParams.MAX_VIDEOS)
         }
 
         private suspend fun newToYou(): List<Video> {
             val strongSeeds = GraphSeedSelector.select(feedSources.historySeedInputs(), HomeChipParams.RELATED_SEEDS)
-            val pool = search(FlowNeuroEngine.explorationQueries(HomeChipParams.QUERIES_PER_INTEREST)) + related(strongSeeds)
-            val brain = FlowNeuroEngine.getBrainSnapshot()
+            val pool = search(VoxTubeNeuroEngine.explorationQueries(HomeChipParams.QUERIES_PER_INTEREST)) + related(strongSeeds)
+            val brain = VoxTubeNeuroEngine.getBrainSnapshot()
             val known =
                 buildSet {
                     viewHistory.getRecentVideoHistory(HomeChipParams.HISTORY_LOOKBACK, includeShorts = true).mapTo(this) { it.channelId }
@@ -373,7 +373,7 @@ class HomeChipFeeds
                     runCatching { channelMemory.remembered() }.getOrDefault(emptyList()).mapTo(this) { it.channelId }
                 }
             val unknown = fromUnknownChannels(ranked(pool), known)
-            val rejected = FlowNeuroEngine.rejectedByPattern(unknown)
+            val rejected = VoxTubeNeuroEngine.rejectedByPattern(unknown)
             return unknown.filterNot { it.id in rejected }.take(HomeChipParams.MAX_VIDEOS)
         }
 
@@ -407,7 +407,7 @@ class HomeChipFeeds
             runCatching { videoStats.snapshot() }.getOrNull()?.months?.values?.forEach { month ->
                 month.videoViews.forEach { (id, views) -> rewatches.merge(id, views, Int::plus) }
             }
-            val taste = FlowNeuroEngine.tasteAffinity(history.map { it.toResumeVideo() })
+            val taste = VoxTubeNeuroEngine.tasteAffinity(history.map { it.toResumeVideo() })
             val disliked = runCatching { likedVideos.dislikedVideoIds() }.getOrDefault(emptySet())
             val exclusions = context.exclusions()
             val ordered =
@@ -443,7 +443,7 @@ class HomeChipFeeds
                         ) to it.likedAt
                     }
             if (videos.isEmpty()) return emptyList()
-            val clusters = FlowNeuroEngine.clusterKeys(videos.map { it.first })
+            val clusters = VoxTubeNeuroEngine.clusterKeys(videos.map { it.first })
             val likedIds = likes.mapTo(HashSet()) { it.videoId }
             val candidates =
                 videos.map { (video, at) ->
@@ -457,7 +457,7 @@ class HomeChipFeeds
                         longTerm = liked || now - at > RECENT_SEED_MS,
                     )
                 }
-            val brain = FlowNeuroEngine.getBrainSnapshot()
+            val brain = VoxTubeNeuroEngine.getBrainSnapshot()
             val disliked = runCatching { likedVideos.dislikedVideoIds() }.getOrDefault(emptySet())
             return mixSeeds(candidates, disliked + brain.suppressedVideoIds.keys, brain.blockedChannels + brain.suppressedChannels.keys)
         }

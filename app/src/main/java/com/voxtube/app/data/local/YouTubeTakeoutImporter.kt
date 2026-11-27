@@ -7,7 +7,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.local.entity.PlaylistEntity
 import com.voxtube.app.data.local.entity.PlaylistVideoCrossRef
 import com.voxtube.app.data.local.entity.VideoEntity
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.di.ProfileDb
 import com.voxtube.app.utils.ThumbnailUrlResolver
 import kotlinx.coroutines.Dispatchers
@@ -292,7 +292,7 @@ internal class YouTubeTakeoutImporter(
         }
         subscriptions.subscribeAll(imported)
         val names = rows.map { it.channelName }.filter { it.isNotEmpty() }
-        if (names.isNotEmpty()) runCatching { FlowNeuroEngine.bootstrapFromSubscriptions(context, names) }
+        if (names.isNotEmpty()) runCatching { VoxTubeNeuroEngine.bootstrapFromSubscriptions(context, names) }
         return imported.size
     }
 

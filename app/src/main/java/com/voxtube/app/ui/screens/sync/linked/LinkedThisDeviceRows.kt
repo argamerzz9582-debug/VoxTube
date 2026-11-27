@@ -10,8 +10,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.screens.sync.COLLECTION_KEYS
 import com.voxtube.app.ui.screens.sync.SyncRowGroup
 import com.voxtube.app.ui.screens.sync.SyncSection
@@ -30,7 +30,7 @@ internal fun LinkedThisDeviceRows(
     SyncSection(stringResource(R.string.linked_this_device)) {
         SyncRowGroup(count = 2) { index, shape ->
             if (index == 0) {
-                FlowSwitchRow(
+                VoxTubeSwitchRow(
                     title = stringResource(R.string.linked_auto_sync),
                     checked = autoSync,
                     onCheckedChange = onAutoSync,
@@ -40,7 +40,7 @@ internal fun LinkedThisDeviceRows(
                     shape = shape,
                 )
             } else {
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.linked_sync_choice),
                     onClick = { choosing = true },
                     supportingText = choiceSummary(leftOut),

@@ -37,7 +37,7 @@ import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.slider
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.components.shared.labelRes
 import com.voxtube.app.ui.screens.settings.index.PlayerAppearanceIndex
 import kotlin.math.roundToInt
@@ -116,35 +116,35 @@ internal fun PlayerAppearanceScreen(
             DEFAULT_FULLSCREEN_SEEKBAR_PADDING_DP,
             MAX_FULLSCREEN_SEEKBAR_PADDING_DP,
         )
-    val portraitOptions = PortraitSeekbarModes.map { FlowToggleOption(it, stringResource(seekbarModeLabel(it))) }
-    val fullscreenOptions = FullscreenSeekbarModes.map { FlowToggleOption(it, stringResource(seekbarModeLabel(it))) }
+    val portraitOptions = PortraitSeekbarModes.map { VoxTubeToggleOption(it, stringResource(seekbarModeLabel(it))) }
+    val fullscreenOptions = FullscreenSeekbarModes.map { VoxTubeToggleOption(it, stringResource(seekbarModeLabel(it))) }
     val idleProgressOptions =
         listOf(
-            FlowToggleOption(IdleProgressBar.ON_VIDEO, stringResource(R.string.player_appearance_idle_progress_on_video)),
-            FlowToggleOption(IdleProgressBar.BELOW_VIDEO, stringResource(R.string.player_appearance_idle_progress_below)),
-            FlowToggleOption(IdleProgressBar.OFF, stringResource(R.string.player_appearance_idle_progress_off)),
+            VoxTubeToggleOption(IdleProgressBar.ON_VIDEO, stringResource(R.string.player_appearance_idle_progress_on_video)),
+            VoxTubeToggleOption(IdleProgressBar.BELOW_VIDEO, stringResource(R.string.player_appearance_idle_progress_below)),
+            VoxTubeToggleOption(IdleProgressBar.OFF, stringResource(R.string.player_appearance_idle_progress_off)),
         )
     val scrubOptions =
         listOf(
-            FlowToggleOption(ScrubPreviewStyle.STRIP, stringResource(R.string.player_appearance_scrub_preview_strip)),
-            FlowToggleOption(ScrubPreviewStyle.FRAME, stringResource(R.string.player_appearance_scrub_preview_frame)),
+            VoxTubeToggleOption(ScrubPreviewStyle.STRIP, stringResource(R.string.player_appearance_scrub_preview_strip)),
+            VoxTubeToggleOption(ScrubPreviewStyle.FRAME, stringResource(R.string.player_appearance_scrub_preview_frame)),
         )
-    val shortsOptions = ShortsPlayerUiMode.entries.map { FlowToggleOption(it, stringResource(shortsUiModeLabel(it))) }
+    val shortsOptions = ShortsPlayerUiMode.entries.map { VoxTubeToggleOption(it, stringResource(shortsUiModeLabel(it))) }
     val plainControlOptions =
         listOf(
-            FlowToggleOption(
+            VoxTubeToggleOption(
                 MusicPlainControlColors.MONOCHROME,
                 stringResource(R.string.player_appearance_plain_control_colors_monochrome),
             ),
-            FlowToggleOption(MusicPlainControlColors.APP_THEME, stringResource(R.string.player_appearance_plain_control_colors_app)),
+            VoxTubeToggleOption(MusicPlainControlColors.APP_THEME, stringResource(R.string.player_appearance_plain_control_colors_app)),
         )
     val ambientMotionOptions =
         listOf(
-            FlowToggleOption(false, stringResource(R.string.player_settings_ambient_motion_smooth)),
-            FlowToggleOption(true, stringResource(R.string.player_settings_ambient_motion_responsive)),
+            VoxTubeToggleOption(false, stringResource(R.string.player_settings_ambient_motion_smooth)),
+            VoxTubeToggleOption(true, stringResource(R.string.player_settings_ambient_motion_responsive)),
         )
-    val sidePanelOptions = FullscreenSidePanelWidth.entries.map { FlowToggleOption(it, stringResource(sidePanelWidthLabel(it))) }
-    val miniPlayerOptions = MiniPlayerSize.entries.map { FlowToggleOption(it, stringResource(miniPlayerSizeLabel(it))) }
+    val sidePanelOptions = FullscreenSidePanelWidth.entries.map { VoxTubeToggleOption(it, stringResource(sidePanelWidthLabel(it))) }
+    val miniPlayerOptions = MiniPlayerSize.entries.map { VoxTubeToggleOption(it, stringResource(miniPlayerSizeLabel(it))) }
     val portraitSummary = stringResource(R.string.player_fullscreen_seekbar_width_subtitle, portraitPadding)
     val fullscreenSummary = stringResource(R.string.player_fullscreen_seekbar_width_subtitle, fullscreenPadding)
     val sliderLabel = stringResource(sliderStyleLabel(sliderStyle))

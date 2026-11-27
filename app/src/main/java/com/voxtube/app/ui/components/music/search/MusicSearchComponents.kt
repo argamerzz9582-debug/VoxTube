@@ -39,8 +39,8 @@ import com.voxtube.app.R
 import com.voxtube.app.innertube.YouTube.SearchFilter
 import com.voxtube.app.innertube.pages.SearchSummary
 import com.voxtube.app.innertube.pages.SearchSummaryKind
-import com.voxtube.app.ui.components.shared.FlowFilterChip
-import com.voxtube.app.ui.components.shared.FlowSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
 import com.voxtube.app.ui.theme.Dimensions
 
 /**
@@ -74,7 +74,7 @@ fun MusicSearchBar(
                 )
             }
 
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = query,
                 onQueryChange = onQueryChange,
                 placeholder = stringResource(R.string.search_music_placeholder),
@@ -118,7 +118,7 @@ fun SearchFilterChips(
     ) {
         items(filters, key = { it.value }) { filter ->
             val selected = activeFilter == filter
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 label = filter.label(),
                 selected = selected,
                 onClick = { onFilterClick(if (selected) null else filter) },

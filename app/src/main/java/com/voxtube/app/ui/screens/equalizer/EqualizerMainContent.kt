@@ -57,16 +57,16 @@ import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.settings.LocalSettingsHighlight
 import com.voxtube.app.ui.components.settings.SettingsHighlightFrame
 import com.voxtube.app.ui.components.settings.isNew
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowPaneState
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
-import com.voxtube.app.ui.components.shared.FlowSidePanes
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubePaneState
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSidePanes
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import kotlinx.coroutines.flow.first
 
@@ -88,7 +88,7 @@ internal fun EqualizerMainContent(
     viewModel: EqualizerViewModel,
     selectedBand: Int?,
     onSelectBand: (Int?) -> Unit,
-    panes: FlowPaneState,
+    panes: VoxTubePaneState,
     twoPane: Boolean,
     onOpenPresets: () -> Unit,
     onSaveAs: () -> Unit,
@@ -107,7 +107,7 @@ internal fun EqualizerMainContent(
         LazyColumn(
             state = state,
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+            verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap),
             contentPadding = PaddingValues(bottom = bottom),
             content = content,
         )
@@ -129,7 +129,7 @@ internal fun EqualizerMainContent(
         }
         return
     }
-    FlowSidePanes(
+    VoxTubeSidePanes(
         panes = panes,
         sidePaneWidth = SidePaneWidth,
         modifier = modifier,
@@ -176,8 +176,8 @@ private class EqSections(
     fun LazyListScope.header() {
         item("header") {
             EqFramed(Modifier.padding(top = 8.dp)) {
-                FlowRowGroup {
-                    FlowSwitchRow(
+                VoxTubeRowGroup {
+                    VoxTubeSwitchRow(
                         title = stringResource(R.string.equalizer),
                         checked = state.enabled,
                         onCheckedChange = viewModel::setEnabled,
@@ -185,7 +185,7 @@ private class EqSections(
                         shape = flowRowGroupShape(0, 2),
                     )
                     val edited = state.isEdited
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = activePresetName(state),
                         supportingText = stringResource(if (edited) R.string.eq_edited else R.string.eq_presets),
                         onClick = onOpenPresets,
@@ -246,11 +246,11 @@ private class EqSections(
     fun LazyListScope.mode() {
         item("mode") {
             EqFramed(Modifier.padding(horizontal = ItemInset)) {
-                FlowConnectedToggleGroup(
+                VoxTubeConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(EqMode.PARAMETRIC, stringResource(R.string.eq_mode_parametric), Icons.Rounded.Tune),
-                            FlowToggleOption(EqMode.GRAPHIC, stringResource(R.string.eq_mode_graphic), Icons.Rounded.Equalizer),
+                            VoxTubeToggleOption(EqMode.PARAMETRIC, stringResource(R.string.eq_mode_parametric), Icons.Rounded.Tune),
+                            VoxTubeToggleOption(EqMode.GRAPHIC, stringResource(R.string.eq_mode_graphic), Icons.Rounded.Equalizer),
                         ),
                     selected = state.mode,
                     onSelected = viewModel::setMode,
@@ -263,7 +263,7 @@ private class EqSections(
         item("bands-header") {
             EqFramed {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    FlowSectionHeader(stringResource(R.string.eq_bands), Modifier.weight(1f))
+                    VoxTubeSectionHeader(stringResource(R.string.eq_bands), Modifier.weight(1f))
                     Text(
                         text = stringResource(R.string.eq_band_count, bandList.size, EqLimits.MAX_BANDS),
                         style = MaterialTheme.typography.labelMedium,
@@ -287,7 +287,7 @@ private class EqSections(
         }
         item("add-band") {
             EqFramed(Modifier.padding(horizontal = ItemInset)) {
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.eq_add_band),
                     onClick = { viewModel.addBand()?.let(onSelectBand) },
                     leadingIcon = Icons.Rounded.Add,
@@ -340,12 +340,12 @@ private class EqSections(
         item("sound") {
             EqFramed {
                 Column {
-                    FlowSectionHeader(stringResource(R.string.eq_settings_section))
+                    VoxTubeSectionHeader(stringResource(R.string.eq_settings_section))
                     val spatialOn = state.spatialSound != EqSpatialSound.OFF
                     val rows = (if (state.autoPreamp) 3 else 4) + (if (spatialOn) 1 else 0)
                     val bassRow = if (state.autoPreamp) 1 else 2
-                    FlowRowGroup {
-                        FlowSwitchRow(
+                    VoxTubeRowGroup {
+                        VoxTubeSwitchRow(
                             title = stringResource(R.string.eq_auto_preamp),
                             supportingText = autoPreampSummary(state),
                             checked = state.autoPreamp,
@@ -368,7 +368,7 @@ private class EqSections(
                         val spatialShape = flowRowGroupShape(bassRow + 1, rows)
                         CompositionLocalProvider(LocalSettingsHighlight provides highlight) {
                             SettingsHighlightFrame(EqualizerIndex.spatialSound.key, spatialShape) {
-                                FlowSwitchRow(
+                                VoxTubeSwitchRow(
                                     title = stringResource(R.string.eq_spatial_sound),
                                     supportingText = stringResource(R.string.eq_spatial_sound_summary),
                                     checked = spatialOn,
@@ -383,12 +383,12 @@ private class EqSections(
                         }
                         if (spatialOn) {
                             PanelRow(shape = flowRowGroupShape(rows - 1, rows)) {
-                                FlowConnectedToggleGroup(
+                                VoxTubeConnectedToggleGroup(
                                     options =
                                         listOf(
-                                            FlowToggleOption(EqSpatialSound.LOW, stringResource(R.string.eq_spatial_low)),
-                                            FlowToggleOption(EqSpatialSound.MEDIUM, stringResource(R.string.eq_spatial_medium)),
-                                            FlowToggleOption(EqSpatialSound.HIGH, stringResource(R.string.eq_spatial_high)),
+                                            VoxTubeToggleOption(EqSpatialSound.LOW, stringResource(R.string.eq_spatial_low)),
+                                            VoxTubeToggleOption(EqSpatialSound.MEDIUM, stringResource(R.string.eq_spatial_medium)),
+                                            VoxTubeToggleOption(EqSpatialSound.HIGH, stringResource(R.string.eq_spatial_high)),
                                         ),
                                     selected = state.spatialSound,
                                     onSelected = viewModel::setSpatialSound,
@@ -407,8 +407,8 @@ private class EqSections(
         val open = onSystemEqualizer ?: return
         item("system") {
             EqFramed(Modifier.padding(top = 16.dp)) {
-                FlowRowGroup {
-                    FlowNavRow(
+                VoxTubeRowGroup {
+                    VoxTubeNavRow(
                         title = stringResource(R.string.eq_system),
                         supportingText = stringResource(R.string.eq_system_desc),
                         onClick = open,
@@ -460,7 +460,7 @@ internal fun EqFramed(
     content: @Composable () -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
-        Box(modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth().then(modifier)) { content() }
+        Box(modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).fillMaxWidth().then(modifier)) { content() }
     }
 }
 

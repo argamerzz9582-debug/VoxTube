@@ -36,7 +36,7 @@ import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.paging.SearchResultItem
 import com.voxtube.app.data.shorts.queue.ShortsQueueSource
 import com.voxtube.app.ui.OnTabReselected
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.components.search.SearchFilterDialog
 import com.voxtube.app.ui.components.search.SearchSuggestionsPanel
 import com.voxtube.app.ui.components.search.SearchTopBar
@@ -71,7 +71,7 @@ fun SearchScreen(
     val quickActions: QuickActionsViewModel = sharedQuickActionsViewModel()
     val pagingItems = viewModel.searchResults.collectAsLazyPagingItems()
     val gridState = rememberLazyGridState()
-    OnTabReselected(FlowTab.Search.route) { gridState.animateScrollToItem(0) }
+    OnTabReselected(VoxTubeTab.Search.route) { gridState.animateScrollToItem(0) }
     var showFilters by rememberSaveable { mutableStateOf(false) }
 
     val submitWith = rememberSearchSubmitter(viewModel, state, quickActions, onNewSearch)

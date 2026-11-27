@@ -72,10 +72,10 @@ import com.voxtube.app.R
 import com.voxtube.app.data.recognition.RecognitionResult
 import com.voxtube.app.data.recognition.RecognitionStatus
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.music.common.rememberMusicArtworkColors
-import com.voxtube.app.ui.components.shared.FlowSpinner
-import com.voxtube.app.ui.components.shared.FlowStateIcon
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
+import com.voxtube.app.ui.components.shared.VoxTubeStateIcon
 import com.voxtube.app.ui.components.shared.flowActionShape
 import com.voxtube.app.ui.components.shared.flowHeroArtworkSize
 
@@ -121,7 +121,7 @@ fun RecognitionScreen(
 
     Scaffold(
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = stringResource(R.string.recognize_music),
                 onBack = onBackClick,
                 actions = {
@@ -229,7 +229,7 @@ private fun RecognitionMicButton(
         contentAlignment = Alignment.Center,
     ) {
         if (recognizing) {
-            FlowSpinner(
+            VoxTubeSpinner(
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(MicButtonSize),
             )
@@ -476,7 +476,7 @@ private fun RecognitionMessage(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        FlowStateIcon(icon = icon, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+        VoxTubeStateIcon(icon = icon, tint = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(
             text = title,
             style = MaterialTheme.typography.titleLargeEmphasized,

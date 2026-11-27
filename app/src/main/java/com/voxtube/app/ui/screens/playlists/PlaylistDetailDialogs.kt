@@ -21,8 +21,8 @@ import com.voxtube.app.data.model.PlaylistInfo
 import com.voxtube.app.ui.components.shared.CollectionEditDialog
 import com.voxtube.app.ui.components.shared.CollectionTarget
 import com.voxtube.app.ui.components.shared.DeleteCollectionDialog
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
 import com.voxtube.app.ui.components.shared.MergeIntoCollectionSheet
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 
 /** The dialog or sheet the playlist page has open, if any. */
 internal sealed interface PlaylistDialog {
@@ -111,7 +111,7 @@ internal fun PlaylistDetailDialogs(
 
         is PlaylistDialog.RemoveSelected -> {
             val count = dialog.ids.size
-            FlowAlertDialog(
+            VoxTubeAlertDialog(
                 onDismissRequest = onDismiss,
                 icon = { Icon(Icons.Default.Delete, contentDescription = null, tint = MaterialTheme.colorScheme.error) },
                 title = { Text(pluralStringResource(R.plurals.remove_selected_videos_title, count, count)) },

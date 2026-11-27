@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.voxtube.app.R
 import com.voxtube.app.data.stats.RecapSummary
-import com.voxtube.app.ui.components.shared.FlowMorphingPortrait
+import com.voxtube.app.ui.components.shared.VoxTubeMorphingPortrait
 import com.voxtube.app.ui.components.stats.spentTimeLabel
 import com.voxtube.app.ui.screens.recap.labels
 import com.voxtube.app.ui.screens.recap.readable
@@ -82,9 +82,9 @@ internal fun StoryShareCard(
             )
             Text(periodLabel, style = MaterialTheme.typography.headlineMedium, color = ink, fontWeight = FontWeight.Black)
             Row(verticalAlignment = Alignment.CenterVertically) {
-                channel?.let { FlowMorphingPortrait(it.imageUrl, it.name, PortraitSize, tint.raised, tint.onContainer) }
+                channel?.let { VoxTubeMorphingPortrait(it.imageUrl, it.name, PortraitSize, tint.raised, tint.onContainer) }
                 artist?.let {
-                    FlowMorphingPortrait(
+                    VoxTubeMorphingPortrait(
                         imageUrl = it.imageUrl,
                         fallback = it.name,
                         diameter = PortraitSize,

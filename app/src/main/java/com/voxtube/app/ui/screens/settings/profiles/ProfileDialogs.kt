@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
 import com.voxtube.app.data.profile.ProfileRegistry
 import com.voxtube.app.ui.components.profiles.switchRefusalText
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 
 @Composable
 internal fun RenameProfileDialog(
@@ -33,7 +33,7 @@ internal fun RenameProfileDialog(
     var name by rememberSaveable { mutableStateOf(initialName) }
     val issue = nameIssue(name, otherNames).takeUnless { it == NameIssue.BLANK && allowBlank }
 
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.profiles_rename)) },
         text = { ProfileNameField(name = name, onNameChange = { name = it }, taken = issue == NameIssue.TAKEN) },
@@ -71,7 +71,7 @@ internal fun DeleteProfileDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         icon = { Icon(Icons.Outlined.Delete, contentDescription = null, tint = MaterialTheme.colorScheme.error) },
         title = { Text(stringResource(R.string.profiles_delete_title, name)) },

@@ -37,7 +37,7 @@ import androidx.glance.layout.width
 import androidx.glance.text.Text
 import com.voxtube.app.R
 import com.voxtube.app.widget.core.action.WidgetDeepLink
-import com.voxtube.app.widget.core.theme.FlowGlanceTheme
+import com.voxtube.app.widget.core.theme.VoxTubeGlanceTheme
 import com.voxtube.app.widget.core.theme.WidgetDimens
 import com.voxtube.app.widget.core.theme.WidgetText
 import com.voxtube.app.widget.core.theme.widgetColorsFlow
@@ -56,7 +56,7 @@ class QuickActionsWidget : GlanceAppWidget() {
         widgetCategory: Int,
     ) {
         val colors = widgetColorsFlow(context).first()
-        provideContent { FlowGlanceTheme(colors) { QuickActionsContent(QuickShortcut.DEFAULT) } }
+        provideContent { VoxTubeGlanceTheme(colors) { QuickActionsContent(QuickShortcut.DEFAULT) } }
     }
 
     override suspend fun provideGlance(
@@ -68,7 +68,7 @@ class QuickActionsWidget : GlanceAppWidget() {
         provideContent {
             val colors by colorsFlow.collectAsState(initialColors)
             val shortcuts = QuickShortcut.from(currentState<Preferences>())
-            FlowGlanceTheme(colors) {
+            VoxTubeGlanceTheme(colors) {
                 QuickActionsContent(shortcuts)
             }
         }

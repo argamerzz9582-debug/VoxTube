@@ -42,7 +42,7 @@ import com.voxtube.app.widget.core.component.WidgetRowThumb
 import com.voxtube.app.widget.core.image.WidgetImageSpec
 import com.voxtube.app.widget.core.image.preloadWidgetImages
 import com.voxtube.app.widget.core.image.rememberWidgetImages
-import com.voxtube.app.widget.core.theme.FlowGlanceTheme
+import com.voxtube.app.widget.core.theme.VoxTubeGlanceTheme
 import com.voxtube.app.widget.core.theme.WidgetDimens
 import com.voxtube.app.widget.core.theme.bakedCornerRadiusPx
 import com.voxtube.app.widget.core.theme.dpToPx
@@ -66,7 +66,7 @@ class RecentlyPlayedWidget : GlanceAppWidget() {
     ) {
         val entries = withContext(Dispatchers.IO) { widgetEntryPoint(context).recentlyPlayedSource().entries() }
         val colors = widgetColorsFlow(context).first()
-        provideContent { FlowGlanceTheme(colors) { ContinueWatchingContent(entries.map { it.toItem(context, emptyMap()) }) } }
+        provideContent { VoxTubeGlanceTheme(colors) { ContinueWatchingContent(entries.map { it.toItem(context, emptyMap()) }) } }
     }
 
     override suspend fun provideGlance(
@@ -83,7 +83,7 @@ class RecentlyPlayedWidget : GlanceAppWidget() {
         provideContent {
             val colors by colorsFlow.collectAsState(initialColors)
             val images by rememberWidgetImages(context, specs, preloaded)
-            FlowGlanceTheme(colors) {
+            VoxTubeGlanceTheme(colors) {
                 ContinueWatchingContent(entries.map { it.toItem(context, images) })
             }
         }

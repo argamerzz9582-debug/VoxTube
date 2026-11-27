@@ -41,8 +41,8 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.player.SleepTimerManager
-import com.voxtube.app.ui.components.shared.FlowBottomSheet
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeBottomSheet
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.rememberFlowBottomSheetState
 import com.voxtube.app.ui.utils.flowWindowDpSize
 import kotlinx.coroutines.delay
@@ -182,7 +182,7 @@ fun MediaSleepTimerSheet(
     }
 
     if (asBottomSheet) {
-        FlowSleepTimerBottomSheet(
+        VoxTubeSleepTimerBottomSheet(
             onDismiss = onDismiss,
             expandedHeight = expandedHeight,
             collapsedHeight = collapsedHeight,
@@ -235,7 +235,7 @@ private fun ColumnScope.SleepTimerColumn(
 }
 
 @Composable
-private fun FlowSleepTimerBottomSheet(
+private fun VoxTubeSleepTimerBottomSheet(
     onDismiss: () -> Unit,
     expandedHeight: Dp?,
     collapsedHeight: Dp,
@@ -246,7 +246,7 @@ private fun FlowSleepTimerBottomSheet(
     actions: @Composable (Modifier) -> Unit,
 ) {
     val sheetState = rememberFlowBottomSheetState()
-    FlowBottomSheet(
+    VoxTubeBottomSheet(
         onDismiss = onDismiss,
         modifier = modifier,
         state = sheetState,
@@ -259,7 +259,7 @@ private fun FlowSleepTimerBottomSheet(
         containerColor = MaterialTheme.colorScheme.surface,
         onProgressChange = onSheetProgressChange,
         header = { dragModifier ->
-            FlowSheetHeader(
+            VoxTubeSheetHeader(
                 inSidePane = !enableVerticalDismiss,
                 title = stringResource(R.string.sleep_timer),
                 onClose = { sheetState.dismiss() },

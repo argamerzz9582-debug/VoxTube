@@ -43,10 +43,10 @@ import com.voxtube.app.data.profile.displayName
 import com.voxtube.app.ui.components.layout.LocalFlowSnackbarHostState
 import com.voxtube.app.ui.components.settings.SettingsDestination
 import com.voxtube.app.ui.components.settings.SettingsTarget
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsGroup
@@ -124,7 +124,7 @@ internal fun ProfileSwitchSheet(
     val context = LocalContext.current
     val atLimit = profiles.size >= ProfileRegistry.MAX_PROFILES
     QuickActionsSheet(onDismiss = onDismiss) { sheet ->
-        FlowSectionHeader(text = stringResource(R.string.profiles_title))
+        VoxTubeSectionHeader(text = stringResource(R.string.profiles_title))
         ProfileDropdown(
             profiles = profiles,
             runningId = runningId,
@@ -139,7 +139,7 @@ internal fun ProfileSwitchSheet(
             rows =
                 listOf(
                     QuickActionRow("profiles.add") { shape ->
-                        FlowNavRow(
+                        VoxTubeNavRow(
                             title = stringResource(R.string.profiles_add),
                             supportingText = stringResource(R.string.profiles_limit, ProfileRegistry.MAX_PROFILES).takeIf { atLimit },
                             onClick = {
@@ -153,7 +153,7 @@ internal fun ProfileSwitchSheet(
                         )
                     },
                     QuickActionRow("profiles.manage") { shape ->
-                        FlowNavRow(
+                        VoxTubeNavRow(
                             title = stringResource(R.string.profiles_manage),
                             onClick = {
                                 sheet.close()
@@ -172,7 +172,7 @@ internal fun ProfileSwitchSheet(
                 rows =
                     listOf(
                         QuickActionRow("profiles.settings") { shape ->
-                            FlowNavRow(
+                            VoxTubeNavRow(
                                 title = stringResource(R.string.settings),
                                 onClick = {
                                     sheet.close()
@@ -215,9 +215,9 @@ private fun ProfileDropdown(
     val sizeSpec = MaterialTheme.motionScheme.defaultEffectsSpec<IntSize>()
     val fadeSpec = MaterialTheme.motionScheme.defaultEffectsSpec<Float>()
 
-    FlowRowGroup {
+    VoxTubeRowGroup {
         Column {
-            FlowNavRow(
+            VoxTubeNavRow(
                 title = running.displayName(context),
                 supportingText = stringResource(R.string.profiles_in_use),
                 onClick = { if (others.isNotEmpty()) expanded = !expanded },
@@ -246,11 +246,11 @@ private fun ProfileDropdown(
                 exit = shrinkVertically(sizeSpec) + fadeOut(fadeSpec),
             ) {
                 Column(
-                    modifier = Modifier.padding(top = FlowSegmentedGap),
-                    verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+                    modifier = Modifier.padding(top = VoxTubeSegmentedGap),
+                    verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap),
                 ) {
                     others.forEachIndexed { index, profile ->
-                        FlowNavRow(
+                        VoxTubeNavRow(
                             title = profile.displayName(context),
                             onClick = { onSwitch(profile.id) },
                             showChevron = false,

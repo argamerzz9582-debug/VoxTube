@@ -15,7 +15,7 @@ import androidx.glance.color.ColorProviders
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.widget.core.image.WidgetImageLoader
 import com.voxtube.app.widget.core.state.nowPlayingSnapshotFlow
-import com.voxtube.app.widget.core.theme.FlowGlanceTheme
+import com.voxtube.app.widget.core.theme.VoxTubeGlanceTheme
 import com.voxtube.app.widget.core.theme.artworkColorProviders
 import com.voxtube.app.widget.core.theme.bakedCornerRadiusPx
 import com.voxtube.app.widget.core.theme.dpToPx
@@ -35,7 +35,7 @@ class NowPlayingWidget : GlanceAppWidget() {
     ) {
         val snapshot = context.nowPlayingSnapshotFlow { NowPlayingWidgetPublisher.hasPublished }.first()?.copy(isPlaying = false)
         val colors = widgetColorsFlow(context).first()
-        provideContent { FlowGlanceTheme(colors) { NowPlayingContent(snapshot = snapshot, artwork = null) } }
+        provideContent { VoxTubeGlanceTheme(colors) { NowPlayingContent(snapshot = snapshot, artwork = null) } }
     }
 
     override suspend fun provideGlance(
@@ -66,7 +66,7 @@ class NowPlayingWidget : GlanceAppWidget() {
             }
             // Read so each progress tick recomposes; the bar itself is placed from the clock right now.
             NowPlayingProgressTicker.clock.collectAsState().value
-            FlowGlanceTheme(artworkColors ?: colors) {
+            VoxTubeGlanceTheme(artworkColors ?: colors) {
                 NowPlayingContent(snapshot = snapshot, artwork = artwork, nowElapsedMs = SystemClock.elapsedRealtime())
             }
         }

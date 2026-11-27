@@ -33,14 +33,14 @@ import com.voxtube.app.innertube.models.PlaylistItem
 import com.voxtube.app.innertube.models.SongItem
 import com.voxtube.app.innertube.models.YTItem
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.music.item.MusicCardOverflowButton
 import com.voxtube.app.ui.components.music.item.MusicCollectionCard
 import com.voxtube.app.ui.components.music.item.MusicTrackItem
 import com.voxtube.app.ui.components.music.sheet.LocalMusicMenus
 import com.voxtube.app.ui.components.music.sheet.toCollectionActionItem
-import com.voxtube.app.ui.components.shared.FlowFeedProgress
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeFeedProgress
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.flowArtistShape
 
 private val GridCellMinWidth = 150.dp
@@ -98,7 +98,7 @@ fun ArtistItemsScreen(
     Scaffold(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = artistItemsPage?.title ?: "",
                 onBack = onBackClick,
             )
@@ -111,7 +111,7 @@ fun ArtistItemsScreen(
                     .fillMaxSize(),
         ) {
             if (isLoading) {
-                FlowLoadingIndicator()
+                VoxTubeLoadingIndicator()
             } else if (artistItemsPage != null) {
                 if (artistItemsPage.items.firstOrNull() is SongItem) {
                     LazyColumn(
@@ -131,7 +131,7 @@ fun ArtistItemsScreen(
                             }
                         }
                         if (isMoreLoading) {
-                            item(key = "more_loading") { FlowFeedProgress() }
+                            item(key = "more_loading") { VoxTubeFeedProgress() }
                         }
                     }
                 } else {
@@ -169,7 +169,7 @@ fun ArtistItemsScreen(
                             )
                         }
                         if (isMoreLoading) {
-                            item(key = "more_loading") { FlowFeedProgress() }
+                            item(key = "more_loading") { VoxTubeFeedProgress() }
                         }
                     }
                 }

@@ -19,13 +19,19 @@ permissions:
   contents: read
 
 env:
-  # Certificate of the official Flow release key. IzzyOnDroid and every
-  # installed client pin this value; an APK signed with anything else cannot
-  # be installed as an update. Changing it forces every user to reinstall.
-  EXPECTED_SIGNER_SHA256: 4322294ed4caa2d4294140095818080ffe8acc1fbe3cdc76107df45c5286be40
+  # Certificate of the VoxTube release key. Installed clients pin this value;
+  # an APK signed with anything else cannot be installed as an update.
+  # Until the RELEASE_KEYSTORE_BASE64 secret is added, releases and nightlies
+  # are signed with the public fallback key in .github/signing (see its
+  # README). When you add your own key, put its certificate digest here.
+  EXPECTED_SIGNER_SHA256: 379c1a5edcdf4cde21b7677f5bd5e154cea1f5339c1c75d2cfa3e3bf153ca443
   # Certificate of the nightly key. Every nightly must carry it so each one
   # installs over the previous nightly without an uninstall.
-  EXPECTED_NIGHTLY_SIGNER_SHA256: e42225b5ab3ac68236e54567ef0c4878afbafcdd3d438fbaba343e2d70425bf0
+  EXPECTED_NIGHTLY_SIGNER_SHA256: 379c1a5edcdf4cde21b7677f5bd5e154cea1f5339c1c75d2cfa3e3bf153ca443
+  # The public fallback key, used when the keystore secrets are not set.
+  FALLBACK_KEYSTORE: .github/signing/voxtube-public.p12
+  FALLBACK_KEY_ALIAS: voxtube
+  FALLBACK_KEY_PASSWORD: voxtube-public
 
 # checks, tests, lint and build run on separate runners at the same time, and
 # both publish jobs wait for all four. The CI Gradle properties replace the
@@ -200,13 +206,18 @@ jobs:
             echo "$RELEASE_KEYSTORE_BASE64" | base64 --decode > release.keystore
             echo "signed=true" >> "$GITHUB_OUTPUT"
             echo "Release keystore decoded."
-          elif [ "${GITHUB_REF#refs/tags/v}" != "$GITHUB_REF" ]; then
-            # A tag build publishes to GitHub Releases and IzzyOnDroid. Without
-            # the keystore, app/build.gradle.kts falls back to signingConfig =
-            # null and produces UNSIGNED APKs, which cannot be installed and
-            # would break the update path for every existing user.
-            echo "::error::RELEASE_KEYSTORE_BASE64 is unavailable for a tag build. Refusing to publish unsigned APKs."
-            exit 1
+          elif [ "${{ github.event_name }}" != "pull_request" ] || [ "${{ github.event.pull_request.head.repo.full_name }}" = "${{ github.repository }}" ]; then
+            # No secret: sign with the public fallback key so the APKs install
+            # and update each other. Replace it with your own key for real
+            # distribution (.github/signing/README.md).
+            cp "$FALLBACK_KEYSTORE" release.keystore
+            {
+              echo "STORE_PASSWORD=$FALLBACK_KEY_PASSWORD"
+              echo "KEY_ALIAS=$FALLBACK_KEY_ALIAS"
+              echo "KEY_PASSWORD=$FALLBACK_KEY_PASSWORD"
+            } >> "$GITHUB_ENV"
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::RELEASE_KEYSTORE_BASE64 is not set. Signing with the public fallback key."
           else
             echo "signed=false" >> "$GITHUB_OUTPUT"
             echo "Release keystore secret is not available. Continuing with an unsigned CI build."
@@ -221,11 +232,17 @@ jobs:
           if [ -n "$NIGHTLY_KEYSTORE_BASE64" ]; then
             echo "$NIGHTLY_KEYSTORE_BASE64" | base64 --decode > nightly.keystore
             echo "signed=true" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event_name }}" = "push" ] && [ "$GITHUB_REF" = "refs/heads/main" ]; then
+          elif [ "${{ github.event_name }}" != "pull_request" ] || [ "${{ github.event.pull_request.head.repo.full_name }}" = "${{ github.repository }}" ]; then
             # Main publishes the nightly testers install; a debug-signed build
-            # could not update the previous one.
-            echo "::error::NIGHTLY_KEYSTORE_BASE64 is unavailable on a main push. Refusing to publish a debug-signed nightly."
-            exit 1
+            # could not update the previous one, so use the public fallback key.
+            cp "$FALLBACK_KEYSTORE" nightly.keystore
+            {
+              echo "NIGHTLY_STORE_PASSWORD=$FALLBACK_KEY_PASSWORD"
+              echo "NIGHTLY_KEY_ALIAS=$FALLBACK_KEY_ALIAS"
+              echo "NIGHTLY_KEY_PASSWORD=$FALLBACK_KEY_PASSWORD"
+            } >> "$GITHUB_ENV"
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::NIGHTLY_KEYSTORE_BASE64 is not set. Signing the nightly with the public fallback key."
           else
             echo "signed=false" >> "$GITHUB_OUTPUT"
             echo "Nightly keystore secret is not available. This run's nightly is debug-signed and is not published."
@@ -237,15 +254,15 @@ jobs:
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         run: >
           ./gradlew :app:assembleGithubNightly :app:assembleFossRelease
-          ${{ github.event_name == 'pull_request' && '-Pflow.prBuild=true' || '' }}
+          ${{ github.event_name == 'pull_request' && '-Pvoxtube.prBuild=true' || '' }}
           --build-cache --stacktrace
         env:
-          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          NIGHTLY_STORE_PASSWORD: ${{ secrets.NIGHTLY_STORE_PASSWORD }}
-          NIGHTLY_KEY_ALIAS: ${{ secrets.NIGHTLY_KEY_ALIAS }}
-          NIGHTLY_KEY_PASSWORD: ${{ secrets.NIGHTLY_KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD || env.STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS || env.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || env.KEY_PASSWORD }}
+          NIGHTLY_STORE_PASSWORD: ${{ secrets.NIGHTLY_STORE_PASSWORD || env.NIGHTLY_STORE_PASSWORD }}
+          NIGHTLY_KEY_ALIAS: ${{ secrets.NIGHTLY_KEY_ALIAS || env.NIGHTLY_KEY_ALIAS }}
+          NIGHTLY_KEY_PASSWORD: ${{ secrets.NIGHTLY_KEY_PASSWORD || env.NIGHTLY_KEY_PASSWORD }}
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
 
@@ -255,9 +272,9 @@ jobs:
           ./gradlew :app:assembleGithubRelease :app:assembleFossRelease
           --build-cache --stacktrace
         env:
-          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD || env.STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS || env.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || env.KEY_PASSWORD }}
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
 
@@ -328,8 +345,8 @@ jobs:
             echo "OK nightly -> $actual"
           fi
           mkdir -p dist-nightly
-          cp "$src" "dist-nightly/flow-nightly-${GITHUB_RUN_NUMBER}.apk"
-          (cd dist-nightly && sha256sum flow-nightly-*.apk | tee checksums.txt)
+          cp "$src" "dist-nightly/voxtube-nightly-${GITHUB_RUN_NUMBER}.apk"
+          (cd dist-nightly && sha256sum voxtube-nightly-*.apk | tee checksums.txt)
 
       # Unit tests run before R8; this reads the shrunk dex for Gson models and generic
       # signatures R8 could have dropped (#996, #964).
@@ -388,7 +405,7 @@ jobs:
           foss_limit=29500000
           foss_bytes=$(stat --format='%s' app/build/outputs/apk/foss/release/app-foss-arm64-v8a-release*.apk)
           if (( foss_bytes > foss_limit )); then
-            printf 'flow-foss-arm64-v8a.apk is %d bytes, over the %d byte budget.\n' "$foss_bytes" "$foss_limit" >&2
+            printf 'voxtube-foss-arm64-v8a.apk is %d bytes, over the %d byte budget.\n' "$foss_bytes" "$foss_limit" >&2
             exit 1
           fi
 
@@ -397,7 +414,7 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v7
         with:
-          name: flow-github-universal-release-apk
+          name: voxtube-github-universal-release-apk
           path: app/build/outputs/apk/github/release/app-github-universal-release*.apk
           if-no-files-found: error
           retention-days: 14
@@ -407,7 +424,7 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v7
         with:
-          name: flow-github-arm64-release-apk
+          name: voxtube-github-arm64-release-apk
           path: app/build/outputs/apk/github/release/app-github-arm64-v8a-release*.apk
           if-no-files-found: error
           retention-days: 14
@@ -417,7 +434,7 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v7
         with:
-          name: flow-github-armeabi-v7a-release-apk
+          name: voxtube-github-armeabi-v7a-release-apk
           path: app/build/outputs/apk/github/release/app-github-armeabi-v7a-release*.apk
           if-no-files-found: error
           retention-days: 14
@@ -427,7 +444,7 @@ jobs:
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v7
         with:
-          name: flow-nightly-apk
+          name: voxtube-nightly-apk
           path: dist-nightly/*
           if-no-files-found: error
           retention-days: 14
@@ -435,7 +452,7 @@ jobs:
       - name: Upload FOSS universal APK
         uses: actions/upload-artifact@v7
         with:
-          name: flow-foss-universal-release-apk
+          name: voxtube-foss-universal-release-apk
           path: app/build/outputs/apk/foss/release/app-foss-universal-release*.apk
           if-no-files-found: error
           retention-days: 14
@@ -444,7 +461,7 @@ jobs:
       - name: Upload FOSS ARM64 APK
         uses: actions/upload-artifact@v7
         with:
-          name: flow-foss-arm64-release-apk
+          name: voxtube-foss-arm64-release-apk
           path: app/build/outputs/apk/foss/release/app-foss-arm64-v8a-release*.apk
           if-no-files-found: error
           retention-days: 14
@@ -453,7 +470,7 @@ jobs:
       - name: Upload FOSS ARMv7 APK
         uses: actions/upload-artifact@v7
         with:
-          name: flow-foss-armeabi-v7a-release-apk
+          name: voxtube-foss-armeabi-v7a-release-apk
           path: app/build/outputs/apk/foss/release/app-foss-armeabi-v7a-release*.apk
           if-no-files-found: error
           retention-days: 14
@@ -464,7 +481,7 @@ jobs:
       - name: Upload R8 mappings
         uses: actions/upload-artifact@v7
         with:
-          name: flow-r8-mappings
+          name: voxtube-r8-mappings
           path: app/build/outputs/mapping/*/mapping.txt
           if-no-files-found: warn
           retention-days: 90
@@ -496,7 +513,7 @@ jobs:
       - name: Download nightly APK
         uses: actions/download-artifact@v8
         with:
-          name: flow-nightly-apk
+          name: voxtube-nightly-apk
           path: dist-nightly/
 
       - name: Move the nightly tag and replace its assets
@@ -505,16 +522,16 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          apk="flow-nightly-${GITHUB_RUN_NUMBER}.apk"
+          apk="voxtube-nightly-${GITHUB_RUN_NUMBER}.apk"
           runs="nightly-note-runs.json"
           test -f "dist-nightly/$apk"
           mkdir -p nightly-state
           previous_run="$GITHUB_RUN_NUMBER"
           if gh release view nightly >/dev/null 2>&1; then
             assets="$(gh release view nightly --json assets --jq '.assets[].name')"
-            last_apk="$(printf '%s\n' "$assets" | grep -E '^flow-nightly-[0-9]+\.apk$' | head -n 1 || true)"
+            last_apk="$(printf '%s\n' "$assets" | grep -E '^voxtube-nightly-[0-9]+\.apk$' | head -n 1 || true)"
             if [ -n "$last_apk" ]; then
-              previous_run="${last_apk#flow-nightly-}"
+              previous_run="${last_apk#voxtube-nightly-}"
               previous_run="${previous_run%.apk}"
             fi
             if printf '%s\n' "$assets" | grep -qx "$runs"; then
@@ -523,7 +540,7 @@ jobs:
           fi
           # Built before the tag moves, so a failure here leaves the previous nightly intact.
           python3 .github/scripts/nightly_notes.py \
-            --intro "Built from ${GITHUB_SHA::7} by run ${GITHUB_RUN_NUMBER}. Installs next to the stable app as Flow Nightly and updates itself from here." \
+            --intro "Built from ${GITHUB_SHA::7} by run ${GITHUB_RUN_NUMBER}. Installs next to the stable app as VoxTube Nightly and updates itself from here." \
             --run "$GITHUB_RUN_NUMBER" --previous-run "$previous_run" \
             --runs-in "nightly-state/$runs" --runs-out "dist-nightly/$runs" \
             > nightly-body.md
@@ -531,7 +548,7 @@ jobs:
             gh api -X PATCH "repos/$GH_REPO/git/refs/tags/nightly" -f sha="$GITHUB_SHA" -F force=true >/dev/null
           else
             gh release create nightly --target "$GITHUB_SHA" --prerelease --latest=false \
-              --title "Flow nightly" --notes "Rolling nightly build."
+              --title "VoxTube nightly" --notes "Rolling nightly build."
           fi
           gh release upload nightly "dist-nightly/$apk" dist-nightly/checksums.txt "dist-nightly/$runs" --clobber
           for old in $(gh release view nightly --json assets --jq '.assets[].name'); do
@@ -540,7 +557,7 @@ jobs:
             fi
           done
           gh release edit nightly --prerelease --latest=false \
-            --title "Flow nightly ${GITHUB_RUN_NUMBER}" \
+            --title "VoxTube nightly ${GITHUB_RUN_NUMBER}" \
             --notes-file nightly-body.md
 
   release:
@@ -559,28 +576,27 @@ jobs:
       - name: Download release APKs
         uses: actions/download-artifact@v8
         with:
-          pattern: flow-*-release-apk
+          pattern: voxtube-*-release-apk
           path: dist/
           merge-multiple: true
 
-      # flow.apk and flow-foss.apk are the universal builds and are a public
-      # contract: IzzyOnDroid matches release assets by file name, and the
-      # README links to them directly. Do not rename or drop them without
-      # first updating the IzzyOnDroid entry for com.voxtube.app.
+      # voxtube.apk and voxtube-foss.apk are the universal builds and are a public
+      # contract: the in-app updater and the README links match release assets
+      # by file name. Do not rename or drop them.
       - name: Rename APKs for release
         run: |
           set -euo pipefail
-          mv dist/app-github-universal-release.apk   dist/flow.apk
-          mv dist/app-foss-universal-release.apk     dist/flow-foss.apk
-          mv dist/app-github-arm64-v8a-release.apk   dist/flow-arm64-v8a.apk
-          mv dist/app-github-armeabi-v7a-release.apk dist/flow-armeabi-v7a.apk
-          mv dist/app-foss-arm64-v8a-release.apk     dist/flow-foss-arm64-v8a.apk
-          mv dist/app-foss-armeabi-v7a-release.apk   dist/flow-foss-armeabi-v7a.apk
+          mv dist/app-github-universal-release.apk   dist/voxtube.apk
+          mv dist/app-foss-universal-release.apk     dist/voxtube-foss.apk
+          mv dist/app-github-arm64-v8a-release.apk   dist/voxtube-arm64-v8a.apk
+          mv dist/app-github-armeabi-v7a-release.apk dist/voxtube-armeabi-v7a.apk
+          mv dist/app-foss-arm64-v8a-release.apk     dist/voxtube-foss-arm64-v8a.apk
+          mv dist/app-foss-armeabi-v7a-release.apk   dist/voxtube-foss-armeabi-v7a.apk
 
       - name: Generate checksums
         run: |
           cd dist
-          sha256sum flow*.apk > checksums.txt
+          sha256sum voxtube*.apk > checksums.txt
           cat checksums.txt
 
       - name: Get version from tag
@@ -592,22 +608,22 @@ jobs:
           RELEASE_VERSION: ${{ steps.get_version.outputs.VERSION }}
         run: |
           test -s release-notes.md
-          grep -Fqx "# Flow ${RELEASE_VERSION}" release-notes.md
+          grep -Fqx "# VoxTube ${RELEASE_VERSION}" release-notes.md
 
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.get_version.outputs.VERSION }}
-          name: Flow ${{ steps.get_version.outputs.VERSION }}
+          name: VoxTube ${{ steps.get_version.outputs.VERSION }}
           body_path: release-notes.md
           generate_release_notes: false
           files: |
-            dist/flow.apk
-            dist/flow-foss.apk
-            dist/flow-arm64-v8a.apk
-            dist/flow-armeabi-v7a.apk
-            dist/flow-foss-arm64-v8a.apk
-            dist/flow-foss-armeabi-v7a.apk
+            dist/voxtube.apk
+            dist/voxtube-foss.apk
+            dist/voxtube-arm64-v8a.apk
+            dist/voxtube-armeabi-v7a.apk
+            dist/voxtube-foss-arm64-v8a.apk
+            dist/voxtube-foss-armeabi-v7a.apk
             dist/checksums.txt
           draft: false
           prerelease: false

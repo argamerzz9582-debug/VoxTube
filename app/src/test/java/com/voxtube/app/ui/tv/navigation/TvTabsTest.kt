@@ -1,8 +1,8 @@
 package com.voxtube.app.ui.tv.navigation
 
 import com.google.common.truth.Truth.assertThat
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
 import com.voxtube.app.ui.components.layout.navigation.NavigationVisibility
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import org.junit.Test
 
 class TvTabsTest {
@@ -10,40 +10,40 @@ class TvTabsTest {
 
     @Test
     fun `follows the user's order and leaves Shorts and Explore off`() {
-        val order = listOf(FlowTab.Library, FlowTab.Shorts, FlowTab.Music, FlowTab.Explore, FlowTab.Home).map(FlowTab::id)
+        val order = listOf(VoxTubeTab.Library, VoxTubeTab.Shorts, VoxTubeTab.Music, VoxTubeTab.Explore, VoxTubeTab.Home).map(VoxTubeTab::id)
 
-        val tabs = tvNavigation(order, defaultTabId = FlowTab.Home.id, visibility = allOn).tabs
+        val tabs = tvNavigation(order, defaultTabId = VoxTubeTab.Home.id, visibility = allOn).tabs
 
-        assertThat(tabs.take(3)).containsExactly(FlowTab.Library, FlowTab.Music, FlowTab.Home).inOrder()
-        assertThat(tabs).containsNoneOf(FlowTab.Shorts, FlowTab.Explore)
+        assertThat(tabs.take(3)).containsExactly(VoxTubeTab.Library, VoxTubeTab.Music, VoxTubeTab.Home).inOrder()
+        assertThat(tabs).containsNoneOf(VoxTubeTab.Shorts, VoxTubeTab.Explore)
     }
 
     @Test
     fun `always shows Search, which TV has nowhere else to put`() {
-        val tabs = tvNavigation(emptyList(), FlowTab.Home.id, NavigationVisibility(search = false)).tabs
+        val tabs = tvNavigation(emptyList(), VoxTubeTab.Home.id, NavigationVisibility(search = false)).tabs
 
-        assertThat(tabs).contains(FlowTab.Search)
+        assertThat(tabs).contains(VoxTubeTab.Search)
     }
 
     @Test
     fun `hides the tabs the user hid`() {
-        val tabs = tvNavigation(emptyList(), FlowTab.Home.id, NavigationVisibility(home = false, music = false)).tabs
+        val tabs = tvNavigation(emptyList(), VoxTubeTab.Home.id, NavigationVisibility(home = false, music = false)).tabs
 
-        assertThat(tabs).containsNoneOf(FlowTab.Home, FlowTab.Music)
+        assertThat(tabs).containsNoneOf(VoxTubeTab.Home, VoxTubeTab.Music)
     }
 
     @Test
     fun `opens on the user's default tab, or the first tab when TV leaves it off`() {
-        assertThat(tvNavigation(emptyList(), FlowTab.Library.id, allOn).startTab).isEqualTo(FlowTab.Library)
+        assertThat(tvNavigation(emptyList(), VoxTubeTab.Library.id, allOn).startTab).isEqualTo(VoxTubeTab.Library)
 
-        val fromShorts = tvNavigation(emptyList(), FlowTab.Shorts.id, allOn)
+        val fromShorts = tvNavigation(emptyList(), VoxTubeTab.Shorts.id, allOn)
         assertThat(fromShorts.startTab).isEqualTo(fromShorts.tabs.first())
     }
 
     @Test
     fun `roots are the tabs plus Settings`() {
-        val navigation = tvNavigation(emptyList(), FlowTab.Home.id, allOn)
+        val navigation = tvNavigation(emptyList(), VoxTubeTab.Home.id, allOn)
 
-        assertThat(navigation.rootRoutes).containsExactlyElementsIn(navigation.tabs.map(FlowTab::route) + TV_SETTINGS_ROUTE)
+        assertThat(navigation.rootRoutes).containsExactlyElementsIn(navigation.tabs.map(VoxTubeTab::route) + TV_SETTINGS_ROUTE)
     }
 }

@@ -33,7 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBarDefaults
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBarDefaults
 import com.voxtube.app.ui.components.shared.dpadDownTo
 import com.voxtube.app.ui.theme.ArtworkScrimAffordance
 import com.voxtube.app.ui.theme.ArtworkScrimContent
@@ -71,7 +71,7 @@ fun MusicHeroTopBar(
             AnimatedVisibility(visible = showTitle, enter = fadeIn(), exit = fadeOut()) {
                 Text(
                     text = title,
-                    style = FlowTopBarDefaults.titleStyle,
+                    style = VoxTubeTopBarDefaults.titleStyle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )

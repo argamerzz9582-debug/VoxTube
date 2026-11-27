@@ -25,8 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowColorSwatch
-import com.voxtube.app.ui.components.shared.FlowColorSwatchDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeColorSwatch
+import com.voxtube.app.ui.components.shared.VoxTubeColorSwatchDefaults
 
 /**
  * A labelled row of colour swatches ending in a custom one. The custom swatch wears the chosen
@@ -49,7 +49,7 @@ internal fun SubtitleColorRow(
         Text(label, style = MaterialTheme.typography.labelLarge)
         LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             items(swatches) { color ->
-                FlowColorSwatch(
+                VoxTubeColorSwatch(
                     color = color.copy(alpha = alpha),
                     selected = !isOff && sameRgb(selected, color),
                     onClick = { onSelect(color) },
@@ -57,7 +57,7 @@ internal fun SubtitleColorRow(
             }
             item {
                 if (isCustom) {
-                    FlowColorSwatch(color = selected.copy(alpha = alpha), selected = true, onClick = onCustom)
+                    VoxTubeColorSwatch(color = selected.copy(alpha = alpha), selected = true, onClick = onCustom)
                 } else {
                     CustomSwatch(onClick = onCustom)
                 }
@@ -71,10 +71,10 @@ private fun CustomSwatch(onClick: () -> Unit) {
     Box(
         modifier =
             Modifier
-                .size(FlowColorSwatchDefaults.Size)
+                .size(VoxTubeColorSwatchDefaults.Size)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.surfaceContainerHighest)
-                .border(FlowColorSwatchDefaults.BorderWidth, MaterialTheme.colorScheme.outlineVariant, CircleShape)
+                .border(VoxTubeColorSwatchDefaults.BorderWidth, MaterialTheme.colorScheme.outlineVariant, CircleShape)
                 .selectable(selected = false, role = Role.Button, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
@@ -82,7 +82,7 @@ private fun CustomSwatch(onClick: () -> Unit) {
             imageVector = Icons.Rounded.Palette,
             contentDescription = stringResource(R.string.subtitle_custom_color),
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.size(FlowColorSwatchDefaults.IconSize),
+            modifier = Modifier.size(VoxTubeColorSwatchDefaults.IconSize),
         )
     }
 }

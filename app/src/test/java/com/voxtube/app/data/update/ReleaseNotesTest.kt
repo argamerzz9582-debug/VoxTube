@@ -9,11 +9,11 @@ import org.junit.Test
 class ReleaseNotesTest {
     private val body =
         """
-        # Flow v2.3.0
+        # VoxTube v2.3.0
 
         **Release date:** 2026-09-28
 
-        Enjoying Flow? Consider supporting it on [Patreon](https://patreon.com/A_EDev) to keep it free.
+        Read the [full changelog](https://example.com/changelog) for details.
 
         ## New features
 
@@ -34,9 +34,9 @@ class ReleaseNotesTest {
         assertThat(notes.intro).hasSize(1)
         assertThat(notes.intro.single().spans)
             .containsExactly(
-                Plain("Enjoying Flow? Consider supporting it on "),
-                Link("Patreon", "https://patreon.com/A_EDev"),
-                Plain(" to keep it free."),
+                Plain("Read the "),
+                Link("full changelog", "https://example.com/changelog"),
+                Plain(" for details."),
             ).inOrder()
     }
 
@@ -72,8 +72,12 @@ class ReleaseNotesTest {
 
     @Test
     fun `bare links become links`() {
-        val spans = parseInline("See https://github.com/Flow-Tube/Flow/releases for more").spans
+        val spans = parseInline("See https://github.com/argamerzz9582-debug/VoxTube/releases for more").spans
 
-        assertThat(spans[1]).isEqualTo(Link("https://github.com/Flow-Tube/Flow/releases", "https://github.com/Flow-Tube/Flow/releases"))
+        assertThat(
+            spans[1],
+        ).isEqualTo(
+            Link("https://github.com/argamerzz9582-debug/VoxTube/releases", "https://github.com/argamerzz9582-debug/VoxTube/releases"),
+        )
     }
 }

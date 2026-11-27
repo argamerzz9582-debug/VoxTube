@@ -1,6 +1,6 @@
 package com.voxtube.app.ui
 
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.screens.search.SEARCH_ROUTE_PATTERN
 import org.junit.Assert.assertEquals
 import org.junit.Test

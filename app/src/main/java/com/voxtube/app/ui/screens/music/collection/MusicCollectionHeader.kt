@@ -60,8 +60,8 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
 import com.voxtube.app.ui.components.shared.LocalSharedArtworkImages
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.connectedButtonShapes
 import com.voxtube.app.ui.components.shared.flowHeroArtworkSize
 import com.voxtube.app.ui.components.shared.sharedArtwork
@@ -202,7 +202,7 @@ internal fun MusicCollectionLoadingHero(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         CollectionArtwork(url = "", artworkKey = artworkKey, modifier = Modifier.size(flowHeroArtworkSize()))
-        FlowLoadingIndicator()
+        VoxTubeLoadingIndicator()
     }
 }
 

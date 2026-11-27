@@ -40,7 +40,7 @@ import com.voxtube.app.widget.core.image.WidgetImageLoader
 import com.voxtube.app.widget.core.image.WidgetShape
 import com.voxtube.app.widget.core.state.NowPlayingSnapshot
 import com.voxtube.app.widget.core.state.nowPlayingSnapshotFlow
-import com.voxtube.app.widget.core.theme.FlowGlanceTheme
+import com.voxtube.app.widget.core.theme.VoxTubeGlanceTheme
 import com.voxtube.app.widget.core.theme.artworkColorProviders
 import com.voxtube.app.widget.core.theme.dpToPx
 import com.voxtube.app.widget.core.theme.widgetColorsFlow
@@ -65,7 +65,7 @@ class TurntableWidget : GlanceAppWidget() {
     ) {
         val snapshot = context.nowPlayingSnapshotFlow { NowPlayingWidgetPublisher.hasPublished }.first()?.copy(isPlaying = true)
         val colors = widgetColorsFlow(context).first()
-        provideContent { FlowGlanceTheme(colors) { TurntableContent(snapshot = snapshot, disc = null) } }
+        provideContent { VoxTubeGlanceTheme(colors) { TurntableContent(snapshot = snapshot, disc = null) } }
     }
 
     override suspend fun provideGlance(
@@ -96,7 +96,7 @@ class TurntableWidget : GlanceAppWidget() {
             val artworkColors by produceState<ColorProviders?>(initialArtworkColors, snapshot?.artworkUrl, style, colors) {
                 value = artworkColorProviders(context, snapshot?.artworkUrl, style, colors)
             }
-            FlowGlanceTheme(artworkColors ?: colors) {
+            VoxTubeGlanceTheme(artworkColors ?: colors) {
                 TurntableContent(snapshot = snapshot, disc = disc)
             }
         }

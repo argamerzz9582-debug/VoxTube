@@ -36,9 +36,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.voxtube.app.R
 import com.voxtube.app.notification.BackgroundWorkPolicy
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 
 private val FootnotePadding = 16.dp
@@ -71,9 +71,9 @@ internal fun AlertsStep(
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
         header()
         item(key = "rows") {
-            Column(verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap)) {
+            Column(verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap)) {
                 if (asksPermission) {
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = stringResource(R.string.onboarding_alerts_allow),
                         supportingText =
                             if (notificationsAllowed) {
@@ -95,7 +95,7 @@ internal fun AlertsStep(
                         },
                     )
                 }
-                FlowSwitchRow(
+                VoxTubeSwitchRow(
                     title = stringResource(R.string.onboarding_alerts_new_videos),
                     supportingText = stringResource(R.string.onboarding_alerts_new_videos_summary),
                     leadingIcon = Icons.Outlined.NewReleases,
@@ -103,7 +103,7 @@ internal fun AlertsStep(
                     onCheckedChange = onNewVideoAlertsChange,
                     shape = flowRowGroupShape(offset, rowCount),
                 )
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.onboarding_alerts_background),
                     supportingText = if (backgroundAllowed) allowedText else stringResource(R.string.onboarding_alerts_background_summary),
                     leadingIcon = Icons.Outlined.BatterySaver,

@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.backup.ImportKind
 import com.voxtube.app.data.backup.ImportSource
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 
@@ -37,14 +37,14 @@ internal fun ImportSourceSheet(
         sheetState = rememberFlowSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
-        FlowSheetHeader(
+        VoxTubeSheetHeader(
             title = stringResource(source.titleRes),
             onClose = onDismiss,
             showDragHandle = false,
         )
-        FlowRowGroup(Modifier.verticalScroll(rememberScrollState()).padding(bottom = SheetBottomPadding)) {
+        VoxTubeRowGroup(Modifier.verticalScroll(rememberScrollState()).padding(bottom = SheetBottomPadding)) {
             source.kinds.forEachIndexed { index, kind ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(kind.titleRes),
                     // Outside Default, say that a master backup reaches every profile it holds, not just this one.
                     supportingText =

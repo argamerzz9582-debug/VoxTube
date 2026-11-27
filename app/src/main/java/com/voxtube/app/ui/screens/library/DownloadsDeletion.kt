@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import kotlinx.coroutines.flow.collectLatest
 
 /**
@@ -52,7 +52,7 @@ internal fun DeleteDownloadsDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.delete_download_dialog_title)) },
         text = {

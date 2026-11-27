@@ -12,8 +12,8 @@ import com.voxtube.app.data.local.ViewHistory
 import com.voxtube.app.data.local.WatchProgressStore
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.ChannelMemoryRepository
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.NeighbourChannelsRepository
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.YouTubeRepository
 import com.voxtube.app.data.shorts.ShortsFeedRepository
 import com.voxtube.app.data.subscriptions.HomeSubscriptionUploads
@@ -260,7 +260,7 @@ class HomeViewModel
             }
 
             viewModelScope.launch {
-                FlowNeuroEngine.initialize(context)
+                VoxTubeNeuroEngine.initialize(context)
             }
 
             viewModelScope.launch {
@@ -447,7 +447,7 @@ class HomeViewModel
             val knownIds = _uiState.value.shorts.mapTo(HashSet()) { it.id }
             val ids = feedImpressionIds(visibleIds, knownIds)
             if (ids.isEmpty()) return
-            viewModelScope.launch { FlowNeuroEngine.recordFeedImpressions(ids) }
+            viewModelScope.launch { VoxTubeNeuroEngine.recordFeedImpressions(ids) }
         }
 
         // Viewport impressions: count only items actually scrolled into view.
@@ -456,7 +456,7 @@ class HomeViewModel
             val knownIds = _uiState.value.videos.mapTo(HashSet()) { it.id }
             val ids = feedImpressionIds(visibleKeys, knownIds)
             if (ids.isEmpty()) return
-            viewModelScope.launch { FlowNeuroEngine.recordFeedImpressions(ids) }
+            viewModelScope.launch { VoxTubeNeuroEngine.recordFeedImpressions(ids) }
             val state = _uiState.value
             val neighbourChannelIds =
                 ids

@@ -41,10 +41,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.ui.components.shared.FlowReorderButtons
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
 import com.voxtube.app.ui.components.shared.MediaThumbnail
 import com.voxtube.app.ui.components.shared.ReorderHandle
+import com.voxtube.app.ui.components.shared.VoxTubeReorderButtons
 import com.voxtube.app.ui.components.shared.card.LocalVideoCardPreferences
 import com.voxtube.app.ui.components.shared.onMenuKey
 import com.voxtube.app.ui.components.shared.quickactions.VideoQuickActionsBottomSheet
@@ -198,7 +198,7 @@ private fun QueueRowContent(
             }
 
             if (LocalDpadNavigation.current) {
-                FlowReorderButtons(onMoveUp = onMoveUp, onMoveDown = onMoveDown)
+                VoxTubeReorderButtons(onMoveUp = onMoveUp, onMoveDown = onMoveDown)
             } else {
                 val reorderLabel = stringResource(R.string.reorder_queue_item)
                 Box(

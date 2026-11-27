@@ -21,9 +21,9 @@ import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.info
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.screens.settings.index.LocalMediaIndex
 
 /** What Local media leaves out: voice notes and recordings, short audio, and folders the viewer hid. */
@@ -55,7 +55,7 @@ internal fun LocalMediaSettingsScreen(
             } else {
                 hidden.forEach { folder ->
                     row("local_media.folder.${folder.id}") { shape ->
-                        FlowNavRow(
+                        VoxTubeNavRow(
                             title = folder.name,
                             onClick = { viewModel.showFolder(folder.id) },
                             leadingIcon = Icons.Outlined.FolderOff,
@@ -73,9 +73,9 @@ internal fun LocalMediaSettingsScreen(
     }
 
     if (pickingMinimum) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.local_setting_min_audio),
-            options = LocalMediaSettings.MIN_AUDIO_CHOICES.map { FlowChoice(it, minimumLabel(it)) },
+            options = LocalMediaSettings.MIN_AUDIO_CHOICES.map { VoxTubeChoice(it, minimumLabel(it)) },
             selected = settings.minAudioSeconds,
             onSelect = viewModel::setMinAudioSeconds,
             onDismiss = { pickingMinimum = false },

@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.shared.FlowErrorState
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
 
 /** The artist route when the page could not be loaded: the error with Retry, under a bar that leads back. */
 @Composable
@@ -23,9 +23,9 @@ fun ArtistPageError(
         modifier = modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
-        topBar = { FlowTopBar(title = "", onBack = onBackClick) },
+        topBar = { VoxTubeTopBar(title = "", onBack = onBackClick) },
     ) { padding ->
-        FlowErrorState(
+        VoxTubeErrorState(
             error = stringResource(R.string.error_failed_to_load_artist),
             onRetry = onRetry,
             modifier = Modifier.padding(padding),

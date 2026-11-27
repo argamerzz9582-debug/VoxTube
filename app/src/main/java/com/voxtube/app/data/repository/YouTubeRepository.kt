@@ -450,7 +450,7 @@ class YouTubeRepository
             val info = getChannelInfo(channelId) ?: return
             val tags = info.keywords
             if (tags.isEmpty() && info.description.isNullOrBlank()) return
-            com.voxtube.app.data.recommendation.FlowNeuroEngine
+            com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
                 .onChannelTagsLearned(context, channelId, tags, info.description)
         }
 

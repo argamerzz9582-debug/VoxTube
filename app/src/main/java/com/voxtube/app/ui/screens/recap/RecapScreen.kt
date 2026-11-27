@@ -32,12 +32,12 @@ import com.voxtube.app.R
 import com.voxtube.app.data.stats.RecapPeriod
 import com.voxtube.app.data.stats.RecapSummary
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowFilterChip
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -69,7 +69,7 @@ internal fun RecapScreen(
     Scaffold(
         contentWindowInsets = WindowInsets(0.dp),
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = { FlowTopBar(title = stringResource(R.string.recap_title), onBack = onBack) },
+        topBar = { VoxTubeTopBar(title = stringResource(R.string.recap_title), onBack = onBack) },
     ) { padding ->
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Adaptive(CardMinWidth),
@@ -87,13 +87,13 @@ internal fun RecapScreen(
             when {
                 state.loading -> {
                     item(key = "loading", span = StaggeredGridItemSpan.FullLine) {
-                        FlowLoadingIndicator(Modifier.fillMaxWidth().height(LoadingHeight))
+                        VoxTubeLoadingIndicator(Modifier.fillMaxWidth().height(LoadingHeight))
                     }
                 }
 
                 state.isEmpty -> {
                     item(key = "empty", span = StaggeredGridItemSpan.FullLine) {
-                        FlowEmptyState(
+                        VoxTubeEmptyState(
                             title = stringResource(R.string.recap_empty_title),
                             subtitle = stringResource(R.string.recap_empty_body),
                             icon = Icons.Outlined.Insights,
@@ -120,7 +120,7 @@ private fun LazyStaggeredGridScope.recapCards(
 ) {
     if (summary.isEmpty) {
         item(key = "period-empty", span = StaggeredGridItemSpan.FullLine) {
-            FlowEmptyState(title = stringResource(R.string.recap_period_empty), icon = Icons.Outlined.Insights)
+            VoxTubeEmptyState(title = stringResource(R.string.recap_period_empty), icon = Icons.Outlined.Insights)
         }
         return
     }
@@ -202,18 +202,18 @@ private fun RecapControls(
         }
     val scopes =
         listOf(
-            FlowToggleOption(RecapScope.MONTH, stringResource(R.string.recap_period_month)),
-            FlowToggleOption(RecapScope.YEAR, stringResource(R.string.recap_period_year)),
-            FlowToggleOption(RecapScope.ALL, stringResource(R.string.recap_period_all)),
+            VoxTubeToggleOption(RecapScope.MONTH, stringResource(R.string.recap_period_month)),
+            VoxTubeToggleOption(RecapScope.YEAR, stringResource(R.string.recap_period_year)),
+            VoxTubeToggleOption(RecapScope.ALL, stringResource(R.string.recap_period_all)),
         )
     val sources =
         listOf(
-            FlowToggleOption(RecapSource.ALL, stringResource(R.string.recap_source_all)),
-            FlowToggleOption(RecapSource.VIDEO, stringResource(R.string.recap_source_video)),
-            FlowToggleOption(RecapSource.MUSIC, stringResource(R.string.recap_source_music)),
+            VoxTubeToggleOption(RecapSource.ALL, stringResource(R.string.recap_source_all)),
+            VoxTubeToggleOption(RecapSource.VIDEO, stringResource(R.string.recap_source_video)),
+            VoxTubeToggleOption(RecapSource.MUSIC, stringResource(R.string.recap_source_music)),
         )
     Column(verticalArrangement = Arrangement.spacedBy(ControlSpacing)) {
-        FlowConnectedToggleGroup(options = scopes, selected = scope, onSelected = { selected ->
+        VoxTubeConnectedToggleGroup(options = scopes, selected = scope, onSelected = { selected ->
             when (selected) {
                 RecapScope.MONTH -> state.months.firstOrNull()?.let { onPeriod(RecapPeriod.Month(it)) }
                 RecapScope.YEAR -> state.years.firstOrNull()?.let { onPeriod(RecapPeriod.Year(it)) }
@@ -224,7 +224,7 @@ private fun RecapControls(
             is RecapPeriod.Month -> {
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(ControlSpacing)) {
                     items(state.months, key = { it.toString() }) { month ->
-                        FlowFilterChip(
+                        VoxTubeFilterChip(
                             label = "${month.month.getDisplayName(TextStyle.SHORT_STANDALONE, locale)} ${month.year}",
                             selected = month == period.month,
                             onClick = { onPeriod(RecapPeriod.Month(month)) },
@@ -236,7 +236,7 @@ private fun RecapControls(
             is RecapPeriod.Year -> {
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(ControlSpacing)) {
                     items(state.years, key = { it }) { year ->
-                        FlowFilterChip(
+                        VoxTubeFilterChip(
                             label = year.toString(),
                             selected = year == period.year,
                             onClick = { onPeriod(RecapPeriod.Year(year)) },
@@ -249,6 +249,6 @@ private fun RecapControls(
                 Unit
             }
         }
-        FlowConnectedToggleGroup(options = sources, selected = state.source, onSelected = onSource)
+        VoxTubeConnectedToggleGroup(options = sources, selected = state.source, onSelected = onSource)
     }
 }

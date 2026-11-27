@@ -7,7 +7,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.BuildConfig
 import com.voxtube.app.R
-import com.voxtube.app.data.recommendation.FlowPersona
+import com.voxtube.app.data.recommendation.VoxTubePersona
 import com.voxtube.app.ui.components.settings.SettingsDestination
 import com.voxtube.app.ui.components.settings.SettingsGroupScope
 import com.voxtube.app.ui.components.settings.SettingsListScope
@@ -15,8 +15,8 @@ import com.voxtube.app.ui.components.settings.SettingsTarget
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.shared.DeepFlowState
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.deepFlowStatus
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 import com.voxtube.app.ui.screens.settings.index.HomeIndex
@@ -24,7 +24,7 @@ import com.voxtube.app.ui.screens.settings.index.HomeIndex
 @Immutable
 internal data class SettingsHomeState(
     val selected: SettingsDestination?,
-    val persona: FlowPersona?,
+    val persona: VoxTubePersona?,
     val deepFlow: DeepFlowState,
     /** Shown on the update row while a check the user started is running; null when idle. */
     val updateCheckingLabel: String?,
@@ -34,7 +34,6 @@ internal data class SettingsHomeState(
 
 internal class SettingsHomeActions(
     val onOpen: (SettingsTarget) -> Unit,
-    val onOpenDonations: () -> Unit,
     val onDeepFlowChange: (Boolean) -> Unit,
     val onDurationClick: () -> Unit,
     val onSaveHistoryChange: (Boolean) -> Unit,
@@ -71,7 +70,7 @@ internal fun SettingsListScope.homeContent(
     val deepFlowHint = R.string.deep_flow_long_press_hint.takeUnless { onTv }
     group(key = "home.engine", header = R.string.settings_flow_engine_header, footer = deepFlowHint) {
         row(HomeIndex.deepFlow.key) { shape ->
-            FlowSwitchRow(
+            VoxTubeSwitchRow(
                 title = stringResource(HomeIndex.deepFlow.title),
                 supportingText = deepFlowStatus(state.deepFlow) ?: stringResource(R.string.deep_flow_mode_subtitle),
                 checked = state.deepFlow.active,
@@ -81,7 +80,7 @@ internal fun SettingsListScope.homeContent(
             )
         }
         row(HomeIndex.deepFlowDuration.key) { shape ->
-            FlowNavRow(
+            VoxTubeNavRow(
                 title = stringResource(HomeIndex.deepFlowDuration.title),
                 supportingText = deepFlowDurationLabel(state.deepFlow.expireHours),
                 onClick = actions.onDurationClick,
@@ -146,7 +145,6 @@ internal fun SettingsListScope.homeContent(
                 icon = HomeRowIcons.Updates,
             )
         }
-        nav(HomeIndex.support, onClick = actions.onOpenDonations, icon = HomeRowIcons.Support)
     }
 }
 

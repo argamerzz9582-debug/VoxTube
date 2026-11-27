@@ -15,7 +15,7 @@ import com.voxtube.app.player.EnhancedPlayerManager
 import com.voxtube.app.player.GlobalPlayerState
 import com.voxtube.app.player.PopupPlayerWindow
 import com.voxtube.app.player.error.PlayerDiagnostics
-import com.voxtube.app.utils.FlowCrashHandler
+import com.voxtube.app.utils.VoxTubeCrashHandler
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -73,7 +73,7 @@ class VideoPlayerService : MediaSessionService() {
         setMediaNotificationProvider(notificationProvider)
         recordForegroundStartFailures("video-service")
 
-        FlowCrashHandler.recordPhase("video-service", "onCreate")
+        VoxTubeCrashHandler.recordPhase("video-service", "onCreate")
         serviceLog("onCreate")
 
         EnhancedPlayerManager.getInstance().initialize(applicationContext)
@@ -107,7 +107,7 @@ class VideoPlayerService : MediaSessionService() {
         startId: Int,
     ): Int {
         val startResult = super.onStartCommand(intent, flags, startId)
-        FlowCrashHandler.recordPhase("video-service", "onStartCommand action=${intent?.action}")
+        VoxTubeCrashHandler.recordPhase("video-service", "onStartCommand action=${intent?.action}")
         serviceLog("onStartCommand action=${intent?.action}")
 
         when (intent?.action) {

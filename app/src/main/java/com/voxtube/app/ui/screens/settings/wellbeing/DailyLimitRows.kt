@@ -14,9 +14,9 @@ import com.voxtube.app.data.wellbeing.DailyLimitSettings
 import com.voxtube.app.ui.components.settings.SettingsListScope
 import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
 import com.voxtube.app.ui.components.stats.spentTimeLabel
 import com.voxtube.app.ui.screens.settings.index.WellbeingIndex
 
@@ -51,10 +51,10 @@ internal fun DailyLimitMinutesDialog(
     onSelect: (Int) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowChoiceDialog(
+    VoxTubeChoiceDialog(
         title = stringResource(R.string.daily_limit_time_title),
         description = stringResource(R.string.daily_limit_time_description),
-        options = DailyLimitPolicy.minuteChoices.map { FlowChoice(it, spentTimeLabel(it * MILLIS_PER_MINUTE)) },
+        options = DailyLimitPolicy.minuteChoices.map { VoxTubeChoice(it, spentTimeLabel(it * MILLIS_PER_MINUTE)) },
         selected = selected,
         onSelect = onSelect,
         onDismiss = onDismiss,
@@ -70,7 +70,7 @@ internal fun DailyLimitWaitDialog(
     onDismiss: () -> Unit,
 ) {
     val secondsLeft = rememberSecondsUntil(pending.waitEndsAt)
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.daily_limit_wait_title)) },
         text = { Text(stringResource(R.string.daily_limit_wait_body)) },

@@ -71,13 +71,13 @@ fun MediaChannelSubscribeRow(
         },
         supportingContent = supportingText?.let { text -> { Text(text) } },
         trailingContent = {
-            FlowSubscribeButton(
+            VoxTubeSubscribeButton(
                 isSubscribed = subscribed,
                 onSubscribeClick = onToggle,
                 onUnsubscribeClick = onToggle,
                 isNotificationsEnabled = notifying,
                 onNotificationChange = onNotificationsChange,
-                size = FlowSubscribeButtonSize.Compact,
+                size = VoxTubeSubscribeButtonSize.Compact,
                 onAddNote = organize?.onAddNote,
                 onManageGroups = organize?.onManageGroups,
             )

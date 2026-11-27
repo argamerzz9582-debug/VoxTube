@@ -27,7 +27,7 @@ import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.notice
 import com.voxtube.app.ui.components.settings.option
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.BackupIndex
 
 internal fun SettingsListScope.exportPage(onExport: (ExportKind) -> Unit) {
@@ -59,7 +59,7 @@ internal class AutoBackupState(
     val lastRun: String?,
     val running: Boolean,
     val severalProfiles: Boolean,
-    val frequencyOptions: List<FlowToggleOption<AutoBackupFrequency>>,
+    val frequencyOptions: List<VoxTubeToggleOption<AutoBackupFrequency>>,
     val typeLabels: Map<AutoBackupType, String>,
 )
 

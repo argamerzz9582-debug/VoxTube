@@ -29,7 +29,7 @@ import com.voxtube.app.ui.components.shared.CommentSortFilter
 import com.voxtube.app.ui.components.shared.CommentThreadState
 import com.voxtube.app.ui.components.shared.CommentsTimedFollow
 import com.voxtube.app.ui.components.shared.CommentsTimedFollowRow
-import com.voxtube.app.ui.components.shared.FlowCommentsList
+import com.voxtube.app.ui.components.shared.VoxTubeCommentsList
 import com.voxtube.app.ui.components.shared.rememberMediaArtworkTint
 
 /**
@@ -104,7 +104,7 @@ fun PlayerCommentsPanel(
             CommentsTimedFollowRow(timedFollow)
         }
         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f))
-        FlowCommentsList(
+        VoxTubeCommentsList(
             comments = comments,
             isLoading = isLoading,
             listState = listState,

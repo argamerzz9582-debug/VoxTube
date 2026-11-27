@@ -7,8 +7,8 @@ import com.voxtube.app.data.local.ViewHistory
 import com.voxtube.app.data.localmedia.LocalSubtitles
 import com.voxtube.app.data.model.SponsorBlockSegment
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.InteractionType
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.SponsorBlockRepository
 import com.voxtube.app.data.repository.YouTubeRepository
 import com.voxtube.app.data.video.OfflineSubtitleStore
@@ -198,7 +198,7 @@ internal class PlaybackSessionApplier(
     private fun recordWatchClick(video: Video) {
         scope.launch(ioDispatcher) {
             try {
-                FlowNeuroEngine.onVideoInteraction(context, video, InteractionType.CLICK)
+                VoxTubeNeuroEngine.onVideoInteraction(context, video, InteractionType.CLICK)
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to record interaction", e)
             }

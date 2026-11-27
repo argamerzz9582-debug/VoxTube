@@ -39,13 +39,13 @@ import com.voxtube.app.ui.components.categories.CategoryPagedGrid
 import com.voxtube.app.ui.components.categories.CategoryShelfPage
 import com.voxtube.app.ui.components.categories.CategorySubTabMenu
 import com.voxtube.app.ui.components.categories.CategoryTabBar
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.rememberFeedGridLayout
 import com.voxtube.app.ui.components.shared.FeedGridSkeleton
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
 import com.voxtube.app.utils.RegionCatalog
 
 /**
@@ -71,7 +71,7 @@ fun CategoriesScreen(
 
     val shelfState = rememberLazyGridState()
     val gridState = rememberLazyGridState()
-    OnTabReselected(FlowTab.Explore.route) {
+    OnTabReselected(VoxTubeTab.Explore.route) {
         val isGridSection =
             uiState.sectionKind == ExploreSectionKind.CHART || uiState.sectionKind == ExploreSectionKind.GRID
         if (uiState.openShelfTitle == null && isGridSection) gridState.animateScrollToItem(0) else shelfState.animateScrollToItem(0)
@@ -81,7 +81,7 @@ fun CategoriesScreen(
 
     Scaffold(
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = uiState.openShelfTitle ?: stringResource(R.string.categories_title),
                 onBack = uiState.openShelfTitle?.let { { viewModel.closeShelf() } },
                 actions = {
@@ -132,7 +132,7 @@ fun CategoriesScreen(
                     }
 
                     uiState.error != null -> {
-                        FlowErrorState(error = uiState.error!!, onRetry = viewModel::refresh)
+                        VoxTubeErrorState(error = uiState.error!!, onRetry = viewModel::refresh)
                     }
 
                     uiState.sectionKind == ExploreSectionKind.CHART -> {
@@ -175,8 +175,8 @@ fun CategoriesScreen(
     }
 
     if (showRegionDialog) {
-        val regionOptions = remember { RegionCatalog.sorted().map { (code, name) -> FlowChoice(code, name) } }
-        FlowChoiceDialog(
+        val regionOptions = remember { RegionCatalog.sorted().map { (code, name) -> VoxTubeChoice(code, name) } }
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.settings_region_dialog_title),
             options = regionOptions,
             selected = trendingRegion,

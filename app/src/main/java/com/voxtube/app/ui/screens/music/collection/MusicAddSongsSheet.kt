@@ -28,9 +28,9 @@ import com.voxtube.app.R
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.ui.components.music.item.MusicItemDensity
 import com.voxtube.app.ui.components.music.item.MusicTrackItem
-import com.voxtube.app.ui.components.shared.FlowSearchField
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
-import com.voxtube.app.ui.components.shared.FlowSpinner
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.theme.Dimensions
 
@@ -56,7 +56,7 @@ internal fun MusicAddSongsSheet(
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
         )
-        FlowSearchField(
+        VoxTubeSearchField(
             query = search.query,
             onQueryChange = onQueryChange,
             placeholder = stringResource(R.string.ui_search_songs_to_add),
@@ -68,7 +68,7 @@ internal fun MusicAddSongsSheet(
         Box(modifier = Modifier.fillMaxWidth().heightIn(min = ResultsMinHeight), contentAlignment = Alignment.TopCenter) {
             when {
                 search.isSearching && search.results.isEmpty() -> {
-                    FlowSpinner(modifier = Modifier.padding(top = 32.dp))
+                    VoxTubeSpinner(modifier = Modifier.padding(top = 32.dp))
                 }
 
                 search.query.isNotBlank() && search.results.isEmpty() -> {
@@ -81,7 +81,7 @@ internal fun MusicAddSongsSheet(
                 }
 
                 else -> {
-                    LazyColumn(verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap)) {
+                    LazyColumn(verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap)) {
                         itemsIndexed(search.results, key = { index, track -> "${track.videoId}#$index" }) { index, track ->
                             val added = track.videoId in inPlaylist
                             val tint = if (added) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant

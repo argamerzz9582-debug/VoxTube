@@ -15,7 +15,7 @@ import com.voxtube.app.data.newmusic.MusicArtistLookup
 import com.voxtube.app.player.EnhancedMusicPlayerManager
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
 import com.voxtube.app.ui.components.shared.ChannelAvatarStack
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsDefaults
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsGroup
@@ -93,7 +93,7 @@ private fun artistRow(
     val navigator = LocalMediaNavigator.current
     val ringColor = MaterialTheme.colorScheme.surfaceContainerHigh
     return QuickActionRow(artist.id.orEmpty()) { shape ->
-        FlowNavRow(
+        VoxTubeNavRow(
             title = artist.name,
             onClick = {
                 navigator.openArtist(artist.id.orEmpty())

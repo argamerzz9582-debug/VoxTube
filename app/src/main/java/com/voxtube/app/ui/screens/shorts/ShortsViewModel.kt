@@ -16,8 +16,8 @@ import com.voxtube.app.data.model.Comment
 import com.voxtube.app.data.model.ShortVideo
 import com.voxtube.app.data.model.toVideo
 import com.voxtube.app.data.recommendation.BlockedChannelNames
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.InteractionType
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.YouTubeRepository
 import com.voxtube.app.data.shorts.ShortAudioTrack
 import com.voxtube.app.data.shorts.ShortPlaybackStreams
@@ -355,7 +355,7 @@ class ShortsViewModel
         fun wantMoreLikeThis(short: ShortVideo) {
             viewModelScope.launch(PerformanceDispatcher.networkIO) {
                 try {
-                    FlowNeuroEngine.onVideoInteraction(short.toVideo(), InteractionType.LIKED)
+                    VoxTubeNeuroEngine.onVideoInteraction(short.toVideo(), InteractionType.LIKED)
                     val page = feed.chainFrom(short)
                     if (queue?.mergeDiscovery(page) != ShortsQueueChange.None) publishQueue()
                     _snackbarMessage.value = context.getString(R.string.shorts_showing_more_like_this)
@@ -385,7 +385,7 @@ class ShortsViewModel
                     val channelId = metadata?.channelId.orEmpty().ifBlank { short.channelId }
                     check(channelId.isNotBlank()) { context.getString(R.string.channel_metadata_unavailable) }
                     val channelName = metadata?.channelName.orEmpty().ifBlank { short.channelName }
-                    FlowNeuroEngine.blockChannel(context, channelId)
+                    VoxTubeNeuroEngine.blockChannel(context, channelId)
                     blockedNames.remember(channelId, channelName)
                     videoStats.onAction(LedgerAction.BLOCK_CHANNEL)
                     dropChannel(channelId)
@@ -407,7 +407,7 @@ class ShortsViewModel
             viewModelScope.launch(PerformanceDispatcher.networkIO) {
                 try {
                     val video = short.toVideo()
-                    FlowNeuroEngine.markNotInterested(video)
+                    VoxTubeNeuroEngine.markNotInterested(video)
                     videoStats.onAction(LedgerAction.NOT_INTERESTED)
                     FeedInvalidationBus.emit(FeedInvalidationBus.Event.NotInterested(video.id, video.channelId))
 

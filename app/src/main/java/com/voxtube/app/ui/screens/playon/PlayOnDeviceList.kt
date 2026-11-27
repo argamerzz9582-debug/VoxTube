@@ -30,8 +30,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.PlayingWaveform
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSpinner
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.deviceKindIcon
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsGroup
@@ -75,7 +75,7 @@ internal fun DeviceList(
                 listOfNotNull(
                     if (rows.foldOffline) {
                         QuickActionRow("offline") { shape ->
-                            FlowNavRow(
+                            VoxTubeNavRow(
                                 title = stringResource(R.string.play_on_not_available),
                                 onClick = { showOffline = !showOffline },
                                 supportingText = if (showOffline) null else rows.offline.joinToString { it.name },
@@ -106,7 +106,7 @@ private fun DeviceRow(
 ) {
     val active = device.did == state.active
     val moving = device.did == state.movingTo
-    FlowNavRow(
+    VoxTubeNavRow(
         title = deviceName(device),
         onClick = { if (!state.moving) onPick(device) },
         supportingContent = { DeviceStatus(device, moving, failed = device.did == state.failed, carded = device.did == state.carded) },
@@ -153,7 +153,7 @@ private fun DeviceTile(
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun MovingIndicator() {
-    FlowSpinner(modifier = Modifier.size(TrailingSize))
+    VoxTubeSpinner(modifier = Modifier.size(TrailingSize))
 }
 
 /**

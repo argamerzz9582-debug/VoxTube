@@ -30,11 +30,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.sync2.service.LinkedDevice
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsGroup
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsSheet
@@ -71,7 +71,7 @@ internal fun LinkedDeviceSheet(
     when (mode) {
         SheetMode.SHEET -> {
             QuickActionsSheet(onDismiss = onDismiss) { sheet ->
-                FlowSheetHeader(
+                VoxTubeSheetHeader(
                     title = names[device.id] ?: device.name,
                     subtitle = status,
                     leadingIcon = icon,
@@ -84,7 +84,7 @@ internal fun LinkedDeviceSheet(
                     rows =
                         listOf(
                             QuickActionRow("name") { shape ->
-                                FlowNavRow(
+                                VoxTubeNavRow(
                                     title = stringResource(R.string.linked_device_name),
                                     onClick = { sheet.hideThen { mode = SheetMode.RENAME } },
                                     supportingText = device.name,
@@ -95,13 +95,13 @@ internal fun LinkedDeviceSheet(
                         ),
                 )
                 if (!device.thisDevice) {
-                    FlowSectionHeader(stringResource(R.string.linked_consent_title))
-                    FlowConnectedToggleGroup(
+                    VoxTubeSectionHeader(stringResource(R.string.linked_consent_title))
+                    VoxTubeConnectedToggleGroup(
                         options =
                             listOf(
-                                FlowToggleOption(null, stringResource(R.string.linked_consent_ask)),
-                                FlowToggleOption(true, stringResource(R.string.linked_consent_allowed)),
-                                FlowToggleOption(false, stringResource(R.string.linked_consent_declined)),
+                                VoxTubeToggleOption(null, stringResource(R.string.linked_consent_ask)),
+                                VoxTubeToggleOption(true, stringResource(R.string.linked_consent_allowed)),
+                                VoxTubeToggleOption(false, stringResource(R.string.linked_consent_declined)),
                             ),
                         selected = consent,
                         onSelected = onConsent,
@@ -113,7 +113,7 @@ internal fun LinkedDeviceSheet(
                         rows =
                             listOf(
                                 QuickActionRow("remove") { shape ->
-                                    FlowNavRow(
+                                    VoxTubeNavRow(
                                         title = stringResource(R.string.linked_remove_from_group),
                                         onClick = { sheet.hideThen { mode = SheetMode.REMOVE } },
                                         leadingIcon = Icons.Outlined.Delete,

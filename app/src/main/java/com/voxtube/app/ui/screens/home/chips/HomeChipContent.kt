@@ -22,8 +22,8 @@ import com.voxtube.app.ui.components.PlaylistCard
 import com.voxtube.app.ui.components.PlaylistCardLayout
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.shared.FeedGridSkeleton
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
 import com.voxtube.app.ui.components.shared.dpadFocusGroup
 import com.voxtube.app.ui.screens.home.HomeFeedGrid
 import com.voxtube.app.ui.screens.home.HomeUiState
@@ -81,7 +81,7 @@ internal fun HomeChipContent(
         }
 
         ChipFeed.Empty -> {
-            FlowEmptyState(
+            VoxTubeEmptyState(
                 title = stringResource(R.string.home_chip_empty_title),
                 subtitle = stringResource(R.string.home_chip_empty_body),
                 icon = Icons.Outlined.VideoLibrary,
@@ -90,7 +90,7 @@ internal fun HomeChipContent(
         }
 
         ChipFeed.Failed -> {
-            FlowErrorState(
+            VoxTubeErrorState(
                 error = stringResource(R.string.home_chip_failed),
                 onRetry = onRefresh,
                 modifier = belowHeader,

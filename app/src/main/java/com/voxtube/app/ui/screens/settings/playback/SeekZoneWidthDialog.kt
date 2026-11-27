@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.local.DoubleTapSeekZone
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 
 private const val DIAGRAM_ASPECT_RATIO = 16f / 9f
 
@@ -78,7 +78,7 @@ internal fun SeekZoneWidthDialog(
     onSelect: (DoubleTapSeekZone) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(text = stringResource(R.string.player_settings_seek_zone_width)) },
         text = {

@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowMorphingPortrait
+import com.voxtube.app.ui.components.shared.VoxTubeMorphingPortrait
 
 private val PortraitSize = 56.dp
 private val ChipSpacing = 8.dp
@@ -53,7 +53,7 @@ internal fun ReadyStep(
             hero(HeroReady)
             state.subscribed.take(PortraitOrbit.size).forEachIndexed { index, channel ->
                 val offset = PortraitOrbit[index]
-                FlowMorphingPortrait(
+                VoxTubeMorphingPortrait(
                     imageUrl = channel.thumbnailUrl,
                     fallback = channel.name,
                     diameter = PortraitSize,

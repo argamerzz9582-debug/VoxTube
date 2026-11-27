@@ -21,8 +21,8 @@ import com.voxtube.app.ui.components.FeedGridLayout
 import com.voxtube.app.ui.components.home.ContinueWatchingShelf
 import com.voxtube.app.ui.components.home.ContinueWatchingShelfDefaults
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.shared.FlowFeedProgress
 import com.voxtube.app.ui.components.shared.MediaShortsShelf
+import com.voxtube.app.ui.components.shared.VoxTubeFeedProgress
 import com.voxtube.app.ui.components.shared.card.MediaVideoCard
 import com.voxtube.app.ui.components.shared.dpadFocusGroup
 import com.voxtube.app.ui.components.shared.feedStripCardWidth
@@ -147,7 +147,7 @@ internal fun HomeFeedGrid(
                 contentType = HomeContentType.LoadingMore,
                 span = { GridItemSpan(maxLineSpan) },
             ) {
-                FlowFeedProgress()
+                VoxTubeFeedProgress()
             }
         }
 
@@ -167,7 +167,7 @@ internal fun HomeFeedGrid(
                 contentType = HomeContentType.EndFooter,
                 span = { GridItemSpan(maxLineSpan) },
             ) {
-                FlowFeedFooter(
+                VoxTubeFeedFooter(
                     videoCount = videos.size,
                     onRefresh = onRefresh,
                 )

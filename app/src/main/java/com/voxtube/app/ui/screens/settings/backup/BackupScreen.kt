@@ -33,10 +33,10 @@ import com.voxtube.app.data.local.LocalDataManager.AutoBackupType
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.SettingsTabs
 import com.voxtube.app.ui.components.settings.notice
-import com.voxtube.app.ui.components.shared.FlowConfirmDialog
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowProgressBanner
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeConfirmDialog
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeProgressBanner
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.utils.rememberDocumentPickerAvailable
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -72,7 +72,7 @@ internal fun BackupScreen(
     val start: (Boolean) -> Unit = { started -> if (!started) scope.launch { snackbarHostState.showSnackbar(busy) } }
 
     (operation as? BackupOperation.Confirming)?.let { confirming ->
-        FlowConfirmDialog(
+        VoxTubeConfirmDialog(
             title = stringResource(R.string.master_restore_confirm_title),
             text = confirming.message,
             confirmLabel = stringResource(R.string.master_restore_confirm),
@@ -129,10 +129,10 @@ internal fun BackupScreen(
             severalProfiles = severalProfiles,
             frequencyOptions =
                 listOf(
-                    FlowToggleOption(AutoBackupFrequency.NONE, stringResource(R.string.auto_backup_frequency_none)),
-                    FlowToggleOption(AutoBackupFrequency.DAILY, stringResource(R.string.auto_backup_frequency_daily)),
-                    FlowToggleOption(AutoBackupFrequency.WEEKLY, stringResource(R.string.auto_backup_frequency_weekly)),
-                    FlowToggleOption(AutoBackupFrequency.MONTHLY, stringResource(R.string.auto_backup_frequency_monthly)),
+                    VoxTubeToggleOption(AutoBackupFrequency.NONE, stringResource(R.string.auto_backup_frequency_none)),
+                    VoxTubeToggleOption(AutoBackupFrequency.DAILY, stringResource(R.string.auto_backup_frequency_daily)),
+                    VoxTubeToggleOption(AutoBackupFrequency.WEEKLY, stringResource(R.string.auto_backup_frequency_weekly)),
+                    VoxTubeToggleOption(AutoBackupFrequency.MONTHLY, stringResource(R.string.auto_backup_frequency_monthly)),
                 ),
             typeLabels =
                 mapOf(
@@ -149,20 +149,20 @@ internal fun BackupScreen(
         snackbarHostState = snackbarHostState,
         header = {
             Column {
-                FlowConnectedToggleGroup(
+                VoxTubeConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(
+                            VoxTubeToggleOption(
                                 SettingsTabs.BACKUP_EXPORT,
                                 stringResource(R.string.settings_backup_tab_export),
                                 Icons.Outlined.FileUpload,
                             ),
-                            FlowToggleOption(
+                            VoxTubeToggleOption(
                                 SettingsTabs.BACKUP_IMPORT,
                                 stringResource(R.string.settings_backup_tab_import),
                                 Icons.Outlined.FileDownload,
                             ),
-                            FlowToggleOption(
+                            VoxTubeToggleOption(
                                 SettingsTabs.BACKUP_AUTO,
                                 stringResource(R.string.settings_backup_tab_auto),
                                 Icons.Outlined.Schedule,
@@ -173,7 +173,7 @@ internal fun BackupScreen(
                     modifier = Modifier.padding(bottom = HeaderSpacing),
                 )
                 (operation as? BackupOperation.Running)?.let { running ->
-                    FlowProgressBanner(
+                    VoxTubeProgressBanner(
                         headline = running.headline,
                         current = running.current,
                         total = running.total,

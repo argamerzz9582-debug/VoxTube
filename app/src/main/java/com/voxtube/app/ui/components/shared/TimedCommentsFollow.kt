@@ -60,7 +60,7 @@ fun CommentsTimedFollowRow(
     follow: CommentsTimedFollow,
     modifier: Modifier = Modifier,
 ) {
-    FlowSwitchRow(
+    VoxTubeSwitchRow(
         title = stringResource(R.string.comments_timed_follow),
         checked = follow.enabled,
         onCheckedChange = follow.onEnabledChange,

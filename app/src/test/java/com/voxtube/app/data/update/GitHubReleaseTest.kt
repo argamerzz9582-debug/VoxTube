@@ -11,16 +11,16 @@ class GitHubReleaseTest {
         digest: String? = null,
     ) = GitHubAsset(name, "https://example.test/$name", size, digest)
 
-    private val splits = listOf(asset("flow-armeabi-v7a.apk"), asset("flow-foss-arm64-v8a.apk"), asset("flow-arm64-v8a.apk"))
+    private val splits = listOf(asset("voxtube-armeabi-v7a.apk"), asset("voxtube-foss-arm64-v8a.apk"), asset("voxtube-arm64-v8a.apk"))
 
     @Test
     fun `an arm64 device gets the arm64 github build`() {
-        assertThat(selectApk(splits, listOf("arm64-v8a", "armeabi-v7a"))?.name).isEqualTo("flow-arm64-v8a.apk")
+        assertThat(selectApk(splits, listOf("arm64-v8a", "armeabi-v7a"))?.name).isEqualTo("voxtube-arm64-v8a.apk")
     }
 
     @Test
     fun `an arm32 device gets the armv7 build`() {
-        assertThat(selectApk(splits, listOf("armeabi-v7a", "armeabi"))?.name).isEqualTo("flow-armeabi-v7a.apk")
+        assertThat(selectApk(splits, listOf("armeabi-v7a", "armeabi"))?.name).isEqualTo("voxtube-armeabi-v7a.apk")
     }
 
     @Test
@@ -30,12 +30,12 @@ class GitHubReleaseTest {
 
     @Test
     fun `an unpublished abi falls back to the universal build`() {
-        assertThat(selectApk(splits + asset("flow.apk"), listOf("x86_64"))?.name).isEqualTo("flow.apk")
+        assertThat(selectApk(splits + asset("voxtube.apk"), listOf("x86_64"))?.name).isEqualTo("voxtube.apk")
     }
 
     @Test
     fun `a foss build is never picked`() {
-        assertThat(selectApk(listOf(asset("flow-foss.apk"), asset("flow.apk")), listOf("arm64-v8a"))?.name).isEqualTo("flow.apk")
+        assertThat(selectApk(listOf(asset("voxtube-foss.apk"), asset("voxtube.apk")), listOf("arm64-v8a"))?.name).isEqualTo("voxtube.apk")
     }
 
     @Test
@@ -52,7 +52,7 @@ class GitHubReleaseTest {
             """
             {"tag_name":"v2.3.0","body":"## New features","html_url":"https://github.com/Flow-Tube/Flow/releases/tag/v2.3.0",
              "published_at":"2026-09-28T10:00:00Z","draft":false,
-             "assets":[{"name":"flow-arm64-v8a.apk","browser_download_url":"https://example.test/a","size":17613193,
+             "assets":[{"name":"voxtube-arm64-v8a.apk","browser_download_url":"https://example.test/a","size":17613193,
                         "digest":"sha256:F900AB"}]}
             """.trimIndent()
 
@@ -60,7 +60,7 @@ class GitHubReleaseTest {
 
         assertThat(release?.version).isEqualTo("2.3.0")
         assertThat(release?.publishedAt).isEqualTo(Instant.parse("2026-09-28T10:00:00Z"))
-        assertThat(release?.apk).isEqualTo(ReleaseApk("flow-arm64-v8a.apk", "https://example.test/a", 17613193, "f900ab"))
+        assertThat(release?.apk).isEqualTo(ReleaseApk("voxtube-arm64-v8a.apk", "https://example.test/a", 17613193, "f900ab"))
     }
 
     @Test
@@ -72,18 +72,18 @@ class GitHubReleaseTest {
 
     @Test
     fun `a newer nightly run is offered with its own apk`() {
-        val nightly = GitHubRelease(tagName = "nightly", assets = listOf(asset("flow-nightly-1430.apk"), asset("checksums.txt")))
+        val nightly = GitHubRelease(tagName = "nightly", assets = listOf(asset("voxtube-nightly-1430.apk"), asset("checksums.txt")))
 
         val release = nightly.toNightlyReleaseIfNewer(currentRun = 1428)
 
         assertThat(release?.version).isEqualTo("nightly.1430")
-        assertThat(release?.apk?.name).isEqualTo("flow-nightly-1430.apk")
+        assertThat(release?.apk?.name).isEqualTo("voxtube-nightly-1430.apk")
     }
 
     @Test
     fun `nightly release notes are filtered to runs newer than the installed one`() {
         val body = "Built from abc by run 1430.\n\n# Run 1430\n\n## Fixed\n- New fix (#2)\n\n# Run 1427\n\n## New\n- Old feature (#1)"
-        val nightly = GitHubRelease(tagName = "nightly", body = body, assets = listOf(asset("flow-nightly-1430.apk")))
+        val nightly = GitHubRelease(tagName = "nightly", body = body, assets = listOf(asset("voxtube-nightly-1430.apk")))
 
         val notes = nightly.toNightlyReleaseIfNewer(currentRun = 1428)?.notes
 
@@ -92,7 +92,7 @@ class GitHubReleaseTest {
 
     @Test
     fun `a nightly is dated by its apk because the rolling release keeps its first date`() {
-        val apk = GitHubAsset("flow-nightly-1430.apk", "https://example.test/a", 1, null, updatedAt = "2026-11-04T13:32:28Z")
+        val apk = GitHubAsset("voxtube-nightly-1430.apk", "https://example.test/a", 1, null, updatedAt = "2026-11-04T13:32:28Z")
         val nightly = GitHubRelease(tagName = "nightly", publishedAt = "2026-09-29T11:39:22Z", assets = listOf(apk))
 
         assertThat(nightly.toNightlyReleaseIfNewer(currentRun = 1428)?.publishedAt).isEqualTo(Instant.parse("2026-11-04T13:32:28Z"))
@@ -101,7 +101,7 @@ class GitHubReleaseTest {
     @Test
     fun `a nightly apk without a date falls back to the release date`() {
         val nightly =
-            GitHubRelease(tagName = "nightly", publishedAt = "2026-09-29T11:39:22Z", assets = listOf(asset("flow-nightly-1430.apk")))
+            GitHubRelease(tagName = "nightly", publishedAt = "2026-09-29T11:39:22Z", assets = listOf(asset("voxtube-nightly-1430.apk")))
 
         assertThat(nightly.toNightlyReleaseIfNewer(currentRun = 1428)?.publishedAt).isEqualTo(Instant.parse("2026-09-29T11:39:22Z"))
     }
@@ -115,7 +115,7 @@ class GitHubReleaseTest {
 
     @Test
     fun `the running nightly or an older one is not an update`() {
-        val nightly = GitHubRelease(tagName = "nightly", assets = listOf(asset("flow-nightly-1428.apk")))
+        val nightly = GitHubRelease(tagName = "nightly", assets = listOf(asset("voxtube-nightly-1428.apk")))
 
         assertThat(nightly.toNightlyReleaseIfNewer(currentRun = 1428)).isNull()
         assertThat(nightly.toNightlyReleaseIfNewer(currentRun = 1500)).isNull()
@@ -123,20 +123,20 @@ class GitHubReleaseTest {
 
     @Test
     fun `a local nightly build never offers an update`() {
-        val nightly = GitHubRelease(tagName = "nightly", assets = listOf(asset("flow-nightly-1430.apk")))
+        val nightly = GitHubRelease(tagName = "nightly", assets = listOf(asset("voxtube-nightly-1430.apk")))
 
         assertThat(nightly.toNightlyReleaseIfNewer(currentRun = 0)).isNull()
     }
 
     @Test
     fun `a nightly release without a nightly apk offers nothing`() {
-        val nightly = GitHubRelease(tagName = "nightly", assets = listOf(asset("flow.apk"), asset("flow-arm64-v8a.apk")))
+        val nightly = GitHubRelease(tagName = "nightly", assets = listOf(asset("voxtube.apk"), asset("voxtube-arm64-v8a.apk")))
 
         assertThat(nightly.toNightlyReleaseIfNewer(currentRun = 1)).isNull()
     }
 
     @Test
     fun `the stable updater never picks a nightly apk`() {
-        assertThat(selectApk(listOf(asset("flow-nightly-1430.apk")), listOf("arm64-v8a"))).isNull()
+        assertThat(selectApk(listOf(asset("voxtube-nightly-1430.apk")), listOf("arm64-v8a"))).isNull()
     }
 }

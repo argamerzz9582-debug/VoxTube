@@ -57,12 +57,15 @@ class EmbeddedTags(
                 when (entry) {
                     is MdtaMetadataEntry -> {
                         if (entry.typeIndicator == MdtaMetadataEntry.TYPE_INDICATOR_STRING) {
-                            FlowTagFields.fieldFromMdtaKey(entry.key)?.let { fields.putIfAbsent(it, String(entry.value, Charsets.UTF_8)) }
+                            VoxTubeTagFields
+                                .fieldFromMdtaKey(
+                                    entry.key,
+                                )?.let { fields.putIfAbsent(it, String(entry.value, Charsets.UTF_8)) }
                         }
                     }
 
                     is InternalFrame -> {
-                        if (entry.domain == FlowTagFields.NAMESPACE) fields.putIfAbsent(entry.description, entry.text)
+                        if (entry.domain == VoxTubeTagFields.NAMESPACE) fields.putIfAbsent(entry.description, entry.text)
                     }
 
                     is TextInformationFrame -> {
@@ -82,9 +85,9 @@ class EmbeddedTags(
                     }
                 }
             }
-            val title = frames[FRAME_TITLE] ?: fields[FlowTagFields.TITLE]
-            if (title != null) fields.putIfAbsent(FlowTagFields.TITLE, title)
-            val flow = FlowTagFields.decode(fields)?.fillFromFrames(frames, comment)
+            val title = frames[FRAME_TITLE] ?: fields[VoxTubeTagFields.TITLE]
+            if (title != null) fields.putIfAbsent(VoxTubeTagFields.TITLE, title)
+            val flow = VoxTubeTagFields.decode(fields)?.fillFromFrames(frames, comment)
             return EmbeddedTags(
                 flow = flow,
                 title = title,

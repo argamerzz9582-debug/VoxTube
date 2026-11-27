@@ -13,7 +13,7 @@ import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.notice
 import com.voxtube.app.ui.screens.settings.index.WidgetsIndex
-import com.voxtube.app.widget.core.FlowWidgets
+import com.voxtube.app.widget.core.VoxTubeWidgets
 import kotlinx.coroutines.launch
 
 /** Every Flow widget, each one tap from the launcher's own add-widget dialog. */
@@ -36,7 +36,7 @@ internal fun WidgetsSettingsScreen(
     ) {
         if (!canPin) notice("widgets.unsupported", text = { unsupported })
         group(key = "widgets.add", header = R.string.settings_widgets_add_header, footer = R.string.settings_widgets_footer) {
-            FlowWidgets.catalog.forEach { widget ->
+            VoxTubeWidgets.catalog.forEach { widget ->
                 nav(
                     WidgetsIndex.entryFor(widget),
                     onClick = {

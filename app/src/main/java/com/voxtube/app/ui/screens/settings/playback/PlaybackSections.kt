@@ -21,9 +21,9 @@ import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.slider
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 import com.voxtube.app.ui.screens.settings.index.PlaybackCrossfadeIndex
 import com.voxtube.app.ui.screens.settings.index.PlaybackGesturesIndex
@@ -48,7 +48,7 @@ internal fun SettingsListScope.playbackSections(
         switch(PlaybackIndex.keepPlayingAfterSwipe, viewModel.keepPlayingAfterSwipe, viewModel::setKeepPlayingAfterSwipe)
         if (state.backgroundRestricted) {
             row("playback.background_restricted") { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.playback_background_restricted_title),
                     supportingText = stringResource(R.string.playback_background_restricted_subtitle),
                     leadingIcon = Icons.Outlined.BatteryAlert,
@@ -236,8 +236,11 @@ private fun SettingsListScope.watchPageSection(
             summary = stringResource(R.string.content_settings_related_card_style_subtitle),
             options =
                 listOf(
-                    FlowToggleOption(PlayerRelatedCardStyle.COMPACT, stringResource(R.string.content_settings_related_card_compact)),
-                    FlowToggleOption(PlayerRelatedCardStyle.FULL_WIDTH, stringResource(R.string.content_settings_related_card_full_width)),
+                    VoxTubeToggleOption(PlayerRelatedCardStyle.COMPACT, stringResource(R.string.content_settings_related_card_compact)),
+                    VoxTubeToggleOption(
+                        PlayerRelatedCardStyle.FULL_WIDTH,
+                        stringResource(R.string.content_settings_related_card_full_width),
+                    ),
                 ),
             selected = selected,
             onSelected = viewModel::setRelatedCardStyle,
@@ -251,10 +254,10 @@ private fun SettingsListScope.watchPageSection(
             summary = stringResource(R.string.content_settings_video_title_lines_subtitle),
             options =
                 listOf(
-                    FlowToggleOption(1, stringResource(R.string.content_settings_title_lines_1)),
-                    FlowToggleOption(2, stringResource(R.string.content_settings_title_lines_2)),
-                    FlowToggleOption(3, stringResource(R.string.content_settings_title_lines_3)),
-                    FlowToggleOption(UNLIMITED_TITLE_LINES, stringResource(R.string.content_settings_title_lines_unlimited)),
+                    VoxTubeToggleOption(1, stringResource(R.string.content_settings_title_lines_1)),
+                    VoxTubeToggleOption(2, stringResource(R.string.content_settings_title_lines_2)),
+                    VoxTubeToggleOption(3, stringResource(R.string.content_settings_title_lines_3)),
+                    VoxTubeToggleOption(UNLIMITED_TITLE_LINES, stringResource(R.string.content_settings_title_lines_unlimited)),
                 ),
             selected = selected,
             onSelected = viewModel::setTitleLines,
@@ -279,7 +282,7 @@ private fun SettingsListScope.shortsPlayerSection(
     openDialog: (PlaybackDialog) -> Unit,
 ) = group(key = "playback.shorts", header = R.string.settings_section_shorts_player) {
     row(PlaybackShortsIndex.disableShortsPlayer.key) { shape ->
-        FlowSwitchRow(
+        VoxTubeSwitchRow(
             title = stringResource(PlaybackShortsIndex.disableShortsPlayer.title),
             supportingText = stringResource(R.string.content_settings_disable_shorts_player_subtitle),
             checked = state.disableShortsPlayer || !state.shortsContent,

@@ -39,8 +39,8 @@ import com.voxtube.app.ui.components.settings.SettingsPreviewSheet
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
 import com.voxtube.app.ui.components.shared.MediaMiniBarDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.PlayerAppearanceIndex
 
 internal enum class MusicMiniSheet { COVER_SHAPES, COVER_PAUSED, BAR_PROGRESS, BUTTONS, BACKGROUND }
@@ -54,15 +54,15 @@ internal class MusicMiniSettings {
     var coverShape by mutableStateOf(MiniCoverShape.MORPHING)
     var coverShapes by mutableStateOf(emptyList<CoverShape>())
     var pausedShape by mutableStateOf<CoverShape?>(CoverShape.CIRCLE)
-    var coverShapeOptions by mutableStateOf(emptyList<FlowToggleOption<MiniCoverShape>>())
-    var coverMotionOptions by mutableStateOf(emptyList<FlowToggleOption<MiniCoverMotion>>())
+    var coverShapeOptions by mutableStateOf(emptyList<VoxTubeToggleOption<MiniCoverShape>>())
+    var coverMotionOptions by mutableStateOf(emptyList<VoxTubeToggleOption<MiniCoverMotion>>())
     var coverShapesLabel by mutableStateOf("")
     var pausedShapeLabel by mutableStateOf("")
     var barProgressLabel by mutableStateOf("")
     var buttonsLabel by mutableStateOf("")
     var backgroundLabel by mutableStateOf("")
-    var coverTapOptions by mutableStateOf(emptyList<FlowToggleOption<MiniCoverTap>>())
-    var longPressOptions by mutableStateOf(emptyList<FlowToggleOption<MiniLongPress>>())
+    var coverTapOptions by mutableStateOf(emptyList<VoxTubeToggleOption<MiniCoverTap>>())
+    var longPressOptions by mutableStateOf(emptyList<VoxTubeToggleOption<MiniLongPress>>())
     var sheet by mutableStateOf<MusicMiniSheet?>(null)
 }
 
@@ -77,14 +77,14 @@ internal fun rememberMusicMiniSettings(viewModel: PlayerAppearanceViewModel): Mu
     settings.pausedShape = pausedShape
     settings.coverShapeOptions =
         listOf(
-            FlowToggleOption(MiniCoverShape.MORPHING, stringResource(R.string.player_appearance_mini_cover_morphing)),
-            FlowToggleOption(MiniCoverShape.CIRCLE, stringResource(R.string.player_appearance_mini_cover_circle)),
+            VoxTubeToggleOption(MiniCoverShape.MORPHING, stringResource(R.string.player_appearance_mini_cover_morphing)),
+            VoxTubeToggleOption(MiniCoverShape.CIRCLE, stringResource(R.string.player_appearance_mini_cover_circle)),
         )
     settings.coverMotionOptions =
         listOf(
-            FlowToggleOption(MiniCoverMotion.ON_PLAY, stringResource(R.string.player_appearance_mini_cover_motion_on_play)),
-            FlowToggleOption(MiniCoverMotion.ALWAYS, stringResource(R.string.player_appearance_mini_cover_motion_always)),
-            FlowToggleOption(MiniCoverMotion.STILL, stringResource(R.string.player_appearance_mini_cover_motion_still)),
+            VoxTubeToggleOption(MiniCoverMotion.ON_PLAY, stringResource(R.string.player_appearance_mini_cover_motion_on_play)),
+            VoxTubeToggleOption(MiniCoverMotion.ALWAYS, stringResource(R.string.player_appearance_mini_cover_motion_always)),
+            VoxTubeToggleOption(MiniCoverMotion.STILL, stringResource(R.string.player_appearance_mini_cover_motion_still)),
         )
     settings.coverShapesLabel = pluralStringResource(R.plurals.player_appearance_cover_shapes_count, coverShapes.size, coverShapes.size)
     settings.pausedShapeLabel = stringResource(pausedShape?.let { coverShapeLabel(it) } ?: R.string.player_appearance_cover_paused_keep)
@@ -97,15 +97,15 @@ internal fun rememberMusicMiniSettings(viewModel: PlayerAppearanceViewModel): Mu
     settings.buttonsLabel = buttonNames.joinToString(", ").ifEmpty { stringResource(R.string.player_appearance_mini_buttons_none) }
     settings.coverTapOptions =
         listOf(
-            FlowToggleOption(MiniCoverTap.OPEN, stringResource(R.string.player_appearance_mini_cover_tap_open)),
-            FlowToggleOption(MiniCoverTap.PLAY_PAUSE, stringResource(R.string.player_appearance_mini_cover_tap_play)),
+            VoxTubeToggleOption(MiniCoverTap.OPEN, stringResource(R.string.player_appearance_mini_cover_tap_open)),
+            VoxTubeToggleOption(MiniCoverTap.PLAY_PAUSE, stringResource(R.string.player_appearance_mini_cover_tap_play)),
         )
     settings.longPressOptions =
         listOf(
-            FlowToggleOption(MiniLongPress.NOTHING, stringResource(R.string.player_appearance_mini_long_press_nothing)),
-            FlowToggleOption(MiniLongPress.OPTIONS, stringResource(R.string.player_appearance_mini_long_press_options)),
-            FlowToggleOption(MiniLongPress.LIKE, stringResource(R.string.player_appearance_mini_long_press_like)),
-            FlowToggleOption(MiniLongPress.QUEUE, stringResource(R.string.player_appearance_mini_long_press_queue)),
+            VoxTubeToggleOption(MiniLongPress.NOTHING, stringResource(R.string.player_appearance_mini_long_press_nothing)),
+            VoxTubeToggleOption(MiniLongPress.OPTIONS, stringResource(R.string.player_appearance_mini_long_press_options)),
+            VoxTubeToggleOption(MiniLongPress.LIKE, stringResource(R.string.player_appearance_mini_long_press_like)),
+            VoxTubeToggleOption(MiniLongPress.QUEUE, stringResource(R.string.player_appearance_mini_long_press_queue)),
         )
     return settings
 }

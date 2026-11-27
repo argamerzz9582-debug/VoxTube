@@ -24,7 +24,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.profile.Profile
 import com.voxtube.app.data.profile.ProfileSwitchGate
 import com.voxtube.app.data.profile.displayName
-import com.voxtube.app.ui.components.shared.FlowSpinner
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 
 private val SwitchingAvatarSize = 96.dp
 private val ContentSpacing = 24.dp
@@ -53,7 +53,7 @@ fun ProfileSwitchingScreen(profile: Profile?) {
                     textAlign = TextAlign.Center,
                 )
             }
-            FlowSpinner()
+            VoxTubeSpinner()
         }
     }
 }

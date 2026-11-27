@@ -20,7 +20,7 @@ import com.voxtube.app.ui.components.music.header.MusicSectionAction
 import com.voxtube.app.ui.components.music.header.MusicSectionHeader
 import com.voxtube.app.ui.components.music.item.MusicItemDensity
 import com.voxtube.app.ui.components.music.item.MusicTrackItem
-import com.voxtube.app.ui.components.shared.FlowSpinner
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.theme.Dimensions
 
@@ -45,7 +45,7 @@ internal fun LazyListScope.collectionSuggestions(suggestions: CollectionSuggesti
     }
     if (state.isLoading) {
         item(key = "suggestions-loading", contentType = "loading") {
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { FlowSpinner() }
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { VoxTubeSpinner() }
         }
         return
     }

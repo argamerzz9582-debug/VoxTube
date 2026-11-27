@@ -8,7 +8,7 @@
         <activity
             android:name="com.voxtube.app.discord.DiscordLoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.Flow" />
+            android:theme="@style/Theme.VoxTube" />
 
         <receiver
             android:name="com.voxtube.app.updater.UpdateInstallReceiver"

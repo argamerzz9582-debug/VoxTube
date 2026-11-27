@@ -19,11 +19,11 @@ import com.voxtube.app.ui.components.settings.SettingsListScope
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.shared.ChannelOrganizeActions
 import com.voxtube.app.ui.components.shared.ChannelOrganizeTarget
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowQuickSearchChips
-import com.voxtube.app.ui.components.shared.FlowSearchField
 import com.voxtube.app.ui.components.shared.MediaChannelSubscribeRow
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeQuickSearchChips
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
 import com.voxtube.app.utils.formatSubscriberCount
 
@@ -41,7 +41,7 @@ internal fun DiscoverChannelsScreen(
 
     SettingsPage(title = stringResource(R.string.discover_channels_title), onBack = onBack, highlight = highlight) {
         item("discover.search") {
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = query,
                 onQueryChange = viewModel::onQueryChange,
                 placeholder = stringResource(R.string.onboarding_channels_search_placeholder),
@@ -53,7 +53,7 @@ internal fun DiscoverChannelsScreen(
         }
         if (state.quickSearches.isNotEmpty()) {
             item("discover.quick") {
-                FlowQuickSearchChips(searches = state.quickSearches, query = query, onQueryChange = viewModel::onQueryChange)
+                VoxTubeQuickSearchChips(searches = state.quickSearches, query = query, onQueryChange = viewModel::onQueryChange)
             }
         }
         if (query.isBlank()) suggestions(state, viewModel) else results(state, query, viewModel)
@@ -140,12 +140,12 @@ private fun SettingsListScope.results(
     val results = state.results
     when {
         results == null -> {
-            item("discover.loading") { FlowLoadingIndicator(Modifier.fillMaxWidth().height(LoadingHeight)) }
+            item("discover.loading") { VoxTubeLoadingIndicator(Modifier.fillMaxWidth().height(LoadingHeight)) }
         }
 
         results.isEmpty() -> {
             item("discover.none") {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(R.string.onboarding_channels_no_results, query),
                     icon = Icons.Outlined.PersonSearch,
                 )

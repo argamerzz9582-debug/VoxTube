@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.player.state.SubtitleOption
-import com.voxtube.app.ui.components.shared.FlowDropdownFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeDropdownFilterChip
 
 /** Picks which caption track the transcript is read from, without touching the video's subtitles. */
 @Composable
@@ -34,7 +34,7 @@ internal fun TranscriptLanguageMenu(
     val selected = tracks.firstOrNull { it.url == selectedTrackUrl }
 
     Box {
-        FlowDropdownFilterChip(
+        VoxTubeDropdownFilterChip(
             label = selected?.label ?: stringResource(R.string.transcript_language),
             selected = selected != null,
             onClick = { expanded = true },

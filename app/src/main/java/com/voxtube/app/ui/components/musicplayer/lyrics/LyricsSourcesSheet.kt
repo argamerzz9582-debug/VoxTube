@@ -34,7 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.lyrics.LyricsCandidate
-import com.voxtube.app.ui.components.shared.FlowSpinner
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
@@ -73,7 +73,7 @@ internal fun LyricsSourcesSheet(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(14.dp),
                     ) {
-                        FlowSpinner(
+                        VoxTubeSpinner(
                             modifier = Modifier.size(30.dp),
                             color = MaterialTheme.colorScheme.primary,
                         )
@@ -119,7 +119,7 @@ internal fun LyricsSourcesSheet(
                                             .padding(vertical = 10.dp),
                                     contentAlignment = Alignment.Center,
                                 ) {
-                                    FlowSpinner(
+                                    VoxTubeSpinner(
                                         modifier = Modifier.size(26.dp),
                                         color = MaterialTheme.colorScheme.primary,
                                     )

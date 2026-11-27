@@ -36,8 +36,8 @@ import kotlinx.coroutines.runBlocking
 class PlayerFactory {
     companion object {
         private const val TAG = "PlayerFactory"
-        private const val EVENT_LOG_TAG = "FlowVideoEvents"
-        private const val STATS_LOG_TAG = "FlowPlaybackStats"
+        private const val EVENT_LOG_TAG = "VoxTubeVideoEvents"
+        private const val STATS_LOG_TAG = "VoxTubePlaybackStats"
     }
 
     private class CachedPrefs(

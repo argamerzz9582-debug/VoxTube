@@ -22,12 +22,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.voxtube.app.R
 import com.voxtube.app.innertube.pages.MoodAndGenres
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.music.section.MoodCategorySection
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
 import com.voxtube.app.ui.components.shared.ShimmerHost
 import com.voxtube.app.ui.components.shared.ShimmerMoodButton
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
 import com.voxtube.app.ui.components.shared.flowGridColumns
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +45,7 @@ fun MoodsAndGenresScreen(
 
     Scaffold(
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = stringResource(R.string.section_moods_and_genres),
                 onBack = onBackClick,
             )
@@ -93,14 +93,14 @@ fun MoodsAndGenresScreen(
                 }
 
                 error != null && moodAndGenresList == null -> {
-                    FlowErrorState(
+                    VoxTubeErrorState(
                         error = error ?: stringResource(R.string.unknown_error),
                         onRetry = { viewModel.retry() },
                     )
                 }
 
                 moodAndGenresList.isNullOrEmpty() -> {
-                    FlowEmptyState(title = stringResource(R.string.empty_moods_genres))
+                    VoxTubeEmptyState(title = stringResource(R.string.empty_moods_genres))
                 }
 
                 else -> {

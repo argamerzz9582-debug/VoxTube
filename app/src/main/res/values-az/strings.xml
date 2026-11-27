@@ -477,9 +477,6 @@
     <string name="settings_item_import_data">Məlumatı İdxal Et</string>
     <string name="settings_item_import_data_subtitle">Nüsxədən bərpa edin və ya digər tətbiqlərdən idxal edin</string>
     <string name="settings_item_about_flow">VoxTube Haqqında</string>
-    <string name="settings_item_about_flow_subtitle">Versiya, Lisenziya, Töhfəçilər</string>
-    <string name="settings_item_support">Dəstək və İanələr</string>
-    <string name="settings_item_support_subtitle">VoxTube-un inkişafına dəstək olun</string>
     <string name="settings_region_dialog_title">Bölgə Seç</string>
     <string name="settings_language_dialog_title">Tətbiq Dilini Seç</string>
     <string name="settings_language_system_default">Sistem standartı</string>
@@ -555,7 +552,6 @@
     <string name="app_icon_picker_subtitle">Başlatıcı ikonu tərzi seçin. Dəyişiklik dərhal qüvvəyə minəcək və başlatıcı qısaca yenilənəcək.</string>
     <string name="app_icon_picker_warning">İkonun dəyişdirilməsi VoxTube-u qısa müddətə əsas ekranınızdan silə bilər. Lazım gələrsə, tətbiq menyusundan onu yenidən əlavə edin.</string>
     <string name="app_icon_apply_toast">İkon yeniləndi - başlatıcınız yenilənəcək</string>
-    <string name="icon_name_flow_red">VoxTube Qırmızı</string>
     <string name="icon_name_flow_light">VoxTube İşıqlı</string>
     <string name="icon_name_flow_play">VoxTube Oynat</string>
     <string name="icon_name_amoled">AMOLED Qarası</string>
@@ -1188,21 +1184,8 @@
     <string name="location_badge_recommended">Tövsiyə olunan</string>
     <string name="location_badge_active">Aktiv</string>
     <string name="select_threads_count_desc">Axın sayını seçin (1-8):</string>
-    <string name="support_donations_title">Dəstək və İanələr</string>
-    <string name="support_flow_dev_title">Flow İnkişafını Dəstəkləyin</string>
-    <string name="support_flow_dev_desc">Əgər Flow sizin üçün faydalıdırsa, onu aşağıdan Open Collective, Patreon və ya kripto ilə dəstəkləyə bilərsiniz. Təşəkkürlər!</string>
-    <string name="support_flow_patreon">Patreon-da Flow-u dəstəkləyin</string>
     <string name="thank_you_support_message">Dəstəyiniz üçün təşəkkür edirik! ❤️</string>
     <string name="address_copied_toast">Ünvan buferə kopyalandı</string>
-    <string name="donation_address_clip_label">İanə Ünvanı</string>
-    <string name="donation_prompt_title">Flow xoşunuza gəlirmi?</string>
-    <string name="donation_prompt_message">Flow pulsuzdur, açıq mənbəlidir və reklamsızdır. Əgər telefonunuzda yer tutubsa, kiçik bir dəstək onun işləməyə davam etməsini təmin edir.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">İnkişafı dəstəklə</string>
-    <string name="donation_prompt_later">Bəlkə sonra</string>
-    <string name="donation_prompt_never">Təkrar göstərmə</string>
-    <string name="about_creator">Yaradıcı</string>
-    <string name="about_website">Veb-sayt</string>
     <string name="github_subtitle">Mənbə kodu və Problemlər</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Nüvə çıxarış kitabxanası</string>
@@ -1230,7 +1213,6 @@
     <string name="section_legal">Hüquqi</string>
     <string name="section_device">Cihaz</string>
     <string name="donate_item_title">İanə et</string>
-    <string name="support_dev_subtitle">İnkişafı dəstəklə</string>
     <string name="btn_ok">OLDU</string>
     <string name="btn_copy">Kopyala</string>
     <string name="github_label">GitHub</string>
@@ -2707,11 +2689,6 @@
         <item quantity="one">%1$d axın</item>
         <item quantity="other">%1$d axın</item>
     </plurals>
-    <string name="support_flow_open_collective">Open Collective-də Flow-u dəstəkləyin</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="about_notices">Açıq mənbə bildirişləri</string>
     <string name="about_notices_summary">Digər layihələrdən söz siyahıları və kod</string>
     <string name="about_license_name">GNU GPL v3</string>
@@ -3778,7 +3755,6 @@
     <string name="settings_search_no_results">%1$s üçün heç bir tənzimləmə tapılmadı</string>
     <string name="settings_lyrics_provider_order_description">Yuxarıdan aşağıya sınaqdan keçirildi. Yenidən sıralamaq üçün sürükləyin.</string>
     <string name="import_running_background">Bu ekrandan ayrıla bilərsiniz. İdxal davam edir.</string>
-    <string name="donations_cryptocurrency">KRİPTOVALYUTA</string>
     <string name="import_no_history_entries">Faylda heç bir izləmə tarixçəsi qeydi tapılmadı</string>
     <string name="import_no_videos">Oxutma siyahısı faylında heç bir video tapılmadı</string>
     <string name="import_no_likes">Bəyənilən tapılmadı. Google hesabınız ingilis dilində olmaqla YouTube üçün Fəaliyyətimi JSON kimi ixrac edin.</string>
@@ -4033,7 +4009,6 @@
     <string name="settings_changelog_all_releases">GitHub-da bütün buraxılışlar</string>
     <string name="settings_changelog_expand">Dəyişiklikləri göstər</string>
     <string name="settings_changelog_collapse">Dəyişiklikləri gizlət</string>
-    <string name="settings_creator_role">Flow-un yaradıcısı və tərtibatçısı</string>
     <string name="device_info_section_device">Cihaz</string>
     <string name="device_info_section_system">Sistem</string>
     <string name="device_info_section_display">Ekran</string>
@@ -4084,7 +4059,6 @@
     <string name="settings_custom_theme_start_from">Buradan başla</string>
     <string name="settings_custom_theme_count">%2$d mövzu içindən %1$d</string>
     <string name="settings_custom_theme_empty">Hələ ki xüsusi mövzu yoxdur</string>
-    <string name="settings_custom_theme_empty_body">İstənilən palitradan başlayın və ya Flow Desktop-da yaradılmış birini idxal edin.</string>
     <string name="settings_custom_theme_import_failed">Həmin faylda etibarlı mövzu yoxdur</string>
     <string name="settings_custom_theme_limit">%1$d-ə qədər mövzu saxlaya bilərsiniz</string>
     <string name="settings_custom_theme_exported">Mövzu ixrac edildi</string>
@@ -4914,13 +4888,10 @@
     <string name="settings_keywords_ai_list">süni intellekt, slop, yaradılan, AiSList, filtr, blok</string>
     <string name="ai_list_status_count_now">%1$s kanal, az əvvəl yeniləndi</string>
     <string name="ai_list_source_title">Siyahı mənbəyi</string>
-    <string name="ai_list_source_default">Flow</string>
-    <string name="ai_list_source_dialog_body">Siyahını dərc edən başqa bir serverdən (məsələn, sahiblik etdiyiniz) istifadə edin. Flow-un serverindən istifadə etmək üçün URL-i boş buraxın.</string>
     <string name="ai_list_source_url_hint">Server URL-i</string>
     <string name="ai_list_source_key_hint">İctimai açar (istəyə görə)</string>
     <string name="ai_list_source_key_help">Yalnız server siyahını öz açarı ilə imzaladıqda tələb olunur</string>
     <string name="ai_list_source_invalid">https URL-i və əgər göstərilibsə, etibarlı Ed25519 ictimai açarı daxil edin</string>
-    <string name="ai_list_source_reset">Flow-dan istifadə et</string>
     <string name="ai_report_header">Süni intellekt kanallarını bildir</string>
     <string name="ai_report_enabled_title">Video menyusundan bildir</string>
     <string name="ai_report_enabled_summary">Hər bir videonun menyusuna \"Süni intellekt kanalını bildir\" əlavə edir</string>
@@ -5114,7 +5085,6 @@
     <string name="ai_lists_status_count">%1$s kanal və %2$s ifaçı, yeniləndi: %3$s</string>
     <string name="ai_lists_status_count_now">%1$s kanal və %2$s ifaçı, indicə yeniləndi</string>
     <string name="ai_music_attribution_soul_title">Soul Over AI tərəfindən musiqi siyahısı</string>
-    <string name="ai_music_attribution_soul_summary">CC BY 4.0, Flow tərəfindən dəyişdirilib</string>
     <string name="ai_music_attribution_blocker_title">Spotify AI Blocker tərəfindən musiqi siyahısı</string>
     <string name="ai_music_attribution_blocker_summary">MIT, © CennoxX</string>
     <string name="ai_music_artist_listed">Bu sənətçi Sİ musiqi siyahısındadır</string>

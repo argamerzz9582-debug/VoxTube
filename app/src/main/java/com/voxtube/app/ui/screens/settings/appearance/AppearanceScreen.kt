@@ -39,9 +39,9 @@ import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.AppearanceIndex
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 import com.voxtube.app.ui.screens.settings.index.NewSettingsPolicy
@@ -102,8 +102,8 @@ internal fun AppearanceScreen(
     val interfaceSummary = stringResource(interfaceModeLabel(interfaceMode))
     val viewModeOptions =
         listOf(
-            FlowToggleOption(HomeViewMode.GRID, stringResource(R.string.content_settings_layout_grid), Icons.Outlined.GridView),
-            FlowToggleOption(
+            VoxTubeToggleOption(HomeViewMode.GRID, stringResource(R.string.content_settings_layout_grid), Icons.Outlined.GridView),
+            VoxTubeToggleOption(
                 HomeViewMode.LIST,
                 stringResource(R.string.content_settings_layout_list),
                 Icons.AutoMirrored.Outlined.ViewList,
@@ -111,20 +111,20 @@ internal fun AppearanceScreen(
         )
     val columnOptions =
         HomeFeedColumns.entries.map { columns ->
-            FlowToggleOption(
+            VoxTubeToggleOption(
                 columns,
                 columns.fixedCount?.toString() ?: stringResource(R.string.content_settings_home_columns_auto),
             )
         }
     val cardStyleOptions =
         listOf(
-            FlowToggleOption(VideoCardStyle.ROUNDED, stringResource(R.string.settings_video_card_style_rounded)),
-            FlowToggleOption(VideoCardStyle.FULL_WIDTH, stringResource(R.string.settings_video_card_style_full_width)),
+            VoxTubeToggleOption(VideoCardStyle.ROUNDED, stringResource(R.string.settings_video_card_style_rounded)),
+            VoxTubeToggleOption(VideoCardStyle.FULL_WIDTH, stringResource(R.string.settings_video_card_style_full_width)),
         )
     val artworkOptions =
         listOf(
-            FlowToggleOption(GridItemSize.BIG, stringResource(R.string.content_settings_grid_big_title)),
-            FlowToggleOption(GridItemSize.SMALL, stringResource(R.string.content_settings_grid_small_title)),
+            VoxTubeToggleOption(GridItemSize.BIG, stringResource(R.string.content_settings_grid_big_title)),
+            VoxTubeToggleOption(GridItemSize.SMALL, stringResource(R.string.content_settings_grid_small_title)),
         )
 
     SettingsPage(
@@ -248,9 +248,9 @@ internal fun AppearanceScreen(
 
     if (showNewSettingsDialog) {
         val days by viewModel.newSettingsDays.collectAsStateWithLifecycle()
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.settings_highlight_new_days_title),
-            options = NewSettingsPolicy.DAY_OPTIONS.map { FlowChoice(it, newSettingsDaysLabel(it)) },
+            options = NewSettingsPolicy.DAY_OPTIONS.map { VoxTubeChoice(it, newSettingsDaysLabel(it)) },
             selected = days,
             onSelect = viewModel::setNewSettingsDays,
             onDismiss = { showNewSettingsDialog = false },
@@ -258,11 +258,11 @@ internal fun AppearanceScreen(
     }
 
     if (showInterfaceDialog) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.interface_mode_title),
             options =
                 AppUiMode.entries.map { mode ->
-                    FlowChoice(mode, stringResource(interfaceModeLabel(mode)), stringResource(interfaceModeSummary(mode)))
+                    VoxTubeChoice(mode, stringResource(interfaceModeLabel(mode)), stringResource(interfaceModeSummary(mode)))
                 },
             selected = interfaceMode,
             onSelect = viewModel::setInterfaceMode,

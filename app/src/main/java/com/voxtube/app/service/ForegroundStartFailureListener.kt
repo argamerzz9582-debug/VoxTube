@@ -5,7 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaSessionService
 import com.voxtube.app.player.error.PlayerDiagnostics
-import com.voxtube.app.utils.FlowCrashHandler
+import com.voxtube.app.utils.VoxTubeCrashHandler
 
 @UnstableApi
 internal fun MediaSessionService.recordForegroundStartFailures(tag: String) {
@@ -13,7 +13,7 @@ internal fun MediaSessionService.recordForegroundStartFailures(tag: String) {
         object : MediaSessionService.Listener {
             @RequiresApi(Build.VERSION_CODES.S)
             override fun onForegroundServiceStartNotAllowedException() {
-                FlowCrashHandler.recordPhase(tag, "foreground start refused by platform")
+                VoxTubeCrashHandler.recordPhase(tag, "foreground start refused by platform")
                 PlayerDiagnostics.logWarning(
                     tag,
                     "startForegroundService refused: app is in the background without an " +

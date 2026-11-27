@@ -59,10 +59,10 @@ import androidx.compose.ui.unit.sp
 import com.voxtube.app.R
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.player.RepeatMode
-import com.voxtube.app.ui.components.layout.FlowBottomInsets
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
-import com.voxtube.app.ui.components.shared.FlowSelectionToolbar
-import com.voxtube.app.ui.components.shared.FlowSwitch
+import com.voxtube.app.ui.components.layout.VoxTubeBottomInsets
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionToolbar
+import com.voxtube.app.ui.components.shared.VoxTubeSwitch
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
@@ -318,7 +318,7 @@ internal fun QueueList(
                                 color = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier.weight(1f),
                             )
-                            FlowSwitch(
+                            VoxTubeSwitch(
                                 checked = endlessRadioEnabled,
                                 onCheckedChange = actions.onToggleEndlessRadio,
                             )
@@ -370,8 +370,8 @@ internal fun QueueList(
             }
         }
         // The toolbar floats over the queue's own bottom edge, not above the app's bars under the player.
-        CompositionLocalProvider(LocalFlowBottomInsets provides FlowBottomInsets.None) {
-            FlowSelectionToolbar(
+        CompositionLocalProvider(LocalFlowBottomInsets provides VoxTubeBottomInsets.None) {
+            VoxTubeSelectionToolbar(
                 visible = selecting && picked.isNotEmpty(),
                 summary = pluralStringResource(R.plurals.selected_count_template, picked.size, picked.size),
                 actions =

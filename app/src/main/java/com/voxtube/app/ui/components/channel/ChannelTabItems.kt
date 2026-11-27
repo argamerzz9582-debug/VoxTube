@@ -33,11 +33,11 @@ import com.voxtube.app.ui.components.PlaylistCardLayout
 import com.voxtube.app.ui.components.rememberFeedGridLayout
 import com.voxtube.app.ui.components.shared.FeedGridTopPadding
 import com.voxtube.app.ui.components.shared.FeedPagingFooter
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
 import com.voxtube.app.ui.components.shared.MediaShortCard
 import com.voxtube.app.ui.components.shared.RetryWhenBackOnline
 import com.voxtube.app.ui.components.shared.ShortCardDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.card.MediaVideoCard
 import com.voxtube.app.ui.components.shared.rememberFeedGridPlan
 
@@ -65,7 +65,7 @@ internal fun ChannelTabItems(
 ) {
     pagingItems?.let { RetryWhenBackOnline(it) }
     if (pagingItems == null || pagingItems.loadState.refresh is LoadState.Loading) {
-        FlowLoadingIndicator(modifier = Modifier.padding(top = topInset))
+        VoxTubeLoadingIndicator(modifier = Modifier.padding(top = topInset))
         return
     }
 
@@ -76,7 +76,7 @@ internal fun ChannelTabItems(
                     .fillMaxSize()
                     .padding(top = topInset),
             contentAlignment = Alignment.Center,
-        ) { FlowEmptyState(title = stringResource(kind.emptyLabel())) }
+        ) { VoxTubeEmptyState(title = stringResource(kind.emptyLabel())) }
         return
     }
 

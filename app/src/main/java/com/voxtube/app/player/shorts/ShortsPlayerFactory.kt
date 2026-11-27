@@ -35,14 +35,14 @@ import com.voxtube.app.player.config.PlayerConfig
 import com.voxtube.app.player.config.VideoSizeCap
 import com.voxtube.app.player.datasource.YouTubeHttpDataSource
 import com.voxtube.app.player.factory.LoadControlFactory
-import com.voxtube.app.player.renderer.subtitle.FlowSubtitleDecoderFactory
+import com.voxtube.app.player.renderer.subtitle.VoxTubeSubtitleDecoderFactory
 
 /** Builds what the Shorts pool runs on: its players, the cached data source and the one media session. */
 @OptIn(UnstableApi::class)
 internal object ShortsPlayerFactory {
     private const val SESSION_ID = "flow_shorts_session"
     private const val TAG = "ShortsPlayerPool"
-    private const val STATS_TAG = "FlowPlaybackStats"
+    private const val STATS_TAG = "VoxTubePlaybackStats"
 
     fun cachedDataSourceFactory(
         appContext: Context,
@@ -129,7 +129,7 @@ internal object ShortsPlayerFactory {
                     extensionRendererMode: Int,
                     out: ArrayList<Renderer>,
                 ) {
-                    val text = TextRenderer(output, outputLooper, FlowSubtitleDecoderFactory())
+                    val text = TextRenderer(output, outputLooper, VoxTubeSubtitleDecoderFactory())
                     text.experimentalSetLegacyDecodingEnabled(true)
                     out.add(text)
                 }

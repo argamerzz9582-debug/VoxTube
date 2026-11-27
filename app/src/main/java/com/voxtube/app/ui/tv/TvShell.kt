@@ -48,8 +48,8 @@ import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.player.queue.QueuePageSource
 import com.voxtube.app.ui.TabScrollEventBus
-import com.voxtube.app.ui.components.layout.FlowBottomInsets
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
+import com.voxtube.app.ui.components.layout.VoxTubeBottomInsets
 import com.voxtube.app.ui.components.settings.SettingsTarget
 import com.voxtube.app.ui.components.shared.MediaMiniBarDefaults
 import com.voxtube.app.ui.screens.home.HomeViewModel
@@ -104,7 +104,7 @@ fun TvShell(
     // Phone pages pad their ends by these insets, so they scroll clear of the floating mini player here too.
     val bottomInsets =
         remember(dimens) {
-            FlowBottomInsets(
+            VoxTubeBottomInsets(
                 systemInset = mutableStateOf(0.dp),
                 barHeight = mutableStateOf(0.dp),
                 barShown = mutableStateOf(false),

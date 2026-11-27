@@ -1,7 +1,7 @@
 package com.voxtube.app.data.profile
 
 import android.content.Context
-import com.voxtube.app.widget.core.FlowWidgets
+import com.voxtube.app.widget.core.VoxTubeWidgets
 import com.voxtube.app.widget.core.refresh.WidgetContentSync
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -21,6 +21,6 @@ class PostSwitchWork
         suspend fun runIfSwitched() {
             if (!ActiveProfile.registry(context).finishPostSwitch()) return
             widgetContentSync.redrawAfterSwitch()
-            FlowWidgets.updateAll(context, except = widgetContentSync.widgets)
+            VoxTubeWidgets.updateAll(context, except = widgetContentSync.widgets)
         }
     }

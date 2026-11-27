@@ -18,8 +18,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performKeyPress
 import androidx.compose.ui.test.requestFocus
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.voxtube.app.ui.components.shared.FlowSheetPresenter
 import com.voxtube.app.ui.components.shared.LocalFlowSheetPresenter
+import com.voxtube.app.ui.components.shared.VoxTubeSheetPresenter
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -36,7 +36,7 @@ class QuickActionsSheetKeyTest {
     private var clicks = 0
 
     /** The sheet in the test's own window, where keys and focus work as they do in a dialog's. */
-    private object InPlace : FlowSheetPresenter {
+    private object InPlace : VoxTubeSheetPresenter {
         @Composable
         override fun Present(
             onDismiss: () -> Unit,

@@ -17,10 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.theme.CustomTheme
 import com.voxtube.app.ui.theme.ThemeCatalog
 import com.voxtube.app.ui.theme.ThemeCatalogEntry
@@ -46,7 +46,7 @@ internal fun ThemeNameDialog(
     var pickingBase by rememberSaveable { mutableStateOf(false) }
     val trimmed = name.trim()
 
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = {
@@ -59,7 +59,7 @@ internal fun ThemeNameDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 if (palettes != null) {
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = stringResource(R.string.settings_custom_theme_start_from),
                         supportingText = stringResource(ThemeCatalog.nameRes(base)),
                         leadingIcon = Icons.Outlined.Palette,
@@ -76,9 +76,9 @@ internal fun ThemeNameDialog(
     )
 
     if (pickingBase && palettes != null) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.settings_custom_theme_start_from),
-            options = palettes.map { FlowChoice(it.mode, stringResource(it.nameRes), stringResource(it.descriptionRes)) },
+            options = palettes.map { VoxTubeChoice(it.mode, stringResource(it.nameRes), stringResource(it.descriptionRes)) },
             selected = base,
             onSelect = { base = it },
             onDismiss = { pickingBase = false },
@@ -92,7 +92,7 @@ internal fun DeleteThemeDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.settings_custom_theme_delete_title, name)) },
         text = { Text(stringResource(R.string.settings_custom_theme_delete_body)) },

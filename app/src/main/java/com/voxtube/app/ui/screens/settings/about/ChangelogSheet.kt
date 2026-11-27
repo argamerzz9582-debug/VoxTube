@@ -55,10 +55,10 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.BuildConfig
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 import kotlinx.coroutines.Dispatchers
@@ -105,7 +105,7 @@ internal fun ChangelogSheet(onDismiss: () -> Unit) {
         sheetState = rememberFlowSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
-        FlowSheetHeader(
+        VoxTubeSheetHeader(
             title = stringResource(R.string.about_changelog),
             subtitle = stringResource(R.string.whats_new_in_flow),
             onClose = onDismiss,
@@ -114,12 +114,12 @@ internal fun ChangelogSheet(onDismiss: () -> Unit) {
         val loaded = releases
         when {
             loaded == null -> {
-                Box(Modifier.fillMaxWidth().height(StateHeight), contentAlignment = Alignment.Center) { FlowLoadingIndicator() }
+                Box(Modifier.fillMaxWidth().height(StateHeight), contentAlignment = Alignment.Center) { VoxTubeLoadingIndicator() }
             }
 
             loaded.isEmpty() -> {
                 Box(Modifier.fillMaxWidth().height(StateHeight)) {
-                    FlowEmptyState(title = stringResource(R.string.no_changelog_found_message))
+                    VoxTubeEmptyState(title = stringResource(R.string.no_changelog_found_message))
                 }
             }
 
@@ -191,7 +191,7 @@ private fun LazyListScope.releaseItems(
             expanded = expanded,
             shape = if (expanded) shape.withoutBottomCorners() else shape,
             onToggle = onToggle,
-            modifier = Modifier.animateItem().padding(top = if (first) 0.dp else FlowSegmentedGap),
+            modifier = Modifier.animateItem().padding(top = if (first) 0.dp else VoxTubeSegmentedGap),
         )
     }
     if (!expanded) return

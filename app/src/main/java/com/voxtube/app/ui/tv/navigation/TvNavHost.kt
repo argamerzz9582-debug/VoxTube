@@ -20,7 +20,7 @@ import com.voxtube.app.data.music.model.toMusicTrack
 import com.voxtube.app.data.music.model.toVideo
 import com.voxtube.app.data.video.DownloadedVideo
 import com.voxtube.app.player.queue.QueuePageSource
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.components.shared.MediaKind
 import com.voxtube.app.ui.screens.channel.ChannelScreen
 import com.voxtube.app.ui.screens.history.HistoryScreen
@@ -70,16 +70,16 @@ fun TvNavHost(
         startDestination = startRoute,
         modifier = modifier,
     ) {
-        composable(FlowTab.Home.route) {
+        composable(VoxTubeTab.Home.route) {
             TvHomeScreen(
                 viewModel = homeViewModel,
                 onVideoClick = onPlayVideo,
                 onPlayPlaylist = { videos, title -> onPlayPlaylist(videos, 0, title, false, null) },
-                onOpenLibrary = { onSelectRoot(FlowTab.Library.route) },
+                onOpenLibrary = { onSelectRoot(VoxTubeTab.Library.route) },
                 modifier = Modifier.fillMaxSize(),
             )
         }
-        composable(FlowTab.Subscriptions.route) {
+        composable(VoxTubeTab.Subscriptions.route) {
             TvSubscriptionsScreen(
                 viewModel = hiltViewModel<SubscriptionsViewModel>(activity),
                 onVideoClick = onPlayVideo,
@@ -87,7 +87,7 @@ fun TvNavHost(
                 modifier = Modifier.fillMaxSize(),
             )
         }
-        composable(FlowTab.Search.route) {
+        composable(VoxTubeTab.Search.route) {
             TvSearchScreen(
                 viewModel = hiltViewModel<SearchViewModel>(activity),
                 onVideoClick = onPlayVideo,
@@ -103,7 +103,7 @@ fun TvNavHost(
                 modifier = Modifier.fillMaxSize(),
             )
         }
-        composable(FlowTab.Library.route) {
+        composable(VoxTubeTab.Library.route) {
             TvLibraryScreen(
                 onVideoClick = onPlayVideo,
                 onMusicClick = musicPlayerViewModel::loadAndPlayTrack,

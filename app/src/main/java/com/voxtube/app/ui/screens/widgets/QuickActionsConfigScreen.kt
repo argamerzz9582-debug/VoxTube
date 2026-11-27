@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.glance.GlanceId
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.settings.SettingsPage
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.widget.quickactions.QuickActionsConfig
 import com.voxtube.app.widget.quickactions.QuickShortcut
 import kotlinx.coroutines.launch
@@ -48,7 +48,7 @@ internal fun QuickActionsConfigScreen(
             QuickShortcut.entries.forEach { shortcut ->
                 row("quick_actions.${shortcut.key}") { shape ->
                     val checked = shortcut in current
-                    FlowSwitchRow(
+                    VoxTubeSwitchRow(
                         title = stringResource(shortcut.label),
                         checked = checked,
                         onCheckedChange = { toggle(shortcut, it) },

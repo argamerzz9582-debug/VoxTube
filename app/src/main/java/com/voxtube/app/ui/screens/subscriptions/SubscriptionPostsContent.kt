@@ -31,13 +31,13 @@ import com.voxtube.app.data.model.Channel
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.shared.FeedPagingFooter
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowPullToRefreshBox
 import com.voxtube.app.ui.components.shared.MediaPostCard
 import com.voxtube.app.ui.components.shared.MediaPostCommentsSheet
 import com.voxtube.app.ui.components.shared.RetryWhenBackOnline
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubePullToRefreshBox
 import com.voxtube.app.ui.components.shared.rememberPostShareAction
 
 private val PostsMaxWidth = 760.dp
@@ -70,7 +70,7 @@ internal fun SubscriptionPostsContent(
     }
 
     Box(modifier = modifier.fillMaxSize()) {
-        FlowPullToRefreshBox(
+        VoxTubePullToRefreshBox(
             isRefreshing = userRefreshing,
             onRefresh = {
                 userRefreshing = true
@@ -92,7 +92,7 @@ internal fun SubscriptionPostsContent(
                         val stateModifier = Modifier.fillParentMaxWidth().padding(vertical = StatePadding)
                         when {
                             refreshState is LoadState.Error || appendState is LoadState.Error -> {
-                                FlowErrorState(
+                                VoxTubeErrorState(
                                     error = stringResource(R.string.community_posts_load_failed),
                                     onRetry = posts::retry,
                                     modifier = stateModifier,
@@ -100,7 +100,7 @@ internal fun SubscriptionPostsContent(
                             }
 
                             refreshState is LoadState.NotLoading && appendState.endOfPaginationReached -> {
-                                FlowEmptyState(
+                                VoxTubeEmptyState(
                                     title = stringResource(R.string.subscription_posts_empty),
                                     icon = Icons.Outlined.ChatBubbleOutline,
                                     modifier = stateModifier,
@@ -108,7 +108,7 @@ internal fun SubscriptionPostsContent(
                             }
 
                             else -> {
-                                Box(stateModifier, contentAlignment = Alignment.Center) { FlowLoadingIndicator() }
+                                Box(stateModifier, contentAlignment = Alignment.Center) { VoxTubeLoadingIndicator() }
                             }
                         }
                     }

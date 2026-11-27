@@ -196,7 +196,6 @@
     <string name="time_today">Сьогодні</string>
     <string name="time_yesterday">Вчора</string>
     <string name="time_earlier">Раніше</string>
-    <string name="icon_name_flow_red">Червоний VoxTube</string>
     <string name="icon_name_amoled">Темний AMOLED</string>
     <string name="icon_name_monochrome">Монохром</string>
     <string name="icon_name_ghost">Привид</string>
@@ -362,9 +361,6 @@
     <string name="settings_item_import_data">Імпорт даних</string>
     <string name="settings_item_import_data_subtitle">Відновити з резервної копії або імпортувати з інших застосунків</string>
     <string name="settings_item_about_flow">Про VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">Версія, ліцензія, автори</string>
-    <string name="settings_item_support">Підтримка та пожертви</string>
-    <string name="settings_item_support_subtitle">Підтримайте розробку VoxTube</string>
     <string name="settings_region_dialog_title">Вибрати регіон</string>
     <string name="settings_export_success">Дані успішно експортовано</string>
     <string name="export_newpipe_subs_failed">Не вдалося експортувати підписки NewPipe</string>
@@ -383,7 +379,7 @@
     <string name="channel_search_open">Пошук в каналі</string>
     <string name="channel_search_close">Закрити пошук</string>
     <string name="channel_search_no_results">Результати пошуку відсутні для %1$s</string>
-    <string name="deep_flow_mode_title">Режим Deep Flow</string>
+    <string name="deep_flow_mode_title">Режим Deep Focus</string>
     <string name="deep_flow_mode_subtitle">Призупинити навчання, поки переглядаєте вебсторінки</string>
     <string name="deep_flow_learning_paused">НАВЧАННЯ ПРИЗУПИНЕНЕ</string>
     <string name="settings_item_proxy_subtitle">Спрямувати віддалений трафік через HTTP або SOCKS5</string>
@@ -572,10 +568,10 @@
     <string name="saved">Збережено</string>
     <string name="deep_flow_dialog_title">Тривалість зупинки</string>
     <string name="deep_flow_dialog_body">На який час потрібно зупинити навчання?</string>
-    <string name="deep_flow_enabled_message">Deep Flow увімкнено</string>
-    <string name="deep_flow_disabled_message">Deep Flow вимкнено</string>
-    <string name="deep_flow_expired_message">Таймер Deep Flow закінчився</string>
-    <string name="deep_flow_active_until_disabled">Deep Flow буде активним доки ви його не вимкнете</string>
+    <string name="deep_flow_enabled_message">Deep Focus увімкнено</string>
+    <string name="deep_flow_disabled_message">Deep Focus вимкнено</string>
+    <string name="deep_flow_expired_message">Таймер Deep Focus закінчився</string>
+    <string name="deep_flow_active_until_disabled">Deep Focus буде активним доки ви його не вимкнете</string>
     <string name="deep_flow_duration_never">Ніколи</string>
     <string name="deep_flow_duration_1h">1 година</string>
     <string name="deep_flow_duration_2h">2 години</string>
@@ -934,15 +930,8 @@
     <string name="location_custom_manual_desc">Введіть абсолютний шлях, наприклад /storage/emulated/0/MyFolder</string>
     <string name="location_badge_active">Активно</string>
     <string name="select_threads_count_desc">Виберіть кількість потоків (1–8):</string>
-    <string name="support_donations_title">Підтримка та пожертви</string>
-    <string name="support_flow_dev_title">Підтримайте розробку Flow</string>
-    <string name="support_flow_dev_desc">Якщо сервіс Flow вам корисний, ви можете підтримати його на Open Collective, Patreon або за допомогою криптовалюти, як показано нижче. Дякуємо!</string>
-    <string name="support_flow_patreon">Підтримайте Flow на Patreon</string>
     <string name="thank_you_support_message">Дякую вам за вашу підтримку! ❤️</string>
     <string name="address_copied_toast">Адреса скопійована до буферу обміну</string>
-    <string name="donation_address_clip_label">Адреса для пожертв</string>
-    <string name="about_creator">Автор</string>
-    <string name="about_website">Сайт</string>
     <string name="github_subtitle">Вихідний код та помилки</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Основна бібліотека витягування</string>
@@ -970,7 +959,6 @@
     <string name="section_legal">Юридична інформація</string>
     <string name="section_device">Пристрій</string>
     <string name="donate_item_title">Пожертва</string>
-    <string name="support_dev_subtitle">Підтримати розробку</string>
     <string name="btn_ok">Гаразд</string>
     <string name="btn_copy">Копіювати</string>
     <string name="github_label">GitHub</string>
@@ -1610,12 +1598,6 @@
     <string name="player_settings_video_codec_dialog_title">Типовий відеокодек</string>
     <string name="player_settings_video_codec_dialog_body">VoxTube вибирає кодек автоматично. Ви все одно можете вибрати будь-який кодек у меню якості. H.264 найплавніше відтворюється на більшості пристроїв. AV1 і VP9 споживають менше трафіку, але потребують більшої обчислювальної потужності.</string>
     <string name="player_settings_video_codec_auto_desc">Дозволити застосунку вибрати (перевага надається H.264)</string>
-    <string name="donation_prompt_title">Насолоджуєтеся Flow?</string>
-    <string name="donation_prompt_message">Flow — безплатний застосунок із відкритим вихідним кодом і без реклами. Якщо він заслужив місце на вашому телефоні, невелика підтримка допоможе йому й надалі працювати.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Підтримати розробку</string>
-    <string name="donation_prompt_later">Можливо пізніше</string>
-    <string name="donation_prompt_never">Більше не показувати</string>
     <string name="library_local_media_label">Локальні медіафайли</string>
     <string name="library_local_media_subtitle">Відтворюйте відео та музику на цьому пристрої</string>
     <string name="local_media_title">Локальні медіа</string>
@@ -1981,10 +1963,6 @@
     <string name="ui_downloading">Завантаження</string>
     <string name="ui_in_library">В бібліотеці</string>
     <string name="ui_flow_logo">Логотип VoxTube</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="discord_error_enable_before_connect">Увімкніть Розширену активність у Discord перед прив’язуванням облікового запису.</string>
     <string name="discord_error_unavailable">Розширена активність у Discord недоступна у цій збірці.</string>
@@ -2276,7 +2254,6 @@
     <string name="settings_search_no_results">Налаштувань для %1$s не знайдено</string>
     <string name="settings_lyrics_provider_order_description">Спробуйте зверху вниз. Перетягніть, щоб змінити порядок.</string>
     <string name="import_running_background">Можете закрити цей екран. Імпорт продовжує виконуватися.</string>
-    <string name="donations_cryptocurrency">КРИПТОВАЛЮТА</string>
     <string name="import_no_history_entries">У файлі не знайдено записів історії переглядів</string>
     <string name="import_no_videos">У файлі списку відтворення не знайдено жодного відео</string>
     <string name="import_no_content">У цій резервній копії не знайдено вмісту для імпорту</string>
@@ -3459,7 +3436,7 @@
     <string name="content_settings_home_subscriptions_subtitle">Переглядайте на головній сторінці відео з каналів, на які ви підписані</string>
     <string name="settings_section_watch_history">Історія переглядів</string>
     <string name="pause_watch_history_title">Призупинити історію переглядів</string>
-    <string name="pause_watch_history_subtitle">Перестати зберігати те, що ви дивитеся. Deep Flow також призупиняє навчання</string>
+    <string name="pause_watch_history_subtitle">Перестати зберігати те, що ви дивитеся. Deep Focus також призупиняє навчання</string>
     <string name="cache_size_1gb">1 ГБ</string>
     <string name="cache_size_2gb">2 ГБ</string>
     <string name="cache_size_5gb">5 ГБ</string>
@@ -3619,7 +3596,6 @@
     <string name="settings_changelog_all_releases">Усі релізи на GitHub</string>
     <string name="settings_changelog_expand">Показати зміни</string>
     <string name="settings_changelog_collapse">Приховати зміни</string>
-    <string name="settings_creator_role">Творець і розробник Flow</string>
     <string name="device_info_section_device">Пристрій</string>
     <string name="device_info_section_system">Система</string>
     <string name="device_info_section_display">Екран</string>
@@ -3670,7 +3646,6 @@
     <string name="settings_custom_theme_start_from">Почати з</string>
     <string name="settings_custom_theme_count">%1$d з %2$d тем</string>
     <string name="settings_custom_theme_empty">Власних тем поки немає</string>
-    <string name="settings_custom_theme_empty_body">Почніть із будь-якої палітри або імпортуйте палітру, створену у Flow Desktop.</string>
     <string name="settings_custom_theme_import_failed">У цьому файлі немає дійсних тем</string>
     <string name="settings_custom_theme_limit">Можна зберігати до %1$d тем</string>
     <string name="settings_custom_theme_exported">Тему експортовано</string>
@@ -4223,8 +4198,8 @@
     <string name="discover_channels_title">Відкрийте для себе канали</string>
     <string name="discover_channels_summary">Знайдіть канали та підпишіться, як під час налаштування</string>
     <string name="discover_channels_suggested_footer">Канали, які ви переглядали кілька разів, не підписуючись на них.</string>
-    <string name="deep_flow_scrobble_title">Скроблити під час Deep Flow</string>
-    <string name="taste_learning_paused">Deep Flow увімкнено, навчання призупинено</string>
+    <string name="deep_flow_scrobble_title">Скроблити під час Deep Focus</string>
+    <string name="taste_learning_paused">Deep Focus увімкнено, навчання призупинено</string>
     <string name="deep_flow_scrobble_subtitle">Продовжувати надсилати прослуховування до Last.fm, Libre.fm і ListenBrainz</string>
     <string name="mini_player_show">Показати меніпрогравач</string>
     <string name="player_settings_double_tap_seek_off">Вимк</string>
@@ -4379,7 +4354,7 @@
         <item quantity="one">Тут немає непереглянутих відео</item>
     </plurals>
     <string name="deep_flow_on_search_title">Показати у результатах пошуку</string>
-    <string name="deep_flow_on_search_subtitle">Перемикач «Deep Flow» над останніми пошуковими запитами</string>
+    <string name="deep_flow_on_search_subtitle">Перемикач «Deep Focus» над останніми пошуковими запитами</string>
     <string name="lyrics_auto_romanize_japanese">Наразі недоступно японською</string>
     <string name="notifications_already_in_watch_later">Уже в «Переглянути пізніше»</string>
     <string name="notifications_save_to_watch_later">Зберегти в «Переглянути пізніше»</string>
@@ -4405,7 +4380,7 @@
     <string name="description_streamed">Транслювалася</string>
     <string name="subscription_bell_alerts_off">Сповіщення про нові відео вимкнені</string>
     <string name="subscription_bell_alerts_turn_on">Увімкнути</string>
-    <string name="deep_flow_long_press_hint">Затисніть логотип або назву VoxTube на екрані «Головна», щоб увімкнути режим Deep Flow</string>
+    <string name="deep_flow_long_press_hint">Затисніть логотип або назву VoxTube на екрані «Головна», щоб увімкнути режим Deep Focus</string>
     <string name="lyrics_provider_lrclib_desc">Синхронізація рядків · відкрити базу даних</string>
     <string name="lyrics_provider_unison_desc">Тексти пісень спільноти · невеликий каталог</string>
     <string name="lyrics_provider_youtube_captions_desc">Синхронізація рядків · субтитри до відео</string>
@@ -4442,7 +4417,6 @@
         <item quantity="many">%d списків відтворення в Music</item>
         <item quantity="other">%d списків відтворення в Music</item>
     </plurals>
-    <string name="support_flow_open_collective">Підтримати Flow на Open Collective</string>
     <string name="about_notices">Повідомлення щодо відкритого ПЗ</string>
     <string name="about_notices_summary">Списки слів та код з інших проєктів</string>
     <string name="onboarding_import_subtitle_profile">Імпортувати підписки та історію з інших застосунків у %1$s. Усе це є необов’язковим.</string>

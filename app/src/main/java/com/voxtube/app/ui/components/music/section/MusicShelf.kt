@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.ui.components.music.card.MusicHeroCaptionHeight
 import com.voxtube.app.ui.components.music.header.MusicSectionAction
 import com.voxtube.app.ui.components.music.header.MusicSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowLaneItemWidth
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.theme.Dimensions
@@ -166,10 +166,10 @@ fun <T> MusicTrackShelf(
             state = state,
             contentPadding = PaddingValues(horizontal = Dimensions.ContentPaddingHorizontal),
             horizontalArrangement = Arrangement.spacedBy(TrackShelfColumnSpacing),
-            verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+            verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap),
             modifier =
                 Modifier
-                    .height(rowHeight * rows + FlowSegmentedGap * (rows - 1))
+                    .height(rowHeight * rows + VoxTubeSegmentedGap * (rows - 1))
                     .fillMaxWidth(),
         ) {
             itemsIndexed(items = uniqueItems, key = { _, item -> key(item) }) { index, item ->

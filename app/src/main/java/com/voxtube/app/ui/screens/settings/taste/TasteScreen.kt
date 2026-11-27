@@ -26,8 +26,8 @@ import com.voxtube.app.data.backup.BackupOperation
 import com.voxtube.app.ui.components.settings.SettingsDestination
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.SettingsTarget
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.deepFlowStatus
 import com.voxtube.app.ui.utils.rememberDocumentPickerAvailable
 import kotlinx.coroutines.launch
@@ -123,7 +123,7 @@ internal fun TasteScreen(
         snackbarHostState = snackbarHostState,
     ) {
         if (state.loading) {
-            item("taste.loading") { FlowLoadingIndicator(Modifier.fillMaxWidth().height(LoadingHeight)) }
+            item("taste.loading") { VoxTubeLoadingIndicator(Modifier.fillMaxWidth().height(LoadingHeight)) }
         } else {
             pausedStatus?.let { learningPaused(pausedLabel, it) }
             tasteContent(state, hiddenLabel, noQueriesLabel, startersLabel, actions)
@@ -134,7 +134,7 @@ internal fun TasteScreen(
         val video = kind == ResetKind.VIDEO
         val title = if (video) R.string.reset_profile_dialog_title else R.string.taste_reset_music_title
         val body = if (video) R.string.taste_reset_video_body else R.string.taste_reset_music_body
-        FlowAlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { confirmReset = null },
             title = { Text(stringResource(title)) },
             text = { Text(stringResource(body)) },

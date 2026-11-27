@@ -9,10 +9,10 @@ import com.voxtube.app.data.local.notifyingIds
 import com.voxtube.app.data.model.Channel
 import com.voxtube.app.data.paging.ChannelSearch
 import com.voxtube.app.data.recommendation.ChannelMemoryRepository
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.NeighbourChannel
 import com.voxtube.app.data.recommendation.NeighbourChannelsRepository
 import com.voxtube.app.data.recommendation.RememberedChannel
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.ChannelAvatarRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -80,14 +80,14 @@ internal class DiscoverChannelsViewModel
 
         private val local =
             flow {
-                val brain = FlowNeuroEngine.getBrainSnapshot()
+                val brain = VoxTubeNeuroEngine.getBrainSnapshot()
                 val topics =
                     (
                         brain.preferredTopics +
                             brain.globalVector.topics.entries
                                 .sortedByDescending { it.value }
                                 .map { it.key }
-                    ).filterNot { it in brain.blockedTopics || FlowNeuroEngine.specificity(it) < QUICK_SEARCH_MIN_SPECIFICITY }
+                    ).filterNot { it in brain.blockedTopics || VoxTubeNeuroEngine.specificity(it) < QUICK_SEARCH_MIN_SPECIFICITY }
                         .distinct()
                         .take(MAX_QUICK_SEARCHES)
                 val followed = subscriptions.getAllSubscriptions().first().associate { it.channelId to it.channelName }

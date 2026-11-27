@@ -24,7 +24,7 @@ import com.voxtube.app.data.audio.eq.EqFilterMath
 import com.voxtube.app.data.audio.eq.EqLimits
 import com.voxtube.app.ui.components.equalizer.EqResponseGraph
 import com.voxtube.app.ui.components.equalizer.formatGain
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 
 private val PreviewHeight = 96.dp
 private val PasteFieldMinHeight = 160.dp
@@ -121,7 +121,7 @@ private fun NameDialog(
     var name by rememberSaveable { mutableStateOf(initial) }
     val blank = name.isBlank()
     val taken = !blank && !isAvailable(name)
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(title)) },
         text = { NameField(name = name, onNameChange = { name = it }, taken = taken) },
@@ -155,7 +155,7 @@ private fun PasteDialog(
     onDismiss: () -> Unit,
 ) {
     var text by rememberSaveable { mutableStateOf("") }
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.eq_paste_text)) },
         text = {
@@ -186,7 +186,7 @@ private fun ImportPreviewDialog(
     val bands = result.curve.bands
     val peak = remember(bands) { EqFilterMath.peakDb(bands) }
     val taken = name.isNotBlank() && !viewModel.isNameAvailable(name)
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = viewModel::dismissImport,
         title = { Text(stringResource(R.string.eq_import_title)) },
         text = {

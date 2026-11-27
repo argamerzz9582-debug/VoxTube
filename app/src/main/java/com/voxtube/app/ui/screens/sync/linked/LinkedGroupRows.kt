@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
 import com.voxtube.app.sync2.data.WEBDAV_STORE
 import com.voxtube.app.sync2.service.LinkedError
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.screens.sync.SyncActionRow
 import com.voxtube.app.ui.screens.sync.SyncInfoItem
 import com.voxtube.app.ui.screens.sync.SyncRowGroup
@@ -57,7 +57,7 @@ internal fun LinkedGroupRows(
             }
             if (canChangeLogin) {
                 add { shape ->
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = stringResource(R.string.linked_login_change_title),
                         onClick = { changingLogin = true },
                         leadingIcon = Icons.Outlined.Password,
@@ -67,7 +67,7 @@ internal fun LinkedGroupRows(
                 }
             }
             add { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.linked_recovery_words),
                     onClick = onReplaceWords,
                     supportingText = stringResource(R.string.linked_replace_words_hint),
@@ -77,7 +77,7 @@ internal fun LinkedGroupRows(
                 )
             }
             add { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.linked_leave),
                     onClick = onLeave,
                     leadingIcon = Icons.AutoMirrored.Outlined.Logout,

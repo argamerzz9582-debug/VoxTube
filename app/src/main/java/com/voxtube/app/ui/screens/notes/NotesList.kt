@@ -39,12 +39,12 @@ import com.voxtube.app.data.notes.NoteKind
 import com.voxtube.app.data.notes.NoteMoments
 import com.voxtube.app.ui.components.layout.flowContentPadding
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowSearchField
-import com.voxtube.app.ui.components.shared.FlowToggleOption
 import com.voxtube.app.ui.components.shared.MediaThumbnail
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.utils.formatDurationMillis
 
 private const val LIST_MOMENTS = 3
@@ -73,7 +73,7 @@ internal fun NotesListPane(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        FlowSearchField(
+        VoxTubeSearchField(
             query = state.query,
             onQueryChange = onQueryChange,
             placeholder = stringResource(R.string.notes_search_placeholder),
@@ -84,12 +84,12 @@ internal fun NotesListPane(
             leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = null) },
             releaseFocusWithKeyboard = true,
         )
-        FlowConnectedToggleGroup(
+        VoxTubeConnectedToggleGroup(
             options =
                 listOf(
-                    FlowToggleOption(NotesFilter.All, stringResource(R.string.notes_filter_all)),
-                    FlowToggleOption(NotesFilter.Videos, stringResource(R.string.notes_filter_videos)),
-                    FlowToggleOption(NotesFilter.Channels, stringResource(R.string.notes_filter_channels)),
+                    VoxTubeToggleOption(NotesFilter.All, stringResource(R.string.notes_filter_all)),
+                    VoxTubeToggleOption(NotesFilter.Videos, stringResource(R.string.notes_filter_videos)),
+                    VoxTubeToggleOption(NotesFilter.Channels, stringResource(R.string.notes_filter_channels)),
                 ),
             selected = state.filter,
             onSelected = onFilterChange,
@@ -98,11 +98,11 @@ internal fun NotesListPane(
 
         when {
             state.all == null -> {
-                FlowLoadingIndicator()
+                VoxTubeLoadingIndicator()
             }
 
             state.all.isEmpty() -> {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(R.string.notes_empty_title),
                     subtitle = stringResource(R.string.notes_empty_body),
                     icon = Icons.Outlined.StickyNote2,
@@ -110,7 +110,7 @@ internal fun NotesListPane(
             }
 
             state.visible.isEmpty() -> {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(R.string.notes_no_match_title),
                     subtitle = stringResource(R.string.notes_no_match_body),
                     icon = Icons.Default.Search,

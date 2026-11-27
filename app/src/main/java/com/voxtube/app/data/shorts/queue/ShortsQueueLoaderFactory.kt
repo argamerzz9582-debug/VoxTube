@@ -3,7 +3,7 @@ package com.voxtube.app.data.shorts.queue
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.local.PlaylistRepository
 import com.voxtube.app.data.local.SubscriptionRepository
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.shorts.ShortsFeedRepository
 import com.voxtube.app.data.subscriptions.SubscriptionFeedRepository
 import com.voxtube.app.data.subscriptions.SubscriptionWatchedVideos
@@ -22,7 +22,7 @@ class ShortsQueueLoaderFactory
         private val subscriptionWatchedVideos: SubscriptionWatchedVideos,
         private val playerPreferences: PlayerPreferences,
         private val handoff: ShortsQueueHandoff,
-        private val neuroEngine: FlowNeuroEngine,
+        private val neuroEngine: VoxTubeNeuroEngine,
     ) {
         fun create(source: ShortsQueueSource): ShortsQueueController {
             val resolved = resolve(source)

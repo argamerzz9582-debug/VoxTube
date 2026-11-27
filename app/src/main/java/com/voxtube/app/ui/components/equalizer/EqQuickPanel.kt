@@ -32,10 +32,10 @@ import com.voxtube.app.data.audio.eq.BuiltInEqPresets
 import com.voxtube.app.data.audio.eq.EqLimits
 import com.voxtube.app.data.audio.eq.EqState
 import com.voxtube.app.data.audio.eq.isEdited
-import com.voxtube.app.ui.components.shared.FlowFilterChip
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.screens.equalizer.EqualizerViewModel
 import kotlinx.coroutines.flow.StateFlow
@@ -58,8 +58,8 @@ internal fun EqQuickPanel(
     viewModel: EqualizerViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    FlowRowGroup(modifier = modifier) {
-        FlowSwitchRow(
+    VoxTubeRowGroup(modifier = modifier) {
+        VoxTubeSwitchRow(
             title = stringResource(R.string.equalizer),
             supportingText = presetSummary(state),
             checked = state.enabled,
@@ -82,14 +82,14 @@ internal fun EqQuickPanel(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(state.userPresets, key = { it.id }) { preset ->
-                    FlowFilterChip(
+                    VoxTubeFilterChip(
                         label = preset.name,
                         selected = state.active.presetId == preset.id,
                         onClick = { viewModel.selectPreset(preset.id) },
                     )
                 }
                 items(BuiltInEqPresets.all, key = { it.id }) { preset ->
-                    FlowFilterChip(
+                    VoxTubeFilterChip(
                         label = stringResource(preset.nameRes),
                         selected = state.active.presetId == preset.id,
                         onClick = { viewModel.selectPreset(preset.id) },
@@ -105,7 +105,7 @@ internal fun EqQuickPanel(
                 modifier = Modifier.padding(RowPadding),
             )
         }
-        FlowNavRow(
+        VoxTubeNavRow(
             title = stringResource(R.string.eq_edit),
             onClick = onEdit,
             leadingIcon = Icons.Rounded.Tune,
@@ -167,7 +167,7 @@ internal fun presetSummary(state: EqState): String {
     }
 }
 
-/** A free-form row inside a [FlowRowGroup], on the same container and shape as the kit's rows. */
+/** A free-form row inside a [VoxTubeRowGroup], on the same container and shape as the kit's rows. */
 @Composable
 internal fun PanelRow(
     shape: Shape,

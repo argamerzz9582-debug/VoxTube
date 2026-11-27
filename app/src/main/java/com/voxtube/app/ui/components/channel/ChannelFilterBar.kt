@@ -37,9 +37,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.innertube.pages.channel.ChannelFilterGroup
-import com.voxtube.app.ui.components.shared.FlowDropdownFilterChip
-import com.voxtube.app.ui.components.shared.FlowFilterChip
-import com.voxtube.app.ui.components.shared.FlowSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeDropdownFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
 
 /**
  * A tab's filter bar. YouTube ships two controls here and they are not interchangeable: a sort menu
@@ -66,7 +66,7 @@ internal fun ChannelFilterBar(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (searchActive && showListControls) {
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = searchQuery,
                 onQueryChange = onSearchQueryChange,
                 placeholder = stringResource(R.string.channel_search_hint),
@@ -117,7 +117,7 @@ internal fun ChannelFilterBar(
                         )
                     } else {
                         val option = group.options[optionIndex]
-                        FlowFilterChip(
+                        VoxTubeFilterChip(
                             label = option.label,
                             selected = optionIndex == chosen,
                             onClick = { onFilterSelected(groupIndex, optionIndex) },
@@ -154,7 +154,7 @@ private fun ChannelFilterDropdown(
             .orEmpty()
 
     Box {
-        FlowDropdownFilterChip(
+        VoxTubeDropdownFilterChip(
             label = label,
             selected = selectedIndex >= 0,
             onClick = { expanded = true },

@@ -1,17 +1,17 @@
 # Default owner for everything in the repository.
-* @A-EDev
+* @argamerzz9582-debug
 
 # Release, signing, and CI paths. Changes here can break the published
 # IzzyOnDroid/F-Droid artifacts, so they always need an explicit review.
-/.github/workflows/    @A-EDev
-/.github/dependabot.yml @A-EDev
-/app/build.gradle.kts  @A-EDev
-/build.gradle.kts      @A-EDev
-/gradle/               @A-EDev
-/fastlane/             @A-EDev
+/.github/workflows/    @argamerzz9582-debug
+/.github/dependabot.yml @argamerzz9582-debug
+/app/build.gradle.kts  @argamerzz9582-debug
+/build.gradle.kts      @argamerzz9582-debug
+/gradle/               @argamerzz9582-debug
+/fastlane/             @argamerzz9582-debug
 
 # Project policy documents.
-/CLAUDE.md             @A-EDev
-/AGENTS.md             @A-EDev
-/CONTRIBUTING.md       @A-EDev
-/SECURITY.md           @A-EDev
+/CLAUDE.md             @argamerzz9582-debug
+/AGENTS.md             @argamerzz9582-debug
+/CONTRIBUTING.md       @argamerzz9582-debug
+/SECURITY.md           @argamerzz9582-debug

@@ -15,8 +15,8 @@ import com.voxtube.app.ui.components.library.labelRes
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
 import com.voxtube.app.ui.screens.settings.index.LibrarySectionsIndex
 
 /**
@@ -76,10 +76,10 @@ internal fun LibrarySettingsScreen(
 
     swipePicker?.let { side ->
         val left = side == SwipeSide.LEFT
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(if (left) R.string.playlist_swipe_left else R.string.playlist_swipe_right),
             description = stringResource(R.string.playlist_swipe_subtitle),
-            options = PlaylistSwipeAction.entries.map { FlowChoice(it, stringResource(it.labelRes)) },
+            options = PlaylistSwipeAction.entries.map { VoxTubeChoice(it, stringResource(it.labelRes)) },
             selected = if (left) swipes.left else swipes.right,
             onSelect = { action -> if (left) viewModel.setPlaylistSwipeLeft(action) else viewModel.setPlaylistSwipeRight(action) },
             onDismiss = { swipePicker = null },

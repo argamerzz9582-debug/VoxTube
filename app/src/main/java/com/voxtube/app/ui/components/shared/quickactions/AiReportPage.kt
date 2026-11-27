@@ -21,7 +21,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.contentfilter.aislist.AiReportCheck
 import com.voxtube.app.data.contentfilter.aislist.AiVerdict
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 
 private val PagePadding = 16.dp
 private val PageSpacing = 12.dp
@@ -49,7 +49,7 @@ internal fun AiReportPage(
         when (val current = check) {
             null -> {
                 Text(stringResource(R.string.ai_report_looking_up), style = MaterialTheme.typography.bodyMedium)
-                FlowLoadingIndicator(modifier = Modifier.fillMaxWidth().height(LoadingHeight))
+                VoxTubeLoadingIndicator(modifier = Modifier.fillMaxWidth().height(LoadingHeight))
             }
 
             is AiReportCheck.Ready -> {

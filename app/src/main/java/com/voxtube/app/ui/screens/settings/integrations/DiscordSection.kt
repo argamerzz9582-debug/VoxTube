@@ -23,9 +23,9 @@ import com.voxtube.app.discord.DiscordSettingsState
 import com.voxtube.app.discord.DiscordSettingsSummary
 import com.voxtube.app.ui.components.settings.SettingsListScope
 import com.voxtube.app.ui.components.settings.notice
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.screens.settings.index.IntegrationsIndex
 
 internal fun SettingsListScope.discordSection(
@@ -41,7 +41,7 @@ internal fun SettingsListScope.discordSection(
         footer = R.string.discord_presence_description,
     ) {
         row(IntegrationsIndex.discord.key) { shape ->
-            FlowSwitchRow(
+            VoxTubeSwitchRow(
                 title = stringResource(IntegrationsIndex.discord.title),
                 supportingText = stringResource(R.string.discord_presence_enable_description),
                 checked = state.isEnabled,
@@ -56,7 +56,7 @@ internal fun SettingsListScope.discordSection(
         }
         if (state.summary == DiscordSettingsSummary.ERROR && state.isAvailable) {
             row("integrations.discord.retry") { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.discord_presence_retry),
                     supportingText = state.errorMessage,
                     leadingIcon = Icons.Outlined.Refresh,
@@ -102,7 +102,7 @@ private fun DiscordAccountRow(
         trailingContent = {
             when {
                 pending -> {
-                    FlowLoadingIndicator()
+                    VoxTubeLoadingIndicator()
                 }
 
                 state.accountName != null -> {

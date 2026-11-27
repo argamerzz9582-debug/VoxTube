@@ -21,7 +21,7 @@ import com.voxtube.app.data.local.AppFontPreferences
 import com.voxtube.app.data.local.LocalDataManager
 import com.voxtube.app.player.EnhancedMusicPlayerManager
 import com.voxtube.app.service.LockScreenPlayerLauncher
-import com.voxtube.app.ui.startup.FlowTheme
+import com.voxtube.app.ui.startup.VoxTubeTheme
 import com.voxtube.app.ui.startup.themeSettings
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.combine
@@ -71,7 +71,7 @@ class LockScreenPlayerActivity : ComponentActivity() {
         val theme = LocalDataManager(applicationContext).themeSettings(appFontPreferences)
         setContent {
             val settings = theme.collectAsState(initial = null).value ?: return@setContent
-            FlowTheme(settings) {
+            VoxTubeTheme(settings) {
                 LockScreenPlayerScreen(onUnlock = ::unlock)
             }
         }

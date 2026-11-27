@@ -21,8 +21,8 @@ import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.data.video.DownloadedVideo
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.library.LibrarySection
-import com.voxtube.app.ui.components.shared.FlowEmptyState
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 import com.voxtube.app.ui.screens.library.LibraryViewModel
 import com.voxtube.app.ui.screens.library.libraryShelves
 import com.voxtube.app.ui.screens.library.visibleContentSections
@@ -64,7 +64,7 @@ fun TvLibraryScreen(
             val hidden = hiddenSections ?: return@LazyColumn
             if (isLibraryEmpty) {
                 item(key = "library-empty", contentType = "empty") {
-                    FlowEmptyState(
+                    VoxTubeEmptyState(
                         title = stringResource(R.string.library_empty_title),
                         subtitle = stringResource(R.string.library_empty_body),
                         icon = Icons.Outlined.VideoLibrary,

@@ -26,7 +26,7 @@ import com.voxtube.app.data.paging.SearchResultItem
 import com.voxtube.app.data.paging.WatchedVideoLookup
 import com.voxtube.app.data.paging.watchedVideoIds
 import com.voxtube.app.data.paging.withoutHidden
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.search.SearchSuggestionsRepository
 import com.voxtube.app.data.shorts.ShortsContentFilter
 import com.voxtube.app.data.shorts.queue.ShortsQueueHandoff
@@ -71,7 +71,7 @@ class SearchViewModel
         private val shortsQueueHandoff: ShortsQueueHandoff,
         private val searchHistory: SearchHistoryRepository,
         private val videoStats: VideoStatsRecorder,
-        private val neuroEngine: FlowNeuroEngine,
+        private val neuroEngine: VoxTubeNeuroEngine,
         private val watchHistoryDao: WatchHistoryDao,
         private val preferences: PlayerPreferences,
         private val privacyGate: PrivacyGate,
@@ -150,7 +150,7 @@ class SearchViewModel
             if (normalized != lastSignaledQuery) {
                 lastSignaledQuery = normalized
                 viewModelScope.launch {
-                    runCatching { FlowNeuroEngine.onSearchQuery(context, query) }
+                    runCatching { VoxTubeNeuroEngine.onSearchQuery(context, query) }
                     videoStats.onSearch(query.takeIf { searchHistory.isSearchHistoryEnabled() })
                 }
             }

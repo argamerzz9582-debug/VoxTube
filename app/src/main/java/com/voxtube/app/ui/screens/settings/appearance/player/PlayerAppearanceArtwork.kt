@@ -9,21 +9,21 @@ import com.voxtube.app.data.music.artwork.ArtworkSource
 import com.voxtube.app.ui.components.settings.SettingsGroupScope
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.PlayerAppearanceIndex
 
 /** The choices the animated artwork rows offer, resolved once per screen. */
 @Immutable
 internal class ArtworkOptions(
-    val source: List<FlowToggleOption<ArtworkSource>>,
-    val quality: List<FlowToggleOption<ArtworkLoopQuality>>,
+    val source: List<VoxTubeToggleOption<ArtworkSource>>,
+    val quality: List<VoxTubeToggleOption<ArtworkLoopQuality>>,
 )
 
 @Composable
 internal fun rememberArtworkOptions(): ArtworkOptions =
     ArtworkOptions(
-        source = ArtworkSource.entries.map { FlowToggleOption(it, stringResource(artworkSourceLabel(it))) },
-        quality = ArtworkLoopQuality.entries.map { FlowToggleOption(it, stringResource(artworkQualityLabel(it))) },
+        source = ArtworkSource.entries.map { VoxTubeToggleOption(it, stringResource(artworkSourceLabel(it))) },
+        quality = ArtworkLoopQuality.entries.map { VoxTubeToggleOption(it, stringResource(artworkQualityLabel(it))) },
     )
 
 private fun artworkSourceLabel(source: ArtworkSource): Int =

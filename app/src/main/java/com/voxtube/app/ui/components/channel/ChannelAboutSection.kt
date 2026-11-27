@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.voxtube.app.R
 import com.voxtube.app.innertube.pages.channel.ChannelHeader
-import com.voxtube.app.ui.components.shared.FlowSelectionContainer
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionContainer
 import com.voxtube.app.ui.theme.extendedColors
 
 /**
@@ -63,7 +63,7 @@ internal fun ChannelAboutSection(header: ChannelHeader) {
         if (!header.description.isNullOrBlank()) {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 ChannelAboutHeading(stringResource(R.string.about))
-                FlowSelectionContainer {
+                VoxTubeSelectionContainer {
                     Text(
                         text = header.description,
                         style = MaterialTheme.typography.bodyMedium,
@@ -123,7 +123,7 @@ internal fun ChannelAboutSection(header: ChannelHeader) {
             HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant, thickness = 0.5.dp)
             Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                 ChannelAboutHeading(stringResource(R.string.channel_about_more_info))
-                FlowSelectionContainer {
+                VoxTubeSelectionContainer {
                     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                         moreInfo.forEach { (icon, value) ->
                             Row(

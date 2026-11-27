@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.data.model.Channel
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
 import com.voxtube.app.ui.components.shared.ChannelGroupBadge
-import com.voxtube.app.ui.components.shared.FlowSubscribeButton
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
 import com.voxtube.app.ui.components.shared.toOrganizeTarget
 
@@ -110,7 +110,7 @@ internal fun SubscriptionManagerItem(
 
         Spacer(modifier = Modifier.width(TitleActionSpacing))
 
-        FlowSubscribeButton(
+        VoxTubeSubscribeButton(
             isSubscribed = true,
             onSubscribeClick = {},
             isNotificationsEnabled = isNotificationsEnabled,

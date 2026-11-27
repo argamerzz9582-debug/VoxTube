@@ -23,8 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 
 /** What the side pane beside the wide player shows. */
 internal enum class PlayerSidePaneTab { UP_NEXT, LYRICS }
@@ -54,15 +54,15 @@ internal fun PlayerSidePane(
                 modifier = Modifier.fillMaxWidth().padding(start = 12.dp, top = 12.dp, end = 4.dp, bottom = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                FlowConnectedToggleGroup(
+                VoxTubeConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(
+                            VoxTubeToggleOption(
                                 PlayerSidePaneTab.UP_NEXT,
                                 stringResource(R.string.music_player_tab_up_next),
                                 Icons.AutoMirrored.Rounded.QueueMusic,
                             ),
-                            FlowToggleOption(
+                            VoxTubeToggleOption(
                                 PlayerSidePaneTab.LYRICS,
                                 stringResource(R.string.music_player_tab_lyrics),
                                 Icons.Rounded.Lyrics,

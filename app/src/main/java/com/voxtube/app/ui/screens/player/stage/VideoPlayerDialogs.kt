@@ -9,7 +9,7 @@ import androidx.media3.common.util.UnstableApi
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Comment
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.ui.components.shared.FlowNoteEditorDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNoteEditorDialog
 import com.voxtube.app.ui.screens.player.dialogs.PlayerBottomSheetsContainer
 import com.voxtube.app.ui.screens.player.dialogs.PlayerDialogsContainer
 import com.voxtube.app.ui.screens.player.dialogs.SbSubmitSegmentDialog
@@ -70,7 +70,7 @@ internal fun VideoPlayerDialogs(
     if (screenState.activeSheet == PlayerSheet.Note) {
         val note by playerViewModel.videoNote.collectAsStateWithLifecycle()
         val insertPositionMs = remember { screenState.currentPosition.takeUnless { video.isLive } }
-        FlowNoteEditorDialog(
+        VoxTubeNoteEditorDialog(
             initialText = note.orEmpty(),
             title = stringResource(R.string.note_video_title),
             onSave = { text -> playerViewModel.saveVideoNote(video.id, text) },

@@ -41,7 +41,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.model.Channel
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
 import com.voxtube.app.ui.components.shared.ChannelGroupBadge
-import com.voxtube.app.ui.components.shared.FlowNewBadge
+import com.voxtube.app.ui.components.shared.VoxTubeNewBadge
 import com.voxtube.app.ui.components.shared.flowArtistShape
 import com.voxtube.app.ui.components.shared.focusLift
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
@@ -141,7 +141,7 @@ internal fun ChannelAvatarItem(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f, fill = false).titleMarquee(),
             )
-            if (hasNewUploads) FlowNewBadge()
+            if (hasNewUploads) VoxTubeNewBadge()
         }
     }
 }

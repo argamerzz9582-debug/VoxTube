@@ -42,7 +42,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.local.CoverShape
 import com.voxtube.app.ui.components.musicplayer.mini.coverPolygon
 import com.voxtube.app.ui.components.musicplayer.mini.coverShapeLabel
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 
 private val ShapeSize = 52.dp
@@ -68,7 +68,7 @@ internal fun CoverShapeSheet(
         sheetState = rememberFlowSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
-        FlowSheetHeader(title = title, subtitle = subtitle, onClose = onDismiss, showDragHandle = false)
+        VoxTubeSheetHeader(title = title, subtitle = subtitle, onClose = onDismiss, showDragHandle = false)
         LazyVerticalGrid(
             columns = GridCells.Adaptive(CellMinWidth),
             contentPadding =

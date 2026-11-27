@@ -38,7 +38,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.backup.BackupOperation
 import com.voxtube.app.data.backup.ImportKind
 import com.voxtube.app.data.backup.ImportSource
-import com.voxtube.app.ui.components.shared.FlowProgressBanner
+import com.voxtube.app.ui.components.shared.VoxTubeProgressBanner
 
 private val TileSpacing = 10.dp
 private val TilePadding = 16.dp
@@ -79,7 +79,7 @@ internal fun ImportStep(
             header()
             (importOperation as? BackupOperation.Running)?.let { running ->
                 item(key = "progress") {
-                    FlowProgressBanner(
+                    VoxTubeProgressBanner(
                         headline = running.headline,
                         current = running.current,
                         total = running.total,

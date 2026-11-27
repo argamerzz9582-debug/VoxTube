@@ -41,8 +41,8 @@ import com.voxtube.app.ui.components.PlayingWaveform
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
 import com.voxtube.app.ui.components.shared.ChannelOrganizeTarget
-import com.voxtube.app.ui.components.shared.FlowSubscribeButton
-import com.voxtube.app.ui.components.shared.FlowSubscribeButtonSize
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
 import com.voxtube.app.ui.components.shared.videoMetadataLine
 import com.voxtube.app.ui.theme.PlayerScrimContent
@@ -121,13 +121,13 @@ internal fun ShortsMetadataOverlay(
                                 },
                             isSubscribed = isSubscribed,
                         )
-                    FlowSubscribeButton(
+                    VoxTubeSubscribeButton(
                         isSubscribed = isSubscribed,
                         onSubscribeClick = onSubscribeToggle,
                         onUnsubscribeClick = onSubscribeToggle,
                         isNotificationsEnabled = isNotificationsEnabled,
                         onNotificationChange = onNotificationChange,
-                        size = FlowSubscribeButtonSize.Compact,
+                        size = VoxTubeSubscribeButtonSize.Compact,
                         showSubscribedLabel = false,
                         onAddNote = organize.onAddNote,
                         onManageGroups = organize.onManageGroups,

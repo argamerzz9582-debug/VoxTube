@@ -53,8 +53,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowActionButton
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
+import com.voxtube.app.ui.components.shared.VoxTubeActionButton
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
 import com.voxtube.app.ui.components.shared.flowActionShape
 import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
@@ -120,7 +120,7 @@ fun CrashReportScreen(
                 Row(
                     modifier =
                         Modifier
-                            .widthIn(max = FlowMaxContentWidth)
+                            .widthIn(max = VoxTubeMaxContentWidth)
                             .fillMaxWidth()
                             .navigationBarsPadding()
                             .padding(BarPadding),
@@ -143,7 +143,7 @@ fun CrashReportScreen(
                         )
                         Text(stringResource(R.string.crash_report), style = MaterialTheme.typography.titleMedium, maxLines = 1)
                     }
-                    FlowActionButton(
+                    VoxTubeActionButton(
                         text = stringResource(R.string.crash_continue),
                         onClick = onContinue,
                         modifier = Modifier.weight(1f),
@@ -154,7 +154,7 @@ fun CrashReportScreen(
     ) { padding ->
         Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {
             LazyColumn(
-                modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth(),
+                modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).fillMaxWidth(),
                 contentPadding = PagePadding,
                 verticalArrangement = Arrangement.spacedBy(Spacing),
             ) {

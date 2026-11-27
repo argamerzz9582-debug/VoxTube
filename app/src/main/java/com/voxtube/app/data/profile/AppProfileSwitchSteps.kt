@@ -6,7 +6,7 @@ import android.os.Build
 import android.os.SystemClock
 import android.window.SplashScreen
 import com.voxtube.app.data.backup.BackupCoordinator
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.recommendation.music.MusicBrainEngine
 import com.voxtube.app.data.scrobble.Scrobbler
 import com.voxtube.app.data.stats.VideoStatsRecorder
@@ -36,7 +36,7 @@ class AppProfileSwitchSteps
         private val musicResumeTracker: MusicResumeTracker,
         private val scrobbler: Scrobbler,
         private val musicBrainEngine: MusicBrainEngine,
-        private val neuroEngine: FlowNeuroEngine,
+        private val neuroEngine: VoxTubeNeuroEngine,
         private val videoStats: VideoStatsRecorder,
         private val sync: dagger.Lazy<SyncManager>,
         private val linked: dagger.Lazy<LinkedSync>,

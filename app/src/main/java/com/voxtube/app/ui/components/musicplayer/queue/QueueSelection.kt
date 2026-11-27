@@ -28,7 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.music.model.MusicTrack
-import com.voxtube.app.ui.components.shared.FlowSelectionAction
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionAction
 
 /** Which queue rows are picked, by their [queueKeys]; null while the queue isn't in select mode. */
 @Stable
@@ -140,10 +140,10 @@ internal fun queueSelectionActions(
     onAddToPlaylist: () -> Unit,
     onDownload: () -> Unit,
     onRemove: () -> Unit,
-): List<FlowSelectionAction> =
+): List<VoxTubeSelectionAction> =
     listOf(
-        FlowSelectionAction(Icons.Rounded.QueuePlayNext, stringResource(R.string.play_next), onClick = onPlayNext),
-        FlowSelectionAction(Icons.AutoMirrored.Rounded.PlaylistAdd, stringResource(R.string.add_to_playlist), onClick = onAddToPlaylist),
-        FlowSelectionAction(Icons.Rounded.Download, stringResource(R.string.download), onClick = onDownload),
-        FlowSelectionAction(Icons.Rounded.RemoveCircleOutline, stringResource(R.string.remove_from_queue), onClick = onRemove),
+        VoxTubeSelectionAction(Icons.Rounded.QueuePlayNext, stringResource(R.string.play_next), onClick = onPlayNext),
+        VoxTubeSelectionAction(Icons.AutoMirrored.Rounded.PlaylistAdd, stringResource(R.string.add_to_playlist), onClick = onAddToPlaylist),
+        VoxTubeSelectionAction(Icons.Rounded.Download, stringResource(R.string.download), onClick = onDownload),
+        VoxTubeSelectionAction(Icons.Rounded.RemoveCircleOutline, stringResource(R.string.remove_from_queue), onClick = onRemove),
     )

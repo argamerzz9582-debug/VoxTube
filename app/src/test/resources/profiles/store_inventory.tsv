@@ -35,7 +35,7 @@ shared_prefs	youtube_identity	main:utils/potoken/VisitorIdentityStore.kt	PROFILE
 shared_prefs	flow_prefs	main:utils/potoken/VisitorIdentityStore.kt	DEVICE	-	Only deletes the legacy visitor keys.
 shared_prefs	flow_prefs	main:utils/cipher/PipePipeNsigDecoder.kt	DEVICE	-	Player-JS id cache with a 24 h lifetime.
 shared_prefs	flow_language_prefs	main:utils/AppLanguageManager.kt	DEVICE	-	App language.
-shared_prefs	flow_crash_prefs	main:utils/FlowCrashHandler.kt	DEVICE	-	Crash reports.
+shared_prefs	flow_crash_prefs	main:utils/VoxTubeCrashHandler.kt	DEVICE	-	Crash reports.
 shared_prefs	music_home_cache_prefs	main:data/recommendation/MusicRecommendationAlgorithm.kt	CACHE	-	Freshness of the music home rows, which sit in each profile's database; suffixed per profile.
 shared_prefs	flow_file_tombstones	main:data/video/VideoDownloadManager.kt	DEVICE	-	Deleted download paths.
 room_database	flow_database	main:data/local/AppDatabase.kt	PROFILE	library	Default's database; also the device database for the download tables. Other profiles open their own file of the same class.
@@ -79,20 +79,20 @@ room_dao	SyncLogDao	main:data/local/AppDatabase.kt	DEFAULT_ONLY	-	Provided from 
 room_dao	SyncPeerDao	main:data/local/AppDatabase.kt	DEFAULT_ONLY	-	Provided from @ProfileDb while Default is active.
 room_dao	MusicGraphDao	main:data/local/AppDatabase.kt	CACHE	-	Provided from @ProfileDb; its caches live in each profile database.
 files_dir	downloads/	main:ui/screens/settings/downloads/DownloadSettingsViewModel.kt	DEVICE	-	Shows the internal download folder.
-files_dir	flow_crashes.log	main:utils/FlowCrashHandler.kt	DEVICE	-	Crash log.
+files_dir	flow_crashes.log	main:utils/VoxTubeCrashHandler.kt	DEVICE	-	Crash log.
 files_dir	cipher_cache/	main:utils/cipher/PlayerJsFetcher.kt	DEVICE	-	Player JS.
 files_dir	lyrics/	main:data/lyrics/LyricsCacheManager.kt	DEVICE	-	Lyrics are content, not personal.
 files_dir	offline_subtitles/	main:data/video/OfflineSubtitleStore.kt	DEVICE	-	Subtitles of downloads.
 files_dir	downloads/	main:data/video/VideoDownloadManager.kt	DEVICE	-	Internal downloads, and the staging fallback when external storage is missing.
 files_dir	download_covers/	main:data/video/storage/DownloadCovers.kt	DEVICE	-	Covers of downloads.
 files_dir	fonts/	main:data/local/CustomFontStore.kt	DEVICE	-	Imported font files; which one is used lives in app_font.
-files_dir	filesDir	main:data/backup/FlowBackupAgent.kt	DEVICE	-	Root for the restore cleanup; profile folders join it in Phase 1.
+files_dir	filesDir	main:data/backup/VoxTubeBackupAgent.kt	DEVICE	-	Root for the restore cleanup; profile folders join it in Phase 1.
 files_dir	local_embedded_tags.json	main:data/localmedia/LocalEmbeddedTags.kt	DEVICE	-	Tags read from local files.
 files_dir	local_subtitles.json	main:data/localmedia/LocalSubtitleStore.kt	DEVICE	-	Subtitle choices for local media.
 files_dir	fake_stream_wall, fake_stream_wall_all	main:player/datasource/FakeStreamWallDataSource.kt	DEVICE	-	Debug switch files.
 no_backup_dir	headphone_resume_off	main:service/HeadphoneResume.kt	DEVICE	-	Player control; written during a switch so no headset resumes.
 no_backup_dir	aislist/	main:data/contentfilter/aislist/AiListRepository.kt	DEVICE	-	AiSList channel list and its handle index; re-downloadable, the same for every profile, never backed up or synced.
-cache_dir	innertube_http_cache/	main:FlowApplication.kt	CACHE	-	Left by the InnerTube HTTP cache older builds kept; deleted at every start.
+cache_dir	innertube_http_cache/	main:VoxTubeApplication.kt	CACHE	-	Left by the InnerTube HTTP cache older builds kept; deleted at every start.
 cache_dir	recap/, lyrics/	main:utils/SharedFiles.kt	CACHE	-	Share images from the active profile; deleted at switch.
 cache_dir	image_cache/	main:di/AppModule.kt	CACHE	-	Thumbnails; shared.
 cache_dir	http_cache/	main:di/NetworkModule.kt	CACHE	-	App OkHttp GET cache; shared.
@@ -153,7 +153,7 @@ files_dir	profile_settings/<id>/, profile_library/<id>/	main:data/profile/Profil
 no_backup_dir	profiles/<id>/	main:data/profile/ProfileFolders.kt	PROFILE	private	Deletes a removed profile's private folder.
 profile_file	youtube_identity_<id>, music_home_cache_prefs_<id>	main:data/profile/ProfileFolders.kt	PROFILE	identity	A removed profile's SharedPreferences files, named the way ProfileFiles names them.
 cache_dir	recap/, lyrics/, playlists/	main:data/profile/AppProfileSwitchSteps.kt	CACHE	-	Deleted at a switch: share exports of the old profile.
-profile_file	pending_restore.zip	main:FlowApplication.kt	PROFILE	private	A seed or restore waiting for the running profile, applied at start before the start destination is picked.
+profile_file	pending_restore.zip	main:VoxTubeApplication.kt	PROFILE	private	A seed or restore waiting for the running profile, applied at start before the start destination is picked.
 profile_file	pending_restore.zip	main:data/profile/ProfileSlices.kt	PROFILE	private	The seed a new profile copies from the running one, written into the new profile's private folder.
 no_backup_dir	profiles/<id>/pending_restore.zip	main:data/profile/ProfileSlices.kt	PROFILE	private	A new profile's private folder, resolved by id before that profile ever runs.
 cache_dir	held_link/	main:data/profile/SwitchIntentQueue.kt	CACHE	-	A playlist file shared during a switch, kept for the next profile to open; replaced by the next one.

@@ -9,10 +9,10 @@ package com.voxtube.app.ui.screens.home
 import com.google.common.truth.Truth.assertThat
 import com.voxtube.app.data.local.VideoHistoryEntry
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowPersona
 import com.voxtube.app.data.recommendation.GraphSeedInput
 import com.voxtube.app.data.recommendation.GraphSeedSource
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubePersona
 import org.junit.Test
 
 /** I-10: behavioral coverage for the home-feed consumer logic (R-2 seeds, I-1 impressions). */
@@ -99,7 +99,7 @@ class HomeFeedLogicTest {
         val deepDiver =
             feedTasteProfile(
                 UserBrain(totalInteractions = 200),
-                FlowPersona.DEEP_DIVER,
+                VoxTubePersona.DEEP_DIVER,
             )
         assertThat(feedFitPenalty(essay, deepDiver)).isEqualTo(0.0)
     }

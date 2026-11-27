@@ -31,11 +31,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.text.Cue
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowColorPickerDialog
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowFilterChip
-import com.voxtube.app.ui.components.shared.FlowSwitch
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeColorPickerDialog
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeSwitch
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.theme.SubtitleBackgroundSwatches
 import com.voxtube.app.ui.theme.SubtitleEdgeSwatches
 import com.voxtube.app.ui.theme.SubtitleTextSwatches
@@ -97,11 +97,11 @@ fun SubtitleCustomizer(
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             val fullscreenPosition =
                 if (editingVertical) currentStyle.verticalFullscreenBottomPadding else currentStyle.fullscreenBottomPadding
-            FlowConnectedToggleGroup(
+            VoxTubeConnectedToggleGroup(
                 options =
                     listOf(
-                        FlowToggleOption(value = false, label = stringResource(R.string.subtitle_fullscreen_landscape)),
-                        FlowToggleOption(value = true, label = stringResource(R.string.subtitle_fullscreen_vertical)),
+                        VoxTubeToggleOption(value = false, label = stringResource(R.string.subtitle_fullscreen_landscape)),
+                        VoxTubeToggleOption(value = true, label = stringResource(R.string.subtitle_fullscreen_vertical)),
                     ),
                 selected = editingVertical,
                 onSelected = { editingVertical = it },
@@ -161,7 +161,7 @@ fun SubtitleCustomizer(
             Text(stringResource(R.string.subtitle_edge_style), style = MaterialTheme.typography.labelLarge)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 SubtitleEdgeType.entries.forEach { type ->
-                    FlowFilterChip(
+                    VoxTubeFilterChip(
                         label = stringResource(type.labelRes),
                         selected = currentStyle.edgeType == type,
                         onClick = { onStyleChange(currentStyle.copy(edgeType = type)) },
@@ -185,7 +185,7 @@ fun SubtitleCustomizer(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(stringResource(R.string.subtitle_bold_text), style = MaterialTheme.typography.labelLarge)
-            FlowSwitch(
+            VoxTubeSwitch(
                 checked = currentStyle.isBold,
                 onCheckedChange = { onStyleChange(currentStyle.copy(isBold = it)) },
             )
@@ -225,7 +225,7 @@ private fun CustomColorDialog(
             ColorTarget.WINDOW -> R.string.subtitle_window_color to style.windowColor
             ColorTarget.EDGE -> R.string.subtitle_edge_color to style.edgeColor
         }
-    FlowColorPickerDialog(
+    VoxTubeColorPickerDialog(
         title = stringResource(titleRes),
         initialArgb = current.copy(alpha = 1f).toArgb().toLong() and ARGB_MASK,
         allowAlpha = false,

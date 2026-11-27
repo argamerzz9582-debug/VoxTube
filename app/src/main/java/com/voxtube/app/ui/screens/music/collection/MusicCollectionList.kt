@@ -36,10 +36,10 @@ import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.music.item.MusicItemDensity
 import com.voxtube.app.ui.components.music.item.MusicTrackItem
 import com.voxtube.app.ui.components.music.section.MusicCollectionShelf
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
-import com.voxtube.app.ui.components.shared.FlowSpinner
 import com.voxtube.app.ui.components.shared.ReorderHandleCell
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.ui.components.shared.reorderHandleDrag
 import com.voxtube.app.ui.components.shared.reorderLift
@@ -94,12 +94,12 @@ internal fun MusicCollectionList(
         state = listState,
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(bottom = flowBottomContentPadding(ListEndPadding)),
-        verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+        verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap),
     ) {
         if (header != null) item(key = "collection-header", contentType = "header") { header() }
         if (tracks.isEmpty() && mode.searchQuery.isNotBlank()) {
             item(key = "collection-no-results", contentType = "empty") {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(R.string.music_collection_no_matches, mode.searchQuery.trim()),
                     icon = Icons.Outlined.SearchOff,
                 )
@@ -168,7 +168,7 @@ internal fun MusicCollectionList(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     when {
-                        footer.isLoadingMore -> FlowSpinner()
+                        footer.isLoadingMore -> VoxTubeSpinner()
                         footer.moreFailed -> TextButton(onClick = footer.onRetryMore) { Text(stringResource(R.string.retry)) }
                     }
                     Text(
@@ -218,7 +218,7 @@ private fun removeButton(
 private fun CollectionEmptyState(kind: MusicCollectionKind?) {
     when (kind) {
         MusicCollectionKind.LIKED -> {
-            FlowEmptyState(
+            VoxTubeEmptyState(
                 title = stringResource(R.string.liked_music_empty_title),
                 subtitle = stringResource(R.string.liked_music_empty_body),
                 icon = Icons.Outlined.FavoriteBorder,
@@ -226,7 +226,7 @@ private fun CollectionEmptyState(kind: MusicCollectionKind?) {
         }
 
         else -> {
-            FlowEmptyState(
+            VoxTubeEmptyState(
                 title = stringResource(R.string.music_playlist_empty_title),
                 subtitle = stringResource(R.string.music_playlist_empty_body),
                 icon = Icons.AutoMirrored.Outlined.QueueMusic,

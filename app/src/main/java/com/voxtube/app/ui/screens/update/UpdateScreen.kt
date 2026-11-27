@@ -58,11 +58,11 @@ import com.voxtube.app.R
 import com.voxtube.app.data.update.AppRelease
 import com.voxtube.app.data.update.AppVersions
 import com.voxtube.app.data.update.UpdateFailure
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowLogo
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeLogo
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -93,7 +93,7 @@ fun UpdateScreen(
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = WindowInsets(0.dp),
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = "",
                 onBack = onClose,
                 actions = {
@@ -129,16 +129,16 @@ fun UpdateScreen(
         Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {
             when {
                 state.loading -> {
-                    FlowLoadingIndicator()
+                    VoxTubeLoadingIndicator()
                 }
 
                 release == null -> {
-                    FlowEmptyState(title = stringResource(R.string.flow_is_up_to_date), icon = Icons.Outlined.Verified)
+                    VoxTubeEmptyState(title = stringResource(R.string.flow_is_up_to_date), icon = Icons.Outlined.Verified)
                 }
 
                 else -> {
                     LazyColumn(
-                        modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth(),
+                        modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).fillMaxWidth(),
                         contentPadding = ContentPadding,
                     ) {
                         item(key = "header") { ReleaseHeader(release) }
@@ -161,7 +161,7 @@ private fun ReleaseHeader(release: AppRelease) {
             color = MaterialTheme.colorScheme.primaryContainer,
             modifier = Modifier.size(HeroSize),
         ) {
-            Box(contentAlignment = Alignment.Center) { FlowLogo(Modifier.width(HeroLogoWidth)) }
+            Box(contentAlignment = Alignment.Center) { VoxTubeLogo(Modifier.width(HeroLogoWidth)) }
         }
         Text(
             text = stringResource(R.string.update_title, release.version),

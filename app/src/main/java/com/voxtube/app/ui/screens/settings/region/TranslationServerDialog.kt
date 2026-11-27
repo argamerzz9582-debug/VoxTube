@@ -19,9 +19,9 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.translation.TranslationServerType
 import com.voxtube.app.data.translation.TranslationSettings
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 
 private val FieldSpacing = 8.dp
 
@@ -39,20 +39,20 @@ internal fun TranslationServerDialog(
     var url by rememberSaveable { mutableStateOf(initial.serverUrl.orEmpty()) }
     var apiKey by rememberSaveable { mutableStateOf(initial.apiKey.orEmpty()) }
     var invalid by rememberSaveable { mutableStateOf(false) }
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.translation_server_title)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(FieldSpacing)) {
                 Text(stringResource(R.string.translation_server_dialog_body), style = MaterialTheme.typography.bodyMedium)
-                FlowConnectedToggleGroup(
+                VoxTubeConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(
+                            VoxTubeToggleOption(
                                 TranslationServerType.LIBRETRANSLATE,
                                 stringResource(R.string.translation_server_libretranslate),
                             ),
-                            FlowToggleOption(TranslationServerType.LINGVA, stringResource(R.string.translation_server_lingva)),
+                            VoxTubeToggleOption(TranslationServerType.LINGVA, stringResource(R.string.translation_server_lingva)),
                         ),
                     selected = type,
                     onSelected = { type = it },

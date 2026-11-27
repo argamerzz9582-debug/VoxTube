@@ -40,10 +40,10 @@ import com.voxtube.app.R
 import com.voxtube.app.data.contentfilter.aislist.AiVerdict
 import com.voxtube.app.innertube.pages.channel.ChannelHeader
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
-import com.voxtube.app.ui.components.shared.FlowNoteCard
-import com.voxtube.app.ui.components.shared.FlowNoticeBanner
-import com.voxtube.app.ui.components.shared.FlowSubscribeButton
 import com.voxtube.app.ui.components.shared.FullSizeImageDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNoteCard
+import com.voxtube.app.ui.components.shared.VoxTubeNoticeBanner
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
 import com.voxtube.app.ui.theme.extendedColors
 import com.voxtube.app.utils.ThumbnailUrlResolver
 import com.voxtube.app.utils.copyPlainText
@@ -105,7 +105,7 @@ internal fun ChannelHeaderSection(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            FlowSubscribeButton(
+            VoxTubeSubscribeButton(
                 isSubscribed = isSubscribed,
                 isNotificationsEnabled = isNotificationsEnabled,
                 onSubscribeClick = onSubscribeClick,
@@ -143,7 +143,7 @@ internal fun ChannelHeaderSection(
             }
 
             if (aiVerdict != AiVerdict.NONE) {
-                FlowNoticeBanner(
+                VoxTubeNoticeBanner(
                     icon = ImageVector.vectorResource(R.drawable.ic_ai_content),
                     message =
                         stringResource(
@@ -156,7 +156,7 @@ internal fun ChannelHeaderSection(
             }
 
             if (!note.isNullOrBlank() && onEditNote != null) {
-                FlowNoteCard(
+                VoxTubeNoteCard(
                     text = note,
                     onEdit = onEditNote,
                     modifier = Modifier.padding(top = 8.dp),

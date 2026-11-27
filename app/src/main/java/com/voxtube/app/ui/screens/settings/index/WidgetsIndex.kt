@@ -3,11 +3,11 @@ package com.voxtube.app.ui.screens.settings.index
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.settings.SettingEntry
 import com.voxtube.app.ui.components.settings.SettingsDestination
-import com.voxtube.app.widget.core.FlowWidgetEntry
-import com.voxtube.app.widget.core.FlowWidgets
+import com.voxtube.app.widget.core.VoxTubeWidgetEntry
+import com.voxtube.app.widget.core.VoxTubeWidgets
 
 internal object WidgetsIndex {
-    fun entryFor(widget: FlowWidgetEntry) =
+    fun entryFor(widget: VoxTubeWidgetEntry) =
         SettingEntry(
             key = "widgets.${widget.id}",
             title = widget.label,
@@ -17,5 +17,5 @@ internal object WidgetsIndex {
             destination = SettingsDestination.WIDGETS,
         )
 
-    val all = FlowWidgets.catalog.map(::entryFor)
+    val all = VoxTubeWidgets.catalog.map(::entryFor)
 }

@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowActionButtonPair
-import com.voxtube.app.ui.components.shared.FlowPairAction
+import com.voxtube.app.ui.components.shared.VoxTubeActionButtonPair
+import com.voxtube.app.ui.components.shared.VoxTubePairAction
 import com.voxtube.app.ui.screens.sync.SyncOption
 import com.voxtube.app.ui.screens.sync.SyncOptions
 import com.voxtube.app.ui.screens.sync.SyncSection
@@ -50,7 +50,7 @@ internal fun LinkedStart(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
-    val create = FlowPairAction(Icons.Outlined.AddLink, stringResource(R.string.linked_create_title), onCreate)
+    val create = VoxTubePairAction(Icons.Outlined.AddLink, stringResource(R.string.linked_create_title), onCreate)
     val join =
         SyncOption(
             Icons.Outlined.QrCodeScanner,
@@ -66,7 +66,7 @@ internal fun LinkedStart(
             onShowCode,
         )
     val second = if (hostOnly) showCode else join
-    FlowActionButtonPair(primary = create, secondary = FlowPairAction(second.icon, second.title, second.onClick))
+    VoxTubeActionButtonPair(primary = create, secondary = VoxTubePairAction(second.icon, second.title, second.onClick))
     SyncSection(stringResource(R.string.linked_other_ways)) {
         SyncOptions(
             listOfNotNull(

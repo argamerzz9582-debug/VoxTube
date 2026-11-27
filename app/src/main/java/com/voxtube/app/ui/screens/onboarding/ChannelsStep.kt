@@ -25,13 +25,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Channel
-import com.voxtube.app.ui.components.shared.FlowPopIn
-import com.voxtube.app.ui.components.shared.FlowQuickSearchChips
-import com.voxtube.app.ui.components.shared.FlowSearchField
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
-import com.voxtube.app.ui.components.shared.FlowSpinner
 import com.voxtube.app.ui.components.shared.MediaChannelSubscribeRow
+import com.voxtube.app.ui.components.shared.VoxTubePopIn
+import com.voxtube.app.ui.components.shared.VoxTubeQuickSearchChips
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.components.shared.dismissKeyboardOnPress
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 import com.voxtube.app.utils.formatSubscriberCount
@@ -58,7 +58,7 @@ internal fun ChannelsStep(
     ) {
         header()
         item(key = "search") {
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = state.query,
                 onQueryChange = onQueryChange,
                 placeholder = stringResource(R.string.onboarding_channels_search_placeholder),
@@ -69,7 +69,7 @@ internal fun ChannelsStep(
             )
         }
         item(key = "quick") {
-            FlowQuickSearchChips(
+            VoxTubeQuickSearchChips(
                 searches = state.topics.take(MAX_QUICK_SEARCHES),
                 query = state.query,
                 onQueryChange = onQueryChange,
@@ -105,7 +105,7 @@ private fun LazyListScope.channelResults(
         }
 
         state.results.isNotEmpty() -> {
-            item(key = "results") { FlowSectionHeader(stringResource(R.string.onboarding_channels_results_header)) }
+            item(key = "results") { VoxTubeSectionHeader(stringResource(R.string.onboarding_channels_results_header)) }
             itemsIndexed(state.results, key = { _, channel -> channel.id }) { index, channel ->
                 val row: @Composable () -> Unit = {
                     MediaChannelSubscribeRow(
@@ -122,8 +122,8 @@ private fun LazyListScope.channelResults(
                         onNotificationsChange = { onNotificationsChange(channel.id, it) },
                     )
                 }
-                val modifier = Modifier.animateItem().padding(bottom = FlowSegmentedGap)
-                if (index < MAX_POPPED_ROWS) FlowPopIn(index, modifier) { row() } else Box(modifier) { row() }
+                val modifier = Modifier.animateItem().padding(bottom = VoxTubeSegmentedGap)
+                if (index < MAX_POPPED_ROWS) VoxTubePopIn(index, modifier) { row() } else Box(modifier) { row() }
             }
         }
     }
@@ -132,7 +132,7 @@ private fun LazyListScope.channelResults(
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun SearchLoading() {
-    FlowSpinner(Modifier.size(SearchLoadingSize))
+    VoxTubeSpinner(Modifier.size(SearchLoadingSize))
 }
 
 @Composable

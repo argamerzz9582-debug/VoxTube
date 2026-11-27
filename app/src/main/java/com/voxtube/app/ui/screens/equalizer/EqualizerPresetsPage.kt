@@ -38,11 +38,11 @@ import com.voxtube.app.data.audio.eq.EqMode
 import com.voxtube.app.data.audio.eq.EqPreset
 import com.voxtube.app.data.audio.eq.EqState
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
-import com.voxtube.app.ui.components.shared.FlowSelectionRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionRow
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 
 private val ItemInset = 12.dp
@@ -63,13 +63,13 @@ internal fun EqualizerPresetsPage(
     val selectedId = state.active.presetId
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+        verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap),
         contentPadding = PaddingValues(top = 8.dp, bottom = bottom),
     ) {
         item("import") {
             EqFramed {
-                FlowRowGroup {
-                    FlowNavRow(
+                VoxTubeRowGroup {
+                    VoxTubeNavRow(
                         title = stringResource(R.string.eq_import_file),
                         supportingText = stringResource(R.string.eq_import_file_desc),
                         onClick = onImportFile,
@@ -77,7 +77,7 @@ internal fun EqualizerPresetsPage(
                         showChevron = false,
                         shape = flowRowGroupShape(0, 2),
                     )
-                    FlowNavRow(
+                    VoxTubeNavRow(
                         title = stringResource(R.string.eq_paste_text),
                         onClick = onPaste,
                         leadingIcon = Icons.Outlined.ContentPaste,
@@ -88,7 +88,7 @@ internal fun EqualizerPresetsPage(
             }
         }
         if (state.userPresets.isNotEmpty()) {
-            item("yours-header") { EqFramed { FlowSectionHeader(stringResource(R.string.eq_your_presets)) } }
+            item("yours-header") { EqFramed { VoxTubeSectionHeader(stringResource(R.string.eq_your_presets)) } }
             itemsIndexed(state.userPresets, key = { _, preset -> preset.id }) { index, preset ->
                 EqFramed(Modifier.padding(horizontal = ItemInset)) {
                     UserPresetRow(
@@ -107,10 +107,10 @@ internal fun EqualizerPresetsPage(
                 }
             }
         }
-        item("built-in-header") { EqFramed { FlowSectionHeader(stringResource(R.string.eq_built_in)) } }
+        item("built-in-header") { EqFramed { VoxTubeSectionHeader(stringResource(R.string.eq_built_in)) } }
         itemsIndexed(BuiltInEqPresets.all, key = { _, preset -> preset.id }) { index, preset ->
             EqFramed(Modifier.padding(horizontal = ItemInset)) {
-                FlowSelectionRow(
+                VoxTubeSelectionRow(
                     title = stringResource(preset.nameRes),
                     selected = preset.id == selectedId,
                     onClick = {
@@ -141,7 +141,7 @@ private fun UserPresetRow(
             preset.mode == EqMode.GRAPHIC -> stringResource(R.string.eq_mode_graphic)
             else -> pluralStringResource(R.plurals.eq_band_total, preset.curve.bands.size, preset.curve.bands.size)
         }
-    FlowNavRow(
+    VoxTubeNavRow(
         title = preset.name,
         supportingText = summary,
         onClick = onClick,

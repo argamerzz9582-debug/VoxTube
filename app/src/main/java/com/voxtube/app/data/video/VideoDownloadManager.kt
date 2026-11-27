@@ -123,7 +123,7 @@ class VideoDownloadManager
         /** Files a delete left on disk because another install owns them; the screen asks the system instead. */
         val undeletable: SharedFlow<List<String>> = _undeletable.asSharedFlow()
 
-        // Progress updates emitted by FlowDownloadService
+        // Progress updates emitted by VoxTubeDownloadService
         private val _progressUpdates = MutableSharedFlow<DownloadProgressUpdate>(extraBufferCapacity = 64)
         val progressUpdates: SharedFlow<DownloadProgressUpdate> = _progressUpdates.asSharedFlow()
 

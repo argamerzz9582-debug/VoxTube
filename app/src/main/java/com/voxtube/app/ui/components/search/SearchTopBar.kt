@@ -23,7 +23,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
 
 /**
  * The Search tab's bar, laid out the way YouTube lays its own out: the back affordance and the mic
@@ -59,7 +59,7 @@ fun SearchTopBar(
             )
         }
 
-        FlowSearchField(
+        VoxTubeSearchField(
             state = textFieldState,
             placeholder = stringResource(R.string.search_videos_channels_placeholder),
             modifier = Modifier.weight(1f),

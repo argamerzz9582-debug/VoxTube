@@ -34,10 +34,10 @@ import com.voxtube.app.data.profile.SlicePart
 import com.voxtube.app.data.profile.displayName
 import com.voxtube.app.ui.components.profiles.profilePhotoRequest
 import com.voxtube.app.ui.components.settings.SettingsPage
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
-import com.voxtube.app.ui.components.shared.FlowToggleOption
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 
 private val PreviewSize = 88.dp
 private val ButtonSpacing = 8.dp
@@ -165,11 +165,11 @@ internal fun ProfileEditScreen(
         if (isNew) {
             header("profile_edit.start", R.string.profiles_start_with)
             item("profile_edit.start_choice") {
-                FlowConnectedToggleGroup(
+                VoxTubeConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(false, stringResource(R.string.profiles_start_fresh)),
-                            FlowToggleOption(true, stringResource(R.string.profiles_copy_from, runningName)),
+                            VoxTubeToggleOption(false, stringResource(R.string.profiles_start_fresh)),
+                            VoxTubeToggleOption(true, stringResource(R.string.profiles_copy_from, runningName)),
                         ),
                     selected = copying,
                     onSelected = { copying = it },
@@ -240,7 +240,7 @@ private fun CopyRow(
     onCheckedChange: (Boolean) -> Unit,
     shape: Shape,
 ) {
-    FlowSwitchRow(
+    VoxTubeSwitchRow(
         title = stringResource(title),
         supportingText = stringResource(summary),
         checked = checked,

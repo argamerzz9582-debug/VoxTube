@@ -22,10 +22,10 @@ import com.voxtube.app.data.recommendation.NeuroTopicCatalog
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.SettingsTabs
 import com.voxtube.app.ui.components.settings.notice
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowPillChip
-import com.voxtube.app.ui.components.shared.FlowPillSection
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubePillChip
+import com.voxtube.app.ui.components.shared.VoxTubePillSection
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.components.topicCategoryIcon
 import com.voxtube.app.ui.components.topicCategoryNameRes
 import com.voxtube.app.ui.screens.settings.index.TopicsIndex
@@ -55,15 +55,15 @@ internal fun TopicPreferencesScreen(
         onBack = onBack,
         highlight = highlight,
         header = {
-            FlowConnectedToggleGroup(
+            VoxTubeConnectedToggleGroup(
                 options =
                     listOf(
-                        FlowToggleOption(
+                        VoxTubeToggleOption(
                             SettingsTabs.TOPICS_INTERESTS,
                             stringResource(R.string.settings_topics_tab_interests),
                             Icons.Outlined.Favorite,
                         ),
-                        FlowToggleOption(
+                        VoxTubeToggleOption(
                             SettingsTabs.TOPICS_BLOCKED,
                             stringResource(R.string.settings_topics_tab_blocked),
                             Icons.Outlined.Block,
@@ -110,14 +110,14 @@ internal fun TopicPreferencesScreen(
             notice("topics.interests.notice", text = { stringResource(R.string.your_interests_desc) }, icon = Icons.Outlined.TipsAndUpdates)
             NeuroTopicCatalog.TOPIC_CATEGORIES.forEach { category ->
                 item("topics.category.${category.name}") {
-                    FlowPillSection(
+                    VoxTubePillSection(
                         title = stringResource(topicCategoryNameRes(category.name)),
                         icon = topicCategoryIcon(category.icon),
                         selectedCount = category.topics.count(interests::contains),
                         modifier = Modifier.padding(vertical = SectionVerticalPadding),
                     ) {
                         category.topics.forEach { topic ->
-                            FlowPillChip(label = topic, selected = topic in interests, onClick = { viewModel.toggleInterest(topic) })
+                            VoxTubePillChip(label = topic, selected = topic in interests, onClick = { viewModel.toggleInterest(topic) })
                         }
                     }
                 }

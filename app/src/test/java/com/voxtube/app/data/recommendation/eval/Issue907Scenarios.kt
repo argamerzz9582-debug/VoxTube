@@ -9,7 +9,6 @@ package com.voxtube.app.data.recommendation.eval
 
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.ContentVector
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.GraphSeedInput
 import com.voxtube.app.data.recommendation.GraphSeedSelector
 import com.voxtube.app.data.recommendation.GraphSeedSource
@@ -24,6 +23,7 @@ import com.voxtube.app.data.recommendation.NeuroTokenizer
 import com.voxtube.app.data.recommendation.NeuroTopicCatalog
 import com.voxtube.app.data.recommendation.NeuroVectorMath
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.recommendation.eval.NeuroLearningBenchmark.Family
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -85,7 +85,7 @@ internal object Issue907Scenarios {
 
     private fun family(family: Family) = NeuroLearningBenchmark.pool().filter { NeuroLearningBenchmark.familyOf(it.id) == family }
 
-    private suspend fun FlowNeuroEngine.watchAll(videos: List<Video>) = with(NeuroLearningBenchmark) { videos.forEach { watch(it) } }
+    private suspend fun VoxTubeNeuroEngine.watchAll(videos: List<Video>) = with(NeuroLearningBenchmark) { videos.forEach { watch(it) } }
 
     private fun rankOnce(
         brain: UserBrain,
@@ -647,7 +647,7 @@ internal object Issue907Scenarios {
                     coEvery { save(any()) } answers { saves++ }
                 }
             val contentStore: NeuroContentStore = mockk(relaxed = true)
-            val engine = FlowNeuroEngine(mockk(relaxed = true), storage, contentStore, learningPaused = { false })
+            val engine = VoxTubeNeuroEngine(mockk(relaxed = true), storage, contentStore, learningPaused = { false })
             engine.initialize()
             val held = engine.getBrainSnapshot()
             engine.shutdown()

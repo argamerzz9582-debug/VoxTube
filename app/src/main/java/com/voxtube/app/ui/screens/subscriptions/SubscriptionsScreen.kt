@@ -54,10 +54,10 @@ import com.voxtube.app.data.shorts.queue.ShortsQueueSource
 import com.voxtube.app.ui.OnTabReselected
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
-import com.voxtube.app.ui.components.layout.topbar.FlowScrollAwayLayout
-import com.voxtube.app.ui.components.layout.topbar.FlowSearchTopBar
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeScrollAwayLayout
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeSearchTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.layout.topbar.rememberFlowScrollAwayState
 import com.voxtube.app.ui.utils.reachUnderStatusBar
 import kotlinx.coroutines.launch
@@ -83,7 +83,7 @@ fun SubscriptionsScreen(
     val postsListState = rememberLazyListState()
     val headerState = rememberFlowScrollAwayState()
     val headerSpec = MaterialTheme.motionScheme.fastSpatialSpec<Float>()
-    OnTabReselected(FlowTab.Subscriptions.route) { headerState.show(headerSpec) }
+    OnTabReselected(VoxTubeTab.Subscriptions.route) { headerState.show(headerSpec) }
     var showPosts by rememberSaveable { mutableStateOf(false) }
 
     var isManagingSubs by rememberSaveable { mutableStateOf(false) }
@@ -134,7 +134,7 @@ fun SubscriptionsScreen(
         modifier = Modifier.reachUnderStatusBar(),
         topBar = {
             if (isManagingSubs) {
-                FlowSearchTopBar(
+                VoxTubeSearchTopBar(
                     modifier = Modifier.windowInsetsPadding(WindowInsets.statusBars),
                     query = searchQuery,
                     onQueryChange = { searchQuery = it },
@@ -227,11 +227,11 @@ fun SubscriptionsScreen(
                         },
                     )
                 } else {
-                    FlowScrollAwayLayout(
+                    VoxTubeScrollAwayLayout(
                         state = headerState,
                         hideOnScroll = topBarHideOnScroll,
                         header = {
-                            FlowTopBar(
+                            VoxTubeTopBar(
                                 title = stringResource(R.string.top_bar_subscriptions_title),
                                 crowded = true,
                                 actions = {

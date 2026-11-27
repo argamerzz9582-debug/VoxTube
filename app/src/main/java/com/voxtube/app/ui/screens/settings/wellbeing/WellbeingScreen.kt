@@ -31,8 +31,8 @@ import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.notice
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
 import com.voxtube.app.ui.components.stats.spentTimeLabel
 import com.voxtube.app.ui.screens.settings.index.WellbeingIndex
 import kotlinx.coroutines.launch
@@ -203,10 +203,10 @@ internal fun WellbeingScreen(
         }
 
         WellbeingDialog.BREAK_FREQUENCY -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.frequency_dialog_title),
                 description = stringResource(R.string.frequency_description),
-                options = BreakFrequencies.map { FlowChoice(it, pluralStringResource(R.plurals.every_minutes_template, it, it)) },
+                options = BreakFrequencies.map { VoxTubeChoice(it, pluralStringResource(R.plurals.every_minutes_template, it, it)) },
                 selected = breakMinutes,
                 onSelect = viewModel::setBreakMinutes,
                 onDismiss = { dialog = null },

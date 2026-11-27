@@ -14,7 +14,7 @@ import com.voxtube.app.player.error.PlaybackErrorLog
 import com.voxtube.app.player.stream.ResetYouTubeSession
 import com.voxtube.app.ui.screens.settings.SettingsViewModel
 import com.voxtube.app.utils.DeviceInfo
-import com.voxtube.app.utils.FlowDiagnostics
+import com.voxtube.app.utils.VoxTubeDiagnostics
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +37,7 @@ class DiagnosticsViewModel
         private val switcher: ProfileSwitcher,
         private val playbackErrors: PlaybackErrorLog,
     ) : SettingsViewModel() {
-        val device: DeviceInfo by lazy { FlowDiagnostics.deviceInfo(context) }
+        val device: DeviceInfo by lazy { VoxTubeDiagnostics.deviceInfo(context) }
 
         private val _session = MutableStateFlow<LogState>(LogState.Loading)
         private val _crashes = MutableStateFlow<LogState>(LogState.Loading)
@@ -54,9 +54,9 @@ class DiagnosticsViewModel
         init {
             viewModelScope.launch { _snapshotCount.value = snapshots.count() }
             viewModelScope.launch(Dispatchers.IO) {
-                sessionText = FlowDiagnostics.readSessionLogs()
+                sessionText = VoxTubeDiagnostics.readSessionLogs()
                 _session.value = parseLog(sessionText, ::logcatLevel)
-                _crashes.value = parseLog(FlowDiagnostics.crashLogsOrNull(context), ::crashLevel)
+                _crashes.value = parseLog(VoxTubeDiagnostics.crashLogsOrNull(context), ::crashLevel)
             }
         }
 
@@ -77,11 +77,11 @@ class DiagnosticsViewModel
             }
 
         suspend fun report(): String =
-            withContext(Dispatchers.IO) { FlowDiagnostics.buildFullReport(context, sessionText, playbackErrors.recent()) }
+            withContext(Dispatchers.IO) { VoxTubeDiagnostics.buildFullReport(context, sessionText, playbackErrors.recent()) }
 
         fun clearCrashes() =
             write {
-                withContext(Dispatchers.IO) { FlowDiagnostics.clearCrashLogs(context) }
+                withContext(Dispatchers.IO) { VoxTubeDiagnostics.clearCrashLogs(context) }
                 _crashes.value = LogState.Empty
             }
 

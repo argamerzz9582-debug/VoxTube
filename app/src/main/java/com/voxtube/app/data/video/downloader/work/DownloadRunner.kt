@@ -28,7 +28,7 @@ import com.voxtube.app.data.video.storage.DownloadFiles
 import com.voxtube.app.data.video.storage.DownloadPlacement
 import com.voxtube.app.data.video.storage.PlacedFile
 import com.voxtube.app.player.stream.ResolvedCaption
-import com.voxtube.app.utils.FlowCrashHandler
+import com.voxtube.app.utils.VoxTubeCrashHandler
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -86,7 +86,7 @@ class DownloadRunner
             waits.stoppedForNetwork = false
             notifier.show(videoId, stored.tags.title, DownloadPhase.Transferring(0L, 0L))
             val trace = DownloadTrace(videoId)
-            FlowCrashHandler.recordPhase("download", "start $videoId")
+            VoxTubeCrashHandler.recordPhase("download", "start $videoId")
             var outcome = "stopped"
             var threads = 0
             try {
@@ -128,7 +128,7 @@ class DownloadRunner
             } finally {
                 withContext(NonCancellable) {
                     Log.i(TRACE_TAG, trace.line(outcome, settingsOf(threads)))
-                    FlowCrashHandler.recordPhase("download", "end $videoId $outcome")
+                    VoxTubeCrashHandler.recordPhase("download", "end $videoId $outcome")
                 }
             }
         }
@@ -196,7 +196,7 @@ class DownloadRunner
             val output = staging.output(extension)
             val runJob = currentCoroutineContext().job
             val remuxStarted = trace.now()
-            FlowCrashHandler.recordPhase("download", "remux ${request.videoId}")
+            VoxTubeCrashHandler.recordPhase("download", "remux ${request.videoId}")
             val remuxed =
                 withContext(Dispatchers.IO) {
                     remuxer.remux(

@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.data.recommendation.FlowPersona
+import com.voxtube.app.data.recommendation.VoxTubePersona
 import com.voxtube.app.ui.components.settings.dpadFocusStop
 import com.voxtube.app.ui.components.shared.flowArtistShape
 import kotlin.math.PI
@@ -56,7 +56,7 @@ private const val START_ANGLE = -PI / 2
 /** The persona's glyph in the artist cookie shape, on a tonal container. */
 @Composable
 internal fun PersonaEmblem(
-    persona: FlowPersona,
+    persona: VoxTubePersona,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -73,7 +73,7 @@ internal fun PersonaEmblem(
 
 @Composable
 internal fun PersonaHeroCard(
-    persona: FlowPersona,
+    persona: VoxTubePersona,
     maturity: Float,
 ) {
     Surface(

@@ -45,12 +45,12 @@ import com.voxtube.app.ui.components.library.PlaylistHeaderPane
 import com.voxtube.app.ui.components.library.PlaylistSearchBar
 import com.voxtube.app.ui.components.library.PlaylistSortChip
 import com.voxtube.app.ui.components.library.PlaylistSortOrder
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowGoneState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowSelectionAction
-import com.voxtube.app.ui.components.shared.FlowSelectionToolbar
-import com.voxtube.app.ui.components.shared.FlowSidePanes
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeGoneState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionAction
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionToolbar
+import com.voxtube.app.ui.components.shared.VoxTubeSidePanes
 import com.voxtube.app.ui.components.shared.quickactions.sharedQuickActionsViewModel
 import com.voxtube.app.ui.components.shared.rememberFlowPaneState
 import com.voxtube.app.ui.components.shared.rememberShareLinksWithoutText
@@ -258,15 +258,19 @@ fun PlaylistDetailScreen(
         Box(Modifier.fillMaxSize().padding(padding)) {
             when {
                 uiState.isLoading -> {
-                    FlowLoadingIndicator()
+                    VoxTubeLoadingIndicator()
                 }
 
                 uiState.isGone -> {
-                    FlowGoneState(message = uiState.errorMessage.orEmpty(), icon = Icons.Outlined.PlaylistRemove, onBack = onNavigateBack)
+                    VoxTubeGoneState(
+                        message = uiState.errorMessage.orEmpty(),
+                        icon = Icons.Outlined.PlaylistRemove,
+                        onBack = onNavigateBack,
+                    )
                 }
 
                 uiState.errorMessage != null -> {
-                    FlowErrorState(error = uiState.errorMessage.orEmpty(), onRetry = viewModel::retry)
+                    VoxTubeErrorState(error = uiState.errorMessage.orEmpty(), onRetry = viewModel::retry)
                 }
 
                 else -> {
@@ -310,7 +314,7 @@ fun PlaylistDetailScreen(
                             header = header,
                         )
                     }
-                    FlowSidePanes(
+                    VoxTubeSidePanes(
                         panes = panes,
                         sidePaneWidth = HeaderPaneWidth,
                         sidePane = {
@@ -331,16 +335,16 @@ fun PlaylistDetailScreen(
                     )
                 }
             }
-            FlowSelectionToolbar(
+            VoxTubeSelectionToolbar(
                 visible = selectionMode && selectedIds.isNotEmpty(),
                 summary = pluralStringResource(R.plurals.selected_count_template, selectedIds.size, selectedIds.size),
                 actions =
                     listOfNotNull(
-                        FlowSelectionAction(Icons.Outlined.Download, stringResource(R.string.download)) {
+                        VoxTubeSelectionAction(Icons.Outlined.Download, stringResource(R.string.download)) {
                             leftOut?.let(viewModel::downloadAllExcept) ?: viewModel.downloadVideos(selectedIds)
                             exitSelection()
                         },
-                        FlowSelectionAction(Icons.Outlined.Delete, stringResource(R.string.remove)) {
+                        VoxTubeSelectionAction(Icons.Outlined.Delete, stringResource(R.string.remove)) {
                             dialog = PlaylistDialog.RemoveSelected(selectedIds)
                         }.takeIf { canModify },
                     ),

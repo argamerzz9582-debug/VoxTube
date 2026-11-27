@@ -2,7 +2,7 @@ package com.voxtube.app.innertube
 
 import android.net.ConnectivityManager
 import android.util.Log
-import com.voxtube.app.FlowApplication
+import com.voxtube.app.VoxTubeApplication
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.innertube.models.Context
 import com.voxtube.app.innertube.models.MediaInfo
@@ -15,8 +15,8 @@ import com.voxtube.app.innertube.models.response.NextResponse
 import com.voxtube.app.innertube.models.response.PlayerResponse
 import com.voxtube.app.innertube.utils.parseCookieString
 import com.voxtube.app.innertube.utils.sha1
-import com.voxtube.app.network.FlowRequestLog
 import com.voxtube.app.network.SharedConnectionPool
+import com.voxtube.app.network.VoxTubeRequestLog
 import io.ktor.client.*
 import io.ktor.client.call.body
 import io.ktor.client.engine.okhttp.*
@@ -152,7 +152,7 @@ class InnerTube {
             // PERFORMANCE OPTIMIZED: Enhanced network configuration
             engine {
                 config {
-                    FlowRequestLog.install(this)
+                    VoxTubeRequestLog.install(this)
                     connectionPool(SharedConnectionPool.pool)
 
                     // Faster timeout configurations - fail fast, retry smart
@@ -213,7 +213,7 @@ class InnerTube {
 
     private fun hasActiveNetwork(): Boolean =
         runCatching {
-            FlowApplication.appContext.getSystemService(ConnectivityManager::class.java)?.activeNetwork != null
+            VoxTubeApplication.appContext.getSystemService(ConnectivityManager::class.java)?.activeNetwork != null
         }.getOrDefault(true)
 
     private fun HttpRequestBuilder.ytClient(
@@ -1230,7 +1230,7 @@ class InnerTube {
                         it?.videoPrimaryInfoRenderer != null
                     }?.videoPrimaryInfoRenderer
 
-            val rytdEnabled = PlayerPreferences(FlowApplication.appContext).rytdEnabled.first()
+            val rytdEnabled = PlayerPreferences(VoxTubeApplication.appContext).rytdEnabled.first()
             val returnYouTubeDislikeResponse =
                 if (rytdEnabled) {
                     returnYouTubeDislike(videoId).body<ReturnYouTubeDislikeResponse>()

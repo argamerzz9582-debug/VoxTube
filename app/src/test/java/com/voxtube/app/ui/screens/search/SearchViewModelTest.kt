@@ -11,7 +11,7 @@ import com.voxtube.app.data.local.SearchFilter
 import com.voxtube.app.data.local.SearchHistoryRepository
 import com.voxtube.app.data.local.SortType
 import com.voxtube.app.data.local.UploadDate
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.search.SearchSuggestionsRepository
 import com.voxtube.app.data.shorts.ShortsContentFilter
 import com.voxtube.app.data.shorts.queue.ShortsQueueHandoff
@@ -71,8 +71,8 @@ class SearchViewModelTest {
         Dispatchers.setMain(testDispatcher)
         // A real engine built on the mocked context reads DataStore on its own scope and fails there,
         // which surfaces as an uncaught exception in whichever runTest comes next.
-        mockkObject(FlowNeuroEngine.Companion)
-        coEvery { FlowNeuroEngine.onSearchQuery(any(), any()) } just runs
+        mockkObject(VoxTubeNeuroEngine.Companion)
+        coEvery { VoxTubeNeuroEngine.onSearchQuery(any(), any()) } just runs
     }
 
     @After

@@ -185,7 +185,7 @@ fun MediaDownloadSheet(
         }
 
         if (qualities.isNotEmpty()) {
-            FlowSectionHeader(text = stringResource(R.string.video))
+            VoxTubeSectionHeader(text = stringResource(R.string.video))
             val stutters = stringResource(R.string.download_may_stutter)
             DownloadTileGrid(items = qualities, columns = VIDEO_COLUMNS) { item, modifier ->
                 val tileOption = DownloadSheetChoices.option(item, option, preferredCodec) { smoothItags.playsSmoothly(item.format(it)) }
@@ -207,8 +207,8 @@ fun MediaDownloadSheet(
                 )
             }
             if (audioOnly == null && quality != null && quality.options.size > 1 && option != null) {
-                FlowConnectedToggleGroup(
-                    options = quality.options.map { FlowToggleOption(it, formatOptionLabel(it, hdrLabel)) },
+                VoxTubeConnectedToggleGroup(
+                    options = quality.options.map { VoxTubeToggleOption(it, formatOptionLabel(it, hdrLabel)) },
                     selected = option,
                     onSelected = { chosenOption = it },
                     colors = toggleColors,
@@ -231,7 +231,7 @@ fun MediaDownloadSheet(
         }
 
         if (audioStreams.isNotEmpty()) {
-            FlowSectionHeader(text = stringResource(R.string.ui_audio_only))
+            VoxTubeSectionHeader(text = stringResource(R.string.ui_audio_only))
             val shownAudio = if (allLanguages) audioStreams else (primaryAudio + listOfNotNull(chosenAudio)).distinct()
             DownloadTileGrid(items = shownAudio, columns = AUDIO_COLUMNS) { stream, modifier ->
                 DownloadChoiceTile(

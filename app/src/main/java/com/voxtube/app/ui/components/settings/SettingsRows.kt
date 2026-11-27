@@ -21,12 +21,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.voxtube.app.ui.components.shared.FlowBadgedTitle
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSelectionRow
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
-import com.voxtube.app.ui.components.shared.FlowToggleOption
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeBadgedTitle
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSelectionRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -42,7 +42,7 @@ fun SettingsGroupScope.switch(
     icon: ImageVector? = null,
     @DrawableRes iconRes: Int? = null,
 ) = entryRow(entry) { shape ->
-    FlowSwitchRow(
+    VoxTubeSwitchRow(
         title = stringResource(entry.title),
         supportingText = summary ?: entry.summaryText(),
         checked = checked,
@@ -68,7 +68,7 @@ fun SettingsGroupScope.switch(
     @DrawableRes iconRes: Int? = null,
 ) = entryRow(entry) { shape ->
     val checked by state.collectAsStateWithLifecycle()
-    FlowSwitchRow(
+    VoxTubeSwitchRow(
         title = stringResource(entry.title),
         supportingText = entry.summaryText(),
         checked = checked,
@@ -92,7 +92,7 @@ fun SettingsGroupScope.choice(
     icon: ImageVector? = null,
     valueText: @Composable () -> String?,
 ) = entryRow(entry) { shape ->
-    FlowNavRow(
+    VoxTubeNavRow(
         title = stringResource(entry.title),
         supportingText = valueText() ?: entry.summaryText(),
         onClick = onClick,
@@ -121,7 +121,7 @@ fun SettingsGroupScope.nav(
     @DrawableRes iconRes: Int? = null,
     modifier: Modifier = Modifier,
 ) = entryRow(entry) { shape ->
-    FlowNavRow(
+    VoxTubeNavRow(
         title = stringResource(entry.title),
         modifier = modifier,
         supportingText = valueText?.invoke() ?: value ?: entry.summaryText(),
@@ -168,7 +168,7 @@ private fun InfoRow(
         leadingContent = icon?.let { { Icon(imageVector = it, contentDescription = null) } },
         supportingContent = value?.let { { Text(it) } },
     ) {
-        FlowBadgedTitle(title = title, badge = badge)
+        VoxTubeBadgedTitle(title = title, badge = badge)
     }
 }
 
@@ -181,7 +181,7 @@ fun SettingsGroupScope.option(
     supportingText: String? = null,
     enabled: Boolean = true,
 ) = row(key) { shape ->
-    FlowSelectionRow(
+    VoxTubeSelectionRow(
         title = label,
         supportingText = supportingText,
         selected = selected,
@@ -194,7 +194,7 @@ fun SettingsGroupScope.option(
 /** A choice between two to four values, answered in place with a connected toggle group. */
 fun <T> SettingsGroupScope.toggleGroup(
     entry: SettingEntry,
-    options: List<FlowToggleOption<T>>,
+    options: List<VoxTubeToggleOption<T>>,
     selected: T,
     onSelected: (T) -> Unit,
     enabled: Boolean = true,
@@ -217,7 +217,7 @@ fun <T> SettingsGroupScope.toggleGroup(
 /** A toggle group that collects its own [state]; see the state-backed [switch]. */
 fun <T> SettingsGroupScope.toggleGroup(
     entry: SettingEntry,
-    options: List<FlowToggleOption<T>>,
+    options: List<VoxTubeToggleOption<T>>,
     state: StateFlow<T>,
     onSelected: (T) -> Unit,
     enabled: Boolean = true,

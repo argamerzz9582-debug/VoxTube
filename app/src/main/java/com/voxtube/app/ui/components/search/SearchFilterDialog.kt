@@ -38,8 +38,8 @@ import com.voxtube.app.data.local.SearchFilter
 import com.voxtube.app.data.local.SortType
 import com.voxtube.app.data.local.UploadDate
 import com.voxtube.app.data.local.WatchState
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 
 /**
  * Search filters, laid out the way YouTube's own dialog is: one row per single-choice group with
@@ -58,7 +58,7 @@ fun SearchFilterDialog(
     var draft by remember(filter) { mutableStateOf(filter) }
     val videoFilters = draft.contentType != ContentType.CHANNELS && draft.contentType != ContentType.PLAYLISTS
 
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.search_filters_title)) },
         text = {
@@ -120,7 +120,7 @@ fun SearchFilterDialog(
                     ) {
                         SearchFeature.entries.forEach { feature ->
                             val selected = feature in draft.features
-                            FlowFilterChip(
+                            VoxTubeFilterChip(
                                 label = stringResource(feature.labelRes()),
                                 selected = selected,
                                 onClick = {

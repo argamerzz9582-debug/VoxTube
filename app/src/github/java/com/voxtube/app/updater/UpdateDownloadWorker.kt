@@ -189,12 +189,12 @@ internal object UpdateFiles {
     fun apkFile(
         context: Context,
         version: String,
-    ) = File(directory(context), "flow-$version.apk")
+    ) = File(directory(context), "voxtube-$version.apk")
 
     fun partFile(
         context: Context,
         version: String,
-    ) = File(directory(context), "flow-$version.apk.part")
+    ) = File(directory(context), "voxtube-$version.apk.part")
 
     /** Deletes every downloaded update except [keepVersion]'s. */
     fun clean(

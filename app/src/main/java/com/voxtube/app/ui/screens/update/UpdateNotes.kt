@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.data.update.NoteSpan
 import com.voxtube.app.data.update.NoteText
 import com.voxtube.app.data.update.ReleaseNotes
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowSegmentShape
 
 private val LinePadding = 16.dp
@@ -42,15 +42,15 @@ private val BadgeIconSize = 16.dp
 /** The release notes as list items: the intro paragraphs, then one segmented group per section. */
 internal fun LazyListScope.releaseNotes(notes: ReleaseNotes) {
     itemsIndexed(notes.intro, key = { index, _ -> "intro-$index" }) { _, text ->
-        NoteParagraph(text, Modifier.padding(vertical = FlowSegmentedGap * 2))
+        NoteParagraph(text, Modifier.padding(vertical = VoxTubeSegmentedGap * 2))
     }
     notes.sections.forEachIndexed { sectionIndex, section ->
-        item(key = "section-$sectionIndex") { FlowSectionHeader(section.title) }
+        item(key = "section-$sectionIndex") { VoxTubeSectionHeader(section.title) }
         itemsIndexed(section.items, key = { index, _ -> "section-$sectionIndex-$index" }) { index, text ->
             Surface(
                 shape = flowSegmentShape(index, section.items.size),
                 color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                modifier = Modifier.fillMaxWidth().padding(bottom = FlowSegmentedGap),
+                modifier = Modifier.fillMaxWidth().padding(bottom = VoxTubeSegmentedGap),
             ) {
                 NoteParagraph(text, Modifier.padding(horizontal = LinePadding, vertical = LineVerticalPadding))
             }

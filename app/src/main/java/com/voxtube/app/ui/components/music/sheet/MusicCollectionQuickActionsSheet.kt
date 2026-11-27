@@ -20,7 +20,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
 import com.voxtube.app.ui.components.shared.ArtworkThumbnail
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsDefaults
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsGroup
@@ -94,7 +94,7 @@ fun MusicCollectionQuickActionsSheet(
             rows =
                 listOf(
                     QuickActionRow("library") { shape ->
-                        FlowNavRow(
+                        VoxTubeNavRow(
                             title = if (isSaved) savedLabel else stringResource(R.string.add_to_library),
                             leadingIcon = if (isSaved) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
                             onClick = { viewModel.toggleSaved(item, announce) },
@@ -108,7 +108,7 @@ fun MusicCollectionQuickActionsSheet(
                         sheet.close()
                     },
                     QuickActionRow("open") { shape ->
-                        FlowNavRow(
+                        VoxTubeNavRow(
                             title = stringResource(R.string.open),
                             leadingIcon = Icons.AutoMirrored.Outlined.OpenInNew,
                             onClick = {

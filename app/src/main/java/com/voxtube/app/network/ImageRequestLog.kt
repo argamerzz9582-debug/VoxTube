@@ -8,12 +8,12 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicLong
 
 /**
- * Debug-only image request log under the `FlowRequests` tag: one line per image fetch with its
+ * Debug-only image request log under the `VoxTubeRequests` tag: one line per image fetch with its
  * status, bytes and time, followed by the running totals for its host since the process started.
  * Only debug builds add it to the image client.
  */
 object ImageRequestLog : Interceptor {
-    private const val TAG = "FlowRequests"
+    private const val TAG = "VoxTubeRequests"
     private const val HTTP_NOT_FOUND = 404
     private const val BYTES_PER_KB = 1024L
 
@@ -39,7 +39,7 @@ object ImageRequestLog : Interceptor {
             }
         val cached = response.networkResponse == null && response.cacheResponse != null
         val counted =
-            FlowRequestLog.CountingBody(response.body) { bytes ->
+            VoxTubeRequestLog.CountingBody(response.body) { bytes ->
                 val sum = record(host, response.code, if (cached) 0L else bytes)
                 val source = if (cached) " http-cache" else ""
                 Log.d(

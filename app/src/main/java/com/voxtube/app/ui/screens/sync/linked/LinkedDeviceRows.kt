@@ -11,9 +11,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
 import com.voxtube.app.sync2.service.LinkedDevice
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.deviceKindIcon
 import com.voxtube.app.ui.screens.sync.SyncRowGroup
 import com.voxtube.app.ui.screens.sync.SyncSection
@@ -47,7 +47,7 @@ internal fun LinkedDeviceRows(
         SyncRowGroup(count = devices.size + 1) { index, shape ->
             val device = devices.getOrNull(index)
             if (device != null) {
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = names[device.id] ?: device.name,
                     onClick = { open = device.id },
                     supportingText = deviceStatus(device, presence, nearby),
@@ -56,7 +56,7 @@ internal fun LinkedDeviceRows(
                     shape = shape,
                 )
             } else {
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.linked_add_device),
                     onClick = { if (onScanNewDevice == null) onAddDevice() else choosingAdd = true },
                     supportingText =
@@ -72,16 +72,16 @@ internal fun LinkedDeviceRows(
         }
     }
     if (choosingAdd && onScanNewDevice != null) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.linked_add_device),
             options =
                 listOf(
-                    FlowChoice(
+                    VoxTubeChoice(
                         AddWay.SHOW_CODE,
                         stringResource(R.string.linked_add_show_code),
                         stringResource(R.string.linked_add_show_code_hint),
                     ),
-                    FlowChoice(
+                    VoxTubeChoice(
                         AddWay.SCAN_CODE,
                         stringResource(R.string.linked_add_scan_code),
                         stringResource(R.string.linked_add_scan_code_hint),

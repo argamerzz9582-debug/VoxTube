@@ -38,7 +38,7 @@ class ChapterSelectionTest {
     private fun setSheet(positionMs: Long) {
         rule.setContent {
             MaterialTheme {
-                FlowChaptersBottomSheet(
+                VoxTubeChaptersBottomSheet(
                     chapters = chapters,
                     currentPosition = positionMs,
                     durationMs = 180_000L,

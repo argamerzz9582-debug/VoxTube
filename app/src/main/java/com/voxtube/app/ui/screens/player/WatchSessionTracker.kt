@@ -7,8 +7,8 @@ import com.voxtube.app.data.local.CachedHomeVideo
 import com.voxtube.app.data.local.HomeFeedCacheRepository
 import com.voxtube.app.data.local.ViewHistory
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.InteractionType
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.YouTubeRepository
 import com.voxtube.app.data.stats.VideoStatsRecorder
 import com.voxtube.app.data.stats.ViewEvent
@@ -323,7 +323,7 @@ internal class WatchSessionTracker(
         lastReportedVideoId = video.id
 
         // Engine-scope dispatch: survives ViewModel teardown.
-        FlowNeuroEngine.onVideoInteractionAsync(
+        VoxTubeNeuroEngine.onVideoInteractionAsync(
             context,
             video,
             signal.type,

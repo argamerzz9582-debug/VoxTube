@@ -33,7 +33,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.stats.spentTimeLabel
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -76,7 +76,7 @@ internal fun WatchTimeCard(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             if (summary == null) {
-                Box(Modifier.fillMaxWidth().height(ChartHeight), contentAlignment = Alignment.Center) { FlowLoadingIndicator() }
+                Box(Modifier.fillMaxWidth().height(ChartHeight), contentAlignment = Alignment.Center) { VoxTubeLoadingIndicator() }
                 return@Column
             }
             Text(

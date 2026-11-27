@@ -69,7 +69,7 @@ internal fun ReplyThread(
                 val lines = row.lines
                 when (row) {
                     is CommentThreadRow.Reply -> {
-                        FlowReplyItem(
+                        VoxTubeReplyItem(
                             reply = row.comment,
                             onSeekMs = onSeekMs,
                             onAuthorClick = onAuthorClick,

@@ -44,9 +44,9 @@ import com.voxtube.app.data.local.MediaCacheSizes
 import com.voxtube.app.data.repository.MediaCacheType
 import com.voxtube.app.data.repository.MediaCacheUsage
 import com.voxtube.app.ui.components.settings.SettingsListScope
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.screens.settings.index.DownloadsIndex
 
 private val UsageSpacing = 8.dp
@@ -120,15 +120,15 @@ internal fun DownloadCacheLimitDialog(
         return
     }
     val customChoice =
-        FlowChoice(
+        VoxTubeChoice(
             CUSTOM_CHOICE,
             stringResource(R.string.cache_size_custom),
             custom?.let { cacheSizeText(it) },
         )
-    FlowChoiceDialog(
+    VoxTubeChoiceDialog(
         title = title,
         description = stringResource(R.string.cache_size_applies_on_restart),
-        options = presets.map { FlowChoice(it, cacheSizeText(it, artwork)) } + listOfNotNull(customChoice.takeUnless { artwork }),
+        options = presets.map { VoxTubeChoice(it, cacheSizeText(it, artwork)) } + listOfNotNull(customChoice.takeUnless { artwork }),
         selected = if (custom != null && !artwork) CUSTOM_CHOICE else selected,
         onSelect = { if (it == CUSTOM_CHOICE) typingCustom = true else viewModel.setLimit(type, it) },
         onDismiss = { if (!typingCustom) onDismiss() },
@@ -253,7 +253,7 @@ private fun CacheRow(
         TextButton(onClick = { viewModel.clear(type) }) { Text(stringResource(R.string.clear)) }
     }
     if (onClick != null) {
-        FlowNavRow(
+        VoxTubeNavRow(
             title = stringResource(type.title()),
             supportingText = summary,
             onClick = onClick,

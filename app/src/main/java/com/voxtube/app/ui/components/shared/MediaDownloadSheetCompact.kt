@@ -233,15 +233,15 @@ fun MediaDownloadSheetCompact(
             Spacer(Modifier.height(16.dp))
 
             if (hasVideo && hasAudio) {
-                FlowConnectedToggleGroup(
+                VoxTubeConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(
+                            VoxTubeToggleOption(
                                 value = false,
                                 label = stringResource(R.string.video),
                                 icon = Icons.Outlined.VideoLibrary,
                             ),
-                            FlowToggleOption(
+                            VoxTubeToggleOption(
                                 value = true,
                                 label = stringResource(R.string.download_audio),
                                 icon = Icons.Outlined.MusicNote,

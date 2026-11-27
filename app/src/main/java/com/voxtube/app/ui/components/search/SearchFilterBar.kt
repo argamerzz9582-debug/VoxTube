@@ -17,7 +17,7 @@ import com.voxtube.app.data.local.SearchFilter
 import com.voxtube.app.data.local.UploadDate
 import com.voxtube.app.data.local.WatchState
 import com.voxtube.app.data.paging.supportsVideoFilters
-import com.voxtube.app.ui.components.shared.FlowFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 
 /**
  * The type chips above the results, in the order YouTube shows them — Shorts second, so the one
@@ -47,7 +47,7 @@ fun SearchFilterBar(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         items(types, key = { it.name }) { type ->
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 label = stringResource(type.labelRes()),
                 selected = filter.contentType == type,
                 onClick = { onFilterChange(filter.copy(contentType = type)) },
@@ -56,7 +56,7 @@ fun SearchFilterBar(
         if (videoFilters) {
             item(key = RECENT_KEY) {
                 val recent = filter.uploadDate == UploadDate.THIS_WEEK
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = stringResource(R.string.search_filter_recently_uploaded),
                     selected = recent,
                     onClick = {
@@ -66,7 +66,7 @@ fun SearchFilterBar(
             }
             items(WATCH_CHIPS, key = { it.name }) { state ->
                 val selected = filter.watchState == state
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = stringResource(state.labelRes()),
                     selected = selected,
                     onClick = { onFilterChange(filter.copy(watchState = if (selected) WatchState.ANY else state)) },

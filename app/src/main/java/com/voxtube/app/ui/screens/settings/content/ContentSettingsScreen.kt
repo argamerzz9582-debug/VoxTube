@@ -19,9 +19,9 @@ import com.voxtube.app.ui.components.settings.SettingsTarget
 import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.screens.settings.index.ContentIndex
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 
@@ -92,7 +92,7 @@ internal fun ContentSettingsScreen(
             switch(ContentIndex.subsCollaborations, viewModel.subsCollaborations, viewModel::setSubsCollaborations)
             switch(ContentIndex.subsPostsChip, viewModel.subsPostsChip, viewModel::setSubsPostsChip)
             row(ContentIndex.subsAllChip.key) { shape ->
-                FlowSwitchRow(
+                VoxTubeSwitchRow(
                     title = stringResource(ContentIndex.subsAllChip.title),
                     supportingText = stringResource(R.string.content_settings_subs_all_chip_subtitle),
                     checked = subsAllChip || !subsHasGroupChip,
@@ -110,7 +110,7 @@ internal fun ContentSettingsScreen(
         group(key = "content.shorts", header = R.string.content_settings_header_shorts) {
             switch(ContentIndex.shortsContent, viewModel.shortsContent, viewModel::setShortsContent)
             row(ContentIndex.channelShortsTab.key) { shape ->
-                FlowSwitchRow(
+                VoxTubeSwitchRow(
                     title = stringResource(ContentIndex.channelShortsTab.title),
                     supportingText = stringResource(R.string.content_settings_channel_shorts_tab_subtitle),
                     checked = channelShortsTab || shortsContent,
@@ -153,7 +153,7 @@ internal fun ContentSettingsScreen(
 
     if (showThresholdDialog) {
         val threshold by viewModel.watchedThreshold.collectAsStateWithLifecycle()
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.content_settings_watched_threshold_title),
             description = stringResource(R.string.content_settings_watched_threshold_dialog_body),
             options =
@@ -162,7 +162,7 @@ internal fun ContentSettingsScreen(
                     WatchedThreshold.PERCENT_99,
                     WatchedThreshold.PERCENT_95,
                     WatchedThreshold.PERCENT_90,
-                ).map { FlowChoice(it, watchedThresholdLabel(it)) },
+                ).map { VoxTubeChoice(it, watchedThresholdLabel(it)) },
             selected = threshold,
             onSelect = viewModel::setWatchedThreshold,
             onDismiss = { showThresholdDialog = false },
@@ -171,10 +171,10 @@ internal fun ContentSettingsScreen(
 
     if (showFeedAutoplayDialog) {
         val mode by viewModel.feedAutoplay.collectAsStateWithLifecycle()
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.content_settings_feed_autoplay_title),
             description = stringResource(R.string.content_settings_feed_autoplay_dialog_body),
-            options = FeedAutoplay.entries.map { FlowChoice(it, feedAutoplayLabel(it)) },
+            options = FeedAutoplay.entries.map { VoxTubeChoice(it, feedAutoplayLabel(it)) },
             selected = mode,
             onSelect = viewModel::setFeedAutoplay,
             onDismiss = { showFeedAutoplayDialog = false },
@@ -183,10 +183,10 @@ internal fun ContentSettingsScreen(
 
     if (showSharedLinksDialog) {
         val action by viewModel.sharedLinkAction.collectAsStateWithLifecycle()
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.content_settings_shared_links_title),
             description = stringResource(R.string.content_settings_shared_links_dialog_body),
-            options = SharedLinkAction.entries.map { FlowChoice(it, sharedLinkActionLabel(it)) },
+            options = SharedLinkAction.entries.map { VoxTubeChoice(it, sharedLinkActionLabel(it)) },
             selected = action,
             onSelect = viewModel::setSharedLinkAction,
             onDismiss = { showSharedLinksDialog = false },

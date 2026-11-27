@@ -298,9 +298,6 @@
     <string name="settings_item_import_data">Importer des données</string>
     <string name="settings_item_import_data_subtitle">Restaurer depuis une sauvegarde ou importer depuis d\'autres applications</string>
     <string name="settings_item_about_flow">À propos de VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">Version, Licence, Contributeurs</string>
-    <string name="settings_item_support">Soutien et dons</string>
-    <string name="settings_item_support_subtitle">Aidez à soutenir le développement de VoxTube</string>
     <string name="settings_region_dialog_title">Sélectionner la région</string>
     <string name="settings_export_success">Données exportées avec succès</string>
     <string name="settings_export_failed">Échec de l\'exportation : %1$s</string>
@@ -579,15 +576,9 @@
     <string name="location_badge_active">Actif</string>
     <string name="select_threads_count_desc">Sélectionnez le nombre de threads (1-8) :</string>
     <!-- Écran des Dons -->
-    <string name="support_donations_title">Soutien et dons</string>
-    <string name="support_flow_dev_title">Soutenir le développement de Flow</string>
-    <string name="support_flow_dev_desc">Si vous trouvez Flow utile et souhaitez soutenir son développement, vous pouvez le faire sur Open Collective ou Patreon ou faire un don via les adresses de cryptomonnaie ci-dessous. Votre soutien contribue à la pérennité du projet !</string>
     <string name="thank_you_support_message">Merci pour votre soutien ! ❤️</string>
     <string name="address_copied_toast">Adresse copiée dans le presse-papiers</string>
-    <string name="donation_address_clip_label">Adresse de Don</string>
     <!-- Écran À Propos -->
-    <string name="about_creator">Créateur</string>
-    <string name="about_website">Site Web</string>
     <string name="github_subtitle">Code source &amp; Problèmes</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Bibliothèque d\'extraction principale</string>
@@ -611,7 +602,6 @@
     <string name="density_label">Densité : %1$s</string>
     <string name="about_title">À propos</string>
     <string name="donate_item_title">Faire un don</string>
-    <string name="support_dev_subtitle">Soutenir le développement</string>
     <string name="btn_ok">OK</string>
     <string name="btn_copy">Copier</string>
     <string name="github_label">GitHub</string>
@@ -649,7 +639,7 @@
     <string name="category_creative">Créatif</string>
     <string name="category_science_nature">Sciences &amp; Nature</string>
     <string name="category_news_current_events">Actualités &amp; Événements</string>
-    <!-- Écran de Contrôle de Flow -->
+    <!-- Écran de Contrôle de VoxTube -->
     <string name="flow_control_center">Centre de contrôle de VoxTube</string>
     <string name="action_refresh">Rafraîchir</string>
     <string name="loading_neural_matrix">Chargement de la matrice neurale...</string>
@@ -861,7 +851,7 @@
     <string name="channel_search_open">Rechercher dans la chaîne</string>
     <string name="channel_search_close">Fermer la recherche</string>
     <string name="channel_search_no_results">Aucun résultat trouvé pour %1$s</string>
-    <string name="deep_flow_mode_title">Mode Deep Flow</string>
+    <string name="deep_flow_mode_title">Mode Deep Focus</string>
     <string name="deep_flow_mode_subtitle">Mettre en pause l\'historique d\'apprentissage et de recherche</string>
     <string name="deep_flow_learning_paused">APPRENTISSAGE EN PAUSE</string>
     <string name="deep_flow_expires_in">Se désactive dans %s</string>
@@ -907,10 +897,10 @@
     <string name="appearance_customizer_save">Enregistrer le thème</string>
     <string name="appearance_role_primary">Primaire</string>
     <string name="appearance_role_on_primary">Aux primaires</string>
-    <string name="deep_flow_enabled_message">Deep Flow activé</string>
-    <string name="deep_flow_disabled_message">Deep Flow désactivé</string>
-    <string name="deep_flow_expired_message">Le minuteur Deep Flow s\'est arrêté</string>
-    <string name="deep_flow_active_until_disabled">Deep Flow reste actif jusqu\'à ce que vous le désactiviez</string>
+    <string name="deep_flow_enabled_message">Deep Focus activé</string>
+    <string name="deep_flow_disabled_message">Deep Focus désactivé</string>
+    <string name="deep_flow_expired_message">Le minuteur Deep Focus s\'est arrêté</string>
+    <string name="deep_flow_active_until_disabled">Deep Focus reste actif jusqu\'à ce que vous le désactiviez</string>
     <string name="deep_flow_duration_never">Jamais</string>
     <string name="appearance_role_secondary">Secondaire</string>
     <string name="appearance_role_tertiary">Tertiaire</string>
@@ -1051,7 +1041,6 @@
     <string name="settings_language_dialog_title">Sélectionner la langue de l\'application</string>
     <string name="settings_language_system_default">Paramètres par défaut du système</string>
     <string name="app_icon_apply_toast">L\'icône a été mise à jour – votre lanceur va s\'actualiser</string>
-    <string name="icon_name_flow_red">VoxTube Rouge</string>
     <string name="icon_name_monochrome">Monochrome</string>
     <string name="icon_name_ghost">Fantôme</string>
     <string name="icon_name_dynamic">Material You</string>
@@ -1153,7 +1142,6 @@
     <string name="audio_access_title">Accès à la musique &amp; à l\'audio</string>
     <string name="audio_access_granted_subtitle">Autorisé</string>
     <string name="audio_access_denied_subtitle">Non autorisé — appuyez pour activer</string>
-    <string name="support_flow_patreon">Soutenez Flow sur Patreon</string>
     <string name="section_app">Application</string>
     <string name="section_contact">Contact</string>
     <string name="section_legal">Légal</string>
@@ -1649,12 +1637,6 @@
     <string name="live_chat_jump_to_latest">Aller au dernier message du chat</string>
     <string name="content_settings_subs_show_checked_count_title">Nombre de vidéos vérifiées</string>
     <string name="content_settings_subs_show_checked_count_subtitle">Indiquer le nombre de vidéos visionnées à côté de la date de la dernière mise à jour</string>
-    <string name="donation_prompt_title">Vous appréciez Flow ?</string>
-    <string name="donation_prompt_message">Flow est une application gratuite et open source, conçue sans publicité ni traqueurs. Si elle a trouvé sa place sur votre appareil, pensez à soutenir son développement : cela contribue réellement à assurer la pérennité du projet.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Soutenir le développement</string>
-    <string name="donation_prompt_later">Peut-être plus tard</string>
-    <string name="donation_prompt_never">Ne plus afficher</string>
     <string name="library_local_media_label">Médias locaux</string>
     <string name="library_local_media_subtitle">Lire des vidéos et de la musique sur cet appareil</string>
     <string name="local_media_title">Médias locaux</string>
@@ -2210,10 +2192,6 @@
     <string name="import_other_youtube_clients">Importer depuis d\'autres clients YouTube</string>
     <string name="fallback_your_saved_shorts">Vos shorts enregistrés</string>
     <string name="discord_presence_playing_fallback">Joué dans VoxTube</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">github.com/argamerzz9582-debug/VoxTube</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="tv_music_empty">Aucune musique à recommander pour le moment</string>
     <string name="tv_music_charts">Classement musical</string>
@@ -2316,7 +2294,6 @@
     <string name="settings_search_no_results">Aucun paramètre trouvé pour %1$s</string>
     <string name="settings_lyrics_provider_order_description">Les fournisseurs sont testés les uns après les autres. Le premier qui renvoie les paroles remporte la mise.</string>
     <string name="import_running_background">Vous pouvez quitter cette page : l\'importation se poursuit en arrière-plan.</string>
-    <string name="donations_cryptocurrency">CRYPTOMONNAIE</string>
     <string name="import_no_history_entries">Aucune entrée d\'historique de surveillance n\'a été trouvée dans le fichier</string>
     <string name="import_no_videos">Aucune vidéo n\'a été trouvée dans le fichier de la playlist</string>
     <string name="import_no_content">Aucun contenu importable n\'a été détecté dans cette sauvegarde</string>
@@ -2869,12 +2846,12 @@
         <item quantity="other">Cela supprime %d notifications. Vous ne pouvez pas annuler cela.</item>
     </plurals>
     <string name="notifications_clear_confirm">Tout effacer</string>
-    <string name="deep_flow_scrobble_title">Scrobble pendant Deep Flow</string>
-    <string name="taste_learning_paused">Deep Flow est activé, l\'apprentissage est suspendu</string>
+    <string name="deep_flow_scrobble_title">Scrobble pendant Deep Focus</string>
+    <string name="taste_learning_paused">Deep Focus est activé, l\'apprentissage est suspendu</string>
     <string name="deep_flow_scrobble_subtitle">Continuez à envoyer des écoutes sur Last.fm, Libre.fm et ListenBrainz</string>
     <string name="deep_flow_on_search_title">Afficher lors de la recherche</string>
-    <string name="deep_flow_on_search_subtitle">Un commutateur Deep Flow au-dessus des recherches récentes</string>
-    <string name="deep_flow_long_press_hint">Appuyez longuement sur le logo ou le nom de VoxTube sur l\'écran d\'accueil pour activer Deep Flow.</string>
+    <string name="deep_flow_on_search_subtitle">Un commutateur Deep Focus au-dessus des recherches récentes</string>
+    <string name="deep_flow_long_press_hint">Appuyez longuement sur le logo ou le nom de VoxTube sur l\'écran d\'accueil pour activer Deep Focus.</string>
     <string name="notif_type_shorts">Shorts</string>
     <string name="notif_type_shorts_subtitle">Inclure Shorts dans les alertes de nouvelles vidéos provenant des abonnements</string>
     <string name="notif_check_interval_off_new_videos">Désactivé lorsque les nouvelles vidéos sont désactivées</string>
@@ -2942,7 +2919,7 @@
     <string name="content_settings_home_subscriptions_subtitle">Mixez les vidéos des chaînes que vous suivez dans l\'accueil</string>
     <string name="settings_section_watch_history">Regarder l\'historique</string>
     <string name="pause_watch_history_title">Suspendre l\'historique des vidéos regardées</string>
-    <string name="pause_watch_history_subtitle">Arrêtez de sauvegarder ce que vous regardez. Deep Flow suspend également l\'apprentissage</string>
+    <string name="pause_watch_history_subtitle">Arrêtez de sauvegarder ce que vous regardez. Deep Focus suspend également l\'apprentissage</string>
     <string name="content_settings_channel_shorts_tab_title">Onglet Shorts sur les chaînes</string>
     <string name="content_settings_channel_shorts_tab_subtitle">Conserver l\'onglet Shorts d\'une chaîne pendant que les Shorts sont masqués</string>
     <string name="content_settings_hide_watched_shorts_title">Masquer Shorts regardé</string>
@@ -3079,7 +3056,6 @@
         <item quantity="many">%1$d fils</item>
         <item quantity="other">%1$d fils</item>
     </plurals>
-    <string name="support_flow_open_collective">Prise en charge de Flow sur Open Collective</string>
     <string name="about_notices">Avis open source</string>
     <string name="about_notices_summary">Listes de mots et code d\'autres projets</string>
     <string name="playlist_downloading_template">Téléchargement : %1$s</string>
@@ -4239,7 +4215,6 @@
     <string name="settings_changelog_all_releases">Toutes les versions sur GitHub</string>
     <string name="settings_changelog_expand">Afficher les modifications</string>
     <string name="settings_changelog_collapse">Masquer les modifications</string>
-    <string name="settings_creator_role">Créateur et développeur de Flow</string>
     <string name="device_info_section_device">Appareil</string>
     <string name="device_info_section_system">Système</string>
     <string name="device_info_section_display">Afficher</string>
@@ -4290,7 +4265,6 @@
     <string name="settings_custom_theme_start_from">Commencer à partir de</string>
     <string name="settings_custom_theme_count">%1$d thèmes sur %2$d</string>
     <string name="settings_custom_theme_empty">Pas encore de thèmes personnalisés</string>
-    <string name="settings_custom_theme_empty_body">Commencez à partir de n’importe quelle palette ou importez-en une créée dans Flow Desktop.</string>
     <string name="settings_custom_theme_import_failed">Aucun thème valide dans ce fichier</string>
     <string name="settings_custom_theme_limit">Vous pouvez conserver jusqu\'à %1$d thèmes</string>
     <string name="settings_custom_theme_exported">Thème exporté</string>

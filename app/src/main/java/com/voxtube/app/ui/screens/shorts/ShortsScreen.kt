@@ -40,11 +40,11 @@ import com.voxtube.app.data.shorts.queue.ShortsQueueSource
 import com.voxtube.app.player.GlobalPlayerState
 import com.voxtube.app.player.shorts.ShortsPlayerPool
 import com.voxtube.app.ui.components.shared.CommentSortFilter
-import com.voxtube.app.ui.components.shared.FlowCommentsBottomSheet
-import com.voxtube.app.ui.components.shared.FlowDescriptionBottomSheet
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
 import com.voxtube.app.ui.components.shared.MediaSheetSlot
+import com.voxtube.app.ui.components.shared.VoxTubeCommentsBottomSheet
+import com.voxtube.app.ui.components.shared.VoxTubeDescriptionBottomSheet
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.applyVideoCommentFilters
 import com.voxtube.app.ui.components.shared.defaultSheetExpandedHeight
 import com.voxtube.app.ui.components.shared.oldestCommentsNote
@@ -161,11 +161,11 @@ fun ShortsScreen(
 
         when {
             uiState.isLoading && uiState.shorts.isEmpty() -> {
-                FlowLoadingIndicator()
+                VoxTubeLoadingIndicator()
             }
 
             uiState.error != null && uiState.shorts.isEmpty() -> {
-                FlowErrorState(
+                VoxTubeErrorState(
                     error = uiState.error ?: stringResource(R.string.error_short_load),
                     onRetry = { viewModel.retry(source) },
                     modifier = Modifier.align(Alignment.Center),
@@ -250,7 +250,7 @@ fun ShortsScreen(
 
         if (showCommentsSheet) {
             DisposableEffect(Unit) { onDispose { sheetInsets.release() } }
-            FlowCommentsBottomSheet(
+            VoxTubeCommentsBottomSheet(
                 comments = visibleComments,
                 isLoading = isLoadingComments,
                 selectedFilter = commentSortFilter,
@@ -299,7 +299,7 @@ fun ShortsScreen(
             DisposableEffect(Unit) { onDispose { sheetInsets.release() } }
             val safeIndex = uiState.currentIndex.coerceIn(0, uiState.shorts.size - 1)
             val short = uiState.shorts[safeIndex]
-            FlowDescriptionBottomSheet(
+            VoxTubeDescriptionBottomSheet(
                 video = short.toVideo(),
                 descriptionPage = descriptionPages[short.id],
                 expandedHeight = sheetExpandedHeight,

@@ -25,9 +25,9 @@ import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.choice
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
 import com.voxtube.app.ui.screens.settings.index.HistoryIndex
 
 private enum class HistoryDialog { MAX_SIZE, RETENTION, CLEAR }
@@ -116,10 +116,10 @@ internal fun HistorySettingsScreen(
 
     when (dialog) {
         HistoryDialog.MAX_SIZE -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.max_history_size_title),
                 description = stringResource(R.string.choose_history_size),
-                options = HistorySizes.map { FlowChoice(it, pluralStringResource(R.plurals.searches_count_template, it, it)) },
+                options = HistorySizes.map { VoxTubeChoice(it, pluralStringResource(R.plurals.searches_count_template, it, it)) },
                 selected = maxSize,
                 onSelect = viewModel::setMaxSize,
                 onDismiss = { dialog = null },
@@ -127,10 +127,10 @@ internal fun HistorySettingsScreen(
         }
 
         HistoryDialog.RETENTION -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.retention_period_title),
                 description = stringResource(R.string.delete_searches_older_than),
-                options = RetentionPeriods.map { (days, label) -> FlowChoice(days, stringResource(label)) },
+                options = RetentionPeriods.map { (days, label) -> VoxTubeChoice(days, stringResource(label)) },
                 selected = retentionDays,
                 onSelect = viewModel::setRetentionDays,
                 onDismiss = { dialog = null },
@@ -138,7 +138,7 @@ internal fun HistorySettingsScreen(
         }
 
         HistoryDialog.CLEAR -> {
-            FlowAlertDialog(
+            VoxTubeAlertDialog(
                 onDismissRequest = { dialog = null },
                 title = { Text(stringResource(R.string.clear_history_dialog_title)) },
                 text = { Text(stringResource(R.string.clear_history_dialog_text)) },

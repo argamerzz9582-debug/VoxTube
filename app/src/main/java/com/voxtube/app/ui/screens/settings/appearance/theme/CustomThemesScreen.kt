@@ -45,7 +45,7 @@ import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.SettingsTarget
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.notice
-import com.voxtube.app.ui.components.shared.FlowEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 import com.voxtube.app.ui.screens.settings.index.CustomThemeIndex
 import com.voxtube.app.ui.theme.CustomTheme
 import com.voxtube.app.ui.theme.ThemeCatalog
@@ -145,7 +145,7 @@ internal fun CustomThemesScreen(
         if (themes != null && list.isEmpty()) {
             item("custom_themes.empty") {
                 Box(Modifier.fillMaxWidth().height(EmptyStateHeight)) {
-                    FlowEmptyState(
+                    VoxTubeEmptyState(
                         title = stringResource(R.string.settings_custom_theme_empty),
                         subtitle = stringResource(R.string.settings_custom_theme_empty_body),
                         icon = Icons.Outlined.Palette,

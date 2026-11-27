@@ -4,10 +4,10 @@ import android.util.Log
 import com.voxtube.app.data.local.HomeFeedCacheRepository
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.ChannelMemoryRepository
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.GraphSeedInput
 import com.voxtube.app.data.recommendation.NeuroScoring
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.update
 
@@ -38,7 +38,7 @@ internal class HomeLoadMoreSources(
         userSubs: Set<String>,
         now: Long,
     ) {
-        val brain = FlowNeuroEngine.getBrainSnapshot()
+        val brain = VoxTubeNeuroEngine.getBrainSnapshot()
         val exclusions = session.feedExclusions()
         val candidates =
             runCatching { channelMemory.storedUploads(now) }
@@ -49,7 +49,7 @@ internal class HomeLoadMoreSources(
         if (candidates.isEmpty()) return
         val pick =
             channelMemoryPicks(
-                ranked = FlowNeuroEngine.rank(candidates, userSubs),
+                ranked = VoxTubeNeuroEngine.rank(candidates, userSubs),
                 onScreenIds = pageIds,
                 onScreenMemoryChannels = page.mapTo(HashSet()) { it.channelId },
                 room = 1,
@@ -90,8 +90,8 @@ internal class HomeLoadMoreSources(
                 .filter { it.source == HomeFeedCacheRepository.SOURCE_RELATED }
                 .mapTo(HashSet()) { it.video.id }
         val reserveVideos =
-            FlowNeuroEngine.shareByInterest(
-                FlowNeuroEngine.rank(
+            VoxTubeNeuroEngine.shareByInterest(
+                VoxTubeNeuroEngine.rank(
                     reserveRows
                         .map { it.video }
                         .filterValid()
@@ -136,7 +136,7 @@ internal class HomeLoadMoreSources(
     ): Int {
         val seedInputs = loadMoreSeedInputs()
         val longTermInputs = feedSources.longTermSeedInputs()
-        val seedIds = FlowNeuroEngine.selectRelatedSeeds(seedInputs, LOAD_MORE_GRAPH_SEEDS, longTermInputs)
+        val seedIds = VoxTubeNeuroEngine.selectRelatedSeeds(seedInputs, LOAD_MORE_GRAPH_SEEDS, longTermInputs)
         if (seedIds.isEmpty()) return 0
 
         val graphFetch = feedSources.fetchRelatedGraph(seedInputs + longTermInputs, seedIds, session::cacheFilters)
@@ -147,10 +147,10 @@ internal class HomeLoadMoreSources(
                 .filterRecentHomeSuggestionGraph(now)
         val graphMetadata = graphCandidates.associateBy { it.video.id }
         val graphRanked =
-            FlowNeuroEngine.shareByInterest(
+            VoxTubeNeuroEngine.shareByInterest(
                 demoteByFit(
                     applyGraphBoost(
-                        FlowNeuroEngine.rank(
+                        VoxTubeNeuroEngine.rank(
                             graphCandidates.map { it.video },
                             userSubs,
                             NeuroScoring.LANE_RELEVANCE_FLOOR,
@@ -208,7 +208,7 @@ internal class HomeLoadMoreSources(
         val fallbackInputs = loadMoreSeedInputs()
         val fallbackLongTerm = feedSources.longTermSeedInputs()
         val fallbackSeeds =
-            FlowNeuroEngine.selectRelatedSeeds(fallbackInputs, LOAD_MORE_FALLBACK_SEEDS, fallbackLongTerm)
+            VoxTubeNeuroEngine.selectRelatedSeeds(fallbackInputs, LOAD_MORE_FALLBACK_SEEDS, fallbackLongTerm)
         if (fallbackSeeds.isNotEmpty() && isCurrent()) {
             val fallbackFetch =
                 feedSources.fetchRelatedGraph(fallbackInputs + fallbackLongTerm, fallbackSeeds, session::cacheFilters)
@@ -219,10 +219,10 @@ internal class HomeLoadMoreSources(
                     .filterRecentHomeSuggestionGraph(now)
             val fallbackMetadata = fallbackCandidates.associateBy { it.video.id }
             val fallbackRanked =
-                FlowNeuroEngine.shareByInterest(
+                VoxTubeNeuroEngine.shareByInterest(
                     demoteByFit(
                         applyGraphBoost(
-                            FlowNeuroEngine.rank(
+                            VoxTubeNeuroEngine.rank(
                                 fallbackCandidates.map { it.video },
                                 userSubs,
                                 NeuroScoring.LANE_RELEVANCE_FLOOR,

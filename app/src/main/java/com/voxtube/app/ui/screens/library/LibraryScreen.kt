@@ -34,13 +34,13 @@ import com.voxtube.app.data.stats.RecapPeriod
 import com.voxtube.app.data.video.DownloadedVideo
 import com.voxtube.app.ui.OnTabReselected
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.library.LibraryNavigationRow
 import com.voxtube.app.ui.components.library.LibrarySection
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
 import com.voxtube.app.ui.components.stats.RecapEntryCard
 import java.time.format.TextStyle
 
@@ -80,7 +80,7 @@ fun LibraryScreen(
     val hiddenSections by viewModel.hiddenSections.collectAsStateWithLifecycle()
     val locale = LocalConfiguration.current.locales[0]
     val listState = rememberLazyListState()
-    OnTabReselected(FlowTab.Library.route) { listState.animateScrollToItem(0) }
+    OnTabReselected(VoxTubeTab.Library.route) { listState.animateScrollToItem(0) }
     val openSection: (LibrarySection) -> Unit = { section ->
         when (section) {
             LibrarySection.HISTORY -> onNavigateToHistory()
@@ -100,7 +100,7 @@ fun LibraryScreen(
 
     Scaffold(
         contentWindowInsets = WindowInsets(0.dp),
-        topBar = { FlowTopBar(title = stringResource(R.string.library)) },
+        topBar = { VoxTubeTopBar(title = stringResource(R.string.library)) },
     ) { padding ->
         LazyColumn(
             state = listState,
@@ -139,7 +139,7 @@ fun LibraryScreen(
             val settingsSections = visibleSettingsSections(hidden, notesEnabled = notesCount != null)
             if (shelfPreviewsEnabled && isLibraryEmpty) {
                 item(key = "library-empty", contentType = "empty") {
-                    FlowEmptyState(
+                    VoxTubeEmptyState(
                         title = stringResource(R.string.library_empty_title),
                         subtitle = stringResource(R.string.library_empty_body),
                         icon = Icons.Outlined.VideoLibrary,
@@ -169,7 +169,7 @@ fun LibraryScreen(
             val emptyLibraryDownloads = shelfPreviewsEnabled && isLibraryEmpty && LibrarySection.DOWNLOADS in contentSections
             if (emptyLibraryDownloads || settingsSections.isNotEmpty()) {
                 item(key = "settings-data", contentType = "navigation-section") {
-                    Column(modifier = Modifier.widthIn(max = FlowMaxContentWidth).padding(horizontal = 16.dp)) {
+                    Column(modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth).padding(horizontal = 16.dp)) {
                         LibrarySectionHeader(stringResource(R.string.library_settings_data_header))
                         if (emptyLibraryDownloads) {
                             LibraryNavigationRow(

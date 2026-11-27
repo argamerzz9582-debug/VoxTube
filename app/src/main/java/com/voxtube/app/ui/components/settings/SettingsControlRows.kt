@@ -22,9 +22,9 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.voxtube.app.ui.components.shared.FlowBadgedTitle
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeBadgedTitle
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.components.shared.dpadVerticalFocusExit
 
 private val ControlRowHorizontalPadding = 16.dp
@@ -40,7 +40,7 @@ private const val DISABLED_ALPHA = 0.4f
 @Composable
 fun <T> SettingsToggleGroupRow(
     title: String,
-    options: List<FlowToggleOption<T>>,
+    options: List<VoxTubeToggleOption<T>>,
     selected: T,
     onSelected: (T) -> Unit,
     shape: Shape,
@@ -53,7 +53,7 @@ fun <T> SettingsToggleGroupRow(
     SettingsControlRowFrame(shape = shape, modifier = modifier) {
         SettingsControlRowTitle(title = title, summary = summary, enabled = enabled, badge = titleBadge)
         preview?.invoke()
-        FlowConnectedToggleGroup(
+        VoxTubeConnectedToggleGroup(
             options = options,
             selected = selected,
             onSelected = onSelected,
@@ -143,7 +143,7 @@ private fun SettingsControlRowTitle(
     badge: Boolean,
 ) {
     Column(modifier = Modifier.alpha(if (enabled) 1f else DISABLED_ALPHA)) {
-        FlowBadgedTitle(
+        VoxTubeBadgedTitle(
             title = title,
             badge = badge,
             style = MaterialTheme.typography.bodyLarge,

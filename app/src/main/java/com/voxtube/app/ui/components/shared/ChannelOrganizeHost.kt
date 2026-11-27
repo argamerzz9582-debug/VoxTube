@@ -83,7 +83,7 @@ private fun ChannelOrganizeHost(organizer: ChannelOrganizeViewModel) {
     val channelId = current.target.channelId
     when (current.kind) {
         ChannelOrganizeKind.Note -> {
-            FlowNoteEditorDialog(
+            VoxTubeNoteEditorDialog(
                 initialText = current.noteText,
                 title = stringResource(R.string.note_channel_title),
                 onSave = organizer::saveNote,

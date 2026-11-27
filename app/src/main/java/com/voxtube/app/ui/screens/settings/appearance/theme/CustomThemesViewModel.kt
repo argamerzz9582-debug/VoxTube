@@ -7,9 +7,9 @@ import com.voxtube.app.data.local.CustomThemeCodec
 import com.voxtube.app.data.local.LocalDataManager
 import com.voxtube.app.ui.screens.settings.SettingsViewModel
 import com.voxtube.app.ui.theme.CustomTheme
-import com.voxtube.app.ui.theme.FlowPalettes
 import com.voxtube.app.ui.theme.ThemeMode
 import com.voxtube.app.ui.theme.ThemeVariant
+import com.voxtube.app.ui.theme.VoxTubePalettes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -72,7 +72,7 @@ class CustomThemesViewModel
                 _message.value = CustomThemeMessage.LimitReached
                 return null
             }
-            val theme = CustomTheme.from(newId(), name, FlowPalettes.forMode(base))
+            val theme = CustomTheme.from(newId(), name, VoxTubePalettes.forMode(base))
             write { dataManager.saveCustomTheme(theme) }
             return theme.id
         }

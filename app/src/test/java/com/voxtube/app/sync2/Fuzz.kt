@@ -10,12 +10,12 @@ import org.junit.Assert.fail
 import kotlin.random.Random
 
 /**
- * Property tests without a library. `-Dflow.fuzz.cases=N` raises the cases per property for a longer
- * local run, and `-Dflow.fuzz.seed=S` replays the seed a failure names.
+ * Property tests without a library. `-Dvoxtube.fuzz.cases=N` raises the cases per property for a longer
+ * local run, and `-Dvoxtube.fuzz.seed=S` replays the seed a failure names.
  */
 object Fuzz {
-    val cases: Int = System.getProperty("flow.fuzz.cases")?.toIntOrNull() ?: 100
-    val seed: Long = System.getProperty("flow.fuzz.seed")?.toLongOrNull() ?: Random.nextLong()
+    val cases: Int = System.getProperty("voxtube.fuzz.cases")?.toIntOrNull() ?: 100
+    val seed: Long = System.getProperty("voxtube.fuzz.seed")?.toLongOrNull() ?: Random.nextLong()
 }
 
 fun describe(input: Any?): String =

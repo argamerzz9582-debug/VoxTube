@@ -708,7 +708,7 @@
     <string name="deep_flow_scrobble_subtitle">Ttkemmil ad d-tessekneḍ i uselmed ɣer Last.fm, Libre.fm d ListenBrainz</string>
     <string name="deep_flow_on_search_title">Ssenɛet-d mi ara nadi</string>
     <string name="deep_flow_on_search_subtitle">Yettbeddil VoxTube nnig nnuba n unadi i d-iteddun</string>
-    <string name="deep_flow_long_press_hint">Sεeddaḍ-d tagga neɣ isem n VoxTube deg uxxam akken ad tεeddiḍ ɣer Deep Flow</string>
+    <string name="deep_flow_long_press_hint">Sεeddaḍ-d tagga neɣ isem n VoxTube deg uxxam akken ad tεeddiḍ ɣer Deep Focus</string>
     <string name="deep_flow_dialog_title">Ḥebsemt lweqt</string>
     <string name="deep_flow_dialog_body">Acḥal n lweqt i ilaq ad yeqqim uḥric ?</string>
     <string name="deep_flow_enabled_message">VoxTube yessefṛaḥ</string>
@@ -795,9 +795,6 @@
     <string name="settings_item_import_data">Amḍiq n yisefka</string>
     <string name="settings_item_import_data_subtitle">Rremt-d seg uɛrur neɣ seg yiswiyen nniḍen</string>
     <string name="settings_item_about_flow">ɣef VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">Tusmiḍt, turagt, ibeddlen</string>
-    <string name="settings_item_support">Ɛiwen i yisefka</string>
-    <string name="settings_item_support_subtitle">Ɛiwen n tallelt i usnulfu n VoxTube</string>
     <string name="settings_region_dialog_title">Fren tamnaḍt</string>
     <string name="settings_language_dialog_title">Fren tutlayt n useɣwen</string>
     <string name="settings_language_system_default">Anagraw n unagraw</string>
@@ -874,7 +871,6 @@
     <string name="app_icon_picker_subtitle">Xdem ungal n usemmiḍ n usebter. Ameddal-nni ad d-yeffeγ s tɣawla, ad d-yesseɣmal umeslay-nni.</string>
     <string name="app_icon_picker_warning">Ma tbeddel taẓuri, ad t-tesseḥḥbes VoxTube seg uswir n uxxam-ik. Ɣer-as-tt-id seg usaru n uselmed ma yella ilaq.</string>
     <string name="app_icon_apply_toast">Tiwlafin igerrzen-d, ad d-yessnerked tasenduqt-ik.</string>
-    <string name="icon_name_flow_red">VoxTube azeggaɣ</string>
     <string name="icon_name_flow_light">VoxTube Tafat</string>
     <string name="icon_name_flow_play">VoxTube uraren</string>
     <string name="icon_name_amoled">AMOLED Aberkan</string>
@@ -1795,26 +1791,8 @@
         <item quantity="one">%1$d lxiḍ</item>
         <item quantity="other">%1$d iɛeddan</item>
     </plurals>
-    <string name="support_donations_title">Ɛiwen i yisefka</string>
-    <string name="support_flow_dev_title">Ɛiwen Flow n usnulfu</string>
-    <string name="support_flow_dev_desc">Ma yella Flow d ayen i k-yefkan, tzemreḍ ad t-id-tesɛiḍ deg Open Collective, Patreon neɣ s crypto ddaw-a. Tanemmirt!</string>
-    <string name="support_flow_open_collective">Flow deg Open Collective</string>
-    <string name="support_flow_patreon">Flow deg Patreon</string>
     <string name="thank_you_support_message">Tanemmirt ɣef uɛiwen-nwen!</string>
     <string name="address_copied_toast">Tansa i d-yettwaɣen ɣer tmacint.</string>
-    <string name="donation_address_clip_label">Tansa n tneflit</string>
-    <string name="donation_prompt_title">Tezha Flow?</string>
-    <string name="donation_prompt_message">Flow d azref, d amaru i yeffɣen d ur d-yeffɣen ara inagan. Ma yella yewwi-d taḍect deg tilifun-ik, cwiṭ n usekles i t-id-yeḥwes.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Ɛiwen n usnulfu</string>
-    <string name="donation_prompt_later">Ahat ticki.</string>
-    <string name="donation_prompt_never">Ur ttɛawademt ara tikkelt nniḍen.</string>
-    <string name="about_creator">Inesnulfuṛ</string>
-    <string name="about_creator_name">A-Edit</string>
-    <string name="about_website">Asmel web</string>
-    <string name="about_website_address">tazzla-tube.org</string>
-    <string name="about_reddit">Rẓemt</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="github_subtitle">Aneɣmas n ufus d tegnit</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Tamkarḍit tamezwarut n tegniḍt</string>
@@ -1845,7 +1823,6 @@
     <string name="section_legal">Ilugan</string>
     <string name="section_device">Igenni</string>
     <string name="donate_item_title">Fkan-d</string>
-    <string name="support_dev_subtitle">Ɛiwen n usnulfu</string>
     <string name="btn_ok">Ih</string>
     <string name="btn_copy">Ddel</string>
     <string name="github_label">GitHub</string>
@@ -3740,7 +3717,6 @@
     <string name="settings_search_no_results">Ulac iwumi yufan i \"%1$s\"</string>
     <string name="settings_lyrics_provider_order_description">Ɛeṛḍet seg uqacuc ar d aqacu. Ṛuḥet i uεeddi.</string>
     <string name="import_running_background">Tzemreḍ ad teǧǧeḍ taferruct-a. Teddukla-nni teqqim tetteddu.</string>
-    <string name="donations_cryptocurrency">CRYPTOCURT</string>
     <string name="import_no_history_entries">Ulac tizmilin n umezruy i d-yufan deg faylu</string>
     <string name="import_no_videos">Ulac tividyuyin i d-yufan deg afaylu n umuɣ</string>
     <string name="import_no_likes">Ulac wid i d-iεǧben. Export My Activity for YouTube as JSON, s usekcum-ik n Google s teglizit.</string>
@@ -4007,7 +3983,6 @@
     <string name="settings_changelog_all_releases">Ayen akk i d-yettilin deg GitHub</string>
     <string name="settings_changelog_expand">Ssken-d ibeddilen</string>
     <string name="settings_changelog_collapse">Ffer ibeddilen</string>
-    <string name="settings_creator_role">Asnulfu d usnulfu n Flow</string>
     <string name="device_info_section_device">Igenni</string>
     <string name="device_info_section_system">Anagraw</string>
     <string name="device_info_section_display">Isseknay</string>
@@ -4058,7 +4033,6 @@
     <string name="settings_custom_theme_start_from">Bdu seg</string>
     <string name="settings_custom_theme_count">%1$d n yisentelmen n %2$d</string>
     <string name="settings_custom_theme_empty">Mazal ur yelli ara yisental iwumi ixeddmen.</string>
-    <string name="settings_custom_theme_empty_body">Bdan seg yal taḥawsa, neɣ d-id-yessufɣen yiwet i d-yexdem deg Flow Desktop.</string>
     <string name="settings_custom_theme_import_failed">Ulac isentel iṣeḥḥanen deg afaylu-a.</string>
     <string name="settings_custom_theme_limit">Tzemreḍ ad tkemmleḍ ɣer yisentelmen n %1$d</string>
     <string name="settings_custom_theme_exported">Agerdas yeffɣen-d</string>

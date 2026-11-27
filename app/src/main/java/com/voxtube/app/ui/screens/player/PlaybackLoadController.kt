@@ -8,7 +8,7 @@ import com.voxtube.app.data.localmedia.LocalMediaDetails
 import com.voxtube.app.data.localmedia.LocalMediaIds
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.recommendation.FeedExclusions
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.video.AutoDownloadResolution
 import com.voxtube.app.data.video.AutoDownloadTrigger
 import com.voxtube.app.player.EnhancedPlayerManager
@@ -295,7 +295,7 @@ internal class PlaybackLoadController(
 
     private fun refreshFeedExclusions() {
         scope.launch(ioDispatcher) {
-            runCatching { FlowNeuroEngine.getInstance(context).feedExclusions() }.onSuccess { exclusions = it }
+            runCatching { VoxTubeNeuroEngine.getInstance(context).feedExclusions() }.onSuccess { exclusions = it }
         }
     }
 }

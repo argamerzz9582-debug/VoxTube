@@ -3,9 +3,9 @@ package com.voxtube.app.ui.screens.home
 import com.voxtube.app.BuildConfig
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.NeuroKeySpec
 import com.voxtube.app.data.recommendation.RankTrace
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.recommendation.snapshot.HomeSnapshot
 import com.voxtube.app.data.recommendation.snapshot.HomeSnapshotStore
 import com.voxtube.app.data.recommendation.snapshot.SnapshotCard
@@ -40,7 +40,7 @@ class HomeSnapshotRecorder
             sourceOf: (String) -> FeedSource?,
             trace: RankTrace,
         ) {
-            val state = runCatching { FlowNeuroEngine.diagnosticState() }.getOrNull() ?: return
+            val state = runCatching { VoxTubeNeuroEngine.diagnosticState() }.getOrNull() ?: return
             val snapshot =
                 HomeSnapshot(
                     appVersion = BuildConfig.VERSION_NAME,

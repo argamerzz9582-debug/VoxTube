@@ -25,8 +25,8 @@ import com.voxtube.app.data.model.Video
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.library.PlaylistVideoRow
 import com.voxtube.app.ui.components.library.libraryListThumbnailWidth
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.animateMediaListItem
 import com.voxtube.app.ui.components.shared.reorderHandleDrag
 import com.voxtube.app.ui.components.shared.reorderLift
@@ -84,7 +84,7 @@ internal fun PlaylistDetailList(
             if (header != null) item(key = "playlist-header", contentType = "header") { header() }
             if (videos.isEmpty() && mode.searchQuery.isNotBlank()) {
                 item(key = "playlist-no-results", contentType = "empty") {
-                    FlowEmptyState(
+                    VoxTubeEmptyState(
                         title = stringResource(R.string.playlist_search_no_results, mode.searchQuery.trim()),
                         icon = Icons.Outlined.SearchOff,
                     )
@@ -93,7 +93,7 @@ internal fun PlaylistDetailList(
                 item(key = "playlist-empty", contentType = "empty") {
                     when {
                         mode.isLikes -> {
-                            FlowEmptyState(
+                            VoxTubeEmptyState(
                                 title = stringResource(R.string.liked_videos_empty_title),
                                 subtitle = stringResource(R.string.liked_videos_empty_body),
                                 icon = Icons.Outlined.ThumbUp,
@@ -101,7 +101,7 @@ internal fun PlaylistDetailList(
                         }
 
                         mode.isWatchLater -> {
-                            FlowEmptyState(
+                            VoxTubeEmptyState(
                                 title = stringResource(R.string.no_videos_saved),
                                 subtitle = stringResource(R.string.no_videos_saved_body),
                                 icon = Icons.Default.WatchLater,
@@ -109,7 +109,7 @@ internal fun PlaylistDetailList(
                         }
 
                         else -> {
-                            FlowEmptyState(
+                            VoxTubeEmptyState(
                                 title = stringResource(R.string.playlist_empty_title),
                                 subtitle = stringResource(R.string.playlist_empty_desc),
                                 icon = Icons.AutoMirrored.Filled.PlaylistPlay,
@@ -154,7 +154,7 @@ internal fun PlaylistDetailList(
             }
             if (hasMorePages) {
                 item(key = "playlist-loading-more", contentType = "loading") {
-                    FlowLoadingIndicator(modifier = Modifier.padding(vertical = 24.dp))
+                    VoxTubeLoadingIndicator(modifier = Modifier.padding(vertical = 24.dp))
                 }
             }
         }

@@ -23,8 +23,8 @@ import com.voxtube.app.R
 import com.voxtube.app.data.local.HomeFeedColumns
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.ui.components.rememberFeedGridLayout
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.card.MediaVideoCard
 import com.voxtube.app.ui.components.shared.rememberFeedGridPlan
 
@@ -47,7 +47,7 @@ internal fun ChannelSearchResults(
                         .fillMaxSize()
                         .padding(top = topInset),
                 contentAlignment = Alignment.Center,
-            ) { FlowLoadingIndicator() }
+            ) { VoxTubeLoadingIndicator() }
         }
 
         uiState.searchErrorLog != null -> {
@@ -74,7 +74,7 @@ internal fun ChannelSearchResults(
                         .padding(top = topInset),
                 contentAlignment = Alignment.Center,
             ) {
-                FlowEmptyState(title = stringResource(R.string.channel_search_no_results, uiState.searchQuery))
+                VoxTubeEmptyState(title = stringResource(R.string.channel_search_no_results, uiState.searchQuery))
             }
         }
 

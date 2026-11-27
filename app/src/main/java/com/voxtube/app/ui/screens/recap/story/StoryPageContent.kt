@@ -35,8 +35,8 @@ import com.voxtube.app.data.stats.RankedItem
 import com.voxtube.app.data.stats.RecapPeriod
 import com.voxtube.app.data.stats.RecapSummary
 import com.voxtube.app.data.stats.ViewFormat
-import com.voxtube.app.ui.components.shared.FlowMorphingPortrait
-import com.voxtube.app.ui.components.shared.FlowPopIn
+import com.voxtube.app.ui.components.shared.VoxTubeMorphingPortrait
+import com.voxtube.app.ui.components.shared.VoxTubePopIn
 import com.voxtube.app.ui.components.stats.StatCalendar
 import com.voxtube.app.ui.components.stats.StatClock
 import com.voxtube.app.ui.components.stats.StatLegendItem
@@ -99,7 +99,7 @@ internal fun StoryPageContent(
             }
 
             is StoryPage.TopChannel -> {
-                FlowMorphingPortrait(page.channel.imageUrl, page.channel.name, HeroPortrait, tint.accent, tint.container)
+                VoxTubeMorphingPortrait(page.channel.imageUrl, page.channel.name, HeroPortrait, tint.accent, tint.container)
                 Eyebrow(stringResource(R.string.recap_story_top_channel), tint)
                 Headline(page.channel.name)
                 val watched = spentTimeLabel(page.channel.durationMs)
@@ -134,7 +134,7 @@ internal fun StoryPageContent(
             }
 
             is StoryPage.TopArtist -> {
-                FlowMorphingPortrait(page.artist.imageUrl, page.artist.name, HeroPortrait, tint.accent, tint.container)
+                VoxTubeMorphingPortrait(page.artist.imageUrl, page.artist.name, HeroPortrait, tint.accent, tint.container)
                 Eyebrow(stringResource(R.string.recap_story_artist), tint)
                 Headline(page.artist.name)
                 Body(stringResource(R.string.recap_story_artist_body, playsLabel(page.artist), page.sharePercent))
@@ -177,7 +177,7 @@ private fun StatPill(
     tint: StoryTint,
     index: Int,
 ) {
-    FlowPopIn(index) {
+    VoxTubePopIn(index) {
         Surface(shape = MaterialTheme.shapes.extraLarge, color = tint.raised, contentColor = tint.onContainer) {
             Column(
                 modifier = Modifier.padding(horizontal = PillPaddingH, vertical = PillPaddingV),
@@ -199,7 +199,7 @@ private fun FaceRow(
     Row(horizontalArrangement = Arrangement.spacedBy(SmallSpacing), verticalAlignment = Alignment.Top) {
         items.forEachIndexed { index, item ->
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.widthIn(max = SmallPortrait * 1.6f)) {
-                FlowMorphingPortrait(item.imageUrl, item.name, SmallPortrait, tint.accent, tint.container, delayIndex = index + 2)
+                VoxTubeMorphingPortrait(item.imageUrl, item.name, SmallPortrait, tint.accent, tint.container, delayIndex = index + 2)
                 Text(item.name, style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
@@ -213,7 +213,7 @@ private fun RepeatArtwork(
     tint: StoryTint,
 ) {
     Box(Modifier.widthIn(max = StoryMaxWidth).fillMaxWidth()) {
-        FlowPopIn(0) {
+        VoxTubePopIn(0) {
             AsyncImage(
                 model = video.imageUrl,
                 contentDescription = null,
@@ -221,7 +221,7 @@ private fun RepeatArtwork(
                 modifier = Modifier.fillMaxWidth().aspectRatio(VIDEO_ASPECT).clip(MaterialTheme.shapes.extraLarge),
             )
         }
-        FlowPopIn(3, Modifier.align(Alignment.TopEnd).offset(x = SmallSpacing, y = -SmallSpacing)) {
+        VoxTubePopIn(3, Modifier.align(Alignment.TopEnd).offset(x = SmallSpacing, y = -SmallSpacing)) {
             Surface(
                 shape = MaterialShapes.SoftBurst.toShape(),
                 color = tint.accent,
@@ -250,7 +250,7 @@ private fun Topics(
         verticalArrangement = Arrangement.spacedBy(SmallSpacing),
     ) {
         topics.take(STORY_LIST + 2).forEachIndexed { index, topic ->
-            FlowPopIn(index) {
+            VoxTubePopIn(index) {
                 Surface(
                     shape = MaterialTheme.shapes.extraLarge,
                     color = if (index == 0) tint.accent else tint.raised,
@@ -318,7 +318,7 @@ private fun NewToYou(
     ) {
         (channels + artists).take(NEW_FACES).forEachIndexed { index, item ->
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.widthIn(max = SmallPortrait * 1.6f)) {
-                FlowMorphingPortrait(item.imageUrl, item.name, SmallPortrait, tint.accent, tint.container, delayIndex = index)
+                VoxTubeMorphingPortrait(item.imageUrl, item.name, SmallPortrait, tint.accent, tint.container, delayIndex = index)
                 Text(item.name, style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
@@ -370,7 +370,7 @@ private fun ArtworkList(
 ) {
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(SmallSpacing)) {
         items.forEachIndexed { index, item ->
-            FlowPopIn(index) {
+            VoxTubePopIn(index) {
                 Surface(shape = MaterialTheme.shapes.large, color = tint.raised, contentColor = tint.onContainer) {
                     Row(
                         Modifier.fillMaxWidth().padding(SmallSpacing),

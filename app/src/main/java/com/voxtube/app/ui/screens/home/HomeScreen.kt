@@ -50,12 +50,12 @@ import com.voxtube.app.ui.OnTabReselected
 import com.voxtube.app.ui.TabScrollEventBus
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
-import com.voxtube.app.ui.components.layout.topbar.FlowScrollAwayLayout
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeScrollAwayLayout
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.layout.topbar.rememberFlowScrollAwayState
 import com.voxtube.app.ui.components.rememberFeedGridLayout
-import com.voxtube.app.ui.components.shared.FlowPullToRefreshBox
+import com.voxtube.app.ui.components.shared.VoxTubePullToRefreshBox
 import com.voxtube.app.ui.components.shared.card.LocalVideoCardThumbnailOverlay
 import com.voxtube.app.ui.screens.home.chips.HomeChipRow
 import com.voxtube.app.ui.utils.reachUnderStatusBar
@@ -136,13 +136,13 @@ fun HomeScreen(
     val haptic = LocalHapticFeedback.current
     val homeLabel = stringResource(R.string.nav_home)
     val deepFlowLabel = stringResource(R.string.deep_flow_mode_title)
-    val reselectHome: () -> Unit = { TabScrollEventBus.emitScrollToTop(FlowTab.Home.route) }
+    val reselectHome: () -> Unit = { TabScrollEventBus.emitScrollToTop(VoxTubeTab.Home.route) }
     val toggleDeepFlow: () -> Unit = {
         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         coroutineScope.launch { DeepFlowManager.toggle(context) }
     }
     val logoClicks = Modifier.homeLogoClicks(homeLabel, deepFlowLabel, onClick = reselectHome, onLongClick = toggleDeepFlow)
-    OnTabReselected(FlowTab.Home.route) { headerState.show(headerSpec) }
+    OnTabReselected(VoxTubeTab.Home.route) { headerState.show(headerSpec) }
 
     Scaffold(
         modifier = modifier.fillMaxSize().reachUnderStatusBar(),
@@ -151,12 +151,12 @@ fun HomeScreen(
             SnackbarHost(snackbarHostState, Modifier.floatAboveBottomChrome(LocalFlowBottomInsets.current))
         },
     ) { padding ->
-        FlowScrollAwayLayout(
+        VoxTubeScrollAwayLayout(
             modifier = Modifier.padding(padding),
             state = headerState,
             hideOnScroll = topBarHideOnScroll,
             header = {
-                FlowTopBar(
+                VoxTubeTopBar(
                     title = {
                         Text(
                             stringResource(R.string.app_name_uppercase),
@@ -171,7 +171,7 @@ fun HomeScreen(
                     leading =
                         if (showAppLogoIcon) {
                             {
-                                FlowHeaderLogoIcon(
+                                VoxTubeHeaderLogoIcon(
                                     isDeepFlowActive = deepFlowActive,
                                     modifier = Modifier.size(32.dp).then(logoClicks),
                                 )
@@ -257,7 +257,7 @@ private fun ResettableHomePullToRefreshBox(
     content: @Composable BoxScope.() -> Unit,
 ) {
     key(resetKey) {
-        FlowPullToRefreshBox(
+        VoxTubePullToRefreshBox(
             isRefreshing = isRefreshing,
             onRefresh = onRefresh,
             indicatorTopPadding = indicatorTopPadding,

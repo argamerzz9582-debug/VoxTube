@@ -12,10 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowSearchField
-import com.voxtube.app.ui.components.shared.FlowToggleOption
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.utils.LocalWindowSizeClass
 import com.voxtube.app.ui.utils.isMediumWidth
 
@@ -40,9 +40,9 @@ internal fun LibraryKindHeader(
     trailing: (@Composable () -> Unit)? = null,
 ) {
     val focusManager = LocalFocusManager.current
-    val options = MediaKind.entries.map { FlowToggleOption(it, stringResource(it.labelRes), it.icon) }
+    val options = MediaKind.entries.map { VoxTubeToggleOption(it, stringResource(it.labelRes), it.icon) }
     val search: @Composable (Modifier) -> Unit = { fieldModifier ->
-        FlowSearchField(
+        VoxTubeSearchField(
             query = query,
             onQueryChange = onQueryChange,
             placeholder = placeholder,
@@ -59,13 +59,13 @@ internal fun LibraryKindHeader(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             search(Modifier.weight(1f))
-            FlowConnectedToggleGroup(options, selectedKind, onKindSelected, Modifier.width(KindSwitchWidth))
+            VoxTubeConnectedToggleGroup(options, selectedKind, onKindSelected, Modifier.width(KindSwitchWidth))
             trailing?.invoke()
         }
     } else {
         Column(modifier) {
             search(Modifier.padding(horizontal = 16.dp).fillMaxWidth())
-            FlowConnectedToggleGroup(options, selectedKind, onKindSelected, Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
+            VoxTubeConnectedToggleGroup(options, selectedKind, onKindSelected, Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
         }
     }
 }

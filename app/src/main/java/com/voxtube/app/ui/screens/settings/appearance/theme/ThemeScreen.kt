@@ -31,8 +31,8 @@ import com.voxtube.app.ui.components.settings.SettingsTarget
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.appearance.themeVariantLabel
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 import com.voxtube.app.ui.screens.settings.index.ThemeIndex
@@ -65,7 +65,7 @@ internal fun ThemeScreen(
     var slotDialog by rememberSaveable { mutableStateOf<SystemSlot?>(null) }
 
     val styleOptions =
-        ThemeVariant.entries.map { FlowToggleOption(it, stringResource(themeVariantLabel(it))) }
+        ThemeVariant.entries.map { VoxTubeToggleOption(it, stringResource(themeVariantLabel(it))) }
     val darkStyleOptions = styleOptions.filter { it.value != ThemeVariant.LIGHT }
     val activeCustomName = settings.customThemes.firstOrNull { it.id == settings.activeCustomId }?.name
     val lightSlotName = themeName(settings.systemLightMode, activeCustomName)
@@ -200,7 +200,7 @@ private fun ThemePaletteDialog(
     items: List<ThemeCardItem>,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = {

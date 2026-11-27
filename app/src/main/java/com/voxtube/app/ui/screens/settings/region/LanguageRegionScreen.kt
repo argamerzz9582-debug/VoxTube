@@ -24,8 +24,8 @@ import com.voxtube.app.data.translation.TranslationSettings
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
 import com.voxtube.app.ui.screens.settings.index.LanguageRegionIndex
 import com.voxtube.app.utils.AppLanguageManager
 import com.voxtube.app.utils.RegionCatalog
@@ -144,18 +144,18 @@ internal fun LanguageRegionScreen(
 
     when (dialog) {
         LanguageRegionDialog.APP_LANGUAGE -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_language_dialog_title),
                 options =
                     listOf(
-                        FlowChoice(
+                        VoxTubeChoice(
                             AppLanguageManager.SYSTEM_DEFAULT,
                             systemDefault,
                             stringResource(R.string.settings_item_app_language_subtitle),
                         ),
                     ) +
                         appLanguages.map { option ->
-                            FlowChoice(option.tag, option.nativeName, option.localizedName.takeIf { it != option.nativeName })
+                            VoxTubeChoice(option.tag, option.nativeName, option.localizedName.takeIf { it != option.nativeName })
                         },
                 selected = normalizedAppLanguage,
                 onSelect = { tag ->
@@ -168,11 +168,11 @@ internal fun LanguageRegionScreen(
         }
 
         LanguageRegionDialog.CONTENT_LANGUAGE -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.music_content_language_dialog_title),
                 options =
-                    listOf(FlowChoice(CONTENT_LANGUAGE_FOLLOW_APP, followApp)) +
-                        viewModel.contentLanguages.map { FlowChoice(it.tag, it.nativeName, it.localizedName) },
+                    listOf(VoxTubeChoice(CONTENT_LANGUAGE_FOLLOW_APP, followApp)) +
+                        viewModel.contentLanguages.map { VoxTubeChoice(it.tag, it.nativeName, it.localizedName) },
                 selected = contentLanguage,
                 onSelect = viewModel::setContentLanguage,
                 onDismiss = { dialog = null },
@@ -180,9 +180,9 @@ internal fun LanguageRegionScreen(
         }
 
         LanguageRegionDialog.CONTENT_COUNTRY -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_region_dialog_title),
-                options = remember { RegionCatalog.sorted().map { (code, name) -> FlowChoice(code, name) } },
+                options = remember { RegionCatalog.sorted().map { (code, name) -> VoxTubeChoice(code, name) } },
                 selected = contentCountry,
                 onSelect = viewModel::setContentCountry,
                 onDismiss = { dialog = null },
@@ -190,12 +190,16 @@ internal fun LanguageRegionScreen(
         }
 
         LanguageRegionDialog.TRANSLATE_WITH -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_translate_with),
                 options =
                     listOf(
-                        FlowChoice(false, stringResource(R.string.translate_with_app), stringResource(R.string.translate_with_app_summary)),
-                        FlowChoice(
+                        VoxTubeChoice(
+                            false,
+                            stringResource(R.string.translate_with_app),
+                            stringResource(R.string.translate_with_app_summary),
+                        ),
+                        VoxTubeChoice(
                             true,
                             stringResource(R.string.translate_with_server),
                             stringResource(R.string.translate_with_server_summary),
@@ -222,11 +226,11 @@ internal fun LanguageRegionScreen(
         }
 
         LanguageRegionDialog.TRANSLATE_TO -> {
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.settings_translate_to),
                 options =
-                    listOf(FlowChoice("", stringResource(R.string.translate_to_content_language))) +
-                        viewModel.contentLanguages.map { FlowChoice(it.tag, it.nativeName, it.localizedName) },
+                    listOf(VoxTubeChoice("", stringResource(R.string.translate_to_content_language))) +
+                        viewModel.contentLanguages.map { VoxTubeChoice(it.tag, it.nativeName, it.localizedName) },
                 selected = translation.target,
                 onSelect = viewModel::setTranslationTarget,
                 onDismiss = { dialog = null },

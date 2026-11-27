@@ -25,7 +25,6 @@ private val ROUTE_KEYS: Map<String, String> =
         "settings?target={target}" to "settings",
         RecapRoutes.STATS to "recap",
         RecapRoutes.STORY to "recap_story",
-        "donations" to "donations",
         "channel?url={channelUrl}" to "channel",
         "history" to "history",
         "playlists?kind={kind}" to "playlists",

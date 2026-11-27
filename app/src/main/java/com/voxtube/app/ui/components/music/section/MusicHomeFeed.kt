@@ -23,7 +23,7 @@ import com.voxtube.app.innertube.pages.HomePage
 import com.voxtube.app.innertube.pages.MoodAndGenres
 import com.voxtube.app.ui.components.music.sheet.MusicCollectionActionItem
 import com.voxtube.app.ui.components.music.sheet.toCollectionActionItem
-import com.voxtube.app.ui.components.shared.FlowFeedProgress
+import com.voxtube.app.ui.components.shared.VoxTubeFeedProgress
 import com.voxtube.app.ui.screens.music.MusicUiState
 
 /**
@@ -332,7 +332,7 @@ fun LazyListScope.musicHomeFeed(
     if (uiState.homeContinuation != null) {
         item(key = "home_continuation", contentType = MusicShelfContentType.Continuation) {
             LaunchedEffect(Unit) { onLoadMore() }
-            if (uiState.isMoreLoading) FlowFeedProgress() else Box(modifier = Modifier.height(0.dp))
+            if (uiState.isMoreLoading) VoxTubeFeedProgress() else Box(modifier = Modifier.height(0.dp))
         }
     }
 }

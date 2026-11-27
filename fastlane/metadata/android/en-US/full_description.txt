@@ -3,7 +3,7 @@ VoxTube is a privacy-first YouTube and YouTube Music client. It provides a perso
 Features:
 
 - Play videos and songs from YouTube and YouTube Music
-- Local recommendation engine (FlowNeuro) that learns your preferences
+- Local recommendation engine (VoxTubeNeuro) that learns your preferences
 - 100% on-device privacy with zero analytics or tracking
 - No Google account required
 - Background audio and Picture-in-Picture (PiP) video playback

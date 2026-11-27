@@ -30,8 +30,8 @@ import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
 import com.voxtube.app.ui.components.shared.ChannelAvatarStack
 import com.voxtube.app.ui.components.shared.ChannelOrganizeTarget
 import com.voxtube.app.ui.components.shared.CollaboratorsBottomSheet
-import com.voxtube.app.ui.components.shared.FlowSubscribeButton
-import com.voxtube.app.ui.components.shared.FlowSubscribeButtonSize
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.card.rememberCollaboratorChannelDisplayName
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
 import com.voxtube.app.ui.components.shared.rememberDateDisplaySettings
@@ -252,8 +252,8 @@ internal fun VideoInfoSection(
 
             if (!isDeviceFile && collaborators.size > 1) {
                 // One button cannot name which channel it follows, so it opens the list that can (#1160).
-                FlowSubscribeButton(
-                    size = FlowSubscribeButtonSize.Compact,
+                VoxTubeSubscribeButton(
+                    size = VoxTubeSubscribeButtonSize.Compact,
                     isSubscribed = collaborators.any { it.channelId in subscribedCollaboratorIds },
                     onSubscribeClick = { showCollaborators = true },
                     onSubscribedClick = { showCollaborators = true },
@@ -271,8 +271,8 @@ internal fun VideoInfoSection(
                             },
                         isSubscribed = isSubscribed,
                     )
-                FlowSubscribeButton(
-                    size = FlowSubscribeButtonSize.Compact,
+                VoxTubeSubscribeButton(
+                    size = VoxTubeSubscribeButtonSize.Compact,
                     isSubscribed = isSubscribed,
                     isNotificationsEnabled = isNotificationsEnabled,
                     onSubscribeClick = onSubscribeClick,

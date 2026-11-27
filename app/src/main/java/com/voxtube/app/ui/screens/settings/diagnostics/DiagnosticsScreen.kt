@@ -47,11 +47,11 @@ import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.info
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.DiagnosticsIndex
 import com.voxtube.app.ui.utils.rememberDocumentPickerAvailable
 import com.voxtube.app.utils.copyPlainText
@@ -104,8 +104,8 @@ internal fun DiagnosticsScreen(
         }
     val tabs =
         listOf(
-            FlowToggleOption(DiagnosticsTab.SESSION, stringResource(R.string.diagnostics_tab_session), Icons.Outlined.BugReport),
-            FlowToggleOption(DiagnosticsTab.CRASHES, stringResource(R.string.diagnostics_tab_crashes), Icons.Outlined.Warning),
+            VoxTubeToggleOption(DiagnosticsTab.SESSION, stringResource(R.string.diagnostics_tab_session), Icons.Outlined.BugReport),
+            VoxTubeToggleOption(DiagnosticsTab.CRASHES, stringResource(R.string.diagnostics_tab_crashes), Icons.Outlined.Warning),
         )
 
     SettingsPage(
@@ -173,7 +173,7 @@ internal fun DiagnosticsScreen(
             )
         }
         item("diagnostics.tabs") {
-            FlowConnectedToggleGroup(options = tabs, selected = tab, onSelected = { tab = it })
+            VoxTubeConnectedToggleGroup(options = tabs, selected = tab, onSelected = { tab = it })
         }
         when (tab) {
             DiagnosticsTab.SESSION -> {
@@ -250,14 +250,14 @@ private fun SettingsListScope.logSection(
     when (state) {
         LogState.Loading -> {
             item("$key.loading") {
-                Box(Modifier.fillMaxWidth().height(StateHeight), contentAlignment = Alignment.Center) { FlowLoadingIndicator() }
+                Box(Modifier.fillMaxWidth().height(StateHeight), contentAlignment = Alignment.Center) { VoxTubeLoadingIndicator() }
             }
         }
 
         LogState.Empty -> {
             item("$key.empty") {
                 Box(Modifier.fillMaxWidth().height(StateHeight)) {
-                    FlowEmptyState(title = stringResource(emptyMessage), icon = Icons.Outlined.CheckCircle)
+                    VoxTubeEmptyState(title = stringResource(emptyMessage), icon = Icons.Outlined.CheckCircle)
                 }
             }
         }
@@ -281,7 +281,7 @@ private fun DiagnosticsConfirmDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = { Text(body) },

@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Channel
-import com.voxtube.app.ui.components.shared.FlowFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 
 internal val GroupRowHorizontalPadding = 12.dp
 private val GroupRowVerticalPadding = 8.dp
@@ -84,7 +84,7 @@ internal fun SubscriptionsFeedHeader(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             if (onPostsClick != null) {
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = stringResource(R.string.tab_posts),
                     selected = postsSelected,
                     onClick = onPostsClick,
@@ -94,14 +94,14 @@ internal fun SubscriptionsFeedHeader(
             val chips = state.groupChips()
             val selected = state.selectedChip(chips)
             if (state.allChipShown(chips)) {
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = stringResource(R.string.group_all),
                     selected = selected == null,
                     onClick = { onGroupSelected(null) },
                 )
             }
             chips.forEach { group ->
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = if (group.isUngrouped()) stringResource(R.string.group_ungrouped) else group.name,
                     selected = selected == group.name,
                     onClick = { onGroupSelected(group.name) },

@@ -275,7 +275,7 @@
     <string name="settings_reset_everything">Resetuj sve</string>
     <string name="settings_analyzing_interactions">Analizirajući vaše interakcije...</string>
     <string name="settings_view_analytics">Pregled analitike</string>
-    <string name="deep_flow_mode_title">Deep Flow Modus</string>
+    <string name="deep_flow_mode_title">Deep Focus Modus</string>
     <string name="deep_flow_mode_subtitle">Pauziraj učenje — pregledaj bez utjecaja na svoj profil</string>
     <string name="deep_flow_learning_paused">Učenje je obustavljeno</string>
     <string name="deep_flow_expires_in">Ističe za %s</string>
@@ -348,9 +348,6 @@
     <string name="settings_item_import_data">Uvoz podataka</string>
     <string name="settings_item_import_data_subtitle">Obnovite iz sigurnosne kopije ili uvezite iz drugih aplikacija</string>
     <string name="settings_item_about_flow">O VoxTube-u</string>
-    <string name="settings_item_about_flow_subtitle">Verzija, Licenca, Doprinosioci</string>
-    <string name="settings_item_support">Podrška i donacije</string>
-    <string name="settings_item_support_subtitle">Podržite razvoj VoxTube-a</string>
     <string name="settings_region_dialog_title">Odaberite regiju</string>
     <string name="settings_export_success">Podaci uspješno izvezani</string>
     <string name="tap_to_close">Dodirnite da zatvorite</string>
@@ -366,10 +363,10 @@
     <string name="channel_search_open">Pretraži Kanal</string>
     <string name="channel_search_close">Zatvori pretragu</string>
     <string name="channel_search_no_results">Nisu pronađeni rezultati za %1$s</string>
-    <string name="deep_flow_enabled_message">Deep Flow uključen</string>
-    <string name="deep_flow_disabled_message">Deep Flow isključen</string>
-    <string name="deep_flow_expired_message">Deep Flow tajmer je istekao</string>
-    <string name="deep_flow_active_until_disabled">Deep Flow ostaje aktivan dok ga ne isključite</string>
+    <string name="deep_flow_enabled_message">Deep Focus uključen</string>
+    <string name="deep_flow_disabled_message">Deep Focus isključen</string>
+    <string name="deep_flow_expired_message">Deep Focus tajmer je istekao</string>
+    <string name="deep_flow_active_until_disabled">Deep Focus ostaje aktivan dok ga ne isključite</string>
     <string name="deep_flow_duration_never">Nikad</string>
     <string name="settings_export_failed">Izvoz je propao: %1$s</string>
     <string name="appearance_title">Izgled</string>
@@ -404,7 +401,6 @@
     <string name="app_icon_picker_subtitle">Odaberite stil ikone pokretača. Promjena stupa na snagu odmah i pokretač će se nakratko osvježiti.</string>
     <string name="app_icon_picker_warning">⚠ Oprez: promjena ikona koristi mehanizam Android sistema koji može nakratko ukloniti prečac aplikacije s početnog ekrana. Dugo pritisnite launcher da ga vratite ako je potrebno.</string>
     <string name="app_icon_apply_toast">Ikona je ažurirana — vaš launcher će se osvježiti</string>
-    <string name="icon_name_flow_red">VoxTube Crvena</string>
     <string name="icon_name_amoled">AMOLED Tamna</string>
     <string name="icon_name_monochrome">Monochrome</string>
     <string name="icon_name_ghost">Duh</string>
@@ -842,12 +838,12 @@
     <string name="notifications_clear_confirm">Obriši sve</string>
     <string name="deep_flow_save_history_title">Sačuvaj u historiju gledanja</string>
     <string name="deep_flow_save_history_subtitle">Zadržite historiju gledanja bez preporuka za podučavanje</string>
-    <string name="deep_flow_scrobble_title">Scrobble tokom Deep Flow</string>
-    <string name="taste_learning_paused">Deep Flow je uključen, učenje je pauzirano</string>
+    <string name="deep_flow_scrobble_title">Scrobble tokom Deep Focus</string>
+    <string name="taste_learning_paused">Deep Focus je uključen, učenje je pauzirano</string>
     <string name="deep_flow_scrobble_subtitle">Nastavite sa slanjem slušanja Last.fm, Libre.fm i ListenBrainz</string>
     <string name="deep_flow_on_search_title">Prikaži na pretrazi</string>
     <string name="deep_flow_on_search_subtitle">Duboki prekidač VoxTube iznad nedavnih pretraživanja</string>
-    <string name="deep_flow_long_press_hint">Dugo pritisnite VoxTube logo ili ime na Početnoj stranici da prebacite Deep Flow</string>
+    <string name="deep_flow_long_press_hint">Dugo pritisnite VoxTube logo ili ime na Početnoj stranici da prebacite Deep Focus</string>
     <plurals name="deep_flow_duration_hours">
         <item quantity="one">%1$d sat</item>
         <item quantity="few">%1$d sata</item>
@@ -1153,7 +1149,7 @@
     <string name="content_settings_home_subscriptions_subtitle">Pomiješajte videozapise s kanala koje pratite na početnoj stranici</string>
     <string name="settings_section_watch_history">Gledajte historiju</string>
     <string name="pause_watch_history_title">Pauzirajte historiju gledanja</string>
-    <string name="pause_watch_history_subtitle">Prestanite čuvati ono što gledate. Deep Flow takođe pauzira učenje</string>
+    <string name="pause_watch_history_subtitle">Prestanite čuvati ono što gledate. Deep Focus takođe pauzira učenje</string>
     <string name="content_settings_show_app_logo_title">Prikaži ikonu logotipa aplikacije</string>
     <string name="content_settings_show_app_logo_subtitle">Prikažite logotip VoxTube na gornjoj traci Početna</string>
     <string name="content_settings_header_shorts">Shorts</string>
@@ -1849,26 +1845,8 @@
         <item quantity="few">%1$d niti</item>
         <item quantity="other">%1$d niti</item>
     </plurals>
-    <string name="support_donations_title">Podrška i donacije</string>
-    <string name="support_flow_dev_title">Podrška razvoju Flow</string>
-    <string name="support_flow_dev_desc">Ako vam je Flow koristan, možete ga podržati na Open Collective, Patreon ili pomoću kriptovalute ispod. Hvala vam!</string>
-    <string name="support_flow_open_collective">Podržava Flow na Open Collective</string>
-    <string name="support_flow_patreon">Podržava Flow na Patreon</string>
     <string name="thank_you_support_message">Hvala vam na podršci! ❤️</string>
     <string name="address_copied_toast">Adresa je kopirana u međuspremnik</string>
-    <string name="donation_address_clip_label">Adresa za donaciju</string>
-    <string name="donation_prompt_title">Uživate u Flow?</string>
-    <string name="donation_prompt_message">Flow je besplatan, otvorenog koda i bez oglasa. Ako je zaslužio mjesto na vašem telefonu, mala podrška će ga održati.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Podrška razvoju</string>
-    <string name="donation_prompt_later">Možda kasnije</string>
-    <string name="donation_prompt_never">Ne prikazuj ponovo</string>
-    <string name="about_creator">Kreator</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website">Website</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="github_subtitle">Izvorni kod i problemi</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Biblioteka ekstrakcije jezgra</string>
@@ -1899,7 +1877,6 @@
     <string name="section_legal">Pravni</string>
     <string name="section_device">Uređaj</string>
     <string name="donate_item_title">Donirajte</string>
-    <string name="support_dev_subtitle">Podrška razvoju</string>
     <string name="btn_ok">OK</string>
     <string name="btn_copy">Kopiraj</string>
     <string name="github_label">GitHub</string>
@@ -3830,7 +3807,6 @@
     <string name="settings_search_no_results">Nisu pronađene postavke za \"%1$s\"</string>
     <string name="settings_lyrics_provider_order_description">Probano od vrha do dna. Prevucite da promijenite redoslijed.</string>
     <string name="import_running_background">Možete napustiti ovaj ekran. Uvoz se nastavlja.</string>
-    <string name="donations_cryptocurrency">KRIPTOVALUTA</string>
     <string name="import_no_history_entries">U datoteci nisu pronađeni unosi historije gledanja</string>
     <string name="import_no_videos">Nema pronađenih videozapisa u datoteci plejliste</string>
     <string name="import_no_likes">Nisu pronađeni lajkovi. Izvezite moju aktivnost za YouTube kao JSON, sa svojim Google računom na engleskom.</string>
@@ -4099,7 +4075,6 @@
     <string name="settings_changelog_all_releases">Sva izdanja na GitHub</string>
     <string name="settings_changelog_expand">Prikaži promjene</string>
     <string name="settings_changelog_collapse">Sakrij promjene</string>
-    <string name="settings_creator_role">Kreator i programer Flow</string>
     <string name="device_info_section_device">Uređaj</string>
     <string name="device_info_section_system">Sistem</string>
     <string name="device_info_section_display">Display</string>
@@ -4150,7 +4125,6 @@
     <string name="settings_custom_theme_start_from">Počni od</string>
     <string name="settings_custom_theme_count">%1$d od %2$d tema</string>
     <string name="settings_custom_theme_empty">Još nema prilagođenih tema</string>
-    <string name="settings_custom_theme_empty_body">Počnite s bilo koje palete ili uvezite onu napravljenu u Flow Desktopu.</string>
     <string name="settings_custom_theme_import_failed">Nema važećih tema u tom fajlu</string>
     <string name="settings_custom_theme_limit">Možete zadržati do %1$d tema</string>
     <string name="settings_custom_theme_exported">Tema je izvezena</string>

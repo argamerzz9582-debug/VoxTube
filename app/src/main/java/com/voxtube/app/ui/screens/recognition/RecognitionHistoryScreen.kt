@@ -37,11 +37,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.data.local.entity.RecognitionHistoryEntity
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.music.common.MusicThumbnail
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
 
 private val HistoryArtworkSize = 56.dp
 
@@ -57,7 +57,7 @@ fun RecognitionHistoryScreen(
     var showClearDialog by remember { mutableStateOf(false) }
 
     if (showClearDialog) {
-        FlowAlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { showClearDialog = false },
             title = { Text(stringResource(R.string.recognition_clear_history)) },
             text = { Text(stringResource(R.string.recognition_clear_history_body)) },
@@ -77,7 +77,7 @@ fun RecognitionHistoryScreen(
 
     Scaffold(
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = stringResource(R.string.recognition_history),
                 onBack = onBackClick,
                 actions = {
@@ -98,7 +98,7 @@ fun RecognitionHistoryScreen(
                     .fillMaxSize()
                     .padding(padding),
         ) {
-            FlowSearchField(
+            VoxTubeSearchField(
                 query = query,
                 onQueryChange = viewModel::onQueryChange,
                 placeholder = stringResource(R.string.recognition_search_history),
@@ -115,7 +115,7 @@ fun RecognitionHistoryScreen(
             )
 
             if (history.isEmpty()) {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(R.string.recognition_history_empty),
                     icon = Icons.Rounded.History,
                 )

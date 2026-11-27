@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 
 @Composable
-internal fun FlowFeedFooter(
+internal fun VoxTubeFeedFooter(
     videoCount: Int,
     onRefresh: () -> Unit,
     modifier: Modifier = Modifier,

@@ -20,7 +20,7 @@ fun MediaPostCommentsSheet(
     var sort by rememberSaveable(post.id) { mutableStateOf(CommentSortFilter.TOP) }
     val comments = remember(state.comments, sort) { if (sort == CommentSortFilter.OLDEST) oldestFirst(state.comments) else state.comments }
 
-    FlowCommentsBottomSheet(
+    VoxTubeCommentsBottomSheet(
         comments = comments,
         isLoading = state.isLoading,
         onDismiss = loader::close,

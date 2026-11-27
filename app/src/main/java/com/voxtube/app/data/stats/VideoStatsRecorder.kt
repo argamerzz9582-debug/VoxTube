@@ -5,7 +5,7 @@ import android.util.Log
 import com.voxtube.app.data.local.PrivacyGate
 import com.voxtube.app.data.local.dao.WatchHistoryDao
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -60,7 +60,7 @@ class VideoStatsRecorder
         ) = record(RecapEntry.VIEW) {
             val topics =
                 if (event.counted && video != null) {
-                    runCatching { FlowNeuroEngine.topTopicsFor(video, VideoStatsParams.TOPICS_PER_VIEW) }.getOrDefault(emptyList())
+                    runCatching { VoxTubeNeuroEngine.topTopicsFor(video, VideoStatsParams.TOPICS_PER_VIEW) }.getOrDefault(emptyList())
                 } else {
                     emptyList()
                 }

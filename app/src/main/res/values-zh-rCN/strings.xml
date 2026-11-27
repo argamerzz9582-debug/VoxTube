@@ -243,7 +243,7 @@
     <string name="new_update_available">有新更新</string>
     <string name="update_available_template">%1$s 现已可用</string>
     <string name="release_notes">发行说明</string>
-    <string name="update_flow">更新Flow</string>
+    <string name="update_flow">更新VoxTube</string>
     <string name="maybe_later">也许稍后</string>
     <string name="nav_home">首页</string>
     <string name="nav_shorts">Shorts</string>
@@ -389,7 +389,7 @@
     <string name="settings_reset_everything">全部重置</string>
     <string name="settings_analyzing_interactions">正在分析您的互动...</string>
     <string name="settings_view_analytics">查看分析</string>
-    <string name="deep_flow_mode_title">Deep Flow 模式</string>
+    <string name="deep_flow_mode_title">Deep Focus 模式</string>
     <string name="deep_flow_mode_subtitle">暂停学习你的偏好，并暂停记录搜索历史</string>
     <string name="deep_flow_learning_paused">已暂停学习</string>
     <string name="deep_flow_expires_in">将在 %s 后结束</string>
@@ -399,10 +399,10 @@
     <string name="deep_flow_save_history_subtitle">将观看的视频保留在历史记录中（有进度）。引擎仍然不会向他们学习。关闭 = 未保存任何内容。</string>
     <string name="deep_flow_dialog_title">暂停时间</string>
     <string name="deep_flow_dialog_body">学习应该暂停多久？</string>
-    <string name="deep_flow_enabled_message">已启用 Deep Flow</string>
-    <string name="deep_flow_disabled_message">已关闭 Deep Flow</string>
-    <string name="deep_flow_expired_message">Deep Flow 计时已结束</string>
-    <string name="deep_flow_active_until_disabled">Deep Flow 会保持启用，直到您将其关闭</string>
+    <string name="deep_flow_enabled_message">已启用 Deep Focus</string>
+    <string name="deep_flow_disabled_message">已关闭 Deep Focus</string>
+    <string name="deep_flow_expired_message">Deep Focus 计时已结束</string>
+    <string name="deep_flow_active_until_disabled">Deep Focus 会保持启用，直到您将其关闭</string>
     <string name="deep_flow_duration_never">永不</string>
     <string name="deep_flow_duration_1h">1小时</string>
     <string name="deep_flow_duration_2h">2小时</string>
@@ -475,10 +475,7 @@
     <string name="settings_item_export_data_subtitle">备份您的数据</string>
     <string name="settings_item_import_data">导入数据</string>
     <string name="settings_item_import_data_subtitle">从备份恢复或从其他应用程序导入</string>
-    <string name="settings_item_about_flow">关于Flow</string>
-    <string name="settings_item_about_flow_subtitle">版本、许可证、贡献者</string>
-    <string name="settings_item_support">支持与捐赠</string>
-    <string name="settings_item_support_subtitle">帮助支持Flow的发展</string>
+    <string name="settings_item_about_flow">关于VoxTube</string>
     <string name="settings_region_dialog_title">选择地区</string>
     <string name="settings_language_dialog_title">选择应用程序语言</string>
     <string name="settings_language_system_default">系统默认</string>
@@ -554,7 +551,6 @@
     <string name="app_icon_picker_subtitle">选择启动器图标样式。更改立即生效，启动器将短暂刷新。</string>
     <string name="app_icon_picker_warning">注意：切换图标使用 Android 系统机制，可能会暂时从主屏幕上删除应用程序快捷方式。如果需要，长按启动器可将其添加回来。</string>
     <string name="app_icon_apply_toast">图标已更新 - 您的启动器将刷新</string>
-    <string name="icon_name_flow_red">VoxTube 红色</string>
     <string name="icon_name_flow_light">VoxTube Light</string>
     <string name="icon_name_flow_play">VoxTube Play</string>
     <string name="icon_name_amoled">AMOLED 深色</string>
@@ -1102,7 +1098,7 @@
     <string name="import_flow_backup_failed_template">无法导入 VoxTube 备份：%1$s</string>
     <string name="import_newpipe_failed_template">无法导入 NewPipe 备份：%1$s</string>
     <string name="import_youtube_failed_template">无法导入 YouTube 备份：%1$s</string>
-    <string name="import_flow_backup_item_title">导入Flow备份</string>
+    <string name="import_flow_backup_item_title">导入VoxTube备份</string>
     <string name="import_flow_backup_desc">从 VoxTube 备份文件恢复您的历史记录、设置和订阅。</string>
     <string name="import_from_newpipe">从 NewPipe 导入</string>
     <string name="import_from_newpipe_desc">从 NewPipe 导出文件 (JSON) 导入订阅。</string>
@@ -1187,21 +1183,8 @@
     <string name="location_badge_recommended">推荐</string>
     <string name="location_badge_active">活跃</string>
     <string name="select_threads_count_desc">选择线程数 (1-8)：</string>
-    <string name="support_donations_title">支持与捐赠</string>
-    <string name="support_flow_dev_title">支持Flow开发</string>
-    <string name="support_flow_dev_desc">如果您发现 Flow 有用并愿意支持其开发，您可以在 Open Collective 或 Patreon 上支持它，或通过下面的加密地址进行捐赠。您的支持有助于使项目保持活力！</string>
-    <string name="support_flow_patreon">在 Patreon 上支持 Flow</string>
     <string name="thank_you_support_message">感谢您的支持！ ❤️</string>
     <string name="address_copied_toast">地址已复制到剪贴板</string>
-    <string name="donation_address_clip_label">捐款地址</string>
-    <string name="donation_prompt_title">喜欢Flow吗？</string>
-    <string name="donation_prompt_message">Flow 是免费、开源的，并且没有广告或跟踪器。如果它在您的设备上赢得了一席之地，请考虑支持其开发 - 它确实有助于保持项目的活力。</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">支持发展</string>
-    <string name="donation_prompt_later">也许稍后</string>
-    <string name="donation_prompt_never">不再显示</string>
-    <string name="about_creator">创作者</string>
-    <string name="about_website">网站</string>
     <string name="github_subtitle">源代码和问题</string>
     <string name="newpipe_extractor_title">NewPipe 提取器</string>
     <string name="newpipe_extractor_subtitle">核心提取库</string>
@@ -1229,7 +1212,6 @@
     <string name="section_legal">法律</string>
     <string name="section_device">设备</string>
     <string name="donate_item_title">捐赠</string>
-    <string name="support_dev_subtitle">支持发展</string>
     <string name="btn_ok">好的</string>
     <string name="btn_copy">复制</string>
     <string name="github_label">GitHub</string>
@@ -1257,7 +1239,7 @@
     <string name="playlist_sort_date_published_oldest">发布日期（最旧）</string>
     <string name="remove_selected_playlist_text">它们将从该播放列表中删除。</string>
     <string name="remove_selected_watch_later_text">它们将从“稍后观看”中移除。</string>
-    <string name="welcome_to_flow">欢迎来到Flow</string>
+    <string name="welcome_to_flow">欢迎来到VoxTube</string>
     <string name="onboarding_subtitle">告诉我们您对什么感兴趣</string>
     <string name="onboarding_instructions">选择至少 3 个主题来个性化您的体验</string>
     <string name="onboarding_interests_title">你喜欢什么？</string>
@@ -1877,7 +1859,7 @@
     <string name="no_match_found">未找到匹配项</string>
     <string name="recognition_error">识别失败</string>
     <string name="try_again">再试一次</string>
-    <string name="search_in_flow">搜索Flow</string>
+    <string name="search_in_flow">搜索VoxTube</string>
     <string name="recognition_search_history">搜索已识别的歌曲</string>
     <string name="recognition_history_empty">已识别的歌曲将出现在此处</string>
     <string name="recognition_clear_history">清除历史记录？</string>
@@ -1918,17 +1900,16 @@
     <plurals name="subscriptions_failed_channels_title">
         <item quantity="other">%d 频道无法被加载</item>
     </plurals>
-    <string name="notif_background_restricted_subtitle">Android正在阻止Flow在关闭时检查新视频，因此只有在您打开应用时才会收到警报。点击以允许不受限制的后台活动。</string>
+    <string name="notif_background_restricted_subtitle">Android正在阻止VoxTube在关闭时检查新视频，因此只有在您打开应用时才会收到警报。点击以允许不受限制的后台活动。</string>
     <string name="player_appearance_seek_gesture_title">进度调节手势</string>
     <string name="content_settings_hide_unplayable_subscriptions_subtitle">过滤出年龄限制，私人，仅限会员和已删除的视频后，他们无法播放</string>
     <string name="player_settings_subtitle_language">首选字幕语言</string>
     <string name="player_settings_subtitle_language_dialog_title">字幕语言</string>
-    <string name="player_settings_subtitle_language_dialog_body">如果可用，标题将以该语言打开。如果视频中没有轨道，Flow将使用YouTube对现有轨道的翻译。在播放期间拾取字幕也会更新此内容。</string>
+    <string name="player_settings_subtitle_language_dialog_body">如果可用，标题将以该语言打开。如果视频中没有轨道，VoxTube将使用YouTube对现有轨道的翻译。在播放期间拾取字幕也会更新此内容。</string>
     <string name="player_settings_subtitle_language_none">无偏好</string>
     <string name="player_settings_subtitle_language_none_desc">使用视频提供的第一个字幕轨道</string>
     <string name="player_settings_auto_enable_subtitles">自动打开字幕</string>
     <string name="player_settings_auto_enable_subtitles_subtitle">用你偏好的语言开启所有视频的字幕</string>
-    <string name="about_reddit">Reddit</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="equalizer">均衡器</string>
     <string name="action_save_preset">保存预设</string>
@@ -2218,7 +2199,7 @@
     <string name="content_settings_channel_notes_subtitle">在频道页面显示笔记</string>
     <string name="content_settings_video_notes_subtitle">在视频简介中显示笔记</string>
     <string name="deep_flow_scrobble_subtitle">继续向 Last.fm、Libre.fm 和 ListenBrainz 发送收听记录</string>
-    <string name="deep_flow_on_search_subtitle">在最近搜索上方显示 Deep Flow 开关</string>
+    <string name="deep_flow_on_search_subtitle">在最近搜索上方显示 Deep Focus 开关</string>
     <string name="notif_type_shorts_subtitle">订阅频道发布 Shorts 时也发送提醒</string>
     <string name="player_background_style_immersive">沉浸式封面</string>
     <string name="player_appearance_haptics_title">振动</string>
@@ -2722,10 +2703,10 @@
     <string name="notifications_open_settings">通知设置</string>
     <string name="notifications_clear_title">清除所有通知？</string>
     <string name="notifications_clear_confirm">全部清除</string>
-    <string name="deep_flow_scrobble_title">在 Deep Flow 中记录收听历史</string>
-    <string name="taste_learning_paused">Deep Flow 已开启，暂停学习你的偏好</string>
+    <string name="deep_flow_scrobble_title">在 Deep Focus 中记录收听历史</string>
+    <string name="taste_learning_paused">Deep Focus 已开启，暂停学习你的偏好</string>
     <string name="deep_flow_on_search_title">在搜索页显示</string>
-    <string name="deep_flow_long_press_hint">长按首页的 VoxTube 标志或名称可切换 Deep Flow</string>
+    <string name="deep_flow_long_press_hint">长按首页的 VoxTube 标志或名称可切换 Deep Focus</string>
     <string name="notif_type_shorts">Shorts</string>
     <string name="notif_check_interval_off_new_videos">关闭新视频提醒时，此项也会关闭</string>
     <string name="icon_name_expressive_scallop">Scallop</string>
@@ -2970,10 +2951,6 @@
     <string name="import_takeout_step_activity">点赞和搜索记录</string>
     <string name="import_takeout_music_library_name">YouTube Music 媒体库</string>
     <string name="import_yt_watch_later_desc">将 Google Takeout 导出的 YouTube CSV 文件直接导入「稍后观看」，文件名不限。</string>
-    <string name="support_flow_open_collective">在 Open Collective 上支持 Flow</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="newpipe_extractor_credit">VoxTube 的 YouTube 内容提取功能由此起步</string>
     <string name="about_notices">开源声明</string>
     <string name="about_notices_summary">来自其他项目的词表和代码</string>
@@ -4049,7 +4026,6 @@
     <string name="settings_search_no_results">未找到 %1$s 的设置</string>
     <string name="settings_lyrics_provider_order_description">按从上到下的顺序尝试。拖动可调整顺序。</string>
     <string name="import_running_background">你可以离开此页面，导入会继续运行。</string>
-    <string name="donations_cryptocurrency">加密货币</string>
     <string name="import_no_history_entries">文件中没有观看记录</string>
     <string name="import_no_videos">播放列表文件中没有视频</string>
     <string name="import_no_likes">未找到点赞记录。请将 Google 账号语言设为英语，再把 YouTube 的「我的活动」导出为 JSON。</string>
@@ -4382,7 +4358,6 @@
     <string name="settings_changelog_all_releases">GitHub 上的所有发行版</string>
     <string name="settings_changelog_expand">显示更新内容</string>
     <string name="settings_changelog_collapse">隐藏更新内容</string>
-    <string name="settings_creator_role">Flow 的创作者和开发者</string>
     <string name="device_info_section_device">设备</string>
     <string name="device_info_section_system">系统</string>
     <string name="device_info_section_display">显示</string>
@@ -4433,7 +4408,6 @@
     <string name="settings_custom_theme_start_from">以此为基础</string>
     <string name="settings_custom_theme_count">已使用 %1$d / %2$d 个主题</string>
     <string name="settings_custom_theme_empty">暂无自定义主题</string>
-    <string name="settings_custom_theme_empty_body">选用任意配色作为起点，或导入在 Flow Desktop 中制作的主题。</string>
     <string name="settings_custom_theme_import_failed">文件中没有有效主题</string>
     <string name="settings_custom_theme_limit">最多可保留 %1$d 个主题</string>
     <string name="settings_custom_theme_exported">主题已导出</string>
@@ -4862,17 +4836,13 @@
     <string name="ai_lists_status_count">%1$s 个频道和 %2$s 位艺人，更新于 %3$s</string>
     <string name="ai_lists_status_count_now">%1$s 个频道和 %2$s 位艺人，刚刚更新</string>
     <string name="ai_music_attribution_soul_title">音乐名单由 Soul Over AI 提供</string>
-    <string name="ai_music_attribution_soul_summary">CC BY 4.0，Flow 已修改</string>
     <string name="ai_music_attribution_blocker_title">音乐名单由 Spotify AI Blocker 提供</string>
     <string name="ai_music_attribution_blocker_summary">MIT, © CennoxX</string>
     <string name="ai_list_source_title">名单来源</string>
-    <string name="ai_list_source_default">Flow</string>
-    <string name="ai_list_source_dialog_body">使用其他发布名单的服务器，也可以自行托管。网址留空时使用 Flow 的服务器。</string>
     <string name="ai_list_source_url_hint">服务器网址</string>
     <string name="ai_list_source_key_hint">公钥（可选）</string>
     <string name="ai_list_source_key_help">仅在服务器使用自己的密钥签署名单时需要</string>
     <string name="ai_list_source_invalid">请输入 HTTPS 网址。如需填写公钥，请使用有效的 Ed25519 公钥。</string>
-    <string name="ai_list_source_reset">使用 Flow 的服务器</string>
     <string name="ai_report_header">举报 AI 频道</string>
     <string name="ai_report_enabled_title">从视频菜单举报</string>
     <string name="ai_report_enabled_summary">在每个视频的菜单中添加「举报 AI 频道」</string>

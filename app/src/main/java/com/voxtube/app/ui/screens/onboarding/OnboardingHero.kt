@@ -3,6 +3,7 @@
 package com.voxtube.app.ui.screens.onboarding
 
 import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,11 +30,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.graphics.shapes.Morph
 import androidx.graphics.shapes.RoundedPolygon
-import com.voxtube.app.ui.components.shared.FlowLogo
+import com.voxtube.app.R
 import com.voxtube.app.ui.components.shared.drawMorph
 import kotlinx.coroutines.flow.first
 
@@ -143,7 +145,11 @@ private fun HeroMark(step: OnboardingStep) {
     if (icon != null) {
         Icon(icon, contentDescription = null, tint = tint, modifier = Modifier.fillMaxWidth(HERO_ICON_SHARE).aspectRatio(1f))
     } else {
-        FlowLogo(Modifier.fillMaxWidth(LOGO_SHARE))
+        Image(
+            painter = painterResource(R.drawable.voxtube_logo),
+            contentDescription = null,
+            modifier = Modifier.fillMaxWidth(LOGO_SHARE).aspectRatio(1f),
+        )
     }
 }
 

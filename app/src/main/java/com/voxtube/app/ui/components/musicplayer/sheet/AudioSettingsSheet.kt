@@ -30,13 +30,13 @@ import com.voxtube.app.player.EnhancedMusicPlayerManager
 import com.voxtube.app.ui.components.equalizer.EqQuickPanel
 import com.voxtube.app.ui.components.equalizer.PanelRow
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
-import com.voxtube.app.ui.components.shared.FlowModalSheetDefaults
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
 import com.voxtube.app.ui.components.shared.MediaPlaybackSpeedPicker
+import com.voxtube.app.ui.components.shared.VoxTubeModalSheetDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 import kotlinx.coroutines.launch
@@ -65,8 +65,8 @@ fun AudioSettingsSheet(onDismiss: () -> Unit) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        modifier = FlowModalSheetDefaults.modifier,
-        contentWindowInsets = FlowModalSheetDefaults.contentWindowInsets,
+        modifier = VoxTubeModalSheetDefaults.modifier,
+        contentWindowInsets = VoxTubeModalSheetDefaults.contentWindowInsets,
     ) {
         Column(
             modifier =
@@ -75,9 +75,9 @@ fun AudioSettingsSheet(onDismiss: () -> Unit) {
                     .verticalScroll(rememberScrollState())
                     .padding(bottom = 24.dp),
         ) {
-            FlowSheetHeader(title = stringResource(R.string.audio_settings_title), onClose = onDismiss, showDragHandle = false)
+            VoxTubeSheetHeader(title = stringResource(R.string.audio_settings_title), onClose = onDismiss, showDragHandle = false)
 
-            FlowSectionHeader(stringResource(R.string.equalizer))
+            VoxTubeSectionHeader(stringResource(R.string.equalizer))
             EqQuickPanel(
                 onEdit = {
                     onDismiss()
@@ -85,8 +85,8 @@ fun AudioSettingsSheet(onDismiss: () -> Unit) {
                 },
             )
 
-            FlowSectionHeader(stringResource(R.string.label_tempo_pitch))
-            FlowRowGroup {
+            VoxTubeSectionHeader(stringResource(R.string.label_tempo_pitch))
+            VoxTubeRowGroup {
                 PanelRow(shape = flowRowGroupShape(0, TEMPO_ROWS)) {
                     MediaPlaybackSpeedPicker(
                         currentSpeed = speed,
@@ -111,7 +111,7 @@ fun AudioSettingsSheet(onDismiss: () -> Unit) {
                         steps = PITCH_STEPS,
                     )
                 }
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.action_reset),
                     onClick = {
                         EnhancedMusicPlayerManager.setPlaybackSpeed(1f)
@@ -123,8 +123,8 @@ fun AudioSettingsSheet(onDismiss: () -> Unit) {
                 )
             }
 
-            FlowRowGroup(modifier = Modifier.padding(top = 16.dp)) {
-                FlowSwitchRow(
+            VoxTubeRowGroup(modifier = Modifier.padding(top = 16.dp)) {
+                VoxTubeSwitchRow(
                     title = stringResource(R.string.music_normalize_volume_title),
                     supportingText = stringResource(R.string.music_normalize_volume_desc),
                     checked = normalizationEnabled,
@@ -132,7 +132,7 @@ fun AudioSettingsSheet(onDismiss: () -> Unit) {
                     leadingIcon = Icons.Filled.GraphicEq,
                     shape = flowRowGroupShape(0, OUTPUT_ROWS),
                 )
-                FlowSwitchRow(
+                VoxTubeSwitchRow(
                     title = stringResource(R.string.music_audio_offload_title),
                     supportingText = stringResource(R.string.music_audio_offload_desc),
                     checked = offloadEnabled,

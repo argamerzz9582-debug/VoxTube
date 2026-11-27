@@ -27,9 +27,9 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.voxtube.app.data.model.Channel
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.ui.components.shared.FlowSubscribeButton
-import com.voxtube.app.ui.components.shared.FlowSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.ShortWatchedIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.rememberChannelOrganizeActions
 import com.voxtube.app.ui.components.shared.toOrganizeTarget
 import com.voxtube.app.ui.theme.extendedColors
@@ -88,13 +88,13 @@ internal fun ChannelRow(
                     target = remember(channel) { channel.toOrganizeTarget() },
                     isSubscribed = isSubscribed,
                 )
-            FlowSubscribeButton(
+            VoxTubeSubscribeButton(
                 isSubscribed = isSubscribed,
                 onSubscribeClick = onSubscribeClick,
                 onUnsubscribeClick = onUnsubscribeClick,
                 isNotificationsEnabled = isNotificationsEnabled,
                 onNotificationChange = onNotificationChange,
-                size = FlowSubscribeButtonSize.Compact,
+                size = VoxTubeSubscribeButtonSize.Compact,
                 onAddNote = organize.onAddNote,
                 onManageGroups = organize.onManageGroups,
             )

@@ -1,8 +1,8 @@
 package com.voxtube.app.sync.apply
 
 import android.content.Context
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.NeuroKeySpec
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.recommendation.music.MusicBrainEngine
 import com.voxtube.app.data.recommendation.music.MusicBrainStorage
 import com.voxtube.app.sync.canonical.BrainCounters
@@ -43,9 +43,9 @@ class BrainSyncAccess
         private val musicBrainCrdtStore: MusicBrainCrdtStore,
         private val musicBrainEngine: MusicBrainEngine,
     ) {
-        private val neuroEngine: FlowNeuroEngine by lazy { FlowNeuroEngine.getInstance(context) }
+        private val neuroEngine: VoxTubeNeuroEngine by lazy { VoxTubeNeuroEngine.getInstance(context) }
 
-        // --- FlowNeuro ---
+        // --- VoxTubeNeuro ---
 
         /** This device's snapshot, carrying the shared CRDT state, then one vector snapshot per peer. */
         suspend fun exportBrain(
@@ -134,13 +134,13 @@ class BrainSyncAccess
                     exported = neuroEngine.exportBrainToStream(bos)
                     bos.toByteArray()
                 }
-            if (!exported) throw IllegalStateException("could not read the local FlowNeuro brain")
+            if (!exported) throw IllegalStateException("could not read the local VoxTubeNeuro brain")
             return bytes
         }
 
         private fun parseLocalBrain(bytes: ByteArray): BrainMapper.SBrain =
             runCatching { BrainMapper.parse(bytes) }
-                .getOrElse { throw IllegalStateException("the local FlowNeuro brain could not be parsed", it) }
+                .getOrElse { throw IllegalStateException("the local VoxTubeNeuro brain could not be parsed", it) }
 
         /**
          * Fold everything that changed locally since the last sync into the sidecar: counter growth

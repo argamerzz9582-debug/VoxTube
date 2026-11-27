@@ -185,7 +185,7 @@
     <string name="notif_type_reminders">تذكيرات وقت استخدام الشاشة</string>
     <string name="notif_type_reminders_subtitle">تذكيرات بمواعيد النوم و الإستراحة من إدارة الوقت</string>
     <string name="notif_type_updates">تحديثات التطبيق</string>
-    <string name="notif_type_updates_subtitle">نبهني عندما يتوفر تحديث جديد لFlow</string>
+    <string name="notif_type_updates_subtitle">نبهني عندما يتوفر تحديث جديد لVoxTube</string>
     <string name="notif_type_general">الإشعارات العامة</string>
     <string name="notif_type_general_subtitle">تنبيهات وإعلانات متنوعة من التطبيق</string>
     <string name="notif_system_settings">إعدادات إشعارات النظام</string>
@@ -224,9 +224,6 @@
     <string name="settings_item_import_data">إسترداد البيانات</string>
     <string name="settings_item_import_data_subtitle">استعادة من نسخة احتياطية أو استيراد من تطبيقات أخرى</string>
     <string name="settings_item_about_flow">عن VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">الإصدار، الترخيص، المساهمون</string>
-    <string name="settings_item_support">الدعم و التبرعات</string>
-    <string name="settings_item_support_subtitle">ساهم في دعم تطوير VoxTube</string>
     <string name="settings_region_dialog_title">إختر البلد</string>
     <string name="settings_export_success">تم تصدير البيانات بنجاح</string>
     <string name="settings_export_failed">فشل التصدير: %1$s</string>
@@ -663,14 +660,8 @@
     <string name="location_badge_recommended">مستحسن</string>
     <string name="location_badge_active">نشط</string>
     <string name="select_threads_count_desc">حدد عدد التقسيمات (١-٨):</string>
-    <string name="support_donations_title">الدعم والتبرعات</string>
-    <string name="support_flow_dev_title">إدعم تطوير Flow</string>
-    <string name="support_flow_dev_desc">إذا كان Flow مفيدًا لك، يمكنك دعمه عبر Open Collective, Patreon أو بالعملات الرقمية أدناه. شكرًا لك!</string>
     <string name="thank_you_support_message">شكراً لدعمكم! ❤️</string>
     <string name="address_copied_toast">تم نسخ العنوان إلى الحافظة</string>
-    <string name="donation_address_clip_label">عنوان التبرع</string>
-    <string name="about_creator">المنشئ</string>
-    <string name="about_website">الموقع الإلكتروني</string>
     <string name="github_subtitle">شفرة المصدر و المشاكل</string>
     <string name="newpipe_extractor_title">NewPipe مستخرج</string>
     <string name="newpipe_extractor_subtitle">مكتبة الاستخراج الأساسية</string>
@@ -698,7 +689,6 @@
     <string name="section_legal">قانوني</string>
     <string name="section_device">الجهاز</string>
     <string name="donate_item_title">التبرع</string>
-    <string name="support_dev_subtitle">دعم التطوير</string>
     <string name="btn_ok">حسنا</string>
     <string name="btn_copy">نسخ</string>
     <string name="github_label">GitHub</string>
@@ -757,7 +747,7 @@
     <string name="stats_topics">المواضيع</string>
     <string name="empty_bubble_cloud_message">شاهد بعض الفيديوهات لتوسيع دائرة اهتمامك!</string>
     <string name="export_profile_data">تصدير بيانات الملف الشخصي</string>
-    <string name="flow_neural_profile_export_subject">تصدير ملف تعريف التدفق العصبي لFlow</string>
+    <string name="flow_neural_profile_export_subject">تصدير ملف تعريف التدفق العصبي لVoxTube</string>
     <string name="screen_title_music_library">مكتبة الموسيقى</string>
     <string name="header_your_collection">مجموعتك</string>
     <string name="subtitle_liked_music">الأغاني المفضلة لديك</string>
@@ -1066,7 +1056,6 @@
     <string name="settings_item_time_management">إدارة الوقت</string>
     <string name="settings_item_time_management_subtitle">إحصائيات الاستخدام، تذكيرات وقت النوم</string>
     <string name="app_icon_apply_toast">تم تحديث الأيقونة - سيتم تحديث مشغل التطبيقات الخاص بك</string>
-    <string name="icon_name_flow_red">أحمر VoxTube</string>
     <string name="icon_name_dynamic">ألوان ديناميكية</string>
     <string name="player_nav_btn_subtitle">إظهار أزرار الفيديو التالي و السابق في المشغل المصغر</string>
     <string name="lyrics_provider_title">مُقدّم كلمات الأغاني</string>
@@ -1310,7 +1299,6 @@
     <string name="settings_item_app_language_subtitle">استخدم لغة جهازك أو اختر لغة يدويًا</string>
     <string name="settings_language_dialog_title">إختر لغة التطبيق</string>
     <string name="settings_language_system_default">‌الإفتراضي للنظام</string>
-    <string name="support_flow_patreon">إدعم Flow على Patreon</string>
     <string name="select_text">حدد النص</string>
     <string name="resume">إستأنف</string>
     <string name="import_playlists_section_title">قوائم التشغيل</string>
@@ -1612,12 +1600,6 @@
     <string name="live_chat_show">إظهار الدردشة</string>
     <string name="live_chat_hide">إخفاء الدردشة</string>
     <string name="live_chat_jump_to_latest">إنتقل إلى أحدث رسالة دردشة</string>
-    <string name="donation_prompt_title">هل تستمتع بFlow؟</string>
-    <string name="donation_prompt_message">Flow مجاني ومفتوح المصدر وخالٍ من الإعلانات. إذا كان Flow يستحق مكانًا على هاتفك، فإن القليل من الدعم يساعد على استمراره.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">إدعم التطوير</string>
-    <string name="donation_prompt_later">رُبما لاحقاً</string>
-    <string name="donation_prompt_never">لا تظهر مجدداً</string>
     <string name="library_local_media_label">الوسائط المحلية</string>
     <string name="library_local_media_subtitle">شَغٍل مقاطع الفيديو و الموسيقى على هذا الجهاز</string>
     <string name="local_media_title">الوسائط المحلية</string>
@@ -2120,10 +2102,6 @@
     <string name="discord_presence_privacy_body">يشارك VoxTube العنوان واسم المنشئ والصورة ومدة التقدم لما تشغّله. يكون معطّلًا افتراضيًا. يتم تشفير رمز Discord الخاص بك ولا يتم تسجيله مطلقًا.</string>
     <string name="discord_presence_gateway_warning">يستخدم هذا تسجيل الدخول عبر رمز Discord الخاص بك بدلًا من تسجيل الدخول الرسمي. هذا يخالف شروط خدمة Discord وقد يؤدي إلى تقييد حسابك أو حظره.</string>
     <string name="discord_presence_risk_dialog_title">هل تقبل مخاطر استخدام حساب Discord؟</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="discord_presence_risk_dialog_body">عند الاتصال، تمنح VoxTube رمز Discord الخاص بك. يبقى مشفّرًا على هذا الجهاز ولا يُرسل إلا إلى Discord. تخالف هذه الطريقة شروط خدمة Discord، لذا قد يتم تقييد حسابك أو حظره.</string>
     <string name="discord_presence_risk_accept">أنا أفهم، اتصل</string>
@@ -2271,7 +2249,6 @@
     <string name="settings_search_no_results">لم يتم العثور على إعدادات لـ %1$s</string>
     <string name="settings_lyrics_provider_order_description">تم الترتيب من الأعلى إلى الأسفل. اسحب لإعادة الترتيب.</string>
     <string name="import_running_background">يمكنك مغادرة هذه الشاشة. سيستمر الاستيراد في الخلفية.</string>
-    <string name="donations_cryptocurrency">العملات المشفرة</string>
     <string name="import_no_history_entries">لم يتم العثور على أي مدخلات لسجل المشاهدة في الملف</string>
     <string name="import_no_videos">لم يتم العثور على أي فيديوهات في ملف قائمة التشغيل</string>
     <string name="import_no_content">لم يتم العثور على أي محتوى قابل للاستيراد في هذه النسخة الاحتياطية</string>
@@ -3675,7 +3652,6 @@
     <string name="settings_changelog_all_releases">جميع الإصدارات على GitHub</string>
     <string name="settings_changelog_expand">عرض التغييرات</string>
     <string name="settings_changelog_collapse">إخفاء التغييرات</string>
-    <string name="settings_creator_role">منشئ ومطوّر Flow</string>
     <string name="device_info_section_device">الجهاز</string>
     <string name="device_info_section_system">‎النظام</string>
     <string name="device_info_section_display">العرض</string>
@@ -3726,7 +3702,6 @@
     <string name="settings_custom_theme_start_from">البدء من</string>
     <string name="settings_custom_theme_count">%1$d من أصل %2$d سمة</string>
     <string name="settings_custom_theme_empty">لا توجد سمات مخصّصة بعد</string>
-    <string name="settings_custom_theme_empty_body">ابدأ بأي لوحة ألوان، أو استورد سمة أنشأتها في Flow Desktop.</string>
     <string name="settings_custom_theme_import_failed">لا يحتوي هذا الملف على سمات صالحة</string>
     <string name="settings_custom_theme_limit">يمكنك الاحتفاظ بما يصل إلى %1$d سمة</string>
     <string name="settings_custom_theme_exported">تم تصدير السمة</string>
@@ -4442,8 +4417,8 @@
     <string name="font_import_not_font">اختر ملف ‎.ttf أو ‎.otf</string>
     <string name="font_import_too_large">يمكن أن يصل حجم ملفات الخطوط إلى %1$d ميغابايت</string>
     <string name="font_import_unreadable">تعذّر قراءة الملف كخط</string>
-    <string name="deep_flow_scrobble_title">تسجيل الاستماع أثناء Deep Flow</string>
-    <string name="taste_learning_paused">Deep Flow مفعّل، والتعلّم متوقف مؤقتًا</string>
+    <string name="deep_flow_scrobble_title">تسجيل الاستماع أثناء Deep Focus</string>
+    <string name="taste_learning_paused">Deep Focus مفعّل، والتعلّم متوقف مؤقتًا</string>
     <string name="deep_flow_scrobble_subtitle">الاستمرار في إرسال ما تستمع إليه إلى Last.fm ،Libre.fm، ListenBrainz</string>
     <string name="downloads_recover_title">البحث عن التنزيلات من تثبيت سابق</string>
     <string name="downloads_recover_body">يحفظ VoxTube التنزيلات في المجلدين Download/VoxTube و Music/VoxTube. لعرض الملفات التي حفظها إصدار سابق من التطبيق فيهما، اسمح بالوصول إلى ملفات الفيديو والصوت.</string>
@@ -4634,8 +4609,7 @@
         <item quantity="zero">لا توجد فيديوهات غير مشاهدة</item>
     </plurals>
     <string name="deep_flow_on_search_title">إظهار في البحث</string>
-    <string name="deep_flow_on_search_subtitle">مفتاح تبديل Deep Flow فوق عمليات البحث الأخيرة</string>
-    <string name="support_flow_open_collective">ادعم Flow على Open Collective</string>
+    <string name="deep_flow_on_search_subtitle">مفتاح تبديل Deep Focus فوق عمليات البحث الأخيرة</string>
     <string name="auto_tab_for_you">مقترح لك</string>
     <string name="auto_tab_queue">قائمة التشغيل</string>
     <string name="taste_unknown_channel">قناة غير معروفة</string>
@@ -4714,7 +4688,7 @@
     <string name="keyboard_shortcut_play_pause">تشغيل أو إيقاف</string>
     <string name="keyboard_shortcut_exit_fullscreen">خروج من وضع ملء الشاشة</string>
     <string name="music_service_disabled">تعذّر تشغيل الموسيقى. خدمة الموسيقى في VoxTube متوقفة على هذا الجهاز.</string>
-    <string name="deep_flow_long_press_hint">اضغط مطولًا على شعار VoxTube أو اسمه في الشاشة الرئيسية للتبديل إلى Deep Flow</string>
+    <string name="deep_flow_long_press_hint">اضغط مطولًا على شعار VoxTube أو اسمه في الشاشة الرئيسية للتبديل إلى Deep Focus</string>
     <string name="nav_downloads">التنزيلات</string>
     <string name="settings_downloads_nav_tab_title">تبويب التنزيلات في شريط التنقل</string>
     <string name="settings_downloads_nav_tab_subtitle">أضف تبويب التنزيلات إلى شريط التنقل</string>
@@ -5474,13 +5448,10 @@
     <string name="settings_keywords_ai_list">الذكاء الاصطناعي، المحتوى الرديء، مُولّد، AiSList، تصفية، حظر</string>
     <string name="ai_list_status_count_now">%1$s قناة، تم التحديث للتو</string>
     <string name="ai_list_source_title">مصدر القائمة</string>
-    <string name="ai_list_source_default">Flow</string>
-    <string name="ai_list_source_dialog_body">استخدم خادمًا آخر ينشر القائمة، مثل خادم تستضيفه بنفسك. اترك الرابط فارغًا لاستخدام خادم Flow.</string>
     <string name="ai_list_source_url_hint">رابط الخادم</string>
     <string name="ai_list_source_key_hint">المفتاح العام (اختياري)</string>
     <string name="ai_list_source_key_help">مطلوب فقط عندما يوقّع الخادم القائمة بمفتاحه الخاص</string>
     <string name="ai_list_source_invalid">أدخل رابط HTTPS ومفتاحًا عامًا صالحًا من نوع Ed25519 إن وُجد</string>
-    <string name="ai_list_source_reset">استخدم خادم Flow</string>
     <string name="ai_report_header">الإبلاغ عن قنوات الذكاء الاصطناعي</string>
     <string name="ai_report_enabled_title">أبلِغ من قائمة الفيديو</string>
     <string name="ai_report_enabled_summary">يضيف خيار «الإبلاغ عن قناة ذكاء اصطناعي» إلى قائمة كل فيديو</string>
@@ -5658,7 +5629,6 @@
     <string name="ai_lists_status_count">%1$s قناة و%2$s فنان، آخر تحديث %3$s</string>
     <string name="ai_lists_status_count_now">%1$s قناة و%2$s فنان، تم التحديث للتو</string>
     <string name="ai_music_attribution_soul_title">قائمة الموسيقى من Soul Over AI</string>
-    <string name="ai_music_attribution_soul_summary">رخصة CC BY 4.0، مع تعديلات من Flow</string>
     <string name="ai_music_attribution_blocker_title">قائمة الموسيقى من Spotify AI Blocker</string>
     <string name="ai_music_attribution_blocker_summary">MIT, © CennoxX</string>
     <string name="content_settings_hide_watched_suggestions_title">إخفاء الفيديوهات التي شاهدتها من الاقتراحات</string>

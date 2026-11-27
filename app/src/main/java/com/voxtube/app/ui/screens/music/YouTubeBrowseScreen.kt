@@ -30,17 +30,17 @@ import com.voxtube.app.innertube.models.PlaylistItem
 import com.voxtube.app.innertube.models.SongItem
 import com.voxtube.app.ui.components.currentGridThumbnailHeight
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.music.item.MusicCollectionCard
 import com.voxtube.app.ui.components.music.item.MusicItemDensity
 import com.voxtube.app.ui.components.music.item.MusicTrackItem
 import com.voxtube.app.ui.components.music.section.MusicShelf
 import com.voxtube.app.ui.components.music.section.MusicTrackShelf
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
 import com.voxtube.app.ui.components.shared.ShimmerGridItem
 import com.voxtube.app.ui.components.shared.ShimmerHost
 import com.voxtube.app.ui.components.shared.ShimmerSectionTitle
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
 import com.voxtube.app.ui.components.shared.flowArtistShape
 import com.voxtube.app.ui.components.shared.flowLaneItemWidth
 
@@ -63,7 +63,7 @@ fun YouTubeBrowseScreen(
 
     Scaffold(
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title = uiState.title ?: stringResource(R.string.title_browse),
                 onBack = onBackClick,
             )
@@ -105,14 +105,14 @@ fun YouTubeBrowseScreen(
                 }
 
                 uiState.error != null -> {
-                    FlowErrorState(
+                    VoxTubeErrorState(
                         error = uiState.error ?: stringResource(R.string.unknown_error),
                         onRetry = { viewModel.retry() },
                     )
                 }
 
                 uiState.sections.isEmpty() -> {
-                    FlowEmptyState(title = stringResource(R.string.empty_browse_content))
+                    VoxTubeEmptyState(title = stringResource(R.string.empty_browse_content))
                 }
 
                 else -> {

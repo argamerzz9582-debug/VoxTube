@@ -19,7 +19,7 @@ import com.voxtube.app.data.local.LocalDataManager
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.profile.ActiveProfile
 import com.voxtube.app.data.profile.ProfileSlices
-import com.voxtube.app.utils.FlowCrashHandler
+import com.voxtube.app.utils.VoxTubeCrashHandler
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
@@ -131,7 +131,7 @@ class AutoBackupWorker(
             val dependencies = EntryPointAccessors.fromApplication(appContext, AutoBackupEntryPoint::class.java)
             val backupRepo = dependencies.backupRepository()
 
-            FlowCrashHandler.recordPhase("backup", "auto $type start")
+            VoxTubeCrashHandler.recordPhase("backup", "auto $type start")
             val result =
                 when (type) {
                     LocalDataManager.AutoBackupType.APP_DATA -> {
@@ -147,7 +147,7 @@ class AutoBackupWorker(
                     }
                 }
 
-            FlowCrashHandler.recordPhase("backup", "auto $type ${if (result.isSuccess) "done" else "failed"}")
+            VoxTubeCrashHandler.recordPhase("backup", "auto $type ${if (result.isSuccess) "done" else "failed"}")
             return@withContext if (result.isSuccess) {
                 ldm.setAutoBackupLastRun(System.currentTimeMillis())
                 showNotification(appContext, success = true)

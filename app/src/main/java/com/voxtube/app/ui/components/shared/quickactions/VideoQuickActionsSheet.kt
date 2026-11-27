@@ -47,12 +47,12 @@ import com.voxtube.app.data.model.VideoCollaborator
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
 import com.voxtube.app.ui.components.shared.ChannelAvatarStack
 import com.voxtube.app.ui.components.shared.ChannelOrganizeTarget
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSubscribeButton
-import com.voxtube.app.ui.components.shared.FlowSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.LocalYouTubeFramesOnly
 import com.voxtube.app.ui.components.shared.MediaThumbnail
 import com.voxtube.app.ui.components.shared.SaveVideoSheet
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButton
+import com.voxtube.app.ui.components.shared.VoxTubeSubscribeButtonSize
 import com.voxtube.app.ui.components.shared.card.LocalVideoCardPreferences
 import com.voxtube.app.ui.components.shared.card.channelAvatarUrls
 import com.voxtube.app.ui.components.shared.card.isWatchedProgress
@@ -300,7 +300,7 @@ private fun channelRow(
     }
 
     return QuickActionRow("channel") { shape ->
-        FlowNavRow(
+        VoxTubeNavRow(
             title = channelLabel,
             onClick = {
                 if (isCollaboration) {
@@ -339,13 +339,13 @@ private fun channelRow(
                                 isSubscribed = isSubscribed,
                                 beforeOpen = onDismiss,
                             )
-                        FlowSubscribeButton(
+                        VoxTubeSubscribeButton(
                             isSubscribed = isSubscribed,
                             onSubscribeClick = toggle,
                             onUnsubscribeClick = toggle,
                             isNotificationsEnabled = video.channelId in notifyingChannelIds,
                             onNotificationChange = { bell.setNotifications(video.channelId, it) },
-                            size = FlowSubscribeButtonSize.Compact,
+                            size = VoxTubeSubscribeButtonSize.Compact,
                             showSubscribedLabel = false,
                             onAddNote = organize.onAddNote,
                             onManageGroups = organize.onManageGroups,
@@ -378,7 +378,7 @@ private fun feedRows(
             onDismiss()
         },
         QuickActionRow("watched") { shape ->
-            FlowNavRow(
+            VoxTubeNavRow(
                 title = stringResource(if (isWatched) R.string.mark_as_unwatched else R.string.mark_as_watched),
                 leadingIcon = if (isWatched) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
                 onClick = {
@@ -403,7 +403,7 @@ private fun feedRows(
         },
         if (reportAi && video.channelId.isNotBlank()) {
             QuickActionRow("report_ai") { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.ai_report_action),
                     leadingIcon = Icons.Outlined.Flag,
                     onClick = onReportAi,
@@ -439,7 +439,7 @@ private fun moreRows(
             }
         },
         QuickActionRow("details") { shape ->
-            FlowNavRow(
+            VoxTubeNavRow(
                 title = stringResource(R.string.details_metadata),
                 leadingIcon = Icons.Outlined.Info,
                 onClick = onOpenDetails,
@@ -459,7 +459,7 @@ internal fun actionRow(
     onClick: () -> Unit,
 ): QuickActionRow =
     QuickActionRow(key) { shape ->
-        FlowNavRow(
+        VoxTubeNavRow(
             title = title,
             supportingText = supporting,
             leadingIcon = icon,

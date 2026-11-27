@@ -15,25 +15,25 @@ import com.voxtube.app.ui.components.musicplayer.lyrics.lyricsGlowLabel
 import com.voxtube.app.ui.components.settings.SettingsListScope
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.PlayerAppearanceIndex
 
 /** The choices the lyrics group offers, resolved once per screen. */
 @Immutable
 internal class LyricsLookOptions(
-    val animation: List<FlowToggleOption<LyricsAnimationStyle>>,
-    val glow: List<FlowToggleOption<LyricsGlow>>,
-    val background: List<FlowToggleOption<LyricsBackgroundStyle>>,
-    val alignment: List<FlowToggleOption<String>>,
+    val animation: List<VoxTubeToggleOption<LyricsAnimationStyle>>,
+    val glow: List<VoxTubeToggleOption<LyricsGlow>>,
+    val background: List<VoxTubeToggleOption<LyricsBackgroundStyle>>,
+    val alignment: List<VoxTubeToggleOption<String>>,
 )
 
 @Composable
 internal fun rememberLyricsLookOptions(): LyricsLookOptions =
     LyricsLookOptions(
-        animation = LyricsAnimationStyle.entries.map { FlowToggleOption(it, stringResource(lyricsAnimationLabel(it))) },
-        glow = LyricsGlow.entries.map { FlowToggleOption(it, stringResource(lyricsGlowLabel(it))) },
-        background = LyricsBackgroundStyle.entries.map { FlowToggleOption(it, stringResource(lyricsBackgroundLabel(it))) },
-        alignment = LyricsAlignments.map { FlowToggleOption(it, stringResource(lyricsAlignmentLabel(it))) },
+        animation = LyricsAnimationStyle.entries.map { VoxTubeToggleOption(it, stringResource(lyricsAnimationLabel(it))) },
+        glow = LyricsGlow.entries.map { VoxTubeToggleOption(it, stringResource(lyricsGlowLabel(it))) },
+        background = LyricsBackgroundStyle.entries.map { VoxTubeToggleOption(it, stringResource(lyricsBackgroundLabel(it))) },
+        alignment = LyricsAlignments.map { VoxTubeToggleOption(it, stringResource(lyricsAlignmentLabel(it))) },
     )
 
 /** How synced lyrics look and move, beside the music player's other looks. */

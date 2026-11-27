@@ -19,7 +19,7 @@ import java.io.File
 class MusicBrainLeakGuardTest {
     private val forbidden =
         listOf(
-            "FlowNeuroEngine",
+            "VoxTubeNeuroEngine",
             "NeuroScoring",
             "NeuroDiscovery",
             "NeuroStorage",

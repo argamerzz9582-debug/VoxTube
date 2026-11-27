@@ -40,10 +40,10 @@ import com.voxtube.app.ui.components.music.sheet.toCollectionActionItem
 import com.voxtube.app.ui.components.search.searchHistoryItems
 import com.voxtube.app.ui.components.search.shownHistory
 import com.voxtube.app.ui.components.search.withoutShownHistory
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowErrorState
-import com.voxtube.app.ui.components.shared.FlowFeedProgress
-import com.voxtube.app.ui.components.shared.FlowLoadingIndicator
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeErrorState
+import com.voxtube.app.ui.components.shared.VoxTubeFeedProgress
+import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 
 private const val RECOMMENDED_SOURCE = "Recommended"
 
@@ -195,9 +195,9 @@ internal fun MusicSearchBody(
 
         val error = uiState.error
         if (uiState.isLoading) {
-            FlowLoadingIndicator()
+            VoxTubeLoadingIndicator()
         } else if (!hasResults && error != null) {
-            FlowErrorState(
+            VoxTubeErrorState(
                 error = error,
                 onRetry = {
                     val filter = uiState.activeFilter
@@ -205,7 +205,7 @@ internal fun MusicSearchBody(
                 },
             )
         } else if (!hasResults) {
-            FlowEmptyState(
+            VoxTubeEmptyState(
                 title = stringResource(R.string.music_search_no_results, query),
                 icon = Icons.Rounded.SearchOff,
             )
@@ -276,7 +276,7 @@ internal fun MusicSearchBody(
                             viewModel.loadMore()
                         }
                         if (uiState.isMoreLoading) {
-                            FlowFeedProgress()
+                            VoxTubeFeedProgress()
                         }
                     }
                 }

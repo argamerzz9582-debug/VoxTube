@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.voxtube.app.BuildConfig
 import com.voxtube.app.data.local.PlayerPreferences
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
-import com.voxtube.app.data.recommendation.FlowPersona
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubePersona
 import com.voxtube.app.data.update.AppRelease
 import com.voxtube.app.data.update.UpdateRepository
 import com.voxtube.app.player.DeepFlowManager
@@ -59,8 +59,8 @@ class SettingsHomeViewModel
                 state.copy(showOnSearch = onSearch)
             }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), DeepFlowState())
 
-        private val _persona = MutableStateFlow<FlowPersona?>(null)
-        val persona: StateFlow<FlowPersona?> = _persona.asStateFlow()
+        private val _persona = MutableStateFlow<VoxTubePersona?>(null)
+        val persona: StateFlow<VoxTubePersona?> = _persona.asStateFlow()
 
         private val _updateCheck = MutableStateFlow<UpdateCheckState>(UpdateCheckState.Idle)
         val updateCheck: StateFlow<UpdateCheckState> = _updateCheck.asStateFlow()
@@ -72,7 +72,7 @@ class SettingsHomeViewModel
         /** Re-reads the persona; the engine exposes no stream, so the list refreshes it when shown. */
         fun refreshPersona() {
             viewModelScope.launch {
-                _persona.value = runCatching { FlowNeuroEngine.getPersona(FlowNeuroEngine.getBrainSnapshot()) }.getOrNull()
+                _persona.value = runCatching { VoxTubeNeuroEngine.getPersona(VoxTubeNeuroEngine.getBrainSnapshot()) }.getOrNull()
             }
         }
 

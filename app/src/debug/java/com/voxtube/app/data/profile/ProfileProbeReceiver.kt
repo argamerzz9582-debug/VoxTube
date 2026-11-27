@@ -15,8 +15,8 @@ import com.voxtube.app.data.local.ViewHistory
 import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.notes.NoteKind
 import com.voxtube.app.data.notes.NotesRepository
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.InteractionType
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.notification.UpcomingReminder
 import com.voxtube.app.notification.UpcomingVideoReminderWorker
 import dagger.hilt.EntryPoint
@@ -59,7 +59,7 @@ internal interface ProfileProbeEntryPoint {
 
     fun preferences(): PlayerPreferences
 
-    fun engine(): FlowNeuroEngine
+    fun engine(): VoxTubeNeuroEngine
 }
 
 class ProfileProbeReceiver : BroadcastReceiver() {

@@ -332,9 +332,6 @@
     <string name="settings_item_import_data">डेटा आयात करें</string>
     <string name="settings_item_import_data_subtitle">बैकअप से पुनर्स्थापित करें या अन्य ऐप्स से आयात करें</string>
     <string name="settings_item_about_flow">VoxTube के बारे में</string>
-    <string name="settings_item_about_flow_subtitle">संस्करण, लाइसेंस, योगदानकर्ता</string>
-    <string name="settings_item_support">सहायता और दान</string>
-    <string name="settings_item_support_subtitle">VoxTube के विकास में सहायता करें</string>
     <string name="settings_region_dialog_title">क्षेत्र चुनें</string>
     <string name="settings_export_success">डेटा सफलतापूर्वक निर्यात किया गया</string>
     <string name="settings_export_failed">निर्यात विफल: %1$s</string>
@@ -349,7 +346,6 @@
     <string name="app_icon_picker_subtitle">लॉन्चर आइकन शैली चुनें। परिवर्तन तुरंत प्रभावी होगा और लॉन्चर संक्षेप में ताज़ा होगा।</string>
     <string name="app_icon_picker_warning">⚠ ध्यान दें: आइकन बदलने पर Android सिस्टम तंत्र का उपयोग होता है जो होम स्क्रीन से ऐप शॉर्टकट को अस्थायी रूप से हटा सकता है। यदि आवश्यक हो तो इसे वापस जोड़ने के लिए लॉन्चर को लंबे समय तक दबाएँ।</string>
     <string name="app_icon_apply_toast">आइकन अपडेट किया गया — आपका लॉन्चर ताज़ा होगा</string>
-    <string name="icon_name_flow_red">VoxTube लाल</string>
     <string name="icon_name_amoled">AMOLED गहरा</string>
     <string name="icon_name_monochrome">एकवर्णी</string>
     <string name="icon_name_ghost">प्रेत</string>
@@ -776,14 +772,8 @@
     <string name="location_badge_recommended">अनुशंसित</string>
     <string name="location_badge_active">सक्रिय</string>
     <string name="select_threads_count_desc">थ्रेड्स की संख्या चुनें (1-8):</string>
-    <string name="support_donations_title">सहायता और दान</string>
-    <string name="support_flow_dev_title">Flow विकास का समर्थन करें</string>
-    <string name="support_flow_dev_desc">यदि आप Flow को उपयोगी पाते हैं और इसके विकास का समर्थन करना चाहते हैं, तो आप Open Collective, Patreon या नीचे दिए गए पतों पर दान कर सकते हैं। आपका समर्थन परियोजना को जीवित रखने में मदद करता है!</string>
     <string name="thank_you_support_message">आपके समर्थन के लिए धन्यवाद! ❤️</string>
     <string name="address_copied_toast">पता क्लिपबोर्ड पर कॉपी किया गया</string>
-    <string name="donation_address_clip_label">दान पता</string>
-    <string name="about_creator">निर्माता</string>
-    <string name="about_website">वेबसाइट</string>
     <string name="github_subtitle">स्रोत कोड और मुद्दे</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">कोर निष्कर्षण लाइब्रेरी</string>
@@ -811,7 +801,6 @@
     <string name="section_legal">कानूनी</string>
     <string name="section_device">डिवाइस</string>
     <string name="donate_item_title">दान करें</string>
-    <string name="support_dev_subtitle">विकास का समर्थन करें</string>
     <string name="btn_ok">ठीक है</string>
     <string name="btn_copy">कॉपी करें</string>
     <string name="github_label">GitHub</string>
@@ -2127,18 +2116,6 @@
         <item quantity="one">%1$d धागा</item>
         <item quantity="other">%1$d धागे</item>
     </plurals>
-    <string name="support_flow_open_collective">Open Collective पर Flow का समर्थन करें</string>
-    <string name="support_flow_patreon">Patreon पर Flow का समर्थन करें</string>
-    <string name="donation_prompt_title">Flow का आनंद ले रहे हैं?</string>
-    <string name="donation_prompt_message">Flow मुफ़्त, खुला स्रोत और विज्ञापन-मुक्त है। यदि इसने आपके फ़ोन पर एक स्थान अर्जित किया है, तो थोड़ा सा समर्थन इसे चालू रखता है।</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">विकास का समर्थन करें</string>
-    <string name="donation_prompt_later">शायद बाद में</string>
-    <string name="donation_prompt_never">दोबारा मत दिखाना</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">प्रवाह-tube.org</string>
-    <string name="about_reddit">reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="about_notices">ओपन सोर्स नोटिस</string>
     <string name="about_notices_summary">अन्य परियोजनाओं से शब्द सूचियाँ और कोड</string>
     <string name="about_license_name">जीएनयू जीपीएल v3</string>
@@ -3757,7 +3734,6 @@
     <string name="settings_search_no_results">\"%1$s\" के लिए कोई सेटिंग नहीं मिली</string>
     <string name="settings_lyrics_provider_order_description">ऊपर से नीचे तक कोशिश की. पुन: व्यवस्थित करने के लिए खींचें।</string>
     <string name="import_running_background">आप इस स्क्रीन को छोड़ सकते हैं. आयात चालू रहता है।</string>
-    <string name="donations_cryptocurrency">cryptocurrency</string>
     <string name="import_no_history_entries">फ़ाइल में कोई घड़ी-इतिहास प्रविष्टियाँ नहीं मिलीं</string>
     <string name="import_no_videos">प्लेलिस्ट फ़ाइल में कोई वीडियो नहीं मिला</string>
     <string name="import_no_likes">कोई लाइक नहीं मिला. YouTube के लिए मेरी गतिविधि को अंग्रेजी में अपने Google खाते से JSON के रूप में निर्यात करें।</string>
@@ -4024,7 +4000,6 @@
     <string name="settings_changelog_all_releases">GitHub पर सभी रिलीज़</string>
     <string name="settings_changelog_expand">परिवर्तन दिखाएँ</string>
     <string name="settings_changelog_collapse">परिवर्तन छिपाएँ</string>
-    <string name="settings_creator_role">Flow के निर्माता और डेवलपर</string>
     <string name="device_info_section_device">उपकरण</string>
     <string name="device_info_section_system">प्रणाली</string>
     <string name="device_info_section_display">प्रदर्शन</string>
@@ -4075,7 +4050,6 @@
     <string name="settings_custom_theme_start_from">से शुरु करें</string>
     <string name="settings_custom_theme_count">%2$d थीम में से %1$d</string>
     <string name="settings_custom_theme_empty">अभी तक कोई कस्टम थीम नहीं है</string>
-    <string name="settings_custom_theme_empty_body">किसी भी पैलेट से प्रारंभ करें, या VoxTube डेस्कटॉप में बने किसी पैलेट को आयात करें।</string>
     <string name="settings_custom_theme_import_failed">उस फ़ाइल में कोई मान्य थीम नहीं है</string>
     <string name="settings_custom_theme_limit">आप %1$d तक थीम रख सकते हैं</string>
     <string name="settings_custom_theme_exported">थीम निर्यात की गई</string>

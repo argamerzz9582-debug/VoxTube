@@ -16,7 +16,7 @@ import com.voxtube.app.ui.utils.isExpandedWidth
 import com.voxtube.app.ui.utils.isMediumWidth
 
 /** Widest a single column of rows grows, so it stays readable on a tablet or an unfolded foldable. */
-val FlowMaxContentWidth: Dp = 720.dp
+val VoxTubeMaxContentWidth: Dp = 720.dp
 
 private val MinLaneItemWidth = 240.dp
 private val MinHeroArtworkSize = 180.dp

@@ -1,11 +1,11 @@
-# Contributing to Flow
+# Contributing to VoxTube
 
-Thank you for your interest in contributing to Flow! We welcome contributions from the community.
+Thank you for your interest in contributing to VoxTube! We welcome contributions from the community.
 
-Flow (`com.voxtube.app`) is an Android music/video app written in Kotlin with Jetpack Compose,
+VoxTube (`com.voxtube.app`) is an Android music/video app written in Kotlin with Jetpack Compose,
 Hilt, and Media3/ExoPlayer. It plays YouTube content via a native InnerTube client with a
 NewPipe-based fallback extraction path, and supports local media playback, offline downloads,
-casting, lyrics, device-to-device sync, and an on-device recommendation engine (FlowNeuroEngine).
+casting, lyrics, device-to-device sync, and an on-device recommendation engine (VoxTubeNeuroEngine).
 
 **Read this file before opening a pull request.** Most review round-trips on this project come from
 one of the rules below, not from the feature itself. `AGENTS.md` in the repository root carries the
@@ -14,7 +14,7 @@ AI assistant, point it at `AGENTS.md`.
 
 ## ❓ Asking Questions About the Codebase
 
-**Use [GitHub Discussions](https://github.com/Flow-Tube/Flow/discussions) — that is the right place, and
+**Use [GitHub Discussions](https://github.com/argamerzz9582-debug/VoxTube) — that is the right place, and
 questions are welcome.** The codebase is deliberately light on comments (see "Comments" below), so
 asking is expected rather than a sign you missed something.
 
@@ -55,11 +55,11 @@ Feature suggestions are welcome! Please:
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/Flow.git
-cd Flow
+git clone https://github.com/YOUR_USERNAME/VoxTube.git
+cd VoxTube
 
 # Add upstream remote
-git remote add upstream https://github.com/Flow-Tube/Flow.git
+git remote add upstream https://github.com/argamerzz9582-debug/VoxTube.git
 
 # Create a feature branch
 git checkout -b feature/your-feature-name
@@ -69,7 +69,7 @@ Always pull the latest `main` before starting work, to minimize merge conflicts.
 
 ### Product Flavors
 
-Flow builds two flavors: `github` (default, in-app updater enabled) and `foss` (no updater).
+VoxTube builds two flavors: `github` (default, in-app updater enabled) and `foss` (no updater).
 **Always use flavor-prefixed Gradle tasks** — `assembleGithubDebug`, `compileFossDebugKotlin` —
 never bare `assembleDebug` or `compileDebugKotlin`.
 
@@ -119,8 +119,8 @@ maintained implementation is on the classpath.
 Before writing any component, effect, animation, formatter, parser, scheduler, or player behaviour:
 
 1. **Check what the app already has.** Read `ui/components/shared/` and `utils/`. The commonest
-   waste is re-implementing something this codebase already exports — `FlowEmptyState`,
-   `FlowErrorState`, `MediaRow`, `MediaThumbnail`, `MediaBadges`, `FlowSearchField`,
+   waste is re-implementing something this codebase already exports — `VoxTubeEmptyState`,
+   `VoxTubeErrorState`, `MediaRow`, `MediaThumbnail`, `MediaBadges`, `VoxTubeSearchField`,
    `ShimmerLoading`, and `FastScrollbar` all exist already.
 2. **Check the version catalog.** `gradle/libs.versions.toml` is the list of what is available.
 3. **Check the actual artifact, not your memory.** The app is on alpha Compose/M3; confirm against
@@ -185,7 +185,7 @@ than one feature uses it, and duplicate no behaviour the library already provide
 
 ## ⚡ Performance, Battery, and Thermals — Non-Negotiable
 
-Flow is a media player that runs for hours at a time. Jank, dropped frames, playback stutter, device
+VoxTube is a media player that runs for hours at a time. Jank, dropped frames, playback stutter, device
 heat, and battery drain are **critical bugs, not cosmetic issues**. Every rule below is anchored in a
 real shipped regression that had to be found and fixed on-device.
 
@@ -345,8 +345,8 @@ Split by **responsibility**, never by line count:
 
 ### Naming conventions (already in force — match them)
 
-- `shared/` primitives with no domain meaning take the **`Flow`** prefix: `FlowFilterChip`,
-  `FlowSearchField`, `FlowEmptyState`, `FlowLoadingIndicator`.
+- `shared/` primitives with no domain meaning take the **`VoxTube`** prefix: `VoxTubeFilterChip`,
+  `VoxTubeSearchField`, `VoxTubeEmptyState`, `VoxTubeLoadingIndicator`.
 - `shared/` components in the media vocabulary take the **`Media`** prefix: `MediaRow`,
   `MediaThumbnail`, `MediaBadges`, `MediaKindSelector`.
 - Feature components take the **feature** prefix: `LibraryShelf`, `MusicTrackItem`,
@@ -397,7 +397,7 @@ empty/error states, badges, formatters, or a second copy of a `shared/` componen
 
 ### Dependency injection
 
-Flow uses Hilt, but some legacy app-owned classes are still reached through static `getInstance()`
+VoxTube uses Hilt, but some legacy app-owned classes are still reached through static `getInstance()`
 calls. Treat those as migration debt, not as a pattern to copy.
 
 1. **Use constructor injection by default** for new ViewModels, repositories, use cases, workers,
@@ -554,7 +554,7 @@ bump takes three times as long to review and is three times as likely to be reve
 
 ## 🔐 Release and Signing Invariants
 
-Flow is distributed through GitHub Releases and
+VoxTube is distributed through GitHub Releases and
 [IzzyOnDroid](https://apt.izzysoft.de/packages/com.voxtube.app). Both pin properties of the
 published artifacts, so the following are hard constraints. Breaking one of them cannot be fixed by a
 follow-up release — it forces every installed user to uninstall and reinstall, losing their local
@@ -568,7 +568,7 @@ refuses to install an update signed by a different key. CI enforces this in the
 `KEY_PASSWORD` repository secrets.
 
 **Release asset file names are a public contract.** IzzyOnDroid matches release assets by file name.
-`flow.apk` and `flow-foss.apk` are the universal builds and must keep those exact names. The per-ABI
+`voxtube.apk` and `voxtube-foss.apk` are the universal builds and must keep those exact names. The per-ABI
 APKs are published alongside them as extras. Renaming or removing either universal APK silently
 breaks the IzzyOnDroid update feed, so coordinate with IzzyOnDroid before changing them.
 
@@ -600,14 +600,14 @@ a `v*` tag build when the keystore secret is missing rather than publishing them
 
 ## ❓ Questions?
 
-- Open a [discussion](https://github.com/Flow-Tube/Flow/discussions) — including questions about how the
+- Open a [discussion](https://github.com/argamerzz9582-debug/VoxTube) — including questions about how the
   codebase works
 - Comment on existing issues
 - Reach out to maintainers
 
 ## 🙏 Thank You!
 
-Every contribution helps make Flow better. Thank you for being part of the community!
+Every contribution helps make VoxTube better. Thank you for being part of the community!
 
 ---
 

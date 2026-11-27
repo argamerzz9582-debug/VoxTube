@@ -15,9 +15,9 @@ import com.voxtube.app.ui.components.settings.LocalNewSettings
 import com.voxtube.app.ui.components.settings.SettingEntry
 import com.voxtube.app.ui.components.settings.SettingsDestination
 import com.voxtube.app.ui.components.settings.SettingsListScope
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowNavRow
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 import com.voxtube.app.ui.screens.settings.index.SearchableSetting
 import com.voxtube.app.ui.screens.settings.index.SettingsIndex
@@ -68,7 +68,7 @@ internal fun SettingsListScope.searchResults(
 ) {
     if (results.isEmpty()) {
         item("search#empty") {
-            FlowEmptyState(
+            VoxTubeEmptyState(
                 title = stringResource(R.string.settings_search_no_results, query),
                 icon = Icons.Outlined.SearchOff,
             )
@@ -78,7 +78,7 @@ internal fun SettingsListScope.searchResults(
     group(key = "search#results") {
         results.forEach { result ->
             row(result.entry.key) { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = result.title,
                     supportingText = result.breadcrumb,
                     onClick = { onResultClick(result.entry) },

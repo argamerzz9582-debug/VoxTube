@@ -31,7 +31,7 @@ import com.voxtube.app.data.local.UploadDate
 import com.voxtube.app.data.local.WatchState
 import com.voxtube.app.data.model.Channel
 import com.voxtube.app.ui.components.shared.FeedPagingFooter
-import com.voxtube.app.ui.components.shared.FlowSuggestionRow
+import com.voxtube.app.ui.components.shared.VoxTubeSuggestionRow
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -253,7 +253,7 @@ class SearchComponentsTest {
         var submitted = false
         var filled = false
         show {
-            FlowSuggestionRow(
+            VoxTubeSuggestionRow(
                 text = "sam sulek bulking",
                 leadingIcon = Icons.Rounded.History,
                 onClick = { submitted = true },

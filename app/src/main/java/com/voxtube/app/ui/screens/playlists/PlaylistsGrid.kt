@@ -25,8 +25,8 @@ import com.voxtube.app.ui.components.PlaylistCardLayout
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.library.MusicPlaylistLibraryCard
 import com.voxtube.app.ui.components.library.libraryGridLayoutFor
-import com.voxtube.app.ui.components.shared.FlowEmptyState
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 
 private val GridCellMinWidth = 160.dp
 private val CompactCellMinWidth = 360.dp
@@ -96,12 +96,12 @@ private fun LazyGridScope.emptyPlaylists(kind: MediaKind) {
         contentType = "empty",
     ) {
         if (kind == MediaKind.Videos) {
-            FlowEmptyState(
+            VoxTubeEmptyState(
                 title = stringResource(R.string.no_playlists_found),
                 icon = Icons.AutoMirrored.Outlined.PlaylistPlay,
             )
         } else {
-            FlowEmptyState(
+            VoxTubeEmptyState(
                 title = stringResource(R.string.empty_music_playlists),
                 icon = Icons.Default.MusicNote,
             )

@@ -32,7 +32,7 @@ import com.voxtube.app.ui.components.layout.navigation.visibleFlowTabs
 import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.NavigationBarIndex
 
 /** Which tabs the navigation bar shows, in what order, and which one Flow opens on. */
@@ -62,20 +62,20 @@ internal fun NavigationBarScreen(
     val shortsHiddenSummary = stringResource(R.string.settings_shorts_tab_disabled_summary)
     val styleOptions =
         listOf(
-            FlowToggleOption(NavBarStyle.STANDARD, stringResource(R.string.settings_nav_style_standard)),
-            FlowToggleOption(NavBarStyle.FLOATING, stringResource(R.string.settings_nav_style_floating)),
+            VoxTubeToggleOption(NavBarStyle.STANDARD, stringResource(R.string.settings_nav_style_standard)),
+            VoxTubeToggleOption(NavBarStyle.FLOATING, stringResource(R.string.settings_nav_style_floating)),
         )
     val labelOptions =
         listOf(
-            FlowToggleOption(NavBarLabels.ALWAYS, stringResource(R.string.settings_nav_labels_always)),
-            FlowToggleOption(NavBarLabels.SELECTED, stringResource(R.string.settings_nav_labels_selected)),
-            FlowToggleOption(NavBarLabels.NEVER, stringResource(R.string.settings_nav_labels_never)),
+            VoxTubeToggleOption(NavBarLabels.ALWAYS, stringResource(R.string.settings_nav_labels_always)),
+            VoxTubeToggleOption(NavBarLabels.SELECTED, stringResource(R.string.settings_nav_labels_selected)),
+            VoxTubeToggleOption(NavBarLabels.NEVER, stringResource(R.string.settings_nav_labels_never)),
         )
 
     val scrollOptions =
         listOf(
-            FlowToggleOption(NavBarScroll.HIDE, stringResource(R.string.settings_nav_scroll_hide)),
-            FlowToggleOption(NavBarScroll.SHRINK, stringResource(R.string.settings_nav_scroll_shrink)),
+            VoxTubeToggleOption(NavBarScroll.HIDE, stringResource(R.string.settings_nav_scroll_hide)),
+            VoxTubeToggleOption(NavBarScroll.SHRINK, stringResource(R.string.settings_nav_scroll_shrink)),
         )
 
     SettingsPage(

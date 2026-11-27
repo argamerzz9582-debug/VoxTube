@@ -46,7 +46,7 @@ import com.voxtube.app.ui.components.settings.info
 import com.voxtube.app.ui.components.settings.notice
 import com.voxtube.app.ui.components.settings.switch
 import com.voxtube.app.ui.components.settings.toggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.NetworkIndex
 import kotlinx.coroutines.launch
 
@@ -68,8 +68,8 @@ internal fun NetworkSettingsScreen(
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val types =
         listOf(
-            FlowToggleOption(AppProxyType.HTTP, stringResource(R.string.proxy_type_http)),
-            FlowToggleOption(AppProxyType.SOCKS5, stringResource(R.string.proxy_type_socks5)),
+            VoxTubeToggleOption(AppProxyType.HTTP, stringResource(R.string.proxy_type_http)),
+            VoxTubeToggleOption(AppProxyType.SOCKS5, stringResource(R.string.proxy_type_socks5)),
         )
     val hostError = stringResource(R.string.proxy_settings_invalid_host)
     val portError = stringResource(R.string.proxy_settings_invalid_port)

@@ -23,6 +23,6 @@ fun MediaBufferingIndicator(
         exit = fadeOut(MaterialTheme.motionScheme.defaultEffectsSpec()),
         modifier = modifier,
     ) {
-        FlowLoadingIndicator(modifier = Modifier.size(BufferingIndicatorSize))
+        VoxTubeLoadingIndicator(modifier = Modifier.size(BufferingIndicatorSize))
     }
 }

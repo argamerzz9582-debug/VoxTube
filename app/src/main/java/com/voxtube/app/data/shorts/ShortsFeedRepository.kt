@@ -17,9 +17,9 @@ import com.voxtube.app.data.model.Video
 import com.voxtube.app.data.model.toShortVideo
 import com.voxtube.app.data.model.toVideo
 import com.voxtube.app.data.recommendation.FeedExclusions
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.ShortsSeedInput
 import com.voxtube.app.data.recommendation.ShortsSeedSource
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.shorts.feed.InnerTubeShortsFeedSources
 import com.voxtube.app.data.shorts.feed.ShortsFeedContext
 import com.voxtube.app.data.shorts.feed.ShortsFeedEngine
@@ -70,7 +70,7 @@ class ShortsFeedRepository
         /** The first page. A fresh pager is reused on a seedless open, so a return visit costs nothing. */
         suspend fun openFeed(seedVideoId: String?): List<ShortVideo> =
             withContext(PerformanceDispatcher.networkIO) {
-                FlowNeuroEngine.initialize(context)
+                VoxTubeNeuroEngine.initialize(context)
                 lock.withLock {
                     val existing = pager
                     if (seedVideoId == null && existing != null && System.currentTimeMillis() - openedAtMillis < FEED_TTL_MS) {
@@ -110,8 +110,8 @@ class ShortsFeedRepository
         suspend fun recordShown(videoId: String) {
             if (videoId.isBlank()) return
             runCatching {
-                FlowNeuroEngine.initialize(context)
-                FlowNeuroEngine.recordSeenShorts(listOf(videoId))
+                VoxTubeNeuroEngine.initialize(context)
+                VoxTubeNeuroEngine.recordSeenShorts(listOf(videoId))
             }.onFailure { Log.w(TAG, "Failed to record shown Short $videoId", it) }
         }
 
@@ -162,13 +162,13 @@ class ShortsFeedRepository
             }.getOrElse { emptyList() }
 
         private suspend fun excludedChannelIds(): Set<String> =
-            runCatching { FlowNeuroEngine.getExcludedChannelIds() }.getOrDefault(emptySet())
+            runCatching { VoxTubeNeuroEngine.getExcludedChannelIds() }.getOrDefault(emptySet())
 
         private suspend fun feedExclusions(): FeedExclusions =
-            runCatching { FlowNeuroEngine.feedExclusions() }.getOrDefault(FeedExclusions.NONE)
+            runCatching { VoxTubeNeuroEngine.feedExclusions() }.getOrDefault(FeedExclusions.NONE)
 
         private suspend fun blockedTextMatcher(): (String, String) -> Boolean =
-            runCatching { FlowNeuroEngine.blockedContentMatcher() }.getOrElse { { _, _ -> false } }
+            runCatching { VoxTubeNeuroEngine.blockedContentMatcher() }.getOrElse { { _, _ -> false } }
 
         private suspend fun watchedReelIds(): Set<String> {
             if (!playerPreferences.hideWatchedShorts.first()) return emptySet()
@@ -180,31 +180,31 @@ class ShortsFeedRepository
                 override suspend fun rank(
                     videos: List<Video>,
                     subscribedChannelIds: Set<String>,
-                ): List<Video> = runCatching { FlowNeuroEngine.rank(videos, subscribedChannelIds) }.getOrDefault(videos)
+                ): List<Video> = runCatching { VoxTubeNeuroEngine.rank(videos, subscribedChannelIds) }.getOrDefault(videos)
 
                 override suspend fun discoveryQueries(resetDepth: Boolean): List<String> =
-                    runCatching { FlowNeuroEngine.generateDiscoveryQueries(resetDepth) }.getOrDefault(emptyList())
+                    runCatching { VoxTubeNeuroEngine.generateDiscoveryQueries(resetDepth) }.getOrDefault(emptyList())
 
                 override suspend fun selectSeeds(
                     candidates: List<ShortsSeedInput>,
                     maxSeeds: Int,
-                ): List<String> = runCatching { FlowNeuroEngine.selectShortsSeeds(candidates, maxSeeds) }.getOrDefault(emptyList())
+                ): List<String> = runCatching { VoxTubeNeuroEngine.selectShortsSeeds(candidates, maxSeeds) }.getOrDefault(emptyList())
 
                 override suspend fun reportQueryNovelty(
                     query: String,
                     novelRatio: Double,
                 ) {
-                    runCatching { FlowNeuroEngine.reportQueryResultNovelty(query, novelRatio) }
+                    runCatching { VoxTubeNeuroEngine.reportQueryResultNovelty(query, novelRatio) }
                 }
 
                 override suspend fun recentlyShownIds(): Set<String> =
-                    runCatching { FlowNeuroEngine.getRecentlyShownVideoIds() }.getOrDefault(emptySet())
+                    runCatching { VoxTubeNeuroEngine.getRecentlyShownVideoIds() }.getOrDefault(emptySet())
             }
 
         private val feedContext =
             object : ShortsFeedContext {
                 override suspend fun profile(): ShortsFeedProfile {
-                    val interactions = runCatching { FlowNeuroEngine.getBrainSnapshot().totalInteractions }.getOrDefault(0)
+                    val interactions = runCatching { VoxTubeNeuroEngine.getBrainSnapshot().totalInteractions }.getOrDefault(0)
                     return ShortsFeedProfile(
                         subscribedChannelIds = subscriptionRepository.getAllSubscriptionIds(),
                         isColdStart = interactions < COLD_START_INTERACTIONS,
@@ -212,11 +212,11 @@ class ShortsFeedRepository
                 }
 
                 override suspend fun filters(): ShortsFeedFilters {
-                    val brain = runCatching { FlowNeuroEngine.getBrainSnapshot() }.getOrNull()
+                    val brain = runCatching { VoxTubeNeuroEngine.getBrainSnapshot() }.getOrNull()
                     val aiMatcher = aiList.currentMatcher()
                     return ShortsFeedFilters(
                         watchedIds = watchedReelIds(),
-                        seenIds = runCatching { FlowNeuroEngine.getRecentlySeenShorts() }.getOrDefault(emptySet()),
+                        seenIds = runCatching { VoxTubeNeuroEngine.getRecentlySeenShorts() }.getOrDefault(emptySet()),
                         suppressedIds = brain?.suppressedVideoIds?.keys.orEmpty(),
                         excludedChannelIds = excludedChannelIds(),
                         isBlockedText = blockedTextMatcher(),

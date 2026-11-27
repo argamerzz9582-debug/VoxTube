@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.data.recommendation.NeuroTopicCatalog
 import com.voxtube.app.data.recommendation.TopicCategory
-import com.voxtube.app.ui.components.shared.FlowPillChip
-import com.voxtube.app.ui.components.shared.FlowPillSection
+import com.voxtube.app.ui.components.shared.VoxTubePillChip
+import com.voxtube.app.ui.components.shared.VoxTubePillSection
 import com.voxtube.app.ui.components.topicCategoryIcon
 import com.voxtube.app.ui.components.topicCategoryNameRes
 import kotlinx.coroutines.delay
@@ -85,13 +85,13 @@ private fun InterestCategorySection(
     selectedTopics: Set<String>,
     onTopicToggle: (String) -> Unit,
 ) {
-    FlowPillSection(
+    VoxTubePillSection(
         title = stringResource(topicCategoryNameRes(category.name)),
         icon = topicCategoryIcon(category.icon),
         selectedCount = category.topics.count(selectedTopics::contains),
     ) {
         category.topics.forEach { topic ->
-            FlowPillChip(
+            VoxTubePillChip(
                 label = topic,
                 selected = selectedTopics.contains(topic),
                 onClick = { onTopicToggle(topic) },

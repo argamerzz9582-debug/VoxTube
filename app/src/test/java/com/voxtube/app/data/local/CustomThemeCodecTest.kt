@@ -4,13 +4,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.google.common.truth.Truth.assertThat
 import com.voxtube.app.ui.theme.CustomTheme
-import com.voxtube.app.ui.theme.FlowPalettes
 import com.voxtube.app.ui.theme.ThemeMode
 import com.voxtube.app.ui.theme.ThemeVariant
+import com.voxtube.app.ui.theme.VoxTubePalettes
 import org.junit.Test
 
 class CustomThemeCodecTest {
-    private val theme = CustomTheme.from("custom-test", "Ocean", FlowPalettes.forMode(ThemeMode.TIDE))
+    private val theme = CustomTheme.from("custom-test", "Ocean", VoxTubePalettes.forMode(ThemeMode.TIDE))
 
     /** A theme as Flow Desktop's `createCustomTheme` stores it: Flow Default cloned, derived steps as `color-mix`. */
     private val desktopTheme =
@@ -160,7 +160,7 @@ class CustomThemeCodecTest {
         assertThat(migrated.light.primary).isEqualTo(Color(0xFF00FF00))
         assertThat(migrated.dark.primary).isEqualTo(Color(0xFF0000FF))
         assertThat(migrated.dark.outline).isEqualTo(Color(0xFF444444))
-        assertThat(migrated.amoled).isEqualTo(FlowPalettes.default.colorsFor(ThemeVariant.AMOLED))
+        assertThat(migrated.amoled).isEqualTo(VoxTubePalettes.default.colorsFor(ThemeVariant.AMOLED))
         assertThat(CustomThemeCodec.decode(CustomThemeCodec.encodeOne(migrated))).hasSize(1)
     }
 

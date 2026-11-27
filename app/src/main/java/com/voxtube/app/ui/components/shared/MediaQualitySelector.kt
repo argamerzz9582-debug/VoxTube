@@ -37,9 +37,9 @@ fun <T> MediaQualitySelectorContent(
 ) {
     if (!groupedByResolution) {
         val sorted = options.sortedByDescending { it.height }
-        FlowRowGroup {
+        VoxTubeRowGroup {
             sorted.forEachIndexed { index, option ->
-                FlowSelectionRow(
+                VoxTubeSelectionRow(
                     title = option.label,
                     supportingText = option.supportingText,
                     selected = option.selected,
@@ -60,9 +60,9 @@ fun <T> MediaQualitySelectorContent(
             .sortedByDescending { it.key }
             .map { it.value }
     val rowCount = resolutions.size + if (auto == null) 0 else 1
-    FlowRowGroup {
+    VoxTubeRowGroup {
         if (auto != null) {
-            FlowSelectionRow(
+            VoxTubeSelectionRow(
                 title = auto.label,
                 selected = auto.selected,
                 shape = flowRowGroupShape(0, rowCount),
@@ -74,7 +74,7 @@ fun <T> MediaQualitySelectorContent(
             val codecOptions = group.filter { it.codecKey.isNotBlank() || it.codecLabel.isNotBlank() }
             if (codecOptions.isEmpty()) {
                 val option = group.first()
-                FlowSelectionRow(
+                VoxTubeSelectionRow(
                     title = option.label,
                     supportingText = option.supportingText,
                     selected = option.selected,
@@ -126,7 +126,7 @@ private fun <T> MediaQualitySelectorCodecRow(
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             codecOptions.forEach { option ->
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = option.codecLabel.ifBlank { option.label },
                     selected = option.selected,
                     onClick = { onOptionSelected(option.item) },

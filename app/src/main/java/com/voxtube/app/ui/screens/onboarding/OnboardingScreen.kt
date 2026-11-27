@@ -37,8 +37,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.data.backup.BackupOperation
 import com.voxtube.app.data.backup.ImportKind
-import com.voxtube.app.ui.components.shared.FlowConfirmDialog
-import com.voxtube.app.ui.components.shared.FlowMaxContentWidth
+import com.voxtube.app.ui.components.shared.VoxTubeConfirmDialog
+import com.voxtube.app.ui.components.shared.VoxTubeMaxContentWidth
 import com.voxtube.app.ui.utils.LocalWindowSizeClass
 import com.voxtube.app.ui.utils.isExpandedWidth
 import kotlinx.coroutines.launch
@@ -60,7 +60,7 @@ fun OnboardingScreen(
     BackHandler(enabled = state.step.index > 0) { viewModel.back() }
 
     (importOperation as? BackupOperation.Confirming)?.let { confirming ->
-        FlowConfirmDialog(
+        VoxTubeConfirmDialog(
             title = stringResource(R.string.master_restore_confirm_title),
             text = confirming.message,
             confirmLabel = stringResource(R.string.master_restore_confirm),
@@ -129,7 +129,7 @@ fun OnboardingScreen(
                 val besideList = LocalWindowSizeClass.current.isExpandedWidth && state.step.showsProgress
                 Box(Modifier.fillMaxWidth(), contentAlignment = if (besideList) Alignment.CenterEnd else Alignment.Center) {
                     OnboardingBottomBar(
-                        modifier = Modifier.widthIn(max = FlowMaxContentWidth),
+                        modifier = Modifier.widthIn(max = VoxTubeMaxContentWidth),
                         state = state,
                         onBack = { viewModel.back() },
                         onNext = {

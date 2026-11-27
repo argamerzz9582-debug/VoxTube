@@ -6,11 +6,11 @@ import com.voxtube.app.data.local.LikedVideosRepository
 import com.voxtube.app.data.local.PlaylistRepository
 import com.voxtube.app.data.local.ViewHistory
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.GraphSeedInput
 import com.voxtube.app.data.recommendation.GraphSeedSelector
 import com.voxtube.app.data.recommendation.GraphSeedSource
 import com.voxtube.app.data.recommendation.NeighbourChannels
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.data.repository.YouTubeRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -52,7 +52,7 @@ class HomeFeedSources
         private val viewHistory: ViewHistory,
         private val likedVideosRepository: LikedVideosRepository,
         private val playlistRepository: PlaylistRepository,
-        private val neuroEngine: FlowNeuroEngine,
+        private val neuroEngine: VoxTubeNeuroEngine,
     ) {
         private data class CachedRelated(
             val videos: List<Video>,

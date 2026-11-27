@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.model.PlaylistInfo
 import com.voxtube.app.data.playlist.PlaylistListOrder
-import com.voxtube.app.ui.components.shared.FlowFilterChip
-import com.voxtube.app.ui.components.shared.FlowSortChip
 import com.voxtube.app.ui.components.shared.MediaKind
+import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
+import com.voxtube.app.ui.components.shared.VoxTubeSortChip
 
 private val FilterRowPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
 private val MenuIconSize = 16.dp
@@ -69,7 +69,7 @@ internal fun PlaylistLibraryFilterRow(
             items = if (showKinds) MediaKind.entries else emptyList(),
             key = { it.name },
         ) { kind ->
-            FlowFilterChip(
+            VoxTubeFilterChip(
                 label = stringResource(kind.labelRes),
                 selected = selectedKind == kind,
                 onClick = { onKindSelected(kind) },
@@ -78,7 +78,7 @@ internal fun PlaylistLibraryFilterRow(
 
         item(key = "ownership-filter") {
             Box {
-                FlowFilterChip(
+                VoxTubeFilterChip(
                     label = selectedOwnership.label(),
                     selected = selectedOwnership != PlaylistOwnershipFilter.All,
                     onClick = { ownershipExpanded = true },
@@ -113,7 +113,7 @@ internal fun PlaylistLibraryFilterRow(
         }
 
         item(key = "order") {
-            FlowSortChip(
+            VoxTubeSortChip(
                 options = PlaylistListOrder.entries,
                 selected = selectedOrder,
                 default = PlaylistListOrder.NEWEST,

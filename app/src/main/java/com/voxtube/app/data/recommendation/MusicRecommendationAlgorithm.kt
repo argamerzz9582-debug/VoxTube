@@ -37,7 +37,7 @@ data class MusicSection(
 )
 
 /**
- * Advanced Music Recommendation Algorithm (FlowMusicAlgorithm)
+ * Advanced Music Recommendation Algorithm (VoxTubeMusicAlgorithm)
  *
  * A hybrid recommendation engine that combines:
  * 1. YouTube Music's native Home Feed (Gold Standard)

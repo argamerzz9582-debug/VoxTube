@@ -28,9 +28,9 @@ import androidx.compose.ui.semantics.semantics
 import com.voxtube.app.R
 import com.voxtube.app.data.model.PlaylistInfo
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
-import com.voxtube.app.ui.components.shared.FlowReorderButtons
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
 import com.voxtube.app.ui.components.shared.ReorderHandle
+import com.voxtube.app.ui.components.shared.VoxTubeReorderButtons
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
@@ -98,7 +98,7 @@ internal fun PlaylistsReorderList(
                             },
                         trailing = {
                             if (LocalDpadNavigation.current) {
-                                FlowReorderButtons(
+                                VoxTubeReorderButtons(
                                     onMoveUp = if (index > 0) ({ move(index, index - 1) }) else null,
                                     onMoveDown = if (index < ordered.lastIndex) ({ move(index, index + 1) }) else null,
                                 )

@@ -111,7 +111,7 @@ object AppProxyManager {
     fun currentSignature(): String = config.signature()
 
     fun applyTo(builder: OkHttpClient.Builder): OkHttpClient.Builder {
-        FlowRequestLog.install(builder)
+        VoxTubeRequestLog.install(builder)
         val activeConfig = config
         val proxy = activeConfig.toProxy() ?: return builder
         builder.proxy(proxy)
@@ -134,7 +134,7 @@ object AppProxyManager {
      * live as long as the process. Clients rebuilt per [currentSignature] use [applyTo] instead.
      */
     fun buildLive(builder: OkHttpClient.Builder): OkHttpClient =
-        FlowRequestLog
+        VoxTubeRequestLog
             .install(builder)
             .proxySelector(AppProxySelector)
             .proxyAuthenticator(AppProxyAuthenticator)

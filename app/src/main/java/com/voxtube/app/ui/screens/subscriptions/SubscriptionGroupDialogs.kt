@@ -57,12 +57,12 @@ import com.voxtube.app.R
 import com.voxtube.app.data.model.Channel
 import com.voxtube.app.data.model.SubscriptionGroup
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowReorderButtons
-import com.voxtube.app.ui.components.shared.FlowSearchField
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
 import com.voxtube.app.ui.components.shared.ReorderHandle
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeReorderButtons
+import com.voxtube.app.ui.components.shared.VoxTubeSearchField
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.utils.flowWindowDpSize
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
@@ -87,7 +87,7 @@ internal fun SubscriptionGroupsManagerDialog(
     onHiddenChange: (SubscriptionGroup, Boolean) -> Unit,
     onOrderChanged: (List<String>) -> Unit,
 ) {
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.manage_groups)) },
         text = {
@@ -197,7 +197,7 @@ private fun SubscriptionGroupsReorderList(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         if (LocalDpadNavigation.current) {
-                            FlowReorderButtons(
+                            VoxTubeReorderButtons(
                                 onMoveUp = if (index > 0) ({ move(index, index - 1) }) else null,
                                 onMoveDown = if (index < ordered.lastIndex) ({ move(index, index + 1) }) else null,
                             )
@@ -294,7 +294,7 @@ internal fun SubscriptionCreateEditGroupDialog(
             }
         }
 
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
@@ -310,14 +310,14 @@ internal fun SubscriptionCreateEditGroupDialog(
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
-                FlowSwitchRow(
+                VoxTubeSwitchRow(
                     title = stringResource(R.string.group_show_in_all),
                     checked = inAll && !hidden,
                     onCheckedChange = { inAll = it },
                     enabled = !hidden,
                     supportingText = if (hidden) stringResource(R.string.group_show_in_all_hidden) else null,
                 )
-                FlowSearchField(
+                VoxTubeSearchField(
                     query = searchQuery,
                     onQueryChange = { searchQuery = it },
                     placeholder = stringResource(R.string.search_channels_hint),

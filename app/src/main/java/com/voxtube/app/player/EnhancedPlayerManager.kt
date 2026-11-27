@@ -102,8 +102,8 @@ import com.voxtube.app.player.subtitle.SubtitleTracks
 import com.voxtube.app.player.surface.SurfaceManager
 import com.voxtube.app.player.surface.VideoSurfacePolicy
 import com.voxtube.app.player.tracker.PlaybackTracker
-import com.voxtube.app.utils.FlowCrashHandler
 import com.voxtube.app.utils.NetworkState
+import com.voxtube.app.utils.VoxTubeCrashHandler
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -136,7 +136,7 @@ class EnhancedPlayerManager private constructor() {
         private const val TAG = PlayerConfig.TAG
         private const val SABR_QUALITY_KEY_PREFIX = "sabr:"
         private const val LIVE_QUALITY_KEY_PREFIX = "live:"
-        private const val AUTO_NEXT_TAG = "FlowVideoAutoNext"
+        private const val AUTO_NEXT_TAG = "VoxTubeVideoAutoNext"
 
         // Deliberately the error handler's tag: these lines are what a user's diagnostics dump is read for.
         private const val DENIAL_TAG = "PlayerErrorHandler"
@@ -1128,7 +1128,7 @@ class EnhancedPlayerManager private constructor() {
                     pendingSurfaceFirstFrameStartedAtMs.takeIf { it > 0L }?.let { startedAtMs ->
                         pendingSurfaceFirstFrameStartedAtMs = 0L
                         Log.w(
-                            "FlowVideoLifecycle",
+                            "VoxTubeVideoLifecycle",
                             "firstFrameAfterSurfaceAttach latencyMs=${SystemClock.elapsedRealtime() - startedAtMs} " +
                                 "video=$currentVideoId pos=${player?.currentPosition} pwr=${player?.playWhenReady}",
                         )
@@ -1539,7 +1539,7 @@ class EnhancedPlayerManager private constructor() {
         audioOnly: Boolean = false,
         playWhenReady: Boolean = !isStartPausedArmed(currentVideoId),
     ): Boolean {
-        FlowCrashHandler.recordPhase("video-item", "load $currentVideoId audioOnly=$audioOnly")
+        VoxTubeCrashHandler.recordPhase("video-item", "load $currentVideoId audioOnly=$audioOnly")
         val loaded =
             prepareMediaSource(
                 videoStream = videoStream,
@@ -3312,7 +3312,7 @@ class EnhancedPlayerManager private constructor() {
             if (!wasSurfaceValid) {
                 pendingSurfaceFirstFrameStartedAtMs = SystemClock.elapsedRealtime()
                 Log.w(
-                    "FlowVideoLifecycle",
+                    "VoxTubeVideoLifecycle",
                     "surfaceAttached video=$currentVideoId pos=${player?.currentPosition} " +
                         "pwr=${player?.playWhenReady} force=$forceAttach",
                 )
@@ -3376,7 +3376,7 @@ class EnhancedPlayerManager private constructor() {
                 if (surfaceManager?.isSurfaceValid() != true) return@launch
                 if (p.playbackState != Player.STATE_READY || !p.playWhenReady) return@launch
                 Log.w(
-                    "FlowVideoLifecycle",
+                    "VoxTubeVideoLifecycle",
                     "surfaceFirstFrameTimeout video=$currentVideoId pos=${p.currentPosition} — forcing a flush",
                 )
                 resyncAfterSurfaceReattach(p)
@@ -3397,12 +3397,12 @@ class EnhancedPlayerManager private constructor() {
         if (mediaLoader?.getActiveSabrOrchestrator() != null) {
             // A SABR seek tears the session down and rebuilds it, which is far more than a surface
             // swap should cost.
-            Log.w("FlowVideoLifecycle", "surfaceReattachResync skipped sabr video=$currentVideoId pos=$position")
+            Log.w("VoxTubeVideoLifecycle", "surfaceReattachResync skipped sabr video=$currentVideoId pos=$position")
             return
         }
         val target = VideoSurfacePolicy.resyncSeekTargetMs(position)
         Log.w(
-            "FlowVideoLifecycle",
+            "VoxTubeVideoLifecycle",
             "surfaceReattachResync video=$currentVideoId pos=$position target=$target",
         )
         p.setSeekParameters(SeekParameters.EXACT)
@@ -3419,7 +3419,7 @@ class EnhancedPlayerManager private constructor() {
             surfaceFirstFrameWatchdog = null
             pendingSurfaceFirstFrameStartedAtMs = 0L
             Log.w(
-                "FlowVideoLifecycle",
+                "VoxTubeVideoLifecycle",
                 "surfaceDetached video=$currentVideoId pos=${player?.currentPosition} pwr=${player?.playWhenReady}",
             )
         }

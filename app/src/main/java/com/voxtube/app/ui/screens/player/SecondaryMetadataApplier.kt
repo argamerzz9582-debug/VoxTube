@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import com.voxtube.app.player.EnhancedPlayerManager
 import com.voxtube.app.player.GlobalPlayerState
 import com.voxtube.app.ui.screens.player.state.VideoPlayerUiState
@@ -189,7 +189,7 @@ internal class SecondaryMetadataApplier(
     ) {
         scope.launch(ioDispatcher) {
             try {
-                FlowNeuroEngine.noteRelated(context, videoId, videos)
+                VoxTubeNeuroEngine.noteRelated(context, videoId, videos)
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to note related videos", e)
             }

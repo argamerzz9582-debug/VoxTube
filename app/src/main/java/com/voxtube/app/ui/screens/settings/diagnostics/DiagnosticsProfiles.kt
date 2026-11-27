@@ -20,7 +20,7 @@ import com.voxtube.app.data.profile.ProfileRegistryState
 import com.voxtube.app.data.profile.displayName
 import com.voxtube.app.ui.components.profiles.ProfileAvatar
 import com.voxtube.app.ui.components.settings.SettingsListScope
-import com.voxtube.app.ui.components.shared.FlowNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 
 /** Debug builds only, until the Profiles screens arrive: add, switch to and delete profiles. Kept out of settings search. */
 internal fun SettingsListScope.debugProfiles(
@@ -37,7 +37,7 @@ internal fun SettingsListScope.debugProfiles(
         state.profiles.forEach { profile ->
             val running = profile.id == runningId
             row("diagnostics.profiles.${profile.id}") { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = profile.displayName(LocalContext.current),
                     supportingText =
                         stringResource(
@@ -63,7 +63,7 @@ internal fun SettingsListScope.debugProfiles(
         }
         if (state.profiles.size < ProfileRegistry.MAX_PROFILES) {
             row("diagnostics.profiles.add") { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.diagnostics_profile_add),
                     onClick = onAdd,
                     leadingIcon = Icons.Outlined.PersonAdd,
@@ -73,7 +73,7 @@ internal fun SettingsListScope.debugProfiles(
             }
             row("diagnostics.profiles.photo") { shape ->
                 val picker = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> uri?.let(onPhoto) }
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.diagnostics_profile_photo),
                     onClick = { picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
                     leadingIcon = Icons.Outlined.AddAPhoto,
@@ -82,7 +82,7 @@ internal fun SettingsListScope.debugProfiles(
                 )
             }
             row("diagnostics.profiles.add_copy") { shape ->
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = stringResource(R.string.diagnostics_profile_add_copy),
                     supportingText = stringResource(R.string.diagnostics_profile_add_copy_summary),
                     onClick = onAddCopy,

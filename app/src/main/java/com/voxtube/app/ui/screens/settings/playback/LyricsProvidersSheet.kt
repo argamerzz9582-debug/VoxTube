@@ -37,11 +37,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowReorderButtons
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
-import com.voxtube.app.ui.components.shared.FlowSwitch
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
 import com.voxtube.app.ui.components.shared.ReorderHandle
+import com.voxtube.app.ui.components.shared.VoxTubeReorderButtons
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSwitch
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 import sh.calvin.reorderable.ReorderableColumn
 
@@ -79,7 +79,7 @@ internal fun LyricsProvidersSheet(
         sheetState = rememberFlowSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
-        FlowSheetHeader(
+        VoxTubeSheetHeader(
             title = stringResource(R.string.lyrics_provider_title),
             subtitle = stringResource(R.string.settings_lyrics_provider_order_description),
             onClose = onDismiss,
@@ -130,7 +130,7 @@ internal fun LyricsProvidersSheet(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             if (LocalDpadNavigation.current) {
-                                FlowReorderButtons(
+                                VoxTubeReorderButtons(
                                     onMoveUp = if (index > 0) ({ move(index, index - 1) }) else null,
                                     onMoveDown = if (index < providers.lastIndex) ({ move(index, index + 1) }) else null,
                                 )
@@ -164,7 +164,7 @@ internal fun LyricsProvidersSheet(
                                     )
                                 }
                             }
-                            FlowSwitch(
+                            VoxTubeSwitch(
                                 checked = provider.enabled,
                                 onCheckedChange = { viewModel.setLyricsProviderEnabled(provider.name, it) },
                             )

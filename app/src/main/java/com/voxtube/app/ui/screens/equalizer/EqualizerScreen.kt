@@ -54,11 +54,11 @@ import com.voxtube.app.data.audio.eq.EqState
 import com.voxtube.app.ui.components.equalizer.EqBandEditor
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
-import com.voxtube.app.ui.components.layout.topbar.FlowGlobalActionsMode
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBarMenuItem
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBarOverflow
-import com.voxtube.app.ui.components.shared.FlowModalSheetDefaults
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeGlobalActionsMode
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBarMenuItem
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBarOverflow
+import com.voxtube.app.ui.components.shared.VoxTubeModalSheetDefaults
 import com.voxtube.app.ui.components.shared.rememberFlowPaneState
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 import com.voxtube.app.utils.shareLink
@@ -118,41 +118,41 @@ fun EqualizerScreen(
         snackbarHost = { SnackbarHost(snackbar, Modifier.floatAboveBottomChrome(LocalFlowBottomInsets.current)) },
         topBar = {
             if (showPresets) {
-                FlowTopBar(
+                VoxTubeTopBar(
                     title = stringResource(R.string.eq_presets),
                     onBack = { showPresets = false },
-                    globalActions = FlowGlobalActionsMode.None,
+                    globalActions = VoxTubeGlobalActionsMode.None,
                 )
             } else {
-                FlowTopBar(
+                VoxTubeTopBar(
                     title = stringResource(R.string.equalizer),
                     onBack = onBack,
-                    globalActions = FlowGlobalActionsMode.None,
+                    globalActions = VoxTubeGlobalActionsMode.None,
                     actions = {
                         IconButton(onClick = viewModel::undo, enabled = canUndo) {
                             Icon(Icons.AutoMirrored.Filled.Undo, contentDescription = undoLabel)
                         }
                         CompareButton(onBypass = viewModel::setBypass)
-                        FlowTopBarOverflow(
+                        VoxTubeTopBarOverflow(
                             items =
                                 listOf(
-                                    FlowTopBarMenuItem(
+                                    VoxTubeTopBarMenuItem(
                                         stringResource(R.string.eq_presets),
                                         { showPresets = true },
                                         icon = Icons.Outlined.LibraryMusic,
                                     ),
-                                    FlowTopBarMenuItem(
+                                    VoxTubeTopBarMenuItem(
                                         stringResource(R.string.eq_import_file),
                                         { openFile.launch(IMPORT_TYPES) },
                                         icon = Icons.Outlined.UploadFile,
                                     ),
-                                    FlowTopBarMenuItem(
+                                    VoxTubeTopBarMenuItem(
                                         stringResource(R.string.eq_paste_text),
                                         { dialog = EqDialog.Paste },
                                         icon = Icons.Outlined.ContentPaste,
                                     ),
-                                    FlowTopBarMenuItem(exportTitle, { share(null) }, icon = Icons.Outlined.IosShare),
-                                    FlowTopBarMenuItem(
+                                    VoxTubeTopBarMenuItem(exportTitle, { share(null) }, icon = Icons.Outlined.IosShare),
+                                    VoxTubeTopBarMenuItem(
                                         stringResource(R.string.reset),
                                         viewModel::resetCurve,
                                         icon = Icons.Outlined.RestartAlt,
@@ -226,8 +226,8 @@ private fun BandSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        modifier = FlowModalSheetDefaults.modifier,
-        contentWindowInsets = FlowModalSheetDefaults.contentWindowInsets,
+        modifier = VoxTubeModalSheetDefaults.modifier,
+        contentWindowInsets = VoxTubeModalSheetDefaults.contentWindowInsets,
     ) {
         EqBandEditor(
             index = index,

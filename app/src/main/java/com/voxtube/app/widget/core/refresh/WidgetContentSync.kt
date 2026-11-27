@@ -45,7 +45,7 @@ private val Context.widgetContentStore by safePreferencesDataStore(name = "widge
  * Re-renders a content widget when what it draws has changed, and only while one is placed.
  *
  * The last signature each kind was rendered with is persisted, for the same reason the theme's is
- * ([com.voxtube.app.widget.core.FlowWidgets]): a process start must not re-render every placed
+ * ([com.voxtube.app.widget.core.VoxTubeWidgets]): a process start must not re-render every placed
  * widget for nothing, since each render holds a Glance session that taxes the app's frames.
  */
 @Singleton
@@ -77,7 +77,7 @@ class WidgetContentSync
             if (sources.any { isPlaced(it) }) ensureStarted()
         }
 
-        /** The widgets that redraw through this sync rather than through [com.voxtube.app.widget.core.FlowWidgets]. */
+        /** The widgets that redraw through this sync rather than through [com.voxtube.app.widget.core.VoxTubeWidgets]. */
         val widgets: Set<KClass<out GlanceAppWidget>> get() = sources.mapTo(HashSet()) { it.widget::class }
 
         /** After a profile switch: what was rendered belongs to the previous profile, so every placed content widget draws again. */

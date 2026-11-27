@@ -19,9 +19,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 
 private val FieldSpacing = 12.dp
 
@@ -39,7 +39,7 @@ internal fun DownloadCacheCustomSizeDialog(
     val megabytes = CacheSizeInput.parse(text, unit)
     val invalid = text.isNotBlank() && megabytes == null
 
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = {
@@ -59,8 +59,8 @@ internal fun DownloadCacheCustomSizeDialog(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal, imeAction = ImeAction.Done),
                     modifier = Modifier.fillMaxWidth(),
                 )
-                FlowConnectedToggleGroup(
-                    options = CacheSizeUnit.entries.map { FlowToggleOption(it, stringResource(it.label())) },
+                VoxTubeConnectedToggleGroup(
+                    options = CacheSizeUnit.entries.map { VoxTubeToggleOption(it, stringResource(it.label())) },
                     selected = unit,
                     onSelected = { unit = it },
                 )

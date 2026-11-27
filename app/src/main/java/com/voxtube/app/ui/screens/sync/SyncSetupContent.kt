@@ -48,7 +48,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.utils.readPlainText
 import kotlinx.coroutines.launch
 
@@ -113,7 +113,7 @@ internal fun SyncSelectContent(
 
     SyncRowGroup(count = COLLECTION_KEYS.size) { index, shape ->
         val key = COLLECTION_KEYS[index]
-        FlowSwitchRow(
+        VoxTubeSwitchRow(
             title = collectionLabel(key),
             supportingText = collectionDescription(key),
             checked = key in selected,

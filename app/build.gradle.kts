@@ -60,8 +60,8 @@ android {
         applicationId = "com.voxtube.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 20
-        versionName = "3.0.5"
+        versionCode = 21
+        versionName = "1.0.0"
 
         buildConfigField("int", "NIGHTLY_RUN", "0")
         buildConfigField("String", "APP_LANGUAGE_TAGS", "\"${(listOf("en") + translatedLocaleTags()).joinToString(",")}\"")
@@ -154,8 +154,8 @@ android {
             isDebuggable = true
             isMinifyEnabled = false
             isShrinkResources = false
-            // `-Pflow.unitTestCoverage` turns on JaCoCo for the unit tests (createGithubDebugUnitTestCoverageReport).
-            enableUnitTestCoverage = providers.gradleProperty("flow.unitTestCoverage").isPresent
+            // `-Pvoxtube.unitTestCoverage` turns on JaCoCo for the unit tests (createGithubDebugUnitTestCoverageReport).
+            enableUnitTestCoverage = providers.gradleProperty("voxtube.unitTestCoverage").isPresent
         }
         release {
             buildConfigField("String", "UPDATE_CHANNEL", "\"stable\"")
@@ -187,7 +187,7 @@ android {
             initWith(getByName("release"))
             // PR runs carry the nightly key too, so their own id keeps a test build from installing over a
             // tester's nightly, which the next nightly would then open with an older schema (#1854).
-            applicationIdSuffix = if (providers.gradleProperty("flow.prBuild").isPresent) ".nightly.pr" else ".nightly"
+            applicationIdSuffix = if (providers.gradleProperty("voxtube.prBuild").isPresent) ".nightly.pr" else ".nightly"
             versionNameSuffix = "-nightly"
             matchingFallbacks += "release"
             buildConfigField("String", "UPDATE_CHANNEL", "\"nightly\"")
@@ -254,8 +254,8 @@ tasks.withType<Test>().configureEach {
         },
     )
     maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
-    // `-Dflow.fuzz.cases=N` and `-Dflow.fuzz.seed=S` reach the property tests.
-    for (name in listOf("flow.fuzz.cases", "flow.fuzz.seed")) providers.systemProperty(name).orNull?.let { systemProperty(name, it) }
+    // `-Dvoxtube.fuzz.cases=N` and `-Dvoxtube.fuzz.seed=S` reach the property tests.
+    for (name in listOf("voxtube.fuzz.cases", "voxtube.fuzz.seed")) providers.systemProperty(name).orNull?.let { systemProperty(name, it) }
     // A failure's cause, e.g. what an earlier test leaked into runTest, otherwise only reaches the HTML report.
     testLogging { exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL }
 }
@@ -278,7 +278,7 @@ androidComponents {
     onVariants(selector().withBuildType("nightly")) { variant ->
         val run = providers.environmentVariable("GITHUB_RUN_NUMBER").map(String::toInt)
         val sha = providers.environmentVariable("GITHUB_SHA").map { it.take(7) }
-        val base = providers.gradleProperty("flow.nightlyBaseVersion")
+        val base = providers.gradleProperty("voxtube.nightlyBaseVersion")
         variant.outputs.forEach { output ->
             val localCode = output.versionCode.get()
             val localName = output.versionName.get()

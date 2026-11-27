@@ -5,8 +5,8 @@ import com.voxtube.app.data.feed.FeedPrefetchQueue
 import com.voxtube.app.data.local.HomeFeedCacheRepository
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
 import com.voxtube.app.data.recommendation.NeuroScoring
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -54,8 +54,8 @@ internal class HomeLoadMorePages(
         try {
             val now = System.currentTimeMillis()
             val userSubs = session.subscriptionScope().boosted
-            val brain = FlowNeuroEngine.getBrainSnapshot()
-            val taste = feedTasteProfile(brain, FlowNeuroEngine.getPersona(brain))
+            val brain = VoxTubeNeuroEngine.getBrainSnapshot()
+            val taste = feedTasteProfile(brain, VoxTubeNeuroEngine.getPersona(brain))
             val currentIds =
                 uiState.value.videos
                     .map { it.id }
@@ -122,7 +122,7 @@ internal class HomeLoadMorePages(
             }
 
             if (session.currentQueryIndex >= session.discoveryQueries.size) {
-                session.discoveryQueries.addAll(unaskedQueries(FlowNeuroEngine.generateDiscoveryQueries(), session.discoveryQueries))
+                session.discoveryQueries.addAll(unaskedQueries(VoxTubeNeuroEngine.generateDiscoveryQueries(), session.discoveryQueries))
             }
 
             // The next page of a search already filling Home takes one of the two searches.
@@ -158,7 +158,7 @@ internal class HomeLoadMorePages(
             val rawVideos = searches.flatMap { it.second }
             if (!homePrefetchQueue.isCurrent(generation)) return PrefetchAttempt(LoadMoreOutcome.EXHAUSTED)
 
-            // Extract shorts for shelf — rank through FlowNeuro
+            // Extract shorts for shelf — rank through VoxTubeNeuro
             val moreShorts =
                 rawVideos
                     .extractShorts()
@@ -167,7 +167,7 @@ internal class HomeLoadMorePages(
                     .filterNot(session.feedExclusions()::hidesFromRecommendations)
             if (moreShorts.isNotEmpty() && playerPreferences.effectiveHomeShortsShelfEnabled.first()) {
                 val rankedMore =
-                    FlowNeuroEngine
+                    VoxTubeNeuroEngine
                         .rank(moreShorts, userSubs)
                         .recentlyShownLast { NeuroScoring.isRecentlySeen(brain.feedHistory[it], now) }
                 uiState.update { state ->
@@ -183,10 +183,10 @@ internal class HomeLoadMorePages(
                         .filterRecentHomeSuggestion(now)
                 if (newVideos.isEmpty()) return
                 val rankedDiscovery =
-                    FlowNeuroEngine
+                    VoxTubeNeuroEngine
                         .shareByInterest(
                             demoteByFit(
-                                FlowNeuroEngine.rank(newVideos, userSubs, NeuroScoring.LANE_RELEVANCE_FLOOR, session.snapshotTrace),
+                                VoxTubeNeuroEngine.rank(newVideos, userSubs, NeuroScoring.LANE_RELEVANCE_FLOOR, session.snapshotTrace),
                                 taste,
                             ),
                         ).let { spreadAcrossSearches(it, queries::get, it.size) }

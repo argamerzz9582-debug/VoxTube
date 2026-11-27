@@ -52,11 +52,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.shared.FittedShareCard
-import com.voxtube.app.ui.components.shared.FlowActionButtonPair
-import com.voxtube.app.ui.components.shared.FlowColorSwatch
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowPairAction
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeActionButtonPair
+import com.voxtube.app.ui.components.shared.VoxTubeColorSwatch
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubePairAction
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.components.shared.rememberMediaPalette
 import com.voxtube.app.ui.utils.captureInto
 import com.voxtube.app.utils.copyPlainText
@@ -156,7 +156,7 @@ internal fun ColumnScope.LyricsShareStyler(
         horizontalArrangement = Arrangement.spacedBy(ControlSpacing),
     ) {
         items(styles) { option ->
-            FlowColorSwatch(
+            VoxTubeColorSwatch(
                 color = colorsByStyle.getValue(option).ground,
                 selected = option == style,
                 onClick = { onStyleChange(option) },
@@ -167,68 +167,72 @@ internal fun ColumnScope.LyricsShareStyler(
             )
         }
     }
-    FlowConnectedToggleGroup(
+    VoxTubeConnectedToggleGroup(
         options =
             listOf(
-                FlowToggleOption(
+                VoxTubeToggleOption(
                     LyricsCardLayout.CLASSIC,
                     stringResource(R.string.lyrics_share_layout_classic),
                     Icons.AutoMirrored.Outlined.Notes,
                 ),
-                FlowToggleOption(LyricsCardLayout.POSTER, stringResource(R.string.lyrics_share_layout_poster), Icons.Outlined.FormatQuote),
-                FlowToggleOption(LyricsCardLayout.SHAPE, stringResource(R.string.lyrics_share_layout_shape), Icons.Outlined.Interests),
+                VoxTubeToggleOption(
+                    LyricsCardLayout.POSTER,
+                    stringResource(R.string.lyrics_share_layout_poster),
+                    Icons.Outlined.FormatQuote,
+                ),
+                VoxTubeToggleOption(LyricsCardLayout.SHAPE, stringResource(R.string.lyrics_share_layout_shape), Icons.Outlined.Interests),
             ),
         selected = layout,
         onSelected = onLayoutChange,
         modifier = Modifier.padding(start = EdgePadding, end = EdgePadding, top = ControlSpacing),
     )
-    FlowConnectedToggleGroup(
+    VoxTubeConnectedToggleGroup(
         options =
             listOf(
-                FlowToggleOption(LyricsCardAspect.FIT, stringResource(R.string.lyrics_share_size_fit), Icons.Outlined.CropFree),
-                FlowToggleOption(LyricsCardAspect.SQUARE, stringResource(R.string.lyrics_share_size_square), Icons.Outlined.CropDin),
-                FlowToggleOption(LyricsCardAspect.STORY, stringResource(R.string.lyrics_share_size_story), Icons.Outlined.CropPortrait),
+                VoxTubeToggleOption(LyricsCardAspect.FIT, stringResource(R.string.lyrics_share_size_fit), Icons.Outlined.CropFree),
+                VoxTubeToggleOption(LyricsCardAspect.SQUARE, stringResource(R.string.lyrics_share_size_square), Icons.Outlined.CropDin),
+                VoxTubeToggleOption(LyricsCardAspect.STORY, stringResource(R.string.lyrics_share_size_story), Icons.Outlined.CropPortrait),
             ),
         selected = aspect,
         onSelected = onAspectChange,
         modifier = Modifier.padding(start = EdgePadding, end = EdgePadding, top = ControlSpacing),
     )
-    FlowConnectedToggleGroup(
+    VoxTubeConnectedToggleGroup(
         options =
             listOf(
-                FlowToggleOption(LyricsCardFrame.SQUARE, stringResource(R.string.lyrics_share_frame_square), Icons.Outlined.BorderOuter),
-                FlowToggleOption(
+                VoxTubeToggleOption(LyricsCardFrame.SQUARE, stringResource(R.string.lyrics_share_frame_square), Icons.Outlined.BorderOuter),
+                VoxTubeToggleOption(
                     LyricsCardFrame.BACKDROP,
                     stringResource(R.string.lyrics_share_frame_backdrop),
                     Icons.Outlined.FilterFrames,
                 ),
-                FlowToggleOption(LyricsCardFrame.TRANSPARENT, stringResource(R.string.lyrics_share_frame_clear), Icons.Outlined.Opacity),
+                VoxTubeToggleOption(LyricsCardFrame.TRANSPARENT, stringResource(R.string.lyrics_share_frame_clear), Icons.Outlined.Opacity),
             ),
         selected = frame,
         onSelected = onFrameChange,
         modifier = Modifier.padding(start = EdgePadding, end = EdgePadding, top = ControlSpacing),
     )
-    FlowConnectedToggleGroup(
+    VoxTubeConnectedToggleGroup(
         options =
             listOf(
-                FlowToggleOption(TextAlign.Left, stringResource(R.string.lyrics_share_align_left), Icons.Outlined.FormatAlignLeft),
-                FlowToggleOption(TextAlign.Center, stringResource(R.string.lyrics_share_align_center), Icons.Outlined.FormatAlignCenter),
-                FlowToggleOption(TextAlign.Right, stringResource(R.string.lyrics_share_align_right), Icons.Outlined.FormatAlignRight),
+                VoxTubeToggleOption(TextAlign.Left, stringResource(R.string.lyrics_share_align_left), Icons.Outlined.FormatAlignLeft),
+                VoxTubeToggleOption(TextAlign.Center, stringResource(R.string.lyrics_share_align_center), Icons.Outlined.FormatAlignCenter),
+                VoxTubeToggleOption(TextAlign.Right, stringResource(R.string.lyrics_share_align_right), Icons.Outlined.FormatAlignRight),
             ),
         selected = align,
         onSelected = onAlignChange,
         modifier = Modifier.padding(horizontal = EdgePadding, vertical = ControlSpacing),
     )
-    FlowActionButtonPair(
+    VoxTubeActionButtonPair(
         primary =
-            FlowPairAction(Icons.Outlined.Share, stringResource(R.string.share)) {
+            VoxTubePairAction(Icons.Outlined.Share, stringResource(R.string.share)) {
                 scope.launch {
                     val image = runCatching { layer.toImageBitmap() }.getOrNull()
                     if (image == null || !shareLyricsCard(context, image, chooserTitle)) report(R.string.lyrics_share_image_failed)
                 }
             },
         secondary =
-            FlowPairAction(Icons.Outlined.SaveAlt, stringResource(R.string.lyrics_share_save_image)) {
+            VoxTubePairAction(Icons.Outlined.SaveAlt, stringResource(R.string.lyrics_share_save_image)) {
                 scope.launch {
                     val image = runCatching { layer.toImageBitmap() }.getOrNull()
                     if (image == null) {
@@ -241,7 +245,7 @@ internal fun ColumnScope.LyricsShareStyler(
             },
         modifier = Modifier.padding(start = EdgePadding, end = EdgePadding, bottom = ControlSpacing),
         tertiary =
-            FlowPairAction(Icons.Outlined.ContentCopy, stringResource(R.string.btn_copy)) {
+            VoxTubePairAction(Icons.Outlined.ContentCopy, stringResource(R.string.btn_copy)) {
                 scope.launch {
                     clipboard.copyPlainText(title, lyricsCopyText(lines, title, artist))
                     // Android 13 and later confirm a copy themselves.

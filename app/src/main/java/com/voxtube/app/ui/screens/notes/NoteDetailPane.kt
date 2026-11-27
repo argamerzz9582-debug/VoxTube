@@ -55,12 +55,12 @@ import com.voxtube.app.data.notes.NoteMoments
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
 import com.voxtube.app.ui.components.shared.DurationBadge
-import com.voxtube.app.ui.components.shared.FlowActionButtonPair
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowPairAction
-import com.voxtube.app.ui.components.shared.FlowRowGroup
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
 import com.voxtube.app.ui.components.shared.VideoThumbnailImage
+import com.voxtube.app.ui.components.shared.VoxTubeActionButtonPair
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubePairAction
+import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.rememberNoteText
 import com.voxtube.app.utils.formatDurationMillis
@@ -69,7 +69,7 @@ private val TwoColumnMinWidth = 720.dp
 private val ChannelAvatarLarge = 96.dp
 private val ChannelAvatarSmall = 36.dp
 
-/** [FlowRowGroup] insets its rows by this much, so everything else in the pane does too. */
+/** [VoxTubeRowGroup] insets its rows by this much, so everything else in the pane does too. */
 private val ContentInset = 12.dp
 
 /**
@@ -123,15 +123,15 @@ private fun NoteSubjectHeader(
     val channelId = if (isVideo) note.subject?.channelId?.takeIf { it.isNotBlank() } else note.targetId
     Column(modifier = Modifier.padding(horizontal = ContentInset), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         if (isVideo) VideoHero(note, onPlay, onOpenChannel) else ChannelHero(note)
-        val edit = FlowPairAction(Icons.Outlined.EditNote, stringResource(R.string.note_edit), onEdit)
+        val edit = VoxTubePairAction(Icons.Outlined.EditNote, stringResource(R.string.note_edit), onEdit)
         when {
             isVideo -> {
-                FlowActionButtonPair(FlowPairAction(Icons.Rounded.PlayArrow, stringResource(R.string.resume)) { onPlay(null) }, edit)
+                VoxTubeActionButtonPair(VoxTubePairAction(Icons.Rounded.PlayArrow, stringResource(R.string.resume)) { onPlay(null) }, edit)
             }
 
             channelId != null -> {
-                FlowActionButtonPair(
-                    FlowPairAction(Icons.Rounded.AccountCircle, stringResource(R.string.note_open_channel)) { onOpenChannel(channelId) },
+                VoxTubeActionButtonPair(
+                    VoxTubePairAction(Icons.Rounded.AccountCircle, stringResource(R.string.note_open_channel)) { onOpenChannel(channelId) },
                     edit,
                 )
             }
@@ -275,11 +275,11 @@ private fun ColumnScope.NoteBody(
     onPlay: (Long?) -> Unit,
 ) {
     if (moments.isNotEmpty()) {
-        FlowSectionHeader(stringResource(R.string.note_timestamps))
-        FlowRowGroup {
+        VoxTubeSectionHeader(stringResource(R.string.note_timestamps))
+        VoxTubeRowGroup {
             moments.forEachIndexed { index, moment ->
                 val time = formatDurationMillis(moment.positionMs)
-                FlowNavRow(
+                VoxTubeNavRow(
                     title = moment.label.ifBlank { time },
                     onClick = { onPlay(moment.positionMs) },
                     shape = flowRowGroupShape(index, moments.size),
@@ -294,7 +294,7 @@ private fun ColumnScope.NoteBody(
             }
         }
     }
-    FlowSectionHeader(stringResource(R.string.note_title))
+    VoxTubeSectionHeader(stringResource(R.string.note_title))
     Surface(
         shape = MaterialTheme.shapes.large,
         color = MaterialTheme.colorScheme.surfaceContainerHigh,

@@ -56,12 +56,12 @@ import com.voxtube.app.data.local.LYRICS_ALIGN_RIGHT
 import com.voxtube.app.data.local.LyricsAnimationStyle
 import com.voxtube.app.data.local.LyricsBackgroundStyle
 import com.voxtube.app.data.local.LyricsGlow
-import com.voxtube.app.ui.components.shared.FlowAlertDialog
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowNavRow
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeNavRow
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionRow
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsGroup
 import com.voxtube.app.ui.components.shared.quickactions.QuickActionsSheet
@@ -91,11 +91,11 @@ internal fun LyricsActionsSheet(
     var showAnimationChoice by remember { mutableStateOf(false) }
     var showGlowChoice by remember { mutableStateOf(false) }
     if (showAnimationChoice) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.lyrics_animation),
             options =
                 LyricsAnimationStyle.entries.map {
-                    FlowChoice(it, stringResource(lyricsAnimationLabel(it)), stringResource(lyricsAnimationDetail(it)))
+                    VoxTubeChoice(it, stringResource(lyricsAnimationLabel(it)), stringResource(lyricsAnimationDetail(it)))
                 },
             selected = display.animationStyle,
             onSelect = { onDisplayChange(display.copy(animationStyle = it)) },
@@ -103,20 +103,20 @@ internal fun LyricsActionsSheet(
         )
     }
     if (showGlowChoice) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.lyrics_glow),
-            options = LyricsGlow.entries.map { FlowChoice(it, stringResource(lyricsGlowLabel(it))) },
+            options = LyricsGlow.entries.map { VoxTubeChoice(it, stringResource(lyricsGlowLabel(it))) },
             selected = display.glow,
             onSelect = { onDisplayChange(display.copy(glow = it)) },
             onDismiss = { showGlowChoice = false },
         )
     }
     if (showBackgroundChoice) {
-        FlowChoiceDialog(
+        VoxTubeChoiceDialog(
             title = stringResource(R.string.lyrics_background),
             options =
                 LyricsBackgroundStyle.entries.map {
-                    FlowChoice(it, stringResource(lyricsBackgroundLabel(it)), stringResource(lyricsBackgroundDetail(it)))
+                    VoxTubeChoice(it, stringResource(lyricsBackgroundLabel(it)), stringResource(lyricsBackgroundDetail(it)))
                 },
             selected = display.background,
             onSelect = { onDisplayChange(display.copy(background = it)) },
@@ -168,7 +168,7 @@ internal fun LyricsActionsSheet(
                     }
                 },
         )
-        FlowSectionHeader(stringResource(R.string.lyrics_display_header))
+        VoxTubeSectionHeader(stringResource(R.string.lyrics_display_header))
         Row(
             modifier =
                 Modifier
@@ -326,7 +326,7 @@ private fun lyricsRow(
     onClick: () -> Unit,
 ): QuickActionRow =
     QuickActionRow(key) { shape ->
-        FlowNavRow(title = title, supportingText = supporting, leadingIcon = icon, onClick = onClick, showChevron = false, shape = shape)
+        VoxTubeNavRow(title = title, supportingText = supporting, leadingIcon = icon, onClick = onClick, showChevron = false, shape = shape)
     }
 
 private fun lyricsSwitchRow(
@@ -339,7 +339,7 @@ private fun lyricsSwitchRow(
     onCheckedChange: (Boolean) -> Unit,
 ): QuickActionRow =
     QuickActionRow(key) { shape ->
-        FlowSwitchRow(
+        VoxTubeSwitchRow(
             title = title,
             checked = checked,
             onCheckedChange = onCheckedChange,
@@ -396,7 +396,7 @@ internal fun LyricsEditDialog(
     onDismiss: () -> Unit,
 ) {
     var text by remember(initialText) { mutableStateOf(initialText) }
-    FlowAlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.lyrics_edit)) },
         text = {

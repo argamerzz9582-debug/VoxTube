@@ -40,7 +40,7 @@ import com.voxtube.app.widget.core.component.WidgetRowThumb
 import com.voxtube.app.widget.core.image.WidgetImageSpec
 import com.voxtube.app.widget.core.image.preloadWidgetImages
 import com.voxtube.app.widget.core.image.rememberWidgetImages
-import com.voxtube.app.widget.core.theme.FlowGlanceTheme
+import com.voxtube.app.widget.core.theme.VoxTubeGlanceTheme
 import com.voxtube.app.widget.core.theme.WidgetDimens
 import com.voxtube.app.widget.core.theme.WidgetText
 import com.voxtube.app.widget.core.theme.bakedCornerRadiusPx
@@ -66,7 +66,7 @@ class DownloadsWidget : GlanceAppWidget() {
         val downloads = withContext(Dispatchers.IO) { widgetEntryPoint(context).downloadsSource().load() }
         val colors = widgetColorsFlow(context).first()
         provideContent {
-            FlowGlanceTheme(colors) { DownloadsContent(downloads.items.map { it.toItem(context, emptyMap()) }, downloads.inProgress) }
+            VoxTubeGlanceTheme(colors) { DownloadsContent(downloads.items.map { it.toItem(context, emptyMap()) }, downloads.inProgress) }
         }
     }
 
@@ -96,7 +96,7 @@ class DownloadsWidget : GlanceAppWidget() {
         provideContent {
             val colors by colorsFlow.collectAsState(initialColors)
             val images by rememberWidgetImages(context, specs, preloaded)
-            FlowGlanceTheme(colors) {
+            VoxTubeGlanceTheme(colors) {
                 DownloadsContent(downloads.items.map { it.toItem(context, images) }, downloads.inProgress)
             }
         }

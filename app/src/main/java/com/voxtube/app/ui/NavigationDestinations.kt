@@ -4,7 +4,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.voxtube.app.data.shorts.queue.ShortsQueueSource
 import com.voxtube.app.ui.components.layout.navigation.DOWNLOADS_ROUTE
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.screens.search.SEARCH_ROUTE_PATTERN
 import java.net.URI
 import java.net.URLEncoder
@@ -13,31 +13,31 @@ import java.net.URLEncoder
 internal fun flowTabForDestination(
     route: String?,
     shortsSourceArg: String?,
-): FlowTab? =
+): VoxTubeTab? =
     when (route) {
         null -> null
-        SHORTS_ROUTE_PATTERN -> FlowTab.Shorts.takeIf { ShortsQueueSource.decode(shortsSourceArg) == ShortsQueueSource.Feed }
-        SEARCH_ROUTE_PATTERN -> FlowTab.Search
-        else -> FlowTab.entries.firstOrNull { it.route == route }
+        SHORTS_ROUTE_PATTERN -> VoxTubeTab.Shorts.takeIf { ShortsQueueSource.decode(shortsSourceArg) == ShortsQueueSource.Feed }
+        SEARCH_ROUTE_PATTERN -> VoxTubeTab.Search
+        else -> VoxTubeTab.entries.firstOrNull { it.route == route }
     }
 
-internal fun NavBackStackEntry.flowTab(): FlowTab? = flowTabForDestination(destination.route, arguments?.getString(SHORTS_ROUTE_ARG))
+internal fun NavBackStackEntry.flowTab(): VoxTubeTab? = flowTabForDestination(destination.route, arguments?.getString(SHORTS_ROUTE_ARG))
 
 /** The tab a route handed in from outside the graph (a widget, a shortcut) names, if any. */
 internal fun flowTabForRoute(
     route: String,
     downloadsTab: Boolean,
-): FlowTab? =
-    FlowTab.entries.firstOrNull { it.route == route }
-        ?: FlowTab.Downloads.takeIf { route == DOWNLOADS_ROUTE && downloadsTab }
+): VoxTubeTab? =
+    VoxTubeTab.entries.firstOrNull { it.route == route }
+        ?: VoxTubeTab.Downloads.takeIf { route == DOWNLOADS_ROUTE && downloadsTab }
 
 /** Downloads as its tab when the bar has one, else as a page over the current screen. */
 internal fun NavController.openDownloads(
-    tabs: List<FlowTab>,
+    tabs: List<VoxTubeTab>,
     startRoute: String,
 ) {
-    if (FlowTab.Downloads in tabs) {
-        navigateToTab(FlowTab.Downloads, startRoute)
+    if (VoxTubeTab.Downloads in tabs) {
+        navigateToTab(VoxTubeTab.Downloads, startRoute)
     } else {
         navigate(DOWNLOADS_ROUTE) { launchSingleTop = true }
     }
@@ -48,7 +48,7 @@ internal const val OPEN_MUSIC_SUBSCRIPTIONS = "open_music_subscriptions"
 
 /** Switches tabs the way the bar does: one copy per tab, each keeping its own saved state. */
 internal fun NavController.navigateToTab(
-    tab: FlowTab,
+    tab: VoxTubeTab,
     startRoute: String,
 ) {
     navigate(tab.route) {
@@ -79,14 +79,14 @@ internal enum class TabTap {
  * was turned on is part of its saved stack, so switching to it would restore that page.
  */
 internal fun tabTapAction(
-    tapped: FlowTab,
-    currentTab: FlowTab?,
-    selectedTab: FlowTab,
+    tapped: VoxTubeTab,
+    currentTab: VoxTubeTab?,
+    selectedTab: VoxTubeTab,
     searchIsTab: Boolean,
-    startTab: FlowTab,
+    startTab: VoxTubeTab,
 ): TabTap =
     when {
-        currentTab == FlowTab.Search && tapped != FlowTab.Search && (!searchIsTab || tapped == startTab) -> TabTap.LEAVE_SEARCH
+        currentTab == VoxTubeTab.Search && tapped != VoxTubeTab.Search && (!searchIsTab || tapped == startTab) -> TabTap.LEAVE_SEARCH
         currentTab == tapped -> TabTap.SCROLL_TO_TOP
         currentTab == null && tapped == selectedTab -> TabTap.POP_TO_ROOT
         else -> TabTap.SWITCH
@@ -95,14 +95,14 @@ internal fun tabTapAction(
 /** Carries out a [TabTap] that changes the screen; [selectedTab] is the tab whose pages are showing. */
 internal fun NavController.tapTab(
     action: TabTap,
-    tab: FlowTab,
-    selectedTab: FlowTab,
+    tab: VoxTubeTab,
+    selectedTab: VoxTubeTab,
     startRoute: String,
 ) {
     when (action) {
         TabTap.LEAVE_SEARCH -> {
             closeSearch()
-            if (currentBackStackEntry?.flowTab() == FlowTab.Search || tab != selectedTab) navigateToTab(tab, startRoute)
+            if (currentBackStackEntry?.flowTab() == VoxTubeTab.Search || tab != selectedTab) navigateToTab(tab, startRoute)
         }
 
         TabTap.POP_TO_ROOT -> {
@@ -121,14 +121,14 @@ internal fun NavController.tapTab(
 
 /** Closes the Search pages on top without keeping them; Search as the opening screen has nothing under it and stays. */
 internal fun NavController.closeSearch() {
-    while (currentBackStackEntry?.flowTab() == FlowTab.Search && previousBackStackEntry != null) popBackStack()
+    while (currentBackStackEntry?.flowTab() == VoxTubeTab.Search && previousBackStackEntry != null) popBackStack()
 }
 
 /** The first visible tab that is not [leaving]: where a video from the Shorts tab plays, and where back leads from Search as the opening tab. */
 internal fun exitTab(
-    tabs: List<FlowTab>,
-    leaving: FlowTab,
-): FlowTab = tabs.firstOrNull { it != leaving } ?: FlowTab.Home
+    tabs: List<VoxTubeTab>,
+    leaving: VoxTubeTab,
+): VoxTubeTab = tabs.firstOrNull { it != leaving } ?: VoxTubeTab.Home
 
 /**
  * The pages inside a tab that keep the bar when the user asks for it: content people browse. Settings,
@@ -157,14 +157,14 @@ internal val PAGES_WITH_NAVIGATION_BAR: Set<String> =
 
 /** Whether the bar shows on the screen at [route]: every tab's first screen, Search when [onSearch], listed pages when [onInnerPages]. */
 internal fun navigationBarShown(
-    currentTab: FlowTab?,
+    currentTab: VoxTubeTab?,
     route: String?,
     onSearch: Boolean,
     onInnerPages: Boolean,
 ): Boolean = currentTab.showsNavigationBar(onSearch) || (onInnerPages && currentTab == null && route in PAGES_WITH_NAVIGATION_BAR)
 
 /** Search is a tab, but it keeps the back-button layout of the other search screens, so no bar unless [onSearch] asks for it. */
-internal fun FlowTab?.showsNavigationBar(onSearch: Boolean = false): Boolean = this != null && (this != FlowTab.Search || onSearch)
+internal fun VoxTubeTab?.showsNavigationBar(onSearch: Boolean = false): Boolean = this != null && (this != VoxTubeTab.Search || onSearch)
 
 internal fun youtubeChannelUrl(channelIdOrHandle: String): String? {
     val value = channelIdOrHandle.trim()

@@ -25,7 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.settings.SettingsListScope
 import com.voxtube.app.ui.components.settings.SettingsPage
-import com.voxtube.app.ui.components.shared.FlowEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 
 /** Every topic, channel and artist blocked in either engine, each one tap from coming back. */
 @Composable
@@ -41,7 +41,7 @@ internal fun HiddenContentScreen(
     SettingsPage(title = stringResource(R.string.taste_hidden_title), onBack = onBack, highlight = highlight) {
         if (!state.loading && hidden.count == 0 && allowedAi.isEmpty()) {
             item("hidden.empty") {
-                FlowEmptyState(
+                VoxTubeEmptyState(
                     title = stringResource(R.string.taste_hidden_empty_title),
                     subtitle = stringResource(R.string.taste_hidden_empty_body),
                     icon = Icons.Outlined.VisibilityOff,

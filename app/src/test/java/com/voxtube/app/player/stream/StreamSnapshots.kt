@@ -153,7 +153,7 @@ internal fun scrubInfoFor(
 ): ScrubInfo = scrubInfoAt(positionMs, stateWithChapters(chapters).chapters, emptyList(), null)
 
 /**
- * FlowChaptersBottomSheet's private `chapterStartMs`, reached by reflection because the sheet keeps
+ * VoxTubeChaptersBottomSheet's private `chapterStartMs`, reached by reflection because the sheet keeps
  * it private and the safety net may not change production code.
  */
 internal fun chapterStartMs(
@@ -162,7 +162,7 @@ internal fun chapterStartMs(
 ): Long? {
     val method =
         Class
-            .forName("com.voxtube.app.ui.components.videoplayer.sheet.FlowChaptersBottomSheetKt")
+            .forName("com.voxtube.app.ui.components.videoplayer.sheet.VoxTubeChaptersBottomSheetKt")
             .getDeclaredMethod("chapterStartMs", List::class.java, Int::class.javaPrimitiveType)
     method.isAccessible = true
     return method.invoke(null, stateWithChapters(chapters).chapters, index) as Long?

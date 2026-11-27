@@ -43,9 +43,9 @@ import com.voxtube.app.data.local.MAX_MINI_BAR_BUTTONS
 import com.voxtube.app.data.local.MiniBarButton
 import com.voxtube.app.ui.components.musicplayer.mini.icon
 import com.voxtube.app.ui.components.musicplayer.mini.labelRes
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
-import com.voxtube.app.ui.components.shared.FlowSwitch
 import com.voxtube.app.ui.components.shared.MediaMiniBarDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSwitch
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
@@ -92,7 +92,7 @@ internal fun MiniButtonsSheet(
         sheetState = rememberFlowSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
-        FlowSheetHeader(
+        VoxTubeSheetHeader(
             title = stringResource(R.string.player_appearance_mini_buttons_title),
             subtitle = stringResource(R.string.player_appearance_mini_buttons_subtitle),
             onClose = onDismiss,
@@ -173,7 +173,7 @@ private fun ButtonRow(
             color = if (enabled || checked) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f),
         )
-        FlowSwitch(checked = checked, onCheckedChange = onCheckedChange, enabled = enabled)
+        VoxTubeSwitch(checked = checked, onCheckedChange = onCheckedChange, enabled = enabled)
     }
 }
 

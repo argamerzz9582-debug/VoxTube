@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.common.truth.Truth.assertThat
 import com.voxtube.app.data.local.PlayerPreferences
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowNeuroEngine
+import com.voxtube.app.data.recommendation.VoxTubeNeuroEngine
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
@@ -247,14 +247,14 @@ class VideoMetadataMappingTest {
         runTest {
             source.serveChannel(channel)
             val context = mockk<Context>()
-            mockkObject(FlowNeuroEngine.Companion)
+            mockkObject(VoxTubeNeuroEngine.Companion)
             try {
-                coEvery { FlowNeuroEngine.onChannelTagsLearned(any(), any(), any(), any()) } just runs
+                coEvery { VoxTubeNeuroEngine.onChannelTagsLearned(any(), any(), any(), any()) } just runs
 
                 repository.learnChannelTags(context, "UCuAXFkgsw1L7xaCfnd5JJOw")
 
                 coVerify(exactly = 1) {
-                    FlowNeuroEngine.onChannelTagsLearned(
+                    VoxTubeNeuroEngine.onChannelTagsLearned(
                         context,
                         "UCuAXFkgsw1L7xaCfnd5JJOw",
                         listOf("rick astley", "pop", "80s"),
@@ -262,7 +262,7 @@ class VideoMetadataMappingTest {
                     )
                 }
             } finally {
-                unmockkObject(FlowNeuroEngine.Companion)
+                unmockkObject(VoxTubeNeuroEngine.Companion)
             }
         }
 
@@ -270,16 +270,16 @@ class VideoMetadataMappingTest {
     fun `a channel with no tags and no description teaches nothing`() =
         runTest {
             source.serveChannel(channel.copy(tags = emptyList(), description = " "))
-            mockkObject(FlowNeuroEngine.Companion)
+            mockkObject(VoxTubeNeuroEngine.Companion)
             try {
-                coEvery { FlowNeuroEngine.onChannelTagsLearned(any(), any(), any(), any()) } just runs
+                coEvery { VoxTubeNeuroEngine.onChannelTagsLearned(any(), any(), any(), any()) } just runs
 
                 repository.learnChannelTags(mockk(), "UCuAXFkgsw1L7xaCfnd5JJOw")
                 repository.learnChannelTags(mockk(), "UCunknown")
 
-                coVerify(exactly = 0) { FlowNeuroEngine.onChannelTagsLearned(any(), any(), any(), any()) }
+                coVerify(exactly = 0) { VoxTubeNeuroEngine.onChannelTagsLearned(any(), any(), any(), any()) }
             } finally {
-                unmockkObject(FlowNeuroEngine.Companion)
+                unmockkObject(VoxTubeNeuroEngine.Companion)
             }
         }
 }

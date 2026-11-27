@@ -44,7 +44,7 @@ import com.voxtube.app.data.playlist.PlaylistImport
 import com.voxtube.app.data.playlist.PlaylistListOrder
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
-import com.voxtube.app.ui.components.layout.topbar.FlowTopBar
+import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.library.PlaylistCreationFabMenu
 import com.voxtube.app.ui.components.library.PlaylistCreationTarget
 import com.voxtube.app.ui.components.library.PlaylistLibraryFilterRow
@@ -161,7 +161,7 @@ fun PlaylistsScreen(
     Scaffold(
         contentWindowInsets = WindowInsets(0.dp),
         topBar = {
-            FlowTopBar(
+            VoxTubeTopBar(
                 title =
                     stringResource(
                         when {

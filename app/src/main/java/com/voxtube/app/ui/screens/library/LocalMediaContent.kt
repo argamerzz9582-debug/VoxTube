@@ -42,11 +42,11 @@ import com.voxtube.app.data.localmedia.LocalMediaItem
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.library.LibrarySelection
 import com.voxtube.app.ui.components.library.libraryGridLayoutFor
-import com.voxtube.app.ui.components.shared.FlowEmptyState
-import com.voxtube.app.ui.components.shared.FlowPullToRefreshBox
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
 import com.voxtube.app.ui.components.shared.MediaKind
 import com.voxtube.app.ui.components.shared.MediaThumbnailDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
+import com.voxtube.app.ui.components.shared.VoxTubePullToRefreshBox
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.animateMediaGridItem
 
 private val GridSpacing = 12.dp
@@ -81,7 +81,7 @@ internal fun LocalMediaContent(
 ) {
     val isVideos = state.selection.kind == MediaKind.Videos
     val filters = state.selection.filters
-    FlowPullToRefreshBox(
+    VoxTubePullToRefreshBox(
         isRefreshing = isRefreshing,
         onRefresh = onRefresh,
         state = rememberPullToRefreshState(),
@@ -114,7 +114,7 @@ internal fun LocalMediaContent(
                                     if (index <
                                         state.folders.lastIndex
                                     ) {
-                                        FlowSegmentedGap
+                                        VoxTubeSegmentedGap
                                     } else {
                                         0.dp
                                     },
@@ -134,7 +134,7 @@ internal fun LocalMediaContent(
                         fullWidth("summary") { PlayAllRow(state.items, isVideos, rowInset(columns, showFolders), actions) }
                     } else if (state.totalCount == 0) {
                         fullWidth("empty") {
-                            FlowEmptyState(
+                            VoxTubeEmptyState(
                                 title =
                                     stringResource(
                                         R.string.local_media_empty_title,
@@ -147,7 +147,7 @@ internal fun LocalMediaContent(
                         }
                     } else {
                         fullWidth("no_results") {
-                            FlowEmptyState(
+                            VoxTubeEmptyState(
                                 title =
                                     stringResource(
                                         R.string.local_media_empty_title,

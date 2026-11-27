@@ -8,7 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.ui.components.shared.FlowNoticeBanner
+import com.voxtube.app.ui.components.shared.VoxTubeNoticeBanner
 import com.voxtube.app.ui.theme.Dimensions
 
 /** Which AI list an opened artist is on, which decides the banner's wording. */
@@ -30,7 +30,7 @@ internal fun LazyListScope.artistAiNotice(
 ) {
     if (notice == null) return
     item(key = "ai_notice") {
-        FlowNoticeBanner(
+        VoxTubeNoticeBanner(
             icon = ImageVector.vectorResource(R.drawable.ic_ai_content),
             message = stringResource(notice.message),
             actionLabel = stringResource(R.string.ai_music_artist_show),

@@ -27,10 +27,10 @@ import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.notice
 import com.voxtube.app.ui.components.settings.option
 import com.voxtube.app.ui.components.settings.switch
-import com.voxtube.app.ui.components.shared.FlowChoice
-import com.voxtube.app.ui.components.shared.FlowChoiceDialog
-import com.voxtube.app.ui.components.shared.FlowConnectedToggleGroup
-import com.voxtube.app.ui.components.shared.FlowToggleOption
+import com.voxtube.app.ui.components.shared.VoxTubeChoice
+import com.voxtube.app.ui.components.shared.VoxTubeChoiceDialog
+import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
+import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.settings.index.QualityIndex
 
 private val TabsBottomPadding = 8.dp
@@ -69,9 +69,17 @@ internal fun QualitySettingsScreen(
 
     val tabs =
         listOf(
-            FlowToggleOption(SettingsTabs.QUALITY_VIDEO, stringResource(R.string.settings_quality_tab_video), Icons.Outlined.SmartDisplay),
-            FlowToggleOption(SettingsTabs.QUALITY_SHORTS, stringResource(R.string.settings_quality_tab_shorts), Icons.Outlined.Slideshow),
-            FlowToggleOption(SettingsTabs.QUALITY_MUSIC, stringResource(R.string.settings_quality_tab_music), Icons.Outlined.MusicNote),
+            VoxTubeToggleOption(
+                SettingsTabs.QUALITY_VIDEO,
+                stringResource(R.string.settings_quality_tab_video),
+                Icons.Outlined.SmartDisplay,
+            ),
+            VoxTubeToggleOption(
+                SettingsTabs.QUALITY_SHORTS,
+                stringResource(R.string.settings_quality_tab_shorts),
+                Icons.Outlined.Slideshow,
+            ),
+            VoxTubeToggleOption(SettingsTabs.QUALITY_MUSIC, stringResource(R.string.settings_quality_tab_music), Icons.Outlined.MusicNote),
         )
     val videoWifiLabel = stringResource(videoQualityLabel(videoWifi))
     val videoMobileLabel = stringResource(videoQualityLabel(videoMobile))
@@ -89,7 +97,7 @@ internal fun QualitySettingsScreen(
         onBack = onBack,
         highlight = highlight,
         header = {
-            FlowConnectedToggleGroup(
+            VoxTubeConnectedToggleGroup(
                 options = tabs,
                 selected = selectedTab,
                 onSelected = { selectedTab = it },
@@ -214,9 +222,9 @@ private fun QualityPickerDialog(
         options: List<VideoQuality>,
         selected: VideoQuality,
         onSelect: (VideoQuality) -> Unit,
-    ) = FlowChoiceDialog(
+    ) = VoxTubeChoiceDialog(
         title = stringResource(title),
-        options = options.map { FlowChoice(it, stringResource(videoQualityLabel(it))) },
+        options = options.map { VoxTubeChoice(it, stringResource(videoQualityLabel(it))) },
         selected = selected,
         onSelect = onSelect,
         onDismiss = onDismiss,
@@ -227,11 +235,11 @@ private fun QualityPickerDialog(
         title: Int,
         selected: ThumbnailQuality,
         onSelect: (ThumbnailQuality) -> Unit,
-    ) = FlowChoiceDialog(
+    ) = VoxTubeChoiceDialog(
         title = stringResource(title),
         options =
             ThumbnailQualities.map {
-                FlowChoice(it, stringResource(thumbnailQualityLabel(it)), stringResource(thumbnailQualityDescription(it)))
+                VoxTubeChoice(it, stringResource(thumbnailQualityLabel(it)), stringResource(thumbnailQualityDescription(it)))
             },
         selected = selected,
         onSelect = onSelect,
@@ -265,12 +273,12 @@ private fun QualityPickerDialog(
 
         QualityPicker.CODEC -> {
             val autoDescription = stringResource(R.string.player_settings_video_codec_auto_desc)
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_settings_video_codec_dialog_title),
                 description = stringResource(R.string.player_settings_video_codec_dialog_body),
                 options =
                     codecChoices(state.hardwareAv1, state.codec).map {
-                        FlowChoice(it, codecLabel(it), autoDescription.takeIf { _ -> it == VideoCodec.AUTO })
+                        VoxTubeChoice(it, codecLabel(it), autoDescription.takeIf { _ -> it == VideoCodec.AUTO })
                     },
                 selected = state.codec,
                 onSelect = viewModel::setCodec,
@@ -280,12 +288,12 @@ private fun QualityPickerDialog(
 
         QualityPicker.FALLBACK_CODEC -> {
             val autoDescription = stringResource(R.string.player_settings_video_codec_fallback_auto_desc)
-            FlowChoiceDialog(
+            VoxTubeChoiceDialog(
                 title = stringResource(R.string.player_settings_video_codec_fallback),
                 description = stringResource(R.string.player_settings_video_codec_fallback_dialog_body),
                 options =
                     fallbackCodecs(state.codec, codecChoices(state.hardwareAv1, state.fallbackCodec)).map {
-                        FlowChoice(
+                        VoxTubeChoice(
                             it,
                             codecLabel(it),
                             autoDescription.takeIf { _ ->

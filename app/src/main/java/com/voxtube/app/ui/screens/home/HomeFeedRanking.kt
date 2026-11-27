@@ -1,8 +1,8 @@
 package com.voxtube.app.ui.screens.home
 
 import com.voxtube.app.data.model.Video
-import com.voxtube.app.data.recommendation.FlowPersona
 import com.voxtube.app.data.recommendation.UserBrain
+import com.voxtube.app.data.recommendation.VoxTubePersona
 import kotlinx.coroutines.flow.map
 
 // Format signals often tied to low-effort feed filler. NOT a blocklist: they only demote
@@ -36,15 +36,15 @@ internal data class FeedTasteProfile(
 
 internal fun feedTasteProfile(
     brain: UserBrain,
-    persona: FlowPersona,
+    persona: VoxTubePersona,
 ): FeedTasteProfile {
     val comfort =
         when (persona) {
-            FlowPersona.DEEP_DIVER, FlowPersona.SCHOLAR,
-            FlowPersona.BINGER, FlowPersona.AUDIOPHILE,
+            VoxTubePersona.DEEP_DIVER, VoxTubePersona.SCHOLAR,
+            VoxTubePersona.BINGER, VoxTubePersona.AUDIOPHILE,
             -> 0
 
-            FlowPersona.SKIMMER -> DURATION_COMFORT_SKIMMER_SEC
+            VoxTubePersona.SKIMMER -> DURATION_COMFORT_SKIMMER_SEC
 
             else -> DURATION_COMFORT_DEFAULT_SEC
         }

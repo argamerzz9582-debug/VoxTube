@@ -110,9 +110,6 @@
     <string name="settings_item_export_data">Ekspor Data</string>
     <string name="settings_item_import_data">Impor Data</string>
     <string name="settings_item_about_flow">Tentang VoxTube</string>
-    <string name="settings_item_about_flow_subtitle">Versi, Lisensi, Kontributor</string>
-    <string name="settings_item_support">Dukungan &amp; Donasi</string>
-    <string name="settings_item_support_subtitle">Bantu dukung pengembangan VoxTube</string>
     <string name="settings_export_success">Data berhasil diekspor</string>
     <string name="settings_export_failed">Ekspor gagal: %1$s</string>
     <string name="appearance_title">Tampilan</string>
@@ -122,7 +119,6 @@
     <string name="appearance_category_dark">Gelap</string>
     <string name="appearance_category_special">Spesial</string>
     <string name="app_icon_apply_toast">Ikon diperbarui - launcher Anda akan disegarkan</string>
-    <string name="icon_name_flow_red">VoxTube Merah</string>
     <string name="icon_name_amoled">AMOLED Gelap</string>
     <string name="icon_name_monochrome">Monokrom</string>
     <string name="icon_name_ghost">Hantu</string>
@@ -947,15 +943,8 @@
     <string name="location_badge_recommended">Direkomendasikan</string>
     <string name="location_badge_active">Aktif</string>
     <string name="select_threads_count_desc">Pilih jumlah thread (1-8):</string>
-    <string name="support_donations_title">Dukungan &amp; Donasi</string>
-    <string name="support_flow_dev_title">Dukung Pengembangan Flow</string>
-    <string name="support_flow_dev_desc">Jika Flow bermanfaat bagi Anda, Anda dapat mendukungnya melalui Open Collective, Patreon, atau mata uang kripto di bawah ini. Terima kasih!</string>
-    <string name="support_flow_patreon">Dukung Flow di Patreon</string>
     <string name="thank_you_support_message">Terima kasih atas dukungan Anda! ❤️</string>
     <string name="address_copied_toast">Alamat disalin ke papan klip</string>
-    <string name="donation_address_clip_label">Alamat Donasi</string>
-    <string name="about_creator">Pembuat</string>
-    <string name="about_website">Situs Web</string>
     <string name="github_subtitle">Kode sumber &amp; Masalah</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Pustaka ekstraksi inti</string>
@@ -983,7 +972,6 @@
     <string name="section_legal">Hukum</string>
     <string name="section_device">Perangkat</string>
     <string name="donate_item_title">Donasi</string>
-    <string name="support_dev_subtitle">Dukung pengembangan</string>
     <string name="btn_ok">OKE</string>
     <string name="btn_copy">Salin</string>
     <string name="github_label">GitHub</string>
@@ -1605,12 +1593,6 @@
     <string name="player_settings_video_codec_dialog_title">Codec Video Default</string>
     <string name="player_settings_video_codec_dialog_body">Codec yang dipilih VoxTube terlebih dahulu. Anda tetap dapat memilih codec apa pun dari menu kualitas. H.264 paling lancar di sebagian besar perangkat. AV1 dan VP9 menggunakan data lebih sedikit, tetapi memerlukan daya lebih besar.</string>
     <string name="player_settings_video_codec_auto_desc">Biarkan aplikasi memilih (mengutamakan H.264)</string>
-    <string name="donation_prompt_title">Menikmati Flow?</string>
-    <string name="donation_prompt_message">Flow gratis, open source, dan tanpa iklan. Jika Flow layak mendapat tempat di ponsel Anda, sedikit dukungan akan membantunya tetap berjalan.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Dukung pengembangan</string>
-    <string name="donation_prompt_later">Mungkin nanti</string>
-    <string name="donation_prompt_never">Jangan tampilkan lagi</string>
     <string name="library_local_media_label">Media bawaan</string>
     <string name="library_local_media_subtitle">Putar video dan musik di perangkat ini</string>
     <string name="local_media_title">Media bawaan</string>
@@ -1870,10 +1852,6 @@
     <string name="playback_speed_multiplier">%1$s×</string>
     <string name="playback_speed_multiplier_precise">%1$.2f×</string>
     <string name="channel_metadata_unavailable">Informasi kanal tidak tersedia</string>
-    <string name="about_creator_name">A-EDev</string>
-    <string name="about_website_address">flow-tube.org</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Flow_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="equalizer">Ekualiser</string>
     <string name="action_save_preset">Simpan prasetel</string>
@@ -2316,7 +2294,6 @@
     <string name="settings_search_no_results">Tidak ada pengaturan yang ditemukan untuk %1$s</string>
     <string name="settings_lyrics_provider_order_description">Dicoba dari atas ke bawah. Seret untuk mengurutkan ulang.</string>
     <string name="import_running_background">Anda dapat meninggalkan layar ini. Proses impor tetap berjalan.</string>
-    <string name="donations_cryptocurrency">MATA UANG KRIPTO</string>
     <string name="import_no_history_entries">Tidak ada entri riwayat tontonan yang ditemukan di file</string>
     <string name="import_no_videos">Tidak ada video yang ditemukan di file daftar putar</string>
     <string name="import_no_content">Tidak ada konten yang dapat diimpor yang ditemukan di cadangan ini</string>
@@ -3060,7 +3037,6 @@
     <string name="settings_changelog_all_releases">Semua rilis di GitHub</string>
     <string name="settings_changelog_expand">Tampilkan perubahan</string>
     <string name="settings_changelog_collapse">Sembunyikan perubahan</string>
-    <string name="settings_creator_role">Kreator dan pengembang Flow</string>
     <string name="device_info_section_device">Perangkat</string>
     <string name="device_info_section_system">Sistem</string>
     <string name="device_info_section_display">Tampilan</string>
@@ -3111,7 +3087,6 @@
     <string name="settings_custom_theme_start_from">Mulai dari</string>
     <string name="settings_custom_theme_count">%1$d dari %2$d tema</string>
     <string name="settings_custom_theme_empty">Belum ada tema kustom</string>
-    <string name="settings_custom_theme_empty_body">Mulai dari palet apa pun atau impor palet yang dibuat di Flow Desktop.</string>
     <string name="settings_custom_theme_import_failed">Tidak ada tema yang valid dalam file tersebut</string>
     <string name="settings_custom_theme_limit">Anda dapat menyimpan hingga %1$d tema</string>
     <string name="settings_custom_theme_exported">Tema diekspor</string>
@@ -3355,7 +3330,7 @@
     <string name="content_settings_home_subscriptions_subtitle">Gabungkan video dari channel yang Anda ikuti ke Beranda</string>
     <string name="settings_section_watch_history">Riwayat tontonan</string>
     <string name="pause_watch_history_title">Jeda riwayat tontonan</string>
-    <string name="pause_watch_history_subtitle">Berhenti menyimpan tontonan Anda. Deep Flow juga berhenti belajar</string>
+    <string name="pause_watch_history_subtitle">Berhenti menyimpan tontonan Anda. Deep Focus juga berhenti belajar</string>
     <string name="content_settings_hide_watched_shorts_subtitle">Jangan tampilkan Shorts yang telah selesai ditonton dari rak dan feed Shorts</string>
     <string name="settings_open_music_player_on_play_title">Buka pemutar penuh untuk lagu baru</string>
     <string name="settings_open_music_player_on_play_summary">Nonaktif akan mempertahankan lagu baru di pemutar mini</string>
@@ -3989,12 +3964,12 @@
     <string name="subscription_posts_empty">Tidak ada postingan dalam 30 hari terakhir</string>
     <string name="notifications_already_in_watch_later">Sudah ada di Tonton Nanti</string>
     <string name="notifications_save_to_watch_later">Simpan ke Tonton Nanti</string>
-    <string name="deep_flow_scrobble_title">Scrobble selama Deep Flow</string>
-    <string name="taste_learning_paused">Deep Flow aktif, pembelajaran dijeda</string>
+    <string name="deep_flow_scrobble_title">Scrobble selama Deep Focus</string>
+    <string name="taste_learning_paused">Deep Focus aktif, pembelajaran dijeda</string>
     <string name="deep_flow_scrobble_subtitle">Tetap kirim riwayat dengar ke Last.fm, Libre.fm, dan ListenBrainz</string>
     <string name="deep_flow_on_search_title">Tampilkan di penelusuran</string>
-    <string name="deep_flow_on_search_subtitle">Tombol alih Deep Flow di atas penelusuran terbaru</string>
-    <string name="deep_flow_long_press_hint">Tekan lama logo atau nama VoxTube di Beranda untuk mengaktifkan atau menonaktifkan Deep Flow</string>
+    <string name="deep_flow_on_search_subtitle">Tombol alih Deep Focus di atas penelusuran terbaru</string>
+    <string name="deep_flow_long_press_hint">Tekan lama logo atau nama VoxTube di Beranda untuk mengaktifkan atau menonaktifkan Deep Focus</string>
     <string name="notif_type_shorts">Shorts</string>
     <string name="notif_type_shorts_subtitle">Sertakan Shorts dalam notifikasi video baru dari channel yang diikuti</string>
     <string name="notif_check_interval_off_new_videos">Nonaktif saat Video Baru dinonaktifkan</string>
@@ -4251,7 +4226,6 @@
     <plurals name="import_takeout_part_ads_removed">
         <item quantity="other">%d iklan dihapus dari riwayat</item>
     </plurals>
-    <string name="support_flow_open_collective">Dukung Flow di Open Collective</string>
     <string name="about_notices">Pemberitahuan sumber terbuka</string>
     <string name="about_notices_summary">Daftar kata dan kode dari proyek lain</string>
     <string name="onboarding_import_subtitle_profile">Impor subscription dan riwayat dari aplikasi lain ke %1$s. Semuanya opsional.</string>

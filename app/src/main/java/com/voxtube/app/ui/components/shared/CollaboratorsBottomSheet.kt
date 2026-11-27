@@ -62,7 +62,7 @@ internal fun collaboratorRows(
         val name = collaborator.name.ifBlank { fallbackName }
         val canOpen = collaborator.channelId.isNotBlank()
         QuickActionRow(key = collaborator.channelId.ifBlank { "collaborator:$index" }) { shape ->
-            FlowNavRow(
+            VoxTubeNavRow(
                 title = name,
                 supportingText = collaborator.subscriberCountText.takeIf { it.isNotBlank() },
                 onClick = {
@@ -100,13 +100,13 @@ internal fun collaboratorRows(
                                     isSubscribed = isSubscribed,
                                     beforeOpen = onOpened,
                                 )
-                            FlowSubscribeButton(
+                            VoxTubeSubscribeButton(
                                 isSubscribed = isSubscribed,
                                 onSubscribeClick = toggle,
                                 onUnsubscribeClick = toggle,
                                 isNotificationsEnabled = collaborator.channelId in notifyingChannelIds,
                                 onNotificationChange = { bell.setNotifications(collaborator.channelId, it) },
-                                size = FlowSubscribeButtonSize.Compact,
+                                size = VoxTubeSubscribeButtonSize.Compact,
                                 showSubscribedLabel = false,
                                 onAddNote = organize.onAddNote,
                                 onManageGroups = organize.onManageGroups,

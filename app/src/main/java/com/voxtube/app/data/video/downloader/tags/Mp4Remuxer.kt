@@ -89,10 +89,10 @@ class Mp4Remuxer
                     var closed = false
                     try {
                         inputs.forEach { it.muxerTrack = muxer.addTrack(MediaFormatUtil.createFormatFromMediaFormat(it.format)) }
-                        tags?.let { FlowTagFields.encode(it) }?.forEach { (field, value) ->
+                        tags?.let { VoxTubeTagFields.encode(it) }?.forEach { (field, value) ->
                             muxer.addMetadataEntry(
                                 MdtaMetadataEntry(
-                                    FlowTagFields.mdtaKey(field),
+                                    VoxTubeTagFields.mdtaKey(field),
                                     value.toByteArray(Charsets.UTF_8),
                                     MdtaMetadataEntry.TYPE_INDICATOR_STRING,
                                 ),

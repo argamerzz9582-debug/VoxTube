@@ -23,7 +23,7 @@ import com.voxtube.app.data.stats.RankedKind
 import com.voxtube.app.data.stats.VideoRecap
 import com.voxtube.app.data.stats.ViewFormat
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowArtistShape
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.stats.StatBigNumber
@@ -63,7 +63,7 @@ private fun RankedRows(
     value: @Composable (RankedItem) -> String,
 ) {
     val navigator = LocalMediaNavigator.current
-    Column(verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap)) {
+    Column(verticalArrangement = Arrangement.spacedBy(VoxTubeSegmentedGap)) {
         items.forEachIndexed { index, item ->
             val link = item.link()
             StatRankRow(

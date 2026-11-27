@@ -20,8 +20,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
-import com.voxtube.app.data.recommendation.FlowPersona
-import com.voxtube.app.ui.components.shared.FlowSpinner
+import com.voxtube.app.data.recommendation.VoxTubePersona
+import com.voxtube.app.ui.components.shared.VoxTubeSpinner
 import com.voxtube.app.ui.screens.settings.taste.PersonaEmblem
 
 private val CardPadding = 16.dp
@@ -32,7 +32,7 @@ private val EmblemSize = 56.dp
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 internal fun PersonaEntryCard(
-    persona: FlowPersona?,
+    persona: VoxTubePersona?,
     selected: Boolean,
     onOpen: () -> Unit,
     modifier: Modifier = Modifier,
@@ -52,7 +52,7 @@ internal fun PersonaEntryCard(
             if (persona != null) {
                 PersonaEmblem(persona, Modifier.size(EmblemSize))
             } else {
-                FlowSpinner(Modifier.size(EmblemSize))
+                VoxTubeSpinner(Modifier.size(EmblemSize))
             }
             Column(Modifier.weight(1f)) {
                 Text(

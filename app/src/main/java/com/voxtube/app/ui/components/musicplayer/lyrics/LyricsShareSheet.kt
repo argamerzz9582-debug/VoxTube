@@ -30,9 +30,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.lyrics.LyricsEntry
-import com.voxtube.app.ui.components.shared.FlowActionButton
-import com.voxtube.app.ui.components.shared.FlowModalSheetDefaults
-import com.voxtube.app.ui.components.shared.FlowSheetHeader
+import com.voxtube.app.ui.components.shared.VoxTubeActionButton
+import com.voxtube.app.ui.components.shared.VoxTubeModalSheetDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 import com.voxtube.app.ui.components.shared.toggleHapticType
 import kotlinx.coroutines.launch
@@ -73,11 +73,11 @@ internal fun LyricsShareSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
         properties = properties,
-        modifier = FlowModalSheetDefaults.modifier,
-        contentWindowInsets = FlowModalSheetDefaults.contentWindowInsets,
+        modifier = VoxTubeModalSheetDefaults.modifier,
+        contentWindowInsets = VoxTubeModalSheetDefaults.contentWindowInsets,
     ) {
         BackHandler(enabled = styling) { customising = false }
-        FlowSheetHeader(
+        VoxTubeSheetHeader(
             title = stringResource(R.string.lyrics_share),
             subtitle = stringResource(R.string.lyrics_share_selected, selected.size, MAX_SHARE_LINES),
             onClose = { scope.launch { sheetState.hide() }.invokeOnCompletion { onDismiss() } },
@@ -157,7 +157,7 @@ private fun ColumnScope.LyricsSharePicker(
             }
         }
     }
-    FlowActionButton(
+    VoxTubeActionButton(
         text = stringResource(R.string.next),
         onClick = onNext,
         enabled = selected.isNotEmpty(),

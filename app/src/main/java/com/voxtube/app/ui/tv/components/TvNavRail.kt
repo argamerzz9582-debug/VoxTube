@@ -54,7 +54,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.PlayingWaveform
-import com.voxtube.app.ui.components.layout.navigation.FlowTab
+import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.components.layout.navigation.icon
 import com.voxtube.app.ui.components.music.common.LocalMusicNowPlayingAnimates
 import com.voxtube.app.ui.tv.navigation.TV_SETTINGS_ROUTE
@@ -73,7 +73,7 @@ import com.voxtube.app.ui.tv.navigation.TV_SETTINGS_ROUTE
  */
 @Composable
 fun TvNavRail(
-    tabs: List<FlowTab>,
+    tabs: List<VoxTubeTab>,
     selectedRoute: String?,
     onSelect: (String) -> Unit,
     onFocusChanged: (Boolean) -> Unit,
@@ -122,7 +122,7 @@ fun TvNavRail(
         Column {
             // Music keeps playing under the browse screens; its entry sits right under Music (after the last
             // tab when Music is hidden) and is the one stop away from the full player.
-            val nowPlayingAfter = tabs.lastOrNull { it == FlowTab.Music } ?: tabs.lastOrNull()
+            val nowPlayingAfter = tabs.lastOrNull { it == VoxTubeTab.Music } ?: tabs.lastOrNull()
             tabs.forEach { tab ->
                 val selected = tab.route == selectedRoute
                 TvRailItem(

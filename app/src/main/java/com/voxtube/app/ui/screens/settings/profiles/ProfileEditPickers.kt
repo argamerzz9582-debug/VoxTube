@@ -32,8 +32,8 @@ import com.voxtube.app.R
 import com.voxtube.app.data.profile.Profile
 import com.voxtube.app.data.profile.ProfileAvatar
 import com.voxtube.app.ui.components.profiles.ProfileAvatar
-import com.voxtube.app.ui.components.shared.FlowColorSwatch
-import com.voxtube.app.ui.components.shared.FlowColorSwatchDefaults
+import com.voxtube.app.ui.components.shared.VoxTubeColorSwatch
+import com.voxtube.app.ui.components.shared.VoxTubeColorSwatchDefaults
 import com.voxtube.app.ui.theme.ProfileColors
 import com.voxtube.app.ui.theme.profileTones
 
@@ -81,7 +81,7 @@ internal fun ProfileColorPicker(
     ) {
         ProfileColors.seeds.forEach { (key, _) ->
             val name = ColorNames[key]?.let { stringResource(it) } ?: key
-            FlowColorSwatch(
+            VoxTubeColorSwatch(
                 color = profileTones(key).container,
                 selected = key == selected,
                 onClick = { onSelect(key) },
@@ -124,7 +124,7 @@ internal fun ProfilePicturePicker(
                     Icon(
                         Icons.Outlined.AddPhotoAlternate,
                         contentDescription = null,
-                        modifier = Modifier.size(FlowColorSwatchDefaults.IconSize),
+                        modifier = Modifier.size(VoxTubeColorSwatchDefaults.IconSize),
                     )
                 }
             }
@@ -150,7 +150,7 @@ private fun PictureCell(
     Surface(
         modifier =
             Modifier
-                .size(FlowColorSwatchDefaults.Size)
+                .size(VoxTubeColorSwatchDefaults.Size)
                 .clip(CircleShape)
                 .selectable(selected = selected, role = Role.RadioButton, onClick = onClick)
                 .semantics { contentDescription = label },

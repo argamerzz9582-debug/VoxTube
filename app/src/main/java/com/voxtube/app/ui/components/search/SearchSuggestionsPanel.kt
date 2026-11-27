@@ -36,9 +36,9 @@ import com.voxtube.app.data.local.SearchType
 import com.voxtube.app.innertube.pages.search.SearchSuggestion
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.shared.DeepFlowState
-import com.voxtube.app.ui.components.shared.FlowConfirmDialog
-import com.voxtube.app.ui.components.shared.FlowSuggestionRow
-import com.voxtube.app.ui.components.shared.FlowSwitchRow
+import com.voxtube.app.ui.components.shared.VoxTubeConfirmDialog
+import com.voxtube.app.ui.components.shared.VoxTubeSuggestionRow
+import com.voxtube.app.ui.components.shared.VoxTubeSwitchRow
 import com.voxtube.app.ui.components.shared.deepFlowStatus
 import com.voxtube.app.utils.NetworkState
 
@@ -73,7 +73,7 @@ fun SearchSuggestionsPanel(
     ) {
         if (deepFlow.showOnSearch && query.isBlank()) {
             item(key = "deepflow") {
-                FlowSwitchRow(
+                VoxTubeSwitchRow(
                     title = stringResource(R.string.deep_flow_mode_title),
                     supportingText = deepFlowStatus(deepFlow) ?: stringResource(R.string.deep_flow_mode_subtitle),
                     checked = deepFlow.active,
@@ -96,7 +96,7 @@ fun SearchSuggestionsPanel(
         )
 
         items(remoteRows, key = { "suggestion:${it.text}" }) { suggestion ->
-            FlowSuggestionRow(
+            VoxTubeSuggestionRow(
                 text = suggestion.text,
                 leadingIcon = Icons.Rounded.Search,
                 onClick = { onSubmit(suggestion.text) },
@@ -128,7 +128,7 @@ fun LazyListScope.searchHistoryItems(
     val shown = history.shownHistory(showAll)
     item(key = "history:header") { SearchHistoryHeader(onClearHistory) }
     items(shown, key = { "history:${it.id}" }) { item ->
-        FlowSuggestionRow(
+        VoxTubeSuggestionRow(
             text = item.query,
             leadingIcon = if (item.type == SearchType.VOICE) Icons.Rounded.Mic else Icons.Rounded.History,
             onClick = { onSelect(item) },
@@ -169,7 +169,7 @@ private fun SearchHistoryHeader(onClearHistory: () -> Unit) {
         }
     }
     if (confirming) {
-        FlowConfirmDialog(
+        VoxTubeConfirmDialog(
             title = stringResource(R.string.clear_history_dialog_title),
             text = stringResource(R.string.clear_history_dialog_text),
             confirmLabel = stringResource(R.string.clear),

@@ -37,8 +37,8 @@ class EmbeddedTagsTest {
     @Test
     fun `embedded tags come from mdta entries and fill gaps from display frames`() {
         val entries =
-            FlowTagFields.encode(full.copy(album = null, lyrics = null)).map { (field, value) ->
-                MdtaMetadataEntry(FlowTagFields.mdtaKey(field), value.toByteArray(), MdtaMetadataEntry.TYPE_INDICATOR_STRING)
+            VoxTubeTagFields.encode(full.copy(album = null, lyrics = null)).map { (field, value) ->
+                MdtaMetadataEntry(VoxTubeTagFields.mdtaKey(field), value.toByteArray(), MdtaMetadataEntry.TYPE_INDICATOR_STRING)
             } +
                 listOf(
                     TextInformationFrame("TALB", null, listOf("Frame album")),
@@ -84,7 +84,7 @@ class EmbeddedTagsTest {
         val entries =
             listOf(
                 InternalFrame("com.apple.iTunes", "videoId", "nope"),
-                InternalFrame(FlowTagFields.NAMESPACE, "kind", "VIDEO"),
+                InternalFrame(VoxTubeTagFields.NAMESPACE, "kind", "VIDEO"),
                 TextInformationFrame("TIT2", null, listOf("Plain title")),
                 TextInformationFrame("TPE1", null, listOf("Plain artist")),
             )
@@ -100,8 +100,8 @@ class EmbeddedTagsTest {
     fun `track frame fills number and total`() {
         val entries =
             listOf(
-                InternalFrame(FlowTagFields.NAMESPACE, "videoId", "v"),
-                InternalFrame(FlowTagFields.NAMESPACE, "kind", "MUSIC"),
+                InternalFrame(VoxTubeTagFields.NAMESPACE, "videoId", "v"),
+                InternalFrame(VoxTubeTagFields.NAMESPACE, "kind", "MUSIC"),
                 TextInformationFrame("TIT2", null, listOf("Song")),
                 TextInformationFrame("TRCK", null, listOf("4/9")),
             )

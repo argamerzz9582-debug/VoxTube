@@ -9,11 +9,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.voxtube.app.ui.components.shared.FlowSectionHeader
-import com.voxtube.app.ui.components.shared.FlowSegmentedGap
+import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
+import com.voxtube.app.ui.components.shared.VoxTubeSegmentedGap
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 
-internal val SettingsRowGap = FlowSegmentedGap
+internal val SettingsRowGap = VoxTubeSegmentedGap
 private val GroupHeaderTopPadding = 8.dp
 
 /** Lines the header text up with the row titles below it, whose own padding is 16 dp. */
@@ -53,7 +53,7 @@ class SettingsListScope internal constructor(
         lazy.item(key = keys.add(key)) {
             SettingsColumnFrame(Modifier.padding(horizontal = GroupHeaderInset)) {
                 SettingsHighlightFrame(key = key, shape = RectangleShape) {
-                    FlowSectionHeader(
+                    VoxTubeSectionHeader(
                         text = stringResource(text),
                         modifier = Modifier.padding(top = GroupHeaderTopPadding),
                     )
