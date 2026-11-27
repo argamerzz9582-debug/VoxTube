@@ -25,12 +25,9 @@ import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.Shuffle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonGroupDefaults
-import androidx.compose.material3.ButtonShapes
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
@@ -60,11 +57,15 @@ import coil3.request.ImageRequest
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.shared.GlassDropdownMenu
+import com.voxtube.app.ui.components.shared.GlassPillButton
 import com.voxtube.app.ui.components.shared.LocalSharedArtworkImages
+import com.voxtube.app.ui.components.shared.PillActionSpacing
+import com.voxtube.app.ui.components.shared.PillButtonShapes
 import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
-import com.voxtube.app.ui.components.shared.connectedButtonShapes
 import com.voxtube.app.ui.components.shared.flowHeroArtworkSize
 import com.voxtube.app.ui.components.shared.sharedArtwork
+import com.voxtube.app.ui.theme.CapsuleShape
+import com.voxtube.app.ui.theme.glass.contentGlass
 
 private const val DESCRIPTION_COLLAPSED_LINES = 2
 private val DownloadProgressSize: Dp = 28.dp
@@ -270,24 +271,17 @@ private fun CollectionPrimaryActions(actions: CollectionHeaderActions) {
     val height = ButtonDefaults.MediumContainerHeight
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
+        horizontalArrangement = Arrangement.spacedBy(PillActionSpacing),
     ) {
-        val leading = connectedButtonShapes(index = 0, count = 2)
-        val trailing = connectedButtonShapes(index = 1, count = 2)
         Button(
             onClick = actions.onPlay,
-            shapes = ButtonShapes(leading.shape, leading.pressedShape),
+            shapes = PillButtonShapes,
             contentPadding = ButtonDefaults.contentPaddingFor(height),
             modifier = Modifier.weight(1f).heightIn(min = height),
         ) {
             ActionLabel(Icons.Rounded.PlayArrow, stringResource(R.string.play), height)
         }
-        FilledTonalButton(
-            onClick = actions.onShuffle,
-            shapes = ButtonShapes(trailing.shape, trailing.pressedShape),
-            contentPadding = ButtonDefaults.contentPaddingFor(height),
-            modifier = Modifier.weight(1f).heightIn(min = height),
-        ) {
+        GlassPillButton(onClick = actions.onShuffle, height = height, modifier = Modifier.weight(1f)) {
             ActionLabel(Icons.Rounded.Shuffle, stringResource(R.string.shuffle), height)
         }
     }
@@ -309,7 +303,11 @@ private fun CollectionSecondaryActions(
     state: CollectionHeaderState,
     actions: CollectionHeaderActions,
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    // The lesser actions share one capsule of glass, like a toolbar group on iOS 26.
+    Row(
+        modifier = contentGlass(CapsuleShape).padding(horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
         if (state.canSave) {
             IconToggleButton(checked = state.isSaved, onCheckedChange = { actions.onSaveToggle() }) {
                 Icon(

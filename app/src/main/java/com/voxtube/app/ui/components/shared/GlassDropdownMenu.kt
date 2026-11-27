@@ -1,15 +1,21 @@
 package com.voxtube.app.ui.components.shared
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.ui.theme.glass.LocalGlassAccessibility
@@ -56,6 +62,47 @@ fun GlassDropdownMenu(
         shadowElevation = GlassMenuShadow,
         border = rim,
         content = content,
+    )
+}
+
+private val GlassMenuRowShape = RoundedCornerShape(14.dp)
+private val GlassMenuRowInset = 6.dp
+private const val SELECTED_ROW_DARK_ALPHA = 0.18f
+private const val SELECTED_ROW_LIGHT_ALPHA = 0.07f
+
+/**
+ * A row of a [GlassDropdownMenu]. The [selected] row sits on a soft rounded pill inset from the sheet's
+ * edge, the way iOS 26 marks the current choice in a menu, and says it is selected to a screen reader.
+ */
+@Composable
+fun GlassMenuItem(
+    text: @Composable () -> Unit,
+    onClick: () -> Unit,
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    leadingIcon: (@Composable () -> Unit)? = null,
+    trailingIcon: (@Composable () -> Unit)? = null,
+    enabled: Boolean = true,
+) {
+    val dark = MaterialTheme.colorScheme.surface.luminance() < DARK_SURFACE_LUMINANCE
+    val pill =
+        when {
+            !selected -> Color.Transparent
+            dark -> Color.White.copy(alpha = SELECTED_ROW_DARK_ALPHA)
+            else -> Color.Black.copy(alpha = SELECTED_ROW_LIGHT_ALPHA)
+        }
+    DropdownMenuItem(
+        text = text,
+        onClick = onClick,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
+        enabled = enabled,
+        modifier =
+            modifier
+                .padding(horizontal = GlassMenuRowInset)
+                .clip(GlassMenuRowShape)
+                .background(pill, GlassMenuRowShape)
+                .semantics { this.selected = selected },
     )
 }
 

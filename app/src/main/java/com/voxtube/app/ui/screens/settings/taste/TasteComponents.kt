@@ -1,5 +1,8 @@
 package com.voxtube.app.ui.screens.settings.taste
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +21,8 @@ import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -26,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -36,6 +42,8 @@ import com.voxtube.app.R
 import com.voxtube.app.data.recommendation.VoxTubePersona
 import com.voxtube.app.ui.components.settings.dpadFocusStop
 import com.voxtube.app.ui.components.shared.flowArtistShape
+import com.voxtube.app.ui.theme.glass.LocalGlassAccessibility
+import com.voxtube.app.ui.theme.glass.contentGlass
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.roundToInt
@@ -77,9 +85,13 @@ internal fun PersonaHeroCard(
     maturity: Float,
 ) {
     Surface(
-        modifier = Modifier.fillMaxWidth().dpadFocusStop(MaterialTheme.shapes.extraLarge),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .dpadFocusStop(MaterialTheme.shapes.extraLarge)
+                .then(contentGlass(MaterialTheme.shapes.extraLarge)),
         shape = MaterialTheme.shapes.extraLarge,
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        color = Color.Transparent,
     ) {
         Column(
             modifier = Modifier.padding(HeroPadding),
@@ -121,7 +133,7 @@ private fun Meter(
 
 /**
  * Five traits drawn twice: the whole profile as a filled shape and the current time of day as an
- * outline. Paths are built once per size and data; nothing here animates.
+ * outline. Paths are built once per size and data; only their reveal animates.
  */
 @Composable
 internal fun TasteShapeCard(
@@ -130,9 +142,13 @@ internal fun TasteShapeCard(
 ) {
     val description = stringResource(R.string.taste_shape_description)
     Surface(
-        modifier = Modifier.fillMaxWidth().dpadFocusStop(MaterialTheme.shapes.extraLarge),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .dpadFocusStop(MaterialTheme.shapes.extraLarge)
+                .then(contentGlass(MaterialTheme.shapes.extraLarge)),
         shape = MaterialTheme.shapes.extraLarge,
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        color = Color.Transparent,
     ) {
         Column(
             modifier = Modifier.padding(HeroPadding),
@@ -183,6 +199,11 @@ private fun TasteRadar(
     val grid = MaterialTheme.colorScheme.outlineVariant
     val fill = MaterialTheme.colorScheme.primary
     val outline = MaterialTheme.colorScheme.onSurfaceVariant
+    // The profile grows out of the centre the first time the card is shown, on a soft spring; with
+    // animations off it is simply there. Only the draw phase reads the value, so nothing recomposes.
+    val reduceMotion = LocalGlassAccessibility.current.reduceMotion
+    val reveal = remember { Animatable(if (reduceMotion) 1f else 0f) }
+    LaunchedEffect(Unit) { reveal.animateTo(1f, spring(dampingRatio = RADAR_REVEAL_DAMPING, stiffness = Spring.StiffnessLow)) }
     Box(
         modifier =
             modifier.drawWithCache {
@@ -198,15 +219,18 @@ private fun TasteRadar(
                 onDrawBehind {
                     rings.forEach { drawPath(it, grid, style = gridStroke) }
                     spokes.forEach { (from, to) -> drawLine(grid, from, to, strokeWidth = gridStroke.width) }
-                    drawPath(profilePath, fill.copy(alpha = PROFILE_FILL_ALPHA))
-                    drawPath(profilePath, fill, style = lineStroke)
-                    drawPath(nowPath, outline, style = lineStroke)
+                    scale(reveal.value, pivot = center) {
+                        drawPath(profilePath, fill.copy(alpha = PROFILE_FILL_ALPHA))
+                        drawPath(profilePath, fill, style = lineStroke)
+                        drawPath(nowPath, outline, style = lineStroke)
+                    }
                 }
             },
     )
 }
 
 private const val RADAR_FILL = 0.92f
+private const val RADAR_REVEAL_DAMPING = 0.72f
 
 private fun direction(
     index: Int,

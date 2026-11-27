@@ -57,3 +57,23 @@ fun contentGlass(shape: Shape = GlassShapes.Capsule): Modifier {
             }
         }
 }
+
+private const val HAIRLINE_DARK_ALPHA = 0.16f
+private const val HAIRLINE_LIGHT_ALPHA = 0.08f
+private val HairlineWidth = 0.75.dp
+
+/**
+ * The hairline edge iOS 26 puts around artwork and thumbnails so a dark frame still has a shape on a
+ * dark page. With the system contrast raised it is the theme's outline.
+ */
+@Composable
+fun glassHairline(shape: Shape): Modifier {
+    val scheme = MaterialTheme.colorScheme
+    val color =
+        when {
+            LocalGlassAccessibility.current.increaseContrast -> scheme.outline
+            scheme.surface.luminance() < DARK_SURFACE_LUMINANCE -> Color.White.copy(alpha = HAIRLINE_DARK_ALPHA)
+            else -> Color.Black.copy(alpha = HAIRLINE_LIGHT_ALPHA)
+        }
+    return Modifier.border(HairlineWidth, color, shape)
+}

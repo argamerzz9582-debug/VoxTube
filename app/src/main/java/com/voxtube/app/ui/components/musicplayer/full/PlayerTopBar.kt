@@ -2,6 +2,7 @@ package com.voxtube.app.ui.components.musicplayer.full
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,6 +27,10 @@ import com.voxtube.app.ui.components.shared.VoxTubeToggleOption
 import com.voxtube.app.ui.screens.music.MusicCastViewModel
 import com.voxtube.app.ui.screens.playon.LocalPlayOn
 import com.voxtube.app.ui.screens.playon.PlayOnButton
+import com.voxtube.app.ui.theme.glass.GlassShapes
+import com.voxtube.app.ui.theme.glass.LiquidGlassStyle
+import com.voxtube.app.ui.theme.glass.LocalGlassBackdrop
+import com.voxtube.app.ui.theme.glass.themedGlass
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,7 +57,17 @@ fun PlayerTopBar(
             if (modeSwitch != null) {
                 modeSwitch()
             } else {
+                // Over the player's recorded background the title floats on a capsule of clear glass,
+                // like the source pill at the top of iOS 26's Now Playing.
+                val glass = LocalGlassBackdrop.current != null
                 Column(
+                    modifier =
+                        if (glass) {
+                            themedGlass(GlassShapes.Capsule, LiquidGlassStyle.Clear)
+                                .padding(horizontal = 18.dp, vertical = 4.dp)
+                        } else {
+                            Modifier
+                        },
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
                 ) {

@@ -6,7 +6,6 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,8 +40,8 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
 import com.voxtube.app.ui.components.videoplayer.controls.PlayerPillIconButton
+import com.voxtube.app.ui.components.videoplayer.controls.playerGlass
 import com.voxtube.app.ui.theme.PlayerScrimContent
-import com.voxtube.app.ui.theme.PlayerScrimPanel
 
 private const val DISC_SPIN_MS = 4_000
 private val RailSpacing = 16.dp
@@ -164,7 +163,7 @@ private fun ShortsSoundDisc(
         modifier =
             Modifier
                 .size(SoundDiscSize)
-                .background(PlayerScrimPanel, CircleShape)
+                .then(playerGlass(CircleShape))
                 .padding(SoundDiscRim),
     ) {
         ChannelAvatarImage(

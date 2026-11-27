@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -46,9 +48,11 @@ import com.voxtube.app.ui.components.shared.DownloadedBadge
 import com.voxtube.app.ui.components.shared.flowGridCellWidth
 import com.voxtube.app.ui.components.shared.flowGridColumns
 import com.voxtube.app.ui.components.shared.onMenuKey
+import com.voxtube.app.ui.components.shared.pressScale
 import com.voxtube.app.ui.components.shared.titleMarquee
 import com.voxtube.app.ui.components.shared.titleMarqueeOverflow
 import com.voxtube.app.ui.theme.Dimensions
+import com.voxtube.app.ui.theme.glass.contentGlass
 
 private val SpeedDialRowHeight = 64.dp
 private val SpeedDialGap = 8.dp
@@ -123,14 +127,24 @@ private fun SpeedDialTile(
     val titleColor = highlight?.onContainer ?: scheme.onSurface
     val subtitleColor = highlight?.onContainer?.copy(alpha = SUBTITLE_ALPHA) ?: scheme.onSurfaceVariant
 
+    val shape = MaterialTheme.shapes.medium
+    val interactionSource = remember { MutableInteractionSource() }
     Row(
         modifier =
             modifier
                 .fillMaxHeight()
-                .clip(MaterialTheme.shapes.medium)
-                .background(highlight?.container ?: scheme.surfaceContainerHigh)
-                .onMenuKey(onLongClick)
+                .pressScale(interactionSource)
+                // A resting tile is a pane of glass; the playing one takes the cover's colour.
+                .then(
+                    if (highlight != null) {
+                        Modifier.clip(shape).background(highlight.container)
+                    } else {
+                        contentGlass(shape)
+                    },
+                ).onMenuKey(onLongClick)
                 .combinedClickable(
+                    interactionSource = interactionSource,
+                    indication = ripple(),
                     onClick = onClick,
                     onLongClick = onLongClick,
                 ),
@@ -186,13 +200,15 @@ private fun SpeedDialShuffleTile(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     Row(
         modifier =
             modifier
                 .fillMaxHeight()
+                .pressScale(interactionSource)
                 .clip(MaterialTheme.shapes.medium)
                 .background(MaterialTheme.colorScheme.tertiaryContainer)
-                .clickable(onClick = onClick),
+                .clickable(interactionSource = interactionSource, indication = ripple(), onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(

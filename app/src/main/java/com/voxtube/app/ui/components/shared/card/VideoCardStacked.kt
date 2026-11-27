@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
@@ -21,6 +22,7 @@ import com.voxtube.app.data.model.Video
 import com.voxtube.app.ui.components.shared.ChannelAvatarStack
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
 import com.voxtube.app.ui.components.shared.videoMetadataLine
+import com.voxtube.app.ui.theme.glass.glassHairline
 
 /**
  * The thumbnail across the full width with the details beneath: feeds and grids. A dense card has no
@@ -50,11 +52,12 @@ internal fun VideoCardStacked(
                 .videoCardClickable(state, onClick)
                 .then(if (useInternalPadding) Modifier.padding(horizontal = density.inset) else Modifier),
     ) {
+        val thumbnailShape = stackedThumbnailShape(dense, fullBleed)
         VideoCardThumbnail(
             state = state,
             isUpcoming = video.isUpcoming,
-            shape = stackedThumbnailShape(dense, fullBleed),
-            modifier = Modifier.fillMaxWidth(),
+            shape = thumbnailShape,
+            modifier = Modifier.fillMaxWidth().then(if (fullBleed) Modifier else glassHairline(thumbnailShape)),
         )
 
         if (dense) {
@@ -176,8 +179,11 @@ internal fun stackedThumbnailShape(
     when {
         fullBleed -> RectangleShape
         dense -> MaterialTheme.shapes.medium
-        else -> MaterialTheme.shapes.large
+        else -> StackedThumbnailShape
     }
+
+/** iOS 26's thumbnail corner: rounder than a card's, short of a pill. */
+private val StackedThumbnailShape = RoundedCornerShape(22.dp)
 
 private val DenseTextSpacing = 2.dp
 private val DenseDetailsTopPadding = 6.dp
