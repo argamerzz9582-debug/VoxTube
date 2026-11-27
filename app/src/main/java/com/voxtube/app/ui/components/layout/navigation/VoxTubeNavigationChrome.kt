@@ -121,6 +121,8 @@ fun VoxTubeNavigationChrome(
     onBarHeightChanged: (Dp) -> Unit = {},
     onRailWidthChanged: (Dp) -> Unit = {},
     glassBackdrop: LayerBackdrop? = null,
+    onSearchClick: (() -> Unit)? = null,
+    searchActive: Boolean = false,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val usesRail = flowUsesNavigationRail()
@@ -221,6 +223,14 @@ fun VoxTubeNavigationChrome(
                         scrollState = barScrollState,
                         look = barLook,
                         onHeightChanged = onBarHeightChanged,
+                        onSearchClick =
+                            onSearchClick?.let { open ->
+                                {
+                                    restUnfolded = false
+                                    open()
+                                }
+                            },
+                        searchActive = searchActive,
                     )
                 }
             }
@@ -241,6 +251,8 @@ private fun BoxScope.NavigationBarSlot(
     scrollState: VoxTubeNavigationScrollState?,
     look: NavBarLook,
     onHeightChanged: (Dp) -> Unit,
+    onSearchClick: (() -> Unit)?,
+    searchActive: Boolean,
 ) {
     val density = LocalDensity.current
     val bottomInsetPx = ShortNavigationBarDefaults.windowInsets.getBottom(density)
@@ -289,6 +301,8 @@ private fun BoxScope.NavigationBarSlot(
                     },
                     // No scroll edge over a surface that rests folded (Shorts): it would wash out the video.
                     modifier = if (restFolded) barModifier else barModifier.bottomScrollEdge(MaterialTheme.colorScheme.background),
+                    onSearchClick = onSearchClick,
+                    searchActive = searchActive,
                 )
             }
         }

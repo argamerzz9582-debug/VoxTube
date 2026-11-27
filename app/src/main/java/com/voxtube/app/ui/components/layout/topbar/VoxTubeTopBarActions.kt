@@ -9,7 +9,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.voxtube.app.R
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 
 /**
  * The Notifications, Settings and profile actions every root destination gets, Settings and profile
@@ -135,7 +135,7 @@ fun VoxTubeTopBarOverflow(
                 contentDescription = contentDescription,
             )
         }
-        DropdownMenu(
+        GlassDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
         ) {

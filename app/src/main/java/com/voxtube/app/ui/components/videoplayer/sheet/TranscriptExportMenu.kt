@@ -11,7 +11,6 @@ import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.SaveAlt
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material.icons.rounded.MoreVert
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -31,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.transcript.TranscriptCue
 import com.voxtube.app.data.video.storage.DownloadNaming
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.utils.copyPlainText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -94,7 +94,7 @@ internal fun TranscriptExportMenu(
         IconButton(onClick = { expanded = true }, modifier = Modifier.size(40.dp)) {
             Icon(imageVector = Icons.Rounded.MoreVert, contentDescription = stringResource(R.string.transcript_actions))
         }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        GlassDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             DropdownMenuItem(
                 text = { Text(stringResource(R.string.transcript_copy)) },
                 leadingIcon = { Icon(Icons.Outlined.ContentCopy, contentDescription = null) },

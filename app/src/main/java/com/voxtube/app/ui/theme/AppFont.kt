@@ -10,6 +10,8 @@ import java.io.File
 enum class AppFont(
     val storageId: String,
 ) {
+    /** Inter, bundled with the app: the iOS-style default. */
+    INTER("inter"),
     SYSTEM("system"),
     CONDENSED("condensed"),
     SERIF("serif"),
@@ -17,7 +19,7 @@ enum class AppFont(
     ;
 
     companion object {
-        fun fromStorage(id: String?): AppFont = entries.firstOrNull { it.storageId == id } ?: SYSTEM
+        fun fromStorage(id: String?): AppFont = entries.firstOrNull { it.storageId == id } ?: INTER
     }
 }
 
@@ -26,7 +28,7 @@ private val CondensedWeights =
 
 /**
  * The family for [font]. A custom font comes from [customFile] through [loadCustom], which must only
- * return a family for a file it could actually read; anything missing or unreadable is the system font.
+ * return a family for a file it could actually read; anything missing or unreadable is the app's own font.
  */
 fun appFontFamily(
     font: AppFont,
@@ -34,7 +36,8 @@ fun appFontFamily(
     loadCustom: (File) -> FontFamily?,
 ): FontFamily =
     when (font) {
-        AppFont.SYSTEM -> VoxTubeFontFamily
+        AppFont.INTER -> VoxTubeFontFamily
+        AppFont.SYSTEM -> FontFamily.Default
         AppFont.CONDENSED -> FontFamily(CondensedWeights.map { Font(DeviceFontFamilyName("sans-serif-condensed"), it) })
         AppFont.SERIF -> FontFamily.Serif
         AppFont.CUSTOM -> customFile?.takeIf { it.isFile }?.let(loadCustom) ?: VoxTubeFontFamily

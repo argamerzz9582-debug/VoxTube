@@ -3,7 +3,6 @@ package com.voxtube.app.ui.components.shared
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -32,7 +31,7 @@ fun <T> VoxTubeSortChip(
     var open by remember { mutableStateOf(false) }
     Box(modifier = modifier) {
         VoxTubeDropdownFilterChip(label = label(selected), selected = selected != default, onClick = { open = true })
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+        GlassDropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             options.forEach { option ->
                 DropdownMenuItem(
                     text = { Text(label(option)) },

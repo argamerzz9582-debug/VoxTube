@@ -6,7 +6,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -21,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
 import com.voxtube.app.data.model.PlaylistInfo
 import com.voxtube.app.ui.components.music.item.MusicCollectionCard
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.ignoreHeldOk
 
 @Composable
@@ -65,7 +65,7 @@ internal fun PlaylistActionsMenu(
     onDelete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    DropdownMenu(
+    GlassDropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismiss,
         modifier = modifier.ignoreHeldOk(),

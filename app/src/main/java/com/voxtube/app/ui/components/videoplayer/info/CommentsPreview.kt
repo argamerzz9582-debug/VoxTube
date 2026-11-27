@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -22,6 +23,7 @@ import com.voxtube.app.R
 import com.voxtube.app.data.model.Comment
 import com.voxtube.app.data.model.plainRichText
 import com.voxtube.app.ui.components.shared.rememberRichTextInlineContent
+import com.voxtube.app.ui.theme.glass.contentGlass
 import com.voxtube.app.utils.toAnnotatedString
 
 private const val DISABLED_CONTENT_ALPHA = 0.38f
@@ -40,12 +42,13 @@ internal fun CommentsPreview(
     Surface(
         onClick = onClick,
         enabled = !isDisabled,
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        shape = CommentsCardShape,
+        color = Color.Transparent,
         modifier =
             Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 8.dp),
+                .padding(horizontal = 12.dp, vertical = 8.dp)
+                .then(contentGlass(CommentsCardShape)),
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -121,3 +124,5 @@ internal fun CommentsPreview(
         }
     }
 }
+
+private val CommentsCardShape = RoundedCornerShape(22.dp)

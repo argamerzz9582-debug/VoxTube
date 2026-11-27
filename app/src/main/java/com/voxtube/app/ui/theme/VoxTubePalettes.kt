@@ -29,17 +29,19 @@ object VoxTubePalettes {
                             outline = Color(0xFFD7D7D7),
                             error = Color(0xFFD32F2F),
                         ),
+                    // Obsidian Glass: a blue-black page and cool slate text, so Liquid Glass reads as glass
+                    // over it, with the iOS system red as the accent.
                     dark =
                         PaletteSeed(
-                            primary = Color(0xFFFF0000),
+                            primary = Color(0xFFFF3B30),
                             onPrimary = Color(0xFFFFFFFF),
-                            secondary = Color(0xFFAAAAAA),
-                            background = Color(0xFF0F0F0F),
-                            surface = Color(0xFF1D1D1D),
-                            onSurface = Color(0xFFF4F4F4),
-                            onSurfaceVariant = Color(0xFFB8B8B8),
-                            outline = Color(0xFF343434),
-                            error = Color(0xFFEF5350),
+                            secondary = Color(0xFFA3ADBD),
+                            background = Color(0xFF06070A),
+                            surface = Color(0xFF16181F),
+                            onSurface = Color(0xFFF8FAFC),
+                            onSurfaceVariant = Color(0xFF94A3B8),
+                            outline = Color(0xFF2A2E38),
+                            error = Color(0xFFFF6961),
                         ),
                 ),
             ThemeMode.MONOCHROME to

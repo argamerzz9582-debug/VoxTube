@@ -72,6 +72,8 @@ class VoxTubeTypographyTest {
         assertThat(flow.labelSmall.fontSize).isEqualTo(11.sp)
         assertThat(flow.displayLargeEmphasized.fontWeight).isEqualTo(FontWeight.ExtraBold)
         assertThat(flow.bodyLargeEmphasized.fontWeight).isEqualTo(FontWeight.Medium)
-        assertThat(Typography).isEqualTo(flow)
+        assertThat(flow.displayLarge.letterSpacing).isEqualTo((-0.6).sp)
+        // Widgets cannot load the bundled font, so their scale is drawn in the system one.
+        assertThat(Typography).isEqualTo(flowTypography(FontFamily.Default))
     }
 }

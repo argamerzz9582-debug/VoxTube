@@ -1,9 +1,11 @@
 package com.voxtube.app.ui.components.videoplayer.info
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyListScope
@@ -35,6 +37,7 @@ import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.material3.ToggleButtonShapes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -42,6 +45,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.shared.popWhenTurnedOn
+import com.voxtube.app.ui.theme.glass.contentGlass
 import com.voxtube.app.utils.formatViewCount
 
 private val ActionSpacing = 8.dp
@@ -201,8 +205,11 @@ internal fun SegmentedLikeDislikeButton(
             else -> stringResource(R.string.like)
         }
 
+    // iOS 26: like and dislike share one glass pill, split by a hairline, as on the reference watch page.
+    val dividerColor = MaterialTheme.colorScheme.onSurface.copy(alpha = LIKE_DIVIDER_ALPHA)
     androidx.compose.foundation.layout.Row(
-        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+        modifier = Modifier.then(contentGlass()),
     ) {
         ToggleButton(
             checked = isLiked,
@@ -211,7 +218,7 @@ internal fun SegmentedLikeDislikeButton(
                 onLikeClick()
             },
             shapes = ButtonGroupDefaults.connectedLeadingButtonShapes(),
-            colors = actionToggleColors(),
+            colors = likePillColors(),
             contentPadding = ActionContentPadding,
         ) {
             Icon(
@@ -223,6 +230,14 @@ internal fun SegmentedLikeDislikeButton(
             Text(text = likeText, style = MaterialTheme.typography.labelLarge)
         }
 
+        androidx.compose.foundation.layout.Box(
+            modifier =
+                Modifier
+                    .width(LikeDividerWidth)
+                    .height(LikeDividerHeight)
+                    .background(dividerColor),
+        )
+
         ToggleButton(
             checked = isDisliked,
             onCheckedChange = {
@@ -230,7 +245,7 @@ internal fun SegmentedLikeDislikeButton(
                 onDislikeClick()
             },
             shapes = ButtonGroupDefaults.connectedTrailingButtonShapes(),
-            colors = actionToggleColors(),
+            colors = likePillColors(),
             contentPadding = ActionContentPadding,
         ) {
             Icon(
@@ -265,6 +280,7 @@ private fun ActionToggle(
         shapes = actionToggleShapes(),
         colors = actionToggleColors(),
         contentPadding = ActionContentPadding,
+        modifier = Modifier.then(contentGlass()),
     ) {
         Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(ActionIconSize))
         Spacer(modifier = Modifier.width(ActionIconSpacing))
@@ -289,10 +305,11 @@ private fun ActionButton(
         shapes = ButtonDefaults.shapes(),
         colors =
             ButtonDefaults.filledTonalButtonColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                containerColor = Color.Transparent,
                 contentColor = MaterialTheme.colorScheme.onSurface,
             ),
         contentPadding = ActionContentPadding,
+        modifier = Modifier.then(contentGlass()),
     ) {
         Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(ActionIconSize))
         Spacer(modifier = Modifier.width(ActionIconSpacing))
@@ -308,7 +325,7 @@ private fun ActionButton(
 @Composable
 private fun actionToggleColors() =
     ToggleButtonDefaults.colors(
-        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+        containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onSurface,
         checkedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
         checkedContentColor = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -321,6 +338,20 @@ private fun actionToggleShapes() =
         pressedShape = MaterialTheme.shapes.medium,
         checkedShape = CircleShape,
     )
+
+/** Inside the shared glass pill a checked half shows by its filled, accent icon, not a second container. */
+@Composable
+private fun likePillColors() =
+    ToggleButtonDefaults.colors(
+        containerColor = Color.Transparent,
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        checkedContainerColor = Color.Transparent,
+        checkedContentColor = MaterialTheme.colorScheme.primary,
+    )
+
+private const val LIKE_DIVIDER_ALPHA = 0.18f
+private val LikeDividerWidth = 1.dp
+private val LikeDividerHeight = 20.dp
 
 private const val LIKED = "LIKED"
 private const val DISLIKED = "DISLIKED"

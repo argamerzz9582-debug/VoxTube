@@ -3,26 +3,38 @@ package com.voxtube.app.ui.theme
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.voxtube.app.R
 
-/** The system font (Roboto on most devices); the app font when the user has not picked another. */
-val VoxTubeFontFamily: FontFamily = FontFamily.Default
+/**
+ * Inter, bundled in four weights: the app font when the user has not picked another. Its tight, even
+ * shapes are the closest open match to Apple's SF Pro, so the interface reads like an iOS app. Scripts
+ * Inter does not cover, such as Devanagari, fall back to the system font glyph by glyph.
+ */
+val VoxTubeFontFamily: FontFamily =
+    FontFamily(
+        Font(R.font.inter_regular, FontWeight.Normal),
+        Font(R.font.inter_medium, FontWeight.Medium),
+        Font(R.font.inter_semibold, FontWeight.SemiBold),
+        Font(R.font.inter_bold, FontWeight.Bold),
+    )
 
 /** Material's own scale, for the roles Flow keeps at their Material size. */
 private val MaterialScale = Typography()
 
 private fun baseTypography(family: FontFamily) =
     Typography(
-        // Display - Large titles
+        // Display - Large titles. Tracked in a little at large sizes, as iOS sets its large titles.
         displayLarge =
             TextStyle(
                 fontFamily = family,
                 fontWeight = FontWeight.Bold,
                 fontSize = 34.sp,
                 lineHeight = 40.sp,
-                letterSpacing = 0.sp,
+                letterSpacing = (-0.6).sp,
             ),
         displayMedium =
             TextStyle(
@@ -30,7 +42,7 @@ private fun baseTypography(family: FontFamily) =
                 fontWeight = FontWeight.Bold,
                 fontSize = 28.sp,
                 lineHeight = 36.sp,
-                letterSpacing = 0.sp,
+                letterSpacing = (-0.45).sp,
             ),
         displaySmall = MaterialScale.displaySmall.copy(fontFamily = family),
         // Headline - Screen titles
@@ -40,7 +52,7 @@ private fun baseTypography(family: FontFamily) =
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 24.sp,
                 lineHeight = 32.sp,
-                letterSpacing = 0.sp,
+                letterSpacing = (-0.3).sp,
             ),
         headlineMedium =
             TextStyle(
@@ -48,7 +60,7 @@ private fun baseTypography(family: FontFamily) =
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
                 lineHeight = 28.sp,
-                letterSpacing = 0.sp,
+                letterSpacing = (-0.2).sp,
             ),
         headlineSmall = MaterialScale.headlineSmall.copy(fontFamily = family),
         // Title - Card titles, section headers
@@ -154,4 +166,4 @@ fun flowTypography(family: FontFamily): Typography {
 }
 
 /** The type scale in the system font, for surfaces that cannot take the user's font (widgets). */
-val Typography: Typography = flowTypography(VoxTubeFontFamily)
+val Typography: Typography = flowTypography(FontFamily.Default)

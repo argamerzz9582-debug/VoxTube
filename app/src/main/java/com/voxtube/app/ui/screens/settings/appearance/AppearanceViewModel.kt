@@ -41,7 +41,7 @@ class AppearanceViewModel
         private val localDataManager: LocalDataManager,
         fontPreferences: AppFontPreferences,
     ) : SettingsViewModel() {
-        val themeMode = localDataManager.themeMode.asState(ThemeMode.SYSTEM)
+        val themeMode = localDataManager.themeMode.asState(ThemeMode.DARK)
         val themeVariant = localDataManager.themeVariant.asState(ThemeVariant.DARK)
         val customThemeName = localDataManager.activeCustomTheme.map { it?.name }.asState(null)
         val interfaceMode = uiModePreferences.mode.asState(AppUiMode.AUTOMATIC)
@@ -84,6 +84,7 @@ class AppearanceViewModel
         val navIconPop = preferences.bottomNavIconPop.asState(true)
         val navScroll = preferences.bottomNavScroll.asState(NavBarScroll.SHRINK)
         val navMiniBeside = preferences.bottomNavMiniBeside.asState(true)
+        val navSearchOrb = preferences.bottomNavSearchOrb.asState(true)
         val searchShowsNavBar = preferences.searchShowsNavBar.asState(false)
         val innerPagesShowNavBar = preferences.innerPagesShowNavBar.asState(false)
         val navTabOrder = preferences.navTabOrder.asState(DEFAULT_NAV_TAB_ORDER)
@@ -183,6 +184,8 @@ class AppearanceViewModel
         fun setNavScroll(scroll: NavBarScroll) = write { preferences.setBottomNavScroll(scroll) }
 
         fun setNavMiniBeside(enabled: Boolean) = write { preferences.setBottomNavMiniBeside(enabled) }
+
+        fun setNavSearchOrb(enabled: Boolean) = write { preferences.setBottomNavSearchOrb(enabled) }
 
         fun setSearchShowsNavBar(enabled: Boolean) = write { preferences.setSearchShowsNavBar(enabled) }
 

@@ -450,6 +450,21 @@ fun VoxTubeApp(
             onBarHeightChanged = { navigationBarHeight = it },
             onRailWidthChanged = { navigationRailWidth = it },
             glassBackdrop = glassBackdrop.takeIf { glassEnabled },
+            onSearchClick = {
+                if (VoxTubeTab.Search in currentNavigationTabs) {
+                    val action = tabTapAction(VoxTubeTab.Search, currentTab, selectedTab, searchIsTab = true, startTab = defaultTab)
+                    if (action == TabTap.SCROLL_TO_TOP) {
+                        TabScrollEventBus.emitScrollToTop(VoxTubeTab.Search.route)
+                    } else {
+                        currentRoute.value = VoxTubeTab.Search.route
+                        navController.tapTab(action, VoxTubeTab.Search, selectedTab, defaultStartRoute)
+                        if (action != TabTap.POP_TO_ROOT) navTransitions.markTabTap(navController.currentBackStackEntry?.id)
+                    }
+                } else if (currentDestinationRoute?.substringBefore('?') != "search") {
+                    navController.navigate("search")
+                }
+            },
+            searchActive = currentTab == VoxTubeTab.Search || currentDestinationRoute?.substringBefore('?') == "search",
         ) {
             ProvideMusicPlaybackState(
                 surfacesVisible = !musicPlayerSheetState.isExpanded && playerSheetState.currentValue != PlayerSheetValue.Expanded,

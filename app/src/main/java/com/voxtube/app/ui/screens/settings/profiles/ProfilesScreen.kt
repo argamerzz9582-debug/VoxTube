@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.PersonAdd
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -36,6 +35,7 @@ import com.voxtube.app.ui.components.settings.SettingsTarget
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.notice
 import com.voxtube.app.ui.components.settings.switch
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.screens.settings.index.ProfilesIndex
 
 private sealed interface ProfileAction {
@@ -183,7 +183,7 @@ private fun ProfileRow(
                 IconButton(onClick = { menuOpen = true }, enabled = enabled) {
                     Icon(Icons.Outlined.MoreVert, contentDescription = stringResource(R.string.profiles_more, name))
                 }
-                DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+                GlassDropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
                     listOfNotNull(
                         (R.string.profiles_switch to onSwitch).takeUnless { running },
                         R.string.profiles_edit to onEdit,

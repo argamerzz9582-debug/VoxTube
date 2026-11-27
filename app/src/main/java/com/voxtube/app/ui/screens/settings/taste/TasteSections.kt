@@ -12,7 +12,6 @@ import androidx.compose.material.icons.outlined.PersonSearch
 import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material.icons.outlined.Upload
 import androidx.compose.material.icons.outlined.VisibilityOff
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -31,6 +30,7 @@ import com.voxtube.app.ui.components.settings.SettingsDestination
 import com.voxtube.app.ui.components.settings.SettingsListScope
 import com.voxtube.app.ui.components.settings.info
 import com.voxtube.app.ui.components.settings.nav
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.skipDpadFocus
 import com.voxtube.app.ui.screens.settings.index.DestinationIndex
 import com.voxtube.app.ui.screens.settings.index.TasteIndex
@@ -347,7 +347,7 @@ private fun ItemMenu(
         IconButton(onClick = { onOpenChange(true) }, modifier = Modifier.skipDpadFocus()) {
             Icon(Icons.Outlined.MoreVert, contentDescription = stringResource(R.string.taste_item_actions, label))
         }
-        DropdownMenu(expanded = open, onDismissRequest = { onOpenChange(false) }) {
+        GlassDropdownMenu(expanded = open, onDismissRequest = { onOpenChange(false) }) {
             options.forEach { (text, action) ->
                 DropdownMenuItem(
                     text = { Text(text) },

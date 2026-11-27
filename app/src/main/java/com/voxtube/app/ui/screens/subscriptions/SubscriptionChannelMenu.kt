@@ -5,7 +5,6 @@ import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.PushPin
 import androidx.compose.material.icons.outlined.StickyNote2
 import androidx.compose.material.icons.rounded.Folder
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -14,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.shared.ChannelOrganizeActions
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 
 /**
  * The long-press menu of a subscribed channel: pin or unpin it, open it where a tap does something
@@ -28,7 +28,7 @@ internal fun SubscriptionChannelMenu(
     onOpenChannel: (() -> Unit)? = null,
     organize: ChannelOrganizeActions? = null,
 ) {
-    DropdownMenu(expanded = expanded, onDismissRequest = onDismiss) {
+    GlassDropdownMenu(expanded = expanded, onDismissRequest = onDismiss) {
         DropdownMenuItem(
             text = { Text(stringResource(if (isPinned) R.string.subscriptions_unpin_channel else R.string.subscriptions_pin_channel)) },
             leadingIcon = { Icon(Icons.Outlined.PushPin, contentDescription = null) },

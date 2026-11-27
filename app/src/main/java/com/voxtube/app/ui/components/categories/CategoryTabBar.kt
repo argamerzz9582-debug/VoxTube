@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.innertube.pages.explore.ExploreDestination
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VoxTubeDropdownFilterChip
 import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 import com.voxtube.app.ui.screens.categories.CATEGORY_TABS
@@ -72,7 +72,7 @@ internal fun CategorySubTabMenu(
             selected = current.title != subTabs.first().title,
             onClick = { expanded = true },
         )
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        GlassDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             subTabs.forEach { subTab ->
                 DropdownMenuItem(
                     text = { Text(subTab.title) },

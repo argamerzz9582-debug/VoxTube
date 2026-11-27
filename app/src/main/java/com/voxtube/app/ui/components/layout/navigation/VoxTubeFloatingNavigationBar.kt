@@ -3,10 +3,14 @@ package com.voxtube.app.ui.components.layout.navigation
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.awaitHorizontalTouchSlopOrCancellation
 import androidx.compose.foundation.gestures.horizontalDrag
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -14,11 +18,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FloatingToolbarDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShortNavigationBarDefaults
 import androidx.compose.material3.ShortNavigationBarItemDefaults
@@ -43,16 +50,19 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.kyant.backdrop.backdrops.layerBackdrop
 import com.voxtube.app.R
 import com.voxtube.app.data.local.NavBarLabels
 import com.voxtube.app.data.local.NavBarLook
@@ -67,6 +77,15 @@ import kotlin.math.roundToInt
 private const val SCRUB_SCALE = 1.035f
 private const val GLASS_INDICATOR_ALPHA = 0.1f
 private val BelowIndicatorTop = 4.dp
+private val SearchOrbGap = 8.dp
+private val SearchOrbIconSize = 26.dp
+private const val SEARCH_ORB_PRESSED_SCALE = 0.9f
+private const val SEARCH_ORB_FOLDED_SCALE = 0.6f
+private const val SEARCH_ORB_GONE = 0.98f
+private const val LENS_PRESS_DAMPING = 0.62f
+private const val LENS_PRESS_STIFFNESS = 400f
+private const val LENS_PULSE_UP_STIFFNESS = 900f
+private const val LENS_TAP_SWELL = 0.7f
 
 /** One slot of the floating bar: a tab, or the "More" slot when [tab] is null. */
 private data class FloatingNavSlot(
@@ -93,8 +112,13 @@ internal fun VoxTubeFloatingNavigationBar(
     collapsed: Boolean,
     onExpand: () -> Unit,
     modifier: Modifier = Modifier,
+    onSearchClick: (() -> Unit)? = null,
+    searchActive: Boolean = false,
 ) {
-    val (barTabs, overflowTabs) = splitTabsForOverflow(tabs, MAX_BAR_TABS)
+    // iOS 26/27: search leaves the capsule for its own round glass button beside it.
+    val searchOrb = onSearchClick != null && look.searchOrb
+    val capsuleTabs = if (searchOrb) tabs - VoxTubeTab.Search else tabs
+    val (barTabs, overflowTabs) = splitTabsForOverflow(capsuleTabs, MAX_BAR_TABS)
     val moreName = stringResource(R.string.nav_more)
     val slots =
         barTabs.map { FloatingNavSlot(it, stringResource(it.labelRes)) } +
@@ -112,7 +136,9 @@ internal fun VoxTubeFloatingNavigationBar(
     val density = LocalDensity.current
     val sidePadding = FloatingToolbarDefaults.ContentPadding.calculateLeftPadding(LayoutDirection.Ltr)
     val windowWidth = LocalWindowInfo.current.containerSize.width
-    val maxRowWidth = with(density) { windowWidth - 2 * (MediaMiniBarDefaults.CompactMargin + sidePadding).toPx() }
+    val orbReserve = if (searchOrb) VoxTubeNavigationDefaults.BarHeight + SearchOrbGap else 0.dp
+    val maxRowWidth =
+        with(density) { windowWidth - 2 * (MediaMiniBarDefaults.CompactMargin + sidePadding).toPx() - orbReserve.toPx() }
     val measurer = rememberTextMeasurer()
     val besideStyle = MaterialTheme.typography.labelLarge
     val belowStyle = MaterialTheme.typography.labelMedium
@@ -162,58 +188,149 @@ internal fun VoxTubeFloatingNavigationBar(
                 .padding(bottom = FloatingToolbarDefaults.ScreenOffset),
         contentAlignment = Alignment.BottomStart,
     ) {
-        // A Liquid Glass capsule in place of Material's toolbar container: it blurs and bends the page
-        // scrolling under it. Items bring their own height, so the capsule has no vertical padding.
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier =
-                Modifier
-                    .layout { measurable, constraints ->
-                        val placeable = measurable.measure(constraints.copy(minWidth = 0))
-                        layout(constraints.maxWidth, placeable.height) {
-                            // Centred while open, sliding to the start edge as it folds to the open tab.
-                            val centred = (constraints.maxWidth - placeable.width) / 2f
-                            placeable.placeRelative((centred * (1f - fold.value)).roundToInt(), 0)
+        // The capsule and the search orb share one layout: open, the pair is centred; folding slides the
+        // capsule to the start edge while the orb shrinks away, so the folded bar is one glass button.
+        Layout(
+            content = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier =
+                        Modifier
+                            .graphicsLayer {
+                                scaleX = scrubScale
+                                scaleY = scrubScale
+                                transformOrigin = TransformOrigin(0.5f, 1f)
+                            }.then(themedGlass(GlassShapes.Capsule, LiquidGlassStyle.TabBar))
+                            .heightIn(min = VoxTubeNavigationDefaults.BarHeight)
+                            .padding(horizontal = sidePadding),
+                ) {
+                    FloatingNavRow(
+                        slots = slots,
+                        open = open,
+                        geometry = geometry,
+                        metrics = metrics,
+                        scrub = look.scrub && !folded,
+                        folded = folded,
+                        pop = look.iconPop,
+                        scrubbing = scrubbing,
+                        onScrubbing = { scrubbing = it },
+                        onSelect = { index ->
+                            val tab = slots.getOrNull(index)?.tab
+                            when {
+                                folded -> onExpand()
+                                tab != null -> onTabSelected(tab)
+                                overflowTabs.isNotEmpty() -> menuOpen = true
+                            }
+                        },
+                    )
+                    if (overflowTabs.isNotEmpty()) {
+                        // The menu anchors to the end of the bar, where "More" sits.
+                        Box {
+                            VoxTubeTabOverflowMenu(
+                                expanded = menuOpen,
+                                onDismissRequest = { menuOpen = false },
+                                tabs = overflowTabs,
+                                selectedTab = selectedTab,
+                                onTabSelected = onTabSelected,
+                            )
                         }
-                    }.graphicsLayer {
-                        scaleX = scrubScale
-                        scaleY = scrubScale
-                        transformOrigin = TransformOrigin(0.5f, 1f)
-                    }.then(themedGlass(GlassShapes.Capsule, LiquidGlassStyle.TabBar))
-                    .heightIn(min = VoxTubeNavigationDefaults.BarHeight)
-                    .padding(horizontal = sidePadding),
-        ) {
-            FloatingNavRow(
-                slots = slots,
-                open = open,
-                geometry = geometry,
-                metrics = metrics,
-                scrub = look.scrub && !folded,
-                folded = folded,
-                pop = look.iconPop,
-                onScrubbing = { scrubbing = it },
-                onSelect = { index ->
-                    val tab = slots.getOrNull(index)?.tab
-                    when {
-                        folded -> onExpand()
-                        tab != null -> onTabSelected(tab)
-                        overflowTabs.isNotEmpty() -> menuOpen = true
                     }
-                },
-            )
-            if (overflowTabs.isNotEmpty()) {
-                // The menu anchors to the end of the bar, where "More" sits.
-                Box {
-                    VoxTubeTabOverflowMenu(
-                        expanded = menuOpen,
-                        onDismissRequest = { menuOpen = false },
-                        tabs = overflowTabs,
-                        selectedTab = selectedTab,
-                        onTabSelected = onTabSelected,
+                }
+                if (searchOrb) {
+                    FloatingSearchOrb(
+                        active = searchActive,
+                        enabled = !folded,
+                        onClick = { onSearchClick?.invoke() },
+                        modifier =
+                            Modifier.graphicsLayer {
+                                val shown = 1f - fold.value
+                                alpha = shown.coerceIn(0f, 1f)
+                                scaleX = SEARCH_ORB_FOLDED_SCALE + (1f - SEARCH_ORB_FOLDED_SCALE) * shown
+                                scaleY = scaleX
+                            },
                     )
                 }
+            },
+        ) { measurables, constraints ->
+            val gap = SearchOrbGap.roundToPx()
+            val orb = measurables.getOrNull(1)?.measure(Constraints())
+            val reserve = orb?.let { it.width + gap } ?: 0
+            val capsule =
+                measurables[0].measure(
+                    constraints.copy(minWidth = 0, maxWidth = (constraints.maxWidth - reserve).coerceAtLeast(0)),
+                )
+            val height = maxOf(capsule.height, orb?.height ?: 0)
+            layout(constraints.maxWidth, height) {
+                val f = fold.value
+                // Centred while open, sliding to the start edge as it folds to the open tab.
+                val centred = (constraints.maxWidth - capsule.width - reserve) / 2f
+                val capsuleX = centred * (1f - f)
+                capsule.placeRelative(capsuleX.roundToInt(), height - capsule.height)
+                // Folded away it is not placed at all, so it cannot catch taps meant for the docked mini player.
+                if (f < SEARCH_ORB_GONE) orb?.placeRelative((capsuleX + capsule.width + gap).roundToInt(), height - orb.height)
             }
         }
+    }
+}
+
+/**
+ * Search as its own round Liquid Glass button beside the tab capsule, iOS 26/27-style. It tints with the
+ * accent while search is open and gives under the finger like the tabs do.
+ */
+@Composable
+private fun FloatingSearchOrb(
+    active: Boolean,
+    enabled: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val haptics = LocalHapticFeedback.current
+    val scheme = MaterialTheme.colorScheme
+    val interaction = remember { MutableInteractionSource() }
+    val pressed by interaction.collectIsPressedAsState()
+    val motion = MaterialTheme.motionScheme
+    val pressScale by animateFloatAsState(
+        targetValue = if (pressed) SEARCH_ORB_PRESSED_SCALE else 1f,
+        animationSpec = if (pressed) motion.fastEffectsSpec() else motion.fastSpatialSpec(),
+        label = "searchOrbPress",
+    )
+    val tint by animateColorAsState(
+        targetValue =
+            if (active) {
+                readableAccentOn(container = scheme.surfaceContainer, accent = scheme.primary)
+            } else {
+                ShortNavigationBarItemDefaults.colors().unselectedIconColor
+            },
+        animationSpec = motion.fastEffectsSpec(),
+        label = "searchOrbTint",
+    )
+    val description = stringResource(R.string.search)
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier =
+            modifier
+                .size(VoxTubeNavigationDefaults.BarHeight)
+                .graphicsLayer {
+                    scaleX = pressScale
+                    scaleY = pressScale
+                }.then(themedGlass(GlassShapes.Capsule, LiquidGlassStyle.TabBar))
+                .clickable(
+                    interactionSource = interaction,
+                    indication = null,
+                    enabled = enabled,
+                    role = Role.Button,
+                    onClickLabel = description,
+                ) {
+                    haptics.performHapticFeedback(HapticFeedbackType.ContextClick)
+                    onClick()
+                }.semantics { selected = active },
+    ) {
+        Icon(
+            imageVector = Icons.Rounded.Search,
+            contentDescription = description,
+            tint = tint,
+            modifier = Modifier.size(SearchOrbIconSize),
+        )
     }
 }
 
@@ -226,6 +343,7 @@ private fun FloatingNavRow(
     scrub: Boolean,
     folded: Boolean,
     pop: Boolean,
+    scrubbing: Boolean,
     onScrubbing: (Boolean) -> Unit,
     onSelect: (Int) -> Unit,
 ) {
@@ -251,97 +369,135 @@ private fun FloatingNavRow(
     // The one place the bar spends the accent: the selected icon, kept at 3:1 against the glass.
     val scheme = MaterialTheme.colorScheme
     val selectedContentColor = readableAccentOn(container = scheme.surfaceContainer, accent = scheme.primary)
-
-    Layout(
-        content = {
-            slots.forEachIndexed { index, slot ->
-                key(slot.tab, slot.name) {
-                    val selected = index == open
-                    val target = geometry.widths.getOrElse(index) { 0f }
-                    val width = animateFloatAsState(target, motion.defaultSpatialSpec(), label = "navItemWidth")
-                    val contentColor by animateColorAsState(
-                        targetValue = if (selected) selectedContentColor else colors.unselectedIconColor,
-                        animationSpec = motion.fastEffectsSpec(),
-                        label = "navItemColor",
-                    )
-                    FloatingNavItem(
-                        icon = slot.tab?.icon(selected) ?: Icons.Filled.MoreHoriz,
-                        name = slot.name,
-                        selected = selected,
-                        names = geometry.names,
-                        width = width,
-                        namedWidth = target,
-                        contentColor = contentColor,
-                        pop = pop,
-                        hidden = folded && !selected,
-                        onClick = { currentSelect(index) },
-                    )
-                }
-            }
-        },
-        modifier =
-            Modifier
-                .drawBehind {
-                    if (open < 0) return@drawBehind
-                    val height = if (belowNames) FloatingNavBelowIndicatorHeight.toPx() else size.height
-                    val top = if (belowNames) BelowIndicatorTop.toPx() else 0f
-                    var start = indicatorStart.value
-                    var end = maxOf(indicatorEnd.value, start + height)
-                    if (layoutDirection == LayoutDirection.Rtl) {
-                        val mirroredStart = size.width - end
-                        end = size.width - start
-                        start = mirroredStart
-                    }
-                    drawRoundRect(
-                        color = indicatorColor,
-                        topLeft = Offset(start, top),
-                        size = Size(end - start, height),
-                        cornerRadius = CornerRadius(height / 2f),
-                    )
-                }.pointerInput(scrub) {
-                    if (!scrub) return@pointerInput
-                    awaitEachGesture {
-                        val down = awaitFirstDown(requireUnconsumed = false)
-                        val drag =
-                            awaitHorizontalTouchSlopOrCancellation(down.id) { change, _ -> change.consume() }
-                                ?: return@awaitEachGesture
-
-                        fun hoverAt(x: Float) {
-                            val index = currentGeometry.itemAt(if (ltr) x else size.width - x)
-                            if (index != hover) {
-                                hover = index
-                                haptics.performHapticFeedback(HapticFeedbackType.SegmentTick)
-                            }
-                        }
-                        onScrubbing(true)
-                        hoverAt(drag.position.x)
-                        val finished =
-                            horizontalDrag(drag.id) { change ->
-                                change.consume()
-                                hoverAt(change.position.x)
-                            }
-                        val chosen = hover
-                        hover = -1
-                        onScrubbing(false)
-                        if (finished && chosen >= 0) {
-                            haptics.performHapticFeedback(HapticFeedbackType.Confirm)
-                            currentSelect(chosen)
-                        }
-                    }
-                },
-    ) { measurables, constraints ->
-        val placeables = measurables.map { it.measure(constraints.copy(minWidth = 0, maxWidth = Constraints.Infinity)) }
-        val starts = IntArray(placeables.size)
-        var x = 0f
-        placeables.forEachIndexed { index, placeable ->
-            starts[index] = x.roundToInt()
-            x += placeable.width
-            val next = placeables.getOrNull(index + 1)
-            if (next != null) x += metrics.gap * minOf(1f, placeable.width / metrics.iconItem, next.width / metrics.iconItem)
+    // iOS 26/27: the selection is a clear Liquid Glass lens that magnifies and lights up the icons under
+    // it, and swells while a finger drags it. Devices or settings that cannot draw it keep the soft pill.
+    val lens = rememberFloatingNavLens(accent = selectedContentColor)
+    val press = remember { Animatable(0f) }
+    LaunchedEffect(scrubbing) {
+        press.animateTo(if (scrubbing) 1f else 0f, spring(dampingRatio = LENS_PRESS_DAMPING, stiffness = LENS_PRESS_STIFFNESS))
+    }
+    // A tap that moves the selection gives the lens a short swell on the way, as a drag would.
+    val pulse = remember { Animatable(0f) }
+    val firstOpen = remember { booleanArrayOf(true) }
+    LaunchedEffect(open) {
+        if (firstOpen[0] || open < 0 || lens == null) {
+            firstOpen[0] = false
+            return@LaunchedEffect
         }
-        val height = placeables.maxOfOrNull { it.height } ?: 0
-        layout(x.roundToInt(), height) {
-            placeables.forEachIndexed { index, placeable -> placeable.placeRelative(starts[index], (height - placeable.height) / 2) }
+        pulse.animateTo(LENS_TAP_SWELL, spring(stiffness = LENS_PULSE_UP_STIFFNESS))
+        pulse.animateTo(0f, spring(dampingRatio = LENS_PRESS_DAMPING, stiffness = LENS_PRESS_STIFFNESS))
+    }
+
+    Box {
+        Layout(
+            content = {
+                slots.forEachIndexed { index, slot ->
+                    key(slot.tab, slot.name) {
+                        val selected = index == open
+                        val target = geometry.widths.getOrElse(index) { 0f }
+                        val width = animateFloatAsState(target, motion.defaultSpatialSpec(), label = "navItemWidth")
+                        val contentColor by animateColorAsState(
+                            targetValue = if (selected) selectedContentColor else colors.unselectedIconColor,
+                            animationSpec = motion.fastEffectsSpec(),
+                            label = "navItemColor",
+                        )
+                        FloatingNavItem(
+                            icon = slot.tab?.icon(selected) ?: Icons.Filled.MoreHoriz,
+                            name = slot.name,
+                            selected = selected,
+                            names = geometry.names,
+                            width = width,
+                            namedWidth = target,
+                            contentColor = contentColor,
+                            pop = pop,
+                            hidden = folded && !selected,
+                            onClick = { currentSelect(index) },
+                        )
+                    }
+                }
+            },
+            modifier =
+                Modifier
+                    .then(if (lens != null) Modifier.layerBackdrop(lens.rowBackdrop) else Modifier)
+                    .drawBehind {
+                        if (open < 0 || lens != null) return@drawBehind
+                        val height = if (belowNames) FloatingNavBelowIndicatorHeight.toPx() else size.height
+                        val top = if (belowNames) BelowIndicatorTop.toPx() else 0f
+                        var start = indicatorStart.value
+                        var end = maxOf(indicatorEnd.value, start + height)
+                        if (layoutDirection == LayoutDirection.Rtl) {
+                            val mirroredStart = size.width - end
+                            end = size.width - start
+                            start = mirroredStart
+                        }
+                        drawRoundRect(
+                            color = indicatorColor,
+                            topLeft = Offset(start, top),
+                            size = Size(end - start, height),
+                            cornerRadius = CornerRadius(height / 2f),
+                        )
+                    }.pointerInput(scrub) {
+                        if (!scrub) return@pointerInput
+                        awaitEachGesture {
+                            val down = awaitFirstDown(requireUnconsumed = false)
+                            val drag =
+                                awaitHorizontalTouchSlopOrCancellation(down.id) { change, _ -> change.consume() }
+                                    ?: return@awaitEachGesture
+
+                            fun hoverAt(x: Float) {
+                                val index = currentGeometry.itemAt(if (ltr) x else size.width - x)
+                                if (index != hover) {
+                                    hover = index
+                                    haptics.performHapticFeedback(HapticFeedbackType.SegmentTick)
+                                }
+                            }
+                            onScrubbing(true)
+                            hoverAt(drag.position.x)
+                            val finished =
+                                horizontalDrag(drag.id) { change ->
+                                    change.consume()
+                                    hoverAt(change.position.x)
+                                }
+                            val chosen = hover
+                            hover = -1
+                            onScrubbing(false)
+                            if (finished && chosen >= 0) {
+                                haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                                currentSelect(chosen)
+                            }
+                        }
+                    },
+        ) { measurables, constraints ->
+            val placeables = measurables.map { it.measure(constraints.copy(minWidth = 0, maxWidth = Constraints.Infinity)) }
+            val starts = IntArray(placeables.size)
+            var x = 0f
+            placeables.forEachIndexed { index, placeable ->
+                starts[index] = x.roundToInt()
+                x += placeable.width
+                val next = placeables.getOrNull(index + 1)
+                if (next != null) x += metrics.gap * minOf(1f, placeable.width / metrics.iconItem, next.width / metrics.iconItem)
+            }
+            val height = placeables.maxOfOrNull { it.height } ?: 0
+            layout(x.roundToInt(), height) {
+                placeables.forEachIndexed { index, placeable -> placeable.placeRelative(starts[index], (height - placeable.height) / 2) }
+            }
+        }
+        if (lens != null && open >= 0) {
+            Box(
+                modifier =
+                    Modifier
+                        .matchParentSize()
+                        .floatingNavLens(
+                            state = lens,
+                            start = indicatorStart,
+                            end = indicatorEnd,
+                            press = { maxOf(press.value, pulse.value) },
+                            restWidth = { currentGeometry.indicatorEnd - currentGeometry.indicatorStart },
+                            top = if (belowNames) BelowIndicatorTop else 0.dp,
+                            height = if (belowNames) FloatingNavBelowIndicatorHeight else null,
+                            surface = indicatorColor,
+                        ),
+            )
         }
     }
 }

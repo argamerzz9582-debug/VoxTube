@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.combine
 /** Every stored theme choice the root theme needs, read as one value so the first frame has all of them. */
 @Immutable
 data class ThemeSettings(
-    val themeMode: ThemeMode = ThemeMode.SYSTEM,
+    val themeMode: ThemeMode = ThemeMode.DARK,
     val themeVariant: ThemeVariant = ThemeVariant.DARK,
     val customTheme: CustomTheme? = null,
     val systemLightThemeMode: ThemeMode = ThemeMode.DARK,

@@ -19,7 +19,6 @@ import androidx.compose.material.icons.automirrored.filled.PlaylistPlay
 import androidx.compose.material.icons.automirrored.outlined.PlaylistPlay
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -45,6 +44,7 @@ import coil3.compose.AsyncImage
 import com.voxtube.app.R
 import com.voxtube.app.data.model.Playlist
 import com.voxtube.app.data.model.PlaylistInfo
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.MediaTextBadge
 import com.voxtube.app.ui.components.shared.rememberArtworkAccent
 import com.voxtube.app.ui.components.shared.thumbnailUrlOrNull
@@ -216,7 +216,7 @@ private fun PlaylistCardMenu(
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
-        DropdownMenu(
+        GlassDropdownMenu(
             expanded = showMenu,
             onDismissRequest = { showMenu = false },
         ) {

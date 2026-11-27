@@ -16,7 +16,6 @@ import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.DriveFileRenameOutline
 import androidx.compose.material.icons.outlined.IosShare
 import androidx.compose.material.icons.outlined.UploadFile
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,6 +37,7 @@ import com.voxtube.app.data.audio.eq.EqMode
 import com.voxtube.app.data.audio.eq.EqPreset
 import com.voxtube.app.data.audio.eq.EqState
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
 import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
@@ -153,7 +153,7 @@ private fun UserPresetRow(
                 IconButton(onClick = { open = true }) {
                     Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.more_options))
                 }
-                DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+                GlassDropdownMenu(expanded = open, onDismissRequest = { open = false }) {
                     MenuItem(R.string.eq_rename, Icons.Outlined.DriveFileRenameOutline) {
                         open = false
                         onRename()

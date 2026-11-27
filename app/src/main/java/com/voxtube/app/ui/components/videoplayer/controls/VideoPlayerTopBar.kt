@@ -130,7 +130,6 @@ internal fun VideoPlayerTopBar(
                     contentDescription = stringResource(R.string.btn_minimize),
                     buttonSize = actionButtonSize,
                     iconSize = actionIconSize,
-                    containerColor = Color.Transparent,
                 )
 
                 if (isFullscreen && !isPortraitFullscreen && !videoTitle.isNullOrBlank()) {
@@ -187,9 +186,11 @@ internal fun VideoPlayerTopBar(
                 }
             }
 
+            // iOS 26: the right-hand actions share one Liquid Glass capsule instead of floating loose.
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(actionSpacing),
+                modifier = Modifier.then(playerGlass()).padding(horizontal = ActionClusterPadding),
             ) {
                 if (isFullscreen) {
                     TopBarIconButton(
@@ -332,6 +333,9 @@ internal fun VideoPlayerTopBar(
  * line up with the content edge; text carries no such inset, so the title adds it back.
  */
 private val TitleInsetCorrection = 4.dp
+
+/** Room inside the glass capsule at each end of the right-hand action cluster. */
+private val ActionClusterPadding = 2.dp
 
 /**
  * A top-bar action that is on or off.

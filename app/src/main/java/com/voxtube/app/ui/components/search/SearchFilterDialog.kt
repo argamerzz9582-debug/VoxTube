@@ -13,7 +13,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowDropDown
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -38,6 +37,7 @@ import com.voxtube.app.data.local.SearchFilter
 import com.voxtube.app.data.local.SortType
 import com.voxtube.app.data.local.UploadDate
 import com.voxtube.app.data.local.WatchState
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 
@@ -185,7 +185,7 @@ private fun <T> FilterRow(
                 modifier = Modifier.size(DropdownIconSize),
             )
         }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        GlassDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             options.forEach { option ->
                 val text = optionLabel(option)
                 DropdownMenuItem(

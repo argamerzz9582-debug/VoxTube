@@ -28,7 +28,6 @@ import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.PlayCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -55,6 +54,7 @@ import com.voxtube.app.data.notes.NoteMoments
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.shared.ChannelAvatarImage
 import com.voxtube.app.ui.components.shared.DurationBadge
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VideoThumbnailImage
 import com.voxtube.app.ui.components.shared.VoxTubeActionButtonPair
 import com.voxtube.app.ui.components.shared.VoxTubeNavRow
@@ -236,7 +236,7 @@ internal fun NoteMenuButton(
         IconButton(onClick = { open = true }) {
             Icon(Icons.Rounded.MoreVert, contentDescription = stringResource(R.string.more_options))
         }
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+        GlassDropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             DropdownMenuItem(
                 text = { Text(stringResource(R.string.note_copy_text)) },
                 leadingIcon = { Icon(Icons.Outlined.ContentCopy, contentDescription = null) },

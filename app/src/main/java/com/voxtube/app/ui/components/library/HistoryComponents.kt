@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -44,6 +43,7 @@ import com.voxtube.app.data.model.toVideo
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
 import com.voxtube.app.ui.components.shared.FastScrollbar
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.MediaRowAction
 import com.voxtube.app.ui.components.shared.MediaShortCard
 import com.voxtube.app.ui.components.shared.MediaThumbnailDefaults
@@ -103,7 +103,7 @@ internal fun HistoryFilterRow(
                     selected = selectedSort != HistorySort.Newest,
                     onClick = { sortExpanded = true },
                 )
-                DropdownMenu(
+                GlassDropdownMenu(
                     expanded = sortExpanded,
                     onDismissRequest = { sortExpanded = false },
                 ) {
@@ -127,7 +127,7 @@ internal fun HistoryFilterRow(
                     selected = selectedYear != null,
                     onClick = { yearExpanded = true },
                 )
-                DropdownMenu(
+                GlassDropdownMenu(
                     expanded = yearExpanded,
                     onDismissRequest = { yearExpanded = false },
                 ) {

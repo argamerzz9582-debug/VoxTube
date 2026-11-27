@@ -51,6 +51,7 @@ internal fun NavigationBarScreen(
     val iconPop by viewModel.navIconPop.collectAsStateWithLifecycle()
     val scroll by viewModel.navScroll.collectAsStateWithLifecycle()
     val miniBeside by viewModel.navMiniBeside.collectAsStateWithLifecycle()
+    val searchOrb by viewModel.navSearchOrb.collectAsStateWithLifecycle()
     val searchShowsBar by viewModel.searchShowsNavBar.collectAsStateWithLifecycle()
     val innerPagesShowBar by viewModel.innerPagesShowNavBar.collectAsStateWithLifecycle()
     val order by viewModel.navTabOrder.collectAsStateWithLifecycle()
@@ -103,6 +104,7 @@ internal fun NavigationBarScreen(
                         icon = Icons.Outlined.PictureInPictureAlt,
                     )
                 }
+                switch(NavigationBarIndex.searchOrb, searchOrb, viewModel::setNavSearchOrb, icon = Icons.Outlined.Search)
                 switch(NavigationBarIndex.scrub, scrub, viewModel::setNavScrub, icon = Icons.Outlined.Swipe)
                 switch(NavigationBarIndex.iconPop, iconPop, viewModel::setNavIconPop, icon = Icons.Outlined.Animation)
             }

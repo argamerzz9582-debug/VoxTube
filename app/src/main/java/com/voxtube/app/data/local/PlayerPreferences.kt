@@ -199,6 +199,7 @@ class PlayerPreferences(
         val BOTTOM_NAV_ICON_POP = booleanPreferencesKey("bottom_nav_icon_pop")
         val BOTTOM_NAV_SCROLL = stringPreferencesKey("bottom_nav_scroll")
         val BOTTOM_NAV_MINI_BESIDE = booleanPreferencesKey("bottom_nav_mini_beside")
+        val BOTTOM_NAV_SEARCH_ORB = booleanPreferencesKey("bottom_nav_search_orb")
         val SEARCH_SHOWS_NAV_BAR = booleanPreferencesKey("search_shows_nav_bar")
         val INNER_PAGES_SHOW_NAV_BAR = booleanPreferencesKey("inner_pages_show_nav_bar")
         val MUSIC_NAVIGATION_ENABLED = booleanPreferencesKey("music_navigation_enabled")
@@ -1811,6 +1812,18 @@ class PlayerPreferences(
         }
     }
 
+    // Search as its own round glass button beside the floating bar, iOS 26-style.
+    val bottomNavSearchOrb: Flow<Boolean> =
+        context.playerPreferencesDataStore.data
+            .map { preferences -> preferences[Keys.BOTTOM_NAV_SEARCH_ORB] ?: true }
+            .distinctUntilChanged()
+
+    suspend fun setBottomNavSearchOrb(enabled: Boolean) {
+        context.playerPreferencesDataStore.edit { preferences ->
+            preferences[Keys.BOTTOM_NAV_SEARCH_ORB] = enabled
+        }
+    }
+
     val bottomNavLook: Flow<NavBarLook> =
         combine(
             bottomNavStyle,
@@ -1821,6 +1834,7 @@ class PlayerPreferences(
         ) { style, labels, scrub, iconPop, scroll ->
             NavBarLook(style, labels, scrub, iconPop, scroll)
         }.combine(bottomNavMiniBeside) { look, miniBeside -> look.copy(miniBeside = miniBeside) }
+            .combine(bottomNavSearchOrb) { look, searchOrb -> look.copy(searchOrb = searchOrb) }
             .distinctUntilChanged()
 
     // Search keeps its full-screen layout unless this is on.
@@ -2447,11 +2461,11 @@ class PlayerPreferences(
         }
     }
 
-    // Video Ambient Mode
+    // Video Ambient Mode: on by default, so the watch page takes on the video's colours behind its glass.
     val videoAmbientModeEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
-                preferences[Keys.VIDEO_AMBIENT_MODE_ENABLED] ?: false
+                preferences[Keys.VIDEO_AMBIENT_MODE_ENABLED] ?: true
             }
 
     suspend fun setVideoAmbientModeEnabled(enabled: Boolean) {
@@ -2463,7 +2477,7 @@ class PlayerPreferences(
     val videoAmbientGlowEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
-                preferences[Keys.VIDEO_AMBIENT_GLOW_ENABLED] ?: false
+                preferences[Keys.VIDEO_AMBIENT_GLOW_ENABLED] ?: true
             }
 
     suspend fun setVideoAmbientGlowEnabled(enabled: Boolean) {
@@ -6078,6 +6092,8 @@ data class NavBarLook(
     val scroll: NavBarScroll = NavBarScroll.SHRINK,
     // Scrolled down, the bar shrinks to the open tab and the mini player rides beside it, like Apple Music.
     val miniBeside: Boolean = true,
+    // Search sits in its own round glass button beside the floating bar instead of being a tab in it.
+    val searchOrb: Boolean = true,
 )
 
 /** What scrolling does to the floating bar, when the bar reacts to scrolling at all. */
