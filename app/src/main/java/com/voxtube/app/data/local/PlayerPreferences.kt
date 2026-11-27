@@ -160,6 +160,7 @@ class PlayerPreferences(
         val MINI_BAR_PROGRESS = stringPreferencesKey("mini_bar_progress")
         val MINI_BAR_BACKGROUND = stringPreferencesKey("mini_bar_background")
         val MINI_COVER_RING = booleanPreferencesKey("mini_cover_ring")
+        val MUSIC_MINI_ONLY_IN_MUSIC = booleanPreferencesKey("music_mini_only_in_music")
         val MINI_BAR_BUTTONS = stringPreferencesKey("mini_bar_buttons")
         val MINI_COVER_TAP = stringPreferencesKey("mini_cover_tap")
         val MINI_LONG_PRESS = stringPreferencesKey("mini_long_press")
@@ -1242,6 +1243,20 @@ class PlayerPreferences(
     suspend fun setMiniCoverRing(enabled: Boolean) {
         context.playerPreferencesDataStore.edit { preferences ->
             preferences[Keys.MINI_COVER_RING] = enabled
+        }
+    }
+
+    /**
+     * Whether the music mini player shows only in the music section. Off it, the song keeps playing
+     * and the mini player waits for the user to come back to Music.
+     */
+    val musicMiniOnlyInMusic: Flow<Boolean> =
+        context.playerPreferencesDataStore.data
+            .map { preferences -> preferences[Keys.MUSIC_MINI_ONLY_IN_MUSIC] ?: true }
+
+    suspend fun setMusicMiniOnlyInMusic(enabled: Boolean) {
+        context.playerPreferencesDataStore.edit { preferences ->
+            preferences[Keys.MUSIC_MINI_ONLY_IN_MUSIC] = enabled
         }
     }
 

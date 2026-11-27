@@ -99,7 +99,6 @@ fun VoxTubeDropdownFilterChip(
 
 private const val SELECTED_FILL_ALPHA = 0.24f
 private const val SELECTED_RIM_ALPHA = 0.65f
-private const val PRESSED_CHIP_SCALE = 0.95f
 private val SelectedRimWidth = 1.dp
 
 @Composable
@@ -132,5 +131,5 @@ private fun Modifier.glassChip(
     selected: Boolean,
     interactionSource: MutableInteractionSource,
 ): Modifier =
-    pressScale(interactionSource, PRESSED_CHIP_SCALE)
+    pressBounce(interactionSource, haptic = false)
         .then(if (selected) Modifier else contentGlass(CapsuleShape))

@@ -139,6 +139,7 @@ internal fun SettingsListScope.musicMiniGroup(
         onClick = { settings.sheet = MusicMiniSheet.BAR_PROGRESS },
     )
     switch(PlayerAppearanceIndex.miniCoverRing, viewModel.miniCoverRing, viewModel::setMiniCoverRing)
+    switch(PlayerAppearanceIndex.musicMiniOnlyInMusic, viewModel.musicMiniOnlyInMusic, viewModel::setMusicMiniOnlyInMusic)
     nav(PlayerAppearanceIndex.miniBackground, value = settings.backgroundLabel, onClick = { settings.sheet = MusicMiniSheet.BACKGROUND })
     nav(PlayerAppearanceIndex.miniButtons, value = settings.buttonsLabel, onClick = { settings.sheet = MusicMiniSheet.BUTTONS })
     toggleGroup(PlayerAppearanceIndex.miniCoverTap, settings.coverTapOptions, viewModel.miniCoverTap, viewModel::setMiniCoverTap)

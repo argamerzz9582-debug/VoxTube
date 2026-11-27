@@ -228,3 +228,39 @@ private fun normalizeYoutubeChannelUrl(url: String): String {
         else -> "https://www.youtube.com/@$channelValue"
     }
 }
+
+/**
+ * Pages of the music section that are not the Music tab itself. Their routes share no prefix
+ * ("artist/…", "musicPlaylist/…", "youtube_browse/…"), so they are named one by one.
+ */
+private val MUSIC_SECTION_ROUTES =
+    setOf(
+        "musicSearch",
+        "artist",
+        "artistItems",
+        "musicPlaylist",
+        "moodsAndGenres",
+        "musicRecognize",
+        "recognitionHistory",
+        "youtube_browse",
+        "musicPlayer",
+        EQUALIZER_ROUTE,
+    )
+
+/** Whether [route], a destination route pattern or a concrete route, is a page of the music section. */
+internal fun isMusicSectionRoute(route: String?): Boolean =
+    route != null && route.substringBefore('?').substringBefore('/') in MUSIC_SECTION_ROUTES
+
+/**
+ * Whether the user is in the music section: on the Music tab, on a page opened from it, or on a
+ * music page reached from anywhere else. [currentTab] is the tab the current page is, if any;
+ * [selectedTab] is the tab the bar shows picked, which stays on Music under its inner pages.
+ */
+internal fun inMusicSection(
+    currentTab: VoxTubeTab?,
+    selectedTab: VoxTubeTab,
+    route: String?,
+): Boolean =
+    currentTab == VoxTubeTab.Music ||
+        (currentTab == null && selectedTab == VoxTubeTab.Music) ||
+        isMusicSectionRoute(route)

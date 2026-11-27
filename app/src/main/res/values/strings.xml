@@ -262,6 +262,8 @@
     <string name="player_appearance_bar_progress_wavy">Wavy line</string>
     <string name="player_appearance_cover_ring_title">Ring around the cover</string>
     <string name="player_appearance_cover_ring_subtitle">Show progress around the cover too</string>
+    <string name="player_appearance_mini_only_in_music_title">Only in Music</string>
+    <string name="player_appearance_mini_only_in_music_subtitle">Show the mini player in the music section only. Songs keep playing everywhere else</string>
     <string name="player_background_style_color">Solid Color</string>
     <string name="player_background_style_cover_colours">Cover Colors</string>
     <string name="player_background_style_moving_colours">Moving Colors</string>

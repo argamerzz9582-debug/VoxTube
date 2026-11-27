@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -78,6 +79,12 @@ object VoxTubeNavigationDefaults {
     /** One tab of the floating bar; shrunk, the bar is this plus the toolbar's side padding. */
     val FloatingItemSize: Dp = FloatingNavItemHeight
 }
+
+/**
+ * Whether the floating bar's round search button stands beside the bar, so a page's top bar can
+ * leave its own search button out instead of offering search twice.
+ */
+val LocalSearchOrbShown = compositionLocalOf { false }
 
 /**
  * Whether this window navigates from the start edge instead of the bottom. An expanded window tall

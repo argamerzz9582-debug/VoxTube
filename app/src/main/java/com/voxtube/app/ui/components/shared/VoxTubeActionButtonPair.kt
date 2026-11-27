@@ -48,6 +48,7 @@ fun VoxTubeActionButtonPair(
     tertiary: VoxTubePairAction? = null,
 ) {
     val height = ButtonDefaults.MediumContainerHeight
+    val primaryInteraction = remember { MutableInteractionSource() }
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(PillActionSpacing),
@@ -56,7 +57,12 @@ fun VoxTubeActionButtonPair(
             onClick = primary.onClick,
             shapes = PillButtonShapes,
             contentPadding = ButtonDefaults.contentPaddingFor(height),
-            modifier = Modifier.weight(1f).heightIn(min = height),
+            interactionSource = primaryInteraction,
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .heightIn(min = height)
+                    .pressBounce(primaryInteraction),
         ) {
             PairActionLabel(primary.icon, primary.label, height)
         }
@@ -88,7 +94,7 @@ val PillButtonShapes = ButtonShapes(CapsuleShape, CapsuleShape)
 
 /**
  * A secondary action as a capsule of glass: the page shows through it and its label keeps the page's
- * text colour. A press sinks it a little, like the rest of the app's glass.
+ * text colour. A press sinks it and springs it back with a tick, like the rest of the app's glass.
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -114,7 +120,7 @@ fun GlassPillButton(
         modifier =
             modifier
                 .heightIn(min = height)
-                .pressScale(interactionSource)
+                .pressBounce(interactionSource)
                 .then(contentGlass(CapsuleShape)),
         content = content,
     )

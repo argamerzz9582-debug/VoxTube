@@ -15,15 +15,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalHapticFeedback
 import com.voxtube.app.ui.theme.ArtworkScrim
+import com.voxtube.app.ui.theme.glass.LocalGlassAccessibility
 
 /**
  * Adds a subtle press-scale animation to any composable.
@@ -55,6 +59,43 @@ fun Modifier.pressScale(
         scaleY = scale.value
     }
 }
+
+/**
+ * The iOS press on a pill of glass: it sinks to [pressedScale] under the finger and springs back
+ * with a little bounce, with a light tick as it goes down. [interactionSource] must be the one the
+ * clickable uses, or the press is never seen. Reduce Motion keeps the tick and drops the bounce.
+ */
+@Composable
+fun Modifier.pressBounce(
+    interactionSource: MutableInteractionSource,
+    pressedScale: Float = PRESS_BOUNCE_SCALE,
+    haptic: Boolean = true,
+): Modifier {
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val haptics = LocalHapticFeedback.current
+    if (haptic) {
+        LaunchedEffect(isPressed) {
+            if (isPressed) haptics.performHapticFeedback(HapticFeedbackType.ContextClick)
+        }
+    }
+    if (LocalGlassAccessibility.current.reduceMotion) return this
+    val scale =
+        animateFloatAsState(
+            targetValue = if (isPressed) pressedScale else 1f,
+            animationSpec = PressBounceSpring,
+            label = "pressBounce",
+        )
+    return this.graphicsLayer {
+        scaleX = scale.value
+        scaleY = scale.value
+    }
+}
+
+/** How far a pressed pill sinks. */
+const val PRESS_BOUNCE_SCALE = 0.95f
+
+/** Medium bounce, medium-low stiffness: the pill overshoots a touch on release, like iOS. */
+private val PressBounceSpring = spring<Float>(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMediumLow)
 
 /**
  * Scrim over the bottom of a thumbnail so the duration pill stays legible on light frames.
