@@ -43,6 +43,8 @@ import com.voxtube.app.ui.components.shared.VoxTubeReorderButtons
 import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.VoxTubeSwitch
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 import sh.calvin.reorderable.ReorderableColumn
 
 private val RowPadding = 24.dp
@@ -77,8 +79,9 @@ internal fun LyricsProvidersSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = glassWindowContainerColor(MaterialTheme.colorScheme.surface),
     ) {
+        GlassWindowBlur()
         VoxTubeSheetHeader(
             title = stringResource(R.string.lyrics_provider_title),
             subtitle = stringResource(R.string.settings_lyrics_provider_order_description),

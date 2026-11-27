@@ -25,8 +25,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -40,6 +42,7 @@ import com.voxtube.app.ui.RemoteSlot
 import com.voxtube.app.ui.components.shared.MediaMiniBarBounds
 import com.voxtube.app.ui.components.shared.MediaMiniBarDefaults
 import com.voxtube.app.ui.components.shared.MediaPlayPauseButton
+import com.voxtube.app.ui.theme.glass.themedGlass
 import kotlin.math.roundToInt
 
 /** What "Play on" puts in the shell's mini player slot now. */
@@ -105,9 +108,11 @@ private fun RemoteBarFrame(
     val density = LocalDensity.current
     val heightPx = with(density) { MediaMiniBarDefaults.Height.toPx() }
     val spacerPx = with(density) { MediaMiniBarDefaults.BottomSpacer.toPx() }
+    val shape = remember { RoundedCornerShape(MediaMiniBarDefaults.CornerRadius) }
     Surface(
-        shape = RoundedCornerShape(MediaMiniBarDefaults.CornerRadius),
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        shape = shape,
+        color = Color.Transparent,
+        contentColor = MaterialTheme.colorScheme.onSurface,
         modifier =
             Modifier
                 .offset {
@@ -120,7 +125,8 @@ private fun RemoteBarFrame(
                     val height = heightPx.roundToInt()
                     val placeable = measurable.measure(Constraints.fixed(width, height))
                     layout(width, height) { placeable.place(0, 0) }
-                }.clickable(onClickLabel = onClickLabel, onClick = onClick),
+                }.then(themedGlass(shape))
+                .clickable(onClickLabel = onClickLabel, onClick = onClick),
     ) {
         Row(Modifier.padding(horizontal = 10.dp), verticalAlignment = Alignment.CenterVertically, content = content)
     }

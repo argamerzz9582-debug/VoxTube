@@ -26,6 +26,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 
 private val OptionHorizontalPadding = 24.dp
 private val OptionVerticalPadding = 12.dp
@@ -51,8 +53,9 @@ fun <T> SettingsPreviewSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = glassWindowContainerColor(MaterialTheme.colorScheme.surface),
     ) {
+        GlassWindowBlur()
         VoxTubeSheetHeader(title = title, subtitle = subtitle, onClose = onDismiss, showDragHandle = false)
         LazyColumn(
             contentPadding =

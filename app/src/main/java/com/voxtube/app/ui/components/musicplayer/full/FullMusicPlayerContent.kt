@@ -51,6 +51,10 @@ import com.voxtube.app.ui.components.shared.SkipDirection
 import com.voxtube.app.ui.screens.music.MusicPlayerViewModel
 import com.voxtube.app.ui.screens.music.MusicVideoSwitchViewModel
 import com.voxtube.app.ui.screens.music.sharedMusicPlayerViewModel
+import com.voxtube.app.ui.theme.glass.LocalLiquidGlassEnabled
+import com.voxtube.app.ui.theme.glass.ProvideGlassBackdrop
+import com.voxtube.app.ui.theme.glass.glassBackdropSource
+import com.voxtube.app.ui.theme.glass.rememberGlassBackdrop
 import com.voxtube.app.ui.utils.LocalWindowIsLandscape
 import com.voxtube.app.ui.utils.LocalWindowSizeClass
 
@@ -335,10 +339,14 @@ internal fun FullMusicPlayerContent(
                 animationSpec = MaterialTheme.motionScheme.defaultEffectsSpec(),
                 label = "inPlaceLyricsDim",
             )
+        // Liquid Glass inside the player samples the player's own background, not the app behind it.
+        val glassOn = LocalLiquidGlassEnabled.current
+        val playerGlass = rememberGlassBackdrop()
         PlayerBackground(
             thumbnailUrl = backgroundThumbnailUrl,
             style = backgroundStyle,
             backdrop = backdrop,
+            modifier = if (glassOn) Modifier.glassBackdropSource(playerGlass) else Modifier,
             artworkAtStart = layout == MusicPlayerLayout.WIDE || layout == MusicPlayerLayout.SPLIT,
             animatedArtwork = animatedArtwork.takeIf { immersiveBackground },
             preloadCovers =
@@ -356,61 +364,63 @@ internal fun FullMusicPlayerContent(
             }
         val pullUpQueue = Modifier.musicSideSwipes(sideSwipes).queuePullUpGesture(queueState, enabled = isPlayerSheetExpanded && !isWide)
         val paneLyricsBackdrop = remember(palette.base) { lyricsBackdrop(palette.base) }
-        when (layout) {
-            MusicPlayerLayout.COMPACT -> {
-                val inPlaceLyrics: @Composable (Modifier) -> Unit = { modifier ->
-                    NowPlayingLyricsInPlace(
-                        uiState = uiState,
-                        viewModel = viewModel,
-                        accentColor = colorScheme.primary,
-                        backdropColor = paneLyricsBackdrop,
-                        contentColor = colorScheme.onSurface,
-                        positionState = positionState,
-                        active = inPlaceLyricsActive(isPlayerSheetExpanded, lyricsInPlaceShown, showLyricsSheet, queueCoversArtwork),
-                        onOpenFullScreen = openLyricsSheet,
-                        modifier = modifier,
+        ProvideGlassBackdrop(playerGlass.takeIf { glassOn }) {
+            when (layout) {
+                MusicPlayerLayout.COMPACT -> {
+                    val inPlaceLyrics: @Composable (Modifier) -> Unit = { modifier ->
+                        NowPlayingLyricsInPlace(
+                            uiState = uiState,
+                            viewModel = viewModel,
+                            accentColor = colorScheme.primary,
+                            backdropColor = paneLyricsBackdrop,
+                            contentColor = colorScheme.onSurface,
+                            positionState = positionState,
+                            active = inPlaceLyricsActive(isPlayerSheetExpanded, lyricsInPlaceShown, showLyricsSheet, queueCoversArtwork),
+                            onOpenFullScreen = openLyricsSheet,
+                            modifier = modifier,
+                        )
+                    }
+                    CompactPlayerLayout(
+                        slots = slots,
+                        artworkSize = artworkSize,
+                        queueFraction = queueState::fraction,
+                        bottomInset = navBarPadding,
+                        modifier = pullUpQueue,
+                        lyrics = inPlaceLyrics.takeIf { lyricsInPlaceShown },
                     )
                 }
-                CompactPlayerLayout(
-                    slots = slots,
-                    artworkSize = artworkSize,
-                    queueFraction = queueState::fraction,
-                    bottomInset = navBarPadding,
-                    modifier = pullUpQueue,
-                    lyrics = inPlaceLyrics.takeIf { lyricsInPlaceShown },
-                )
-            }
 
-            MusicPlayerLayout.PORTRAIT_LARGE -> {
-                CompactPlayerLayout(
-                    slots = slots,
-                    artworkSize = artworkSize,
-                    queueFraction = queueState::fraction,
-                    bottomInset = navBarPadding,
-                    modifier = Modifier.align(Alignment.TopCenter).widthIn(max = PortraitLargeMaxWidth).then(pullUpQueue),
-                )
-            }
-
-            MusicPlayerLayout.SPLIT -> {
-                SplitPlayerLayout(slots, queueState::fraction, pullUpQueue)
-            }
-
-            MusicPlayerLayout.WIDE -> {
-                WidePlayerLayout(slots, panes, immersive = immersiveBackground) { modifier ->
-                    NowPlayingSidePane(
-                        tab = sidePaneTab,
-                        onTabChange = selectSidePaneTab,
-                        onOpenFullLyrics = openLyricsSheet,
-                        lyricsBackdrop = paneLyricsBackdrop,
-                        uiState = uiState,
-                        viewModel = viewModel,
-                        positionState = positionState,
-                        isPlayerSheetExpanded = isPlayerSheetExpanded,
-                        showLyricsSheet = showLyricsSheet,
-                        queueSwipes = queueSwipes,
-                        queueActions = queueActions,
-                        modifier = modifier,
+                MusicPlayerLayout.PORTRAIT_LARGE -> {
+                    CompactPlayerLayout(
+                        slots = slots,
+                        artworkSize = artworkSize,
+                        queueFraction = queueState::fraction,
+                        bottomInset = navBarPadding,
+                        modifier = Modifier.align(Alignment.TopCenter).widthIn(max = PortraitLargeMaxWidth).then(pullUpQueue),
                     )
+                }
+
+                MusicPlayerLayout.SPLIT -> {
+                    SplitPlayerLayout(slots, queueState::fraction, pullUpQueue)
+                }
+
+                MusicPlayerLayout.WIDE -> {
+                    WidePlayerLayout(slots, panes, immersive = immersiveBackground) { modifier ->
+                        NowPlayingSidePane(
+                            tab = sidePaneTab,
+                            onTabChange = selectSidePaneTab,
+                            onOpenFullLyrics = openLyricsSheet,
+                            lyricsBackdrop = paneLyricsBackdrop,
+                            uiState = uiState,
+                            viewModel = viewModel,
+                            positionState = positionState,
+                            isPlayerSheetExpanded = isPlayerSheetExpanded,
+                            showLyricsSheet = showLyricsSheet,
+                            queueSwipes = queueSwipes,
+                            queueActions = queueActions,
+                            modifier = modifier,
+                        )
+                    }
                 }
             }
         }

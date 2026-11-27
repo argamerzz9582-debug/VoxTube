@@ -1,9 +1,9 @@
-# VoxTube v1.0.0
+# VoxTube v1.1.0
 
-**Release date:** 2026-11-26
+**Release date:** 2026-11-27
 **Status:** Stable
 
-The first VoxTube release: a privacy-respecting YouTube and YouTube Music client with an on-device recommendation engine and a new look.
+The Liquid Glass release: the tab bar, headers, mini player, sheets, dialogs, settings and music player are now made of glass that blurs and bends what is behind it.
 
 ## Download
 
@@ -16,31 +16,25 @@ The first VoxTube release: a privacy-respecting YouTube and YouTube Music client
 | `checksums.txt` | SHA-256 of every APK |
 | Source code (zip / tar.gz) | The full source of this release |
 
-Android 8.0 or newer. VoxTube uses its own app ID (`com.voxtube.app`), so it installs next to other YouTube clients. Backups from Flow can be imported in Settings > Backup.
-
-## Highlights
-
-- New name, new logo and a new app ID
-- Softer, rounder corners across the app as the first step of the Liquid Glass redesign
-- Updates come straight from this repository's releases
+Android 8.0 or newer. Updates over VoxTube 1.0.0 in place. The full glass effect needs Android 13; Android 12 gets blur without refraction, and older versions get solid surfaces.
 
 ## New
 
-- Pinch the mini player to any size, drag a tucked mini player back out, and new TalkBack actions for it
-- Fine scrubbing: pull up while dragging the seek bar to scroll through frames
-- Remember video quality per network (#2178)
-- Hashtags, music credits, verified badges and live viewer counts on the watch page
-- Related videos keep loading, and now include playlists, Mixes and Shorts
-- Autoplay on Home (off by default) and a top bar that slides away as you scroll
-- Captions follow the audio track, and Shorts can show captions (#2377)
-- Rich community posts: tappable links, playlist cards and image polls
-- Liked music first in Your playlists on Music home (#2359)
-- Spotify Canvas and a quality choice for animated album art (#2379)
-- Works on school and work Wi-Fi that needs a certificate you installed (#2284)
-- While Deep Focus is on, the keyboard does not learn what you type in search
+- Liquid Glass tab bar: the floating bar is a glass capsule that blurs and bends the page behind it, and is now the default style
+- Liquid Glass headers on Home, Music, Subscriptions and every settings page
+- Liquid glass background for the music mini player, now the default (Settings > Appearance > Player)
+- Dialogs and sheets are translucent glass over a frosted app on Android 12 and newer
+- Glass shuffle, repeat, lyrics, queue, like and download buttons in the music player
 
-## Improved and fixed
+## Improved
 
-- Faster, more reliable downloads that survive network drops and expired links, with a free space check
-- Smoother playback start, preloading and picture-in-picture, and lower memory use in Shorts
-- Many fixes for live streams, the queue, music shuffle, HDR and Android TV
+- Duration and status badges on thumbnails are pills
+- Glass falls back to solid surfaces on low memory devices and in battery saver
+
+## Direct links
+
+- APK (recommended): [voxtube.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.1.0/voxtube.apk)
+- APK (arm64): [voxtube-arm64-v8a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.1.0/voxtube-arm64-v8a.apk)
+- APK (32-bit): [voxtube-armeabi-v7a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.1.0/voxtube-armeabi-v7a.apk)
+- APK (FOSS): [voxtube-foss.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.1.0/voxtube-foss.apk)
+- Source code: [zip](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.1.0.zip) · [tar.gz](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.1.0.tar.gz)

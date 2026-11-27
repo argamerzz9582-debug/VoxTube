@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Key
 import androidx.compose.material.icons.outlined.Spellcheck
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -25,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.shared.LocalDpadNavigation
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.dpadReadThrough
 import com.voxtube.app.ui.screens.sync.QrCodeImage
@@ -125,7 +125,7 @@ internal fun ReplaceWordsDialog(
     onDismiss: () -> Unit,
     onReplace: () -> Unit,
 ) {
-    AlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.linked_replace_words_title)) },
         text = { Text(stringResource(R.string.linked_replace_words_body)) },

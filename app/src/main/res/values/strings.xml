@@ -269,6 +269,7 @@
     <string name="player_background_style_black">True Black</string>
     <string name="player_appearance_mini_background_title">Background</string>
     <string name="player_appearance_mini_background_subtitle">What the mini player is painted with</string>
+    <string name="mini_background_glass">Liquid glass</string>
     <string name="mini_background_tinted">Tinted</string>
     <string name="mini_background_vivid">Vivid</string>
     <string name="mini_background_app_theme">App theme</string>

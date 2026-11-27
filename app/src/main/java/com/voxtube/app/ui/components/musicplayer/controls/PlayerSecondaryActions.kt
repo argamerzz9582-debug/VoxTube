@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -31,6 +32,9 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.player.RepeatMode
 import com.voxtube.app.ui.components.musicplayer.common.readableAccentOn
+import com.voxtube.app.ui.theme.glass.LiquidGlassStyle
+import com.voxtube.app.ui.theme.glass.LocalGlassBackdrop
+import com.voxtube.app.ui.theme.glass.themedGlass
 
 private val SegmentFullRadius = 21.dp
 private val SegmentEdgeRadius = 8.dp
@@ -137,19 +141,22 @@ internal fun RowScope.PlayerToggleButton(
     checkedContentColor: Color,
     icon: ImageVector,
     contentDescription: String?,
-    uncheckedShape: Shape,
+    uncheckedShape: CornerBasedShape,
     onClick: () -> Unit,
 ) {
+    // Off, the button is a pane of clear Liquid Glass over the player's background.
+    val glass = !checked && LocalGlassBackdrop.current != null
     ToggleButton(
         checked = checked,
         onCheckedChange = { onClick() },
         modifier =
             Modifier
                 .weight(1f)
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .then(if (glass) themedGlass(uncheckedShape, LiquidGlassStyle.Clear) else Modifier),
         colors =
             ToggleButtonDefaults.colors(
-                containerColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f),
+                containerColor = if (glass) Color.Transparent else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f),
                 contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 checkedContainerColor = checkedContainerColor,
                 checkedContentColor = checkedContentColor,
@@ -229,12 +236,14 @@ private fun SplitCapsuleButton(
     onLongClick: (() -> Unit)? = null,
 ) {
     val scheme = MaterialTheme.colorScheme
+    // Inactive, the capsule is clear Liquid Glass over the player's background.
+    val glass = !active && LocalGlassBackdrop.current != null
     val containerColor by animateColorAsState(
         targetValue =
-            if (active) {
-                scheme.primary
-            } else {
-                scheme.onPrimary.copy(alpha = 0.7f)
+            when {
+                active -> scheme.primary
+                glass -> Color.Transparent
+                else -> scheme.onPrimary.copy(alpha = 0.7f)
             },
         animationSpec = tween(durationMillis = 250),
         label = "capsuleContainer",
@@ -257,6 +266,7 @@ private fun SplitCapsuleButton(
         modifier =
             Modifier
                 .size(width = 50.dp, height = 42.dp)
+                .then(if (glass) themedGlass(shape, LiquidGlassStyle.Clear) else Modifier)
                 .clip(shape)
                 .background(containerColor)
                 .combinedClickable(

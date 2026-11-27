@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ErrorOutline
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -18,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.sync2.service.LinkedError
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import com.voxtube.app.ui.screens.sync.SyncActionRow
 import com.voxtube.app.ui.screens.sync.SyncStepHeader
 
@@ -106,7 +106,7 @@ internal fun LinkedOverview(
         )
     }
     if (confirmLeave) {
-        AlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { confirmLeave = false },
             title = { Text(stringResource(R.string.linked_leave_title)) },
             text = {

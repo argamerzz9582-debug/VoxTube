@@ -35,6 +35,9 @@ import com.voxtube.app.ui.components.shared.VoxTubeModalSheetDefaults
 import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
 import com.voxtube.app.ui.components.shared.toggleHapticType
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassSheetBase
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 import kotlinx.coroutines.launch
 
 private val EdgePadding = 16.dp
@@ -75,7 +78,9 @@ internal fun LyricsShareSheet(
         properties = properties,
         modifier = VoxTubeModalSheetDefaults.modifier,
         contentWindowInsets = VoxTubeModalSheetDefaults.contentWindowInsets,
+        containerColor = glassWindowContainerColor(glassSheetBase()),
     ) {
+        GlassWindowBlur()
         BackHandler(enabled = styling) { customising = false }
         VoxTubeSheetHeader(
             title = stringResource(R.string.lyrics_share),

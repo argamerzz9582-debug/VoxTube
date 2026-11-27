@@ -20,6 +20,8 @@ import com.voxtube.app.ui.components.shared.VoxTubeRowGroup
 import com.voxtube.app.ui.components.shared.VoxTubeSheetHeader
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 
 private val SheetBottomPadding = 16.dp
 
@@ -35,8 +37,9 @@ internal fun ImportSourceSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = glassWindowContainerColor(MaterialTheme.colorScheme.surface),
     ) {
+        GlassWindowBlur()
         VoxTubeSheetHeader(
             title = stringResource(source.titleRes),
             onClose = onDismiss,

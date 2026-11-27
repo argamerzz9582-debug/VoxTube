@@ -1,0 +1,18 @@
+VOXTUBE CHANGE LOG
+VERSION: 1.1.0
+DATE: 2026-11-27
+STATUS: stable
+
+HIGHLIGHTS
+- The Liquid Glass redesign: glass that blurs and bends what is behind it
+
+NEW
+- Liquid Glass tab bar: the floating bar is a glass capsule and is now the default style
+- Liquid Glass headers on Home, Music, Subscriptions and every settings page
+- Liquid glass background for the music mini player, now the default
+- Dialogs and sheets are translucent glass over a frosted app on Android 12 and newer
+- Glass shuffle, repeat, lyrics, queue, like and download buttons in the music player
+
+IMPROVED
+- Duration and status badges on thumbnails are pills
+- Glass falls back to solid surfaces on low memory devices and in battery saver

@@ -31,6 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 
 private val SheetTitlePadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
 private val SheetListPadding = PaddingValues(vertical = 8.dp)
@@ -72,9 +74,10 @@ fun SaveToCollectionSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberFlowSheetState(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = glassWindowContainerColor(MaterialTheme.colorScheme.surface),
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
+        GlassWindowBlur()
         CollectionSheetContent(
             title = title,
             entries = entries,

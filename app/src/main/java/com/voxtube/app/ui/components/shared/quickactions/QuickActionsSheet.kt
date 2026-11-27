@@ -55,6 +55,9 @@ import com.voxtube.app.ui.components.shared.connectedButtonShapes
 import com.voxtube.app.ui.components.shared.flowRowGroupShape
 import com.voxtube.app.ui.components.shared.ignoreHeldOk
 import com.voxtube.app.ui.components.shared.rememberFlowSheetState
+import com.voxtube.app.ui.theme.glass.GlassWindowBlur
+import com.voxtube.app.ui.theme.glass.glassSheetBase
+import com.voxtube.app.ui.theme.glass.glassWindowContainerColor
 import kotlinx.coroutines.launch
 
 /** The values every quick actions sheet shares. */
@@ -136,7 +139,9 @@ fun QuickActionsSheet(
         properties = properties,
         modifier = VoxTubeModalSheetDefaults.modifier,
         contentWindowInsets = VoxTubeModalSheetDefaults.contentWindowInsets,
+        containerColor = glassWindowContainerColor(glassSheetBase()),
     ) {
+        GlassWindowBlur()
         BackHandler(enabled = onBack != null) { onBack?.invoke() }
         Column(
             modifier =

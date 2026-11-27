@@ -7,9 +7,10 @@ import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.awaitHorizontalTouchSlopOrCancellation
 import androidx.compose.foundation.gestures.horizontalDrag
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -17,7 +18,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FloatingToolbarDefaults
-import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShortNavigationBarDefaults
 import androidx.compose.material3.ShortNavigationBarItemDefaults
@@ -56,10 +56,13 @@ import com.voxtube.app.R
 import com.voxtube.app.data.local.NavBarLabels
 import com.voxtube.app.data.local.NavBarLook
 import com.voxtube.app.ui.components.shared.MediaMiniBarDefaults
+import com.voxtube.app.ui.theme.glass.GlassShapes
+import com.voxtube.app.ui.theme.glass.themedGlass
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 private const val SCRUB_SCALE = 1.035f
+private const val GLASS_INDICATOR_ALPHA = 0.72f
 private val BelowIndicatorTop = 4.dp
 
 /** One slot of the floating bar: a tab, or the "More" slot when [tab] is null. */
@@ -69,13 +72,13 @@ private data class FloatingNavSlot(
 )
 
 /**
- * The bottom bar in its floating style: Material's floating toolbar holding one row of tabs with a single
+ * The bottom bar in its floating style: a Liquid Glass capsule holding one row of tabs with a single
  * indicator that travels between them. Its front edge leads on the fast spring and its back edge follows on
  * the default one, so it stretches on the way, and every slot's width springs with it. Dragging along the
  * bar scrubs the indicator across the tabs and opens the one under the finger on release.
  *
  * Material's navigation items each draw their own indicator, so none can travel between them; the row is
- * built from foundation primitives inside Material's toolbar container instead.
+ * built from foundation primitives inside the glass capsule instead.
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -156,11 +159,10 @@ internal fun VoxTubeFloatingNavigationBar(
                 .padding(bottom = FloatingToolbarDefaults.ScreenOffset),
         contentAlignment = Alignment.BottomStart,
     ) {
-        HorizontalFloatingToolbar(
-            expanded = true,
-            colors = FloatingToolbarDefaults.standardFloatingToolbarColors(),
-            // Items bring their own height; the toolbar's vertical padding would make the bar taller than 64 dp.
-            contentPadding = PaddingValues(horizontal = sidePadding),
+        // A Liquid Glass capsule in place of Material's toolbar container: it blurs and bends the page
+        // scrolling under it. Items bring their own height, so the capsule has no vertical padding.
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier =
                 Modifier
                     .layout { measurable, constraints ->
@@ -174,7 +176,9 @@ internal fun VoxTubeFloatingNavigationBar(
                         scaleX = scrubScale
                         scaleY = scrubScale
                         transformOrigin = TransformOrigin(0.5f, 1f)
-                    },
+                    }.then(themedGlass(GlassShapes.Capsule))
+                    .heightIn(min = VoxTubeNavigationDefaults.BarHeight)
+                    .padding(horizontal = sidePadding),
         ) {
             FloatingNavRow(
                 slots = slots,
@@ -237,7 +241,8 @@ private fun FloatingNavRow(
     val currentGeometry by rememberUpdatedState(geometry)
     val ltr by rememberUpdatedState(LocalLayoutDirection.current == LayoutDirection.Ltr)
     val currentSelect by rememberUpdatedState(onSelect)
-    val indicatorColor = colors.selectedIndicatorColor
+    // On glass the indicator is a tinted lens rather than a solid pill, so the page still shows through it.
+    val indicatorColor = colors.selectedIndicatorColor.copy(alpha = GLASS_INDICATOR_ALPHA)
     val belowNames = geometry.names == FloatingNavNames.BELOW
 
     Layout(

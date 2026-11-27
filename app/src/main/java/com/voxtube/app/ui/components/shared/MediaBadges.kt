@@ -28,11 +28,14 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.theme.ArtworkLiveBadge
 import com.voxtube.app.ui.theme.ArtworkScrimContent
+import com.voxtube.app.ui.theme.CapsuleShape
 import com.voxtube.app.ui.theme.artworkScrim
 import com.voxtube.app.utils.formatDuration
 
 private val BadgeSpacing = 4.dp
-private val BadgeHorizontalPadding = 5.dp
+
+// Pill badges, as Liquid Glass draws small labels on artwork.
+private val BadgeHorizontalPadding = 7.dp
 private val BadgeVerticalPadding = 2.dp
 private const val BADGE_SCRIM_ALPHA = 0.72f
 private val BadgeIconSize = 13.dp
@@ -88,7 +91,7 @@ fun MediaTextBadge(
 ) {
     Surface(
         modifier = modifier,
-        shape = MaterialTheme.shapes.extraSmall,
+        shape = CapsuleShape,
         color = containerColor,
         contentColor = contentColor,
     ) {
@@ -125,7 +128,7 @@ fun MediaIconBadge(
 ) {
     Surface(
         modifier = modifier,
-        shape = MaterialTheme.shapes.extraSmall,
+        shape = CapsuleShape,
         color = artworkScrim(BADGE_SCRIM_ALPHA),
         contentColor = ArtworkScrimContent,
     ) {

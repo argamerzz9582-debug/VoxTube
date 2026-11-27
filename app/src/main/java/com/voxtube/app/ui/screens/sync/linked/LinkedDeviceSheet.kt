@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -30,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.sync2.service.LinkedDevice
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import com.voxtube.app.ui.components.shared.VoxTubeConnectedToggleGroup
 import com.voxtube.app.ui.components.shared.VoxTubeNavRow
 import com.voxtube.app.ui.components.shared.VoxTubeSectionHeader
@@ -151,7 +151,7 @@ private fun RenameDialog(
     onSave: (String) -> Unit,
 ) {
     var name by rememberSaveable { mutableStateOf(current) }
-    AlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.linked_rename_title)) },
         text = {
@@ -189,7 +189,7 @@ private fun RemoveDialog(
         val ids = addedBy(device.id)
         added = devices.filter { it.id in ids && !it.thisDevice }
     }
-    AlertDialog(
+    VoxTubeAlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.linked_remove_title, names[device.id] ?: device.name)) },
         text = {

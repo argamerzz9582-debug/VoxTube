@@ -15,7 +15,6 @@ import androidx.compose.material.icons.outlined.Key
 import androidx.compose.material.icons.outlined.QrCode2
 import androidx.compose.material.icons.outlined.QrCodeScanner
 import androidx.compose.material.icons.outlined.Wifi
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -38,6 +37,7 @@ import com.voxtube.app.sync2.device.WebDavLogin
 import com.voxtube.app.sync2.linking.RestoreDevice
 import com.voxtube.app.sync2.service.LinkedError
 import com.voxtube.app.ui.components.settings.SettingsNotice
+import com.voxtube.app.ui.components.shared.VoxTubeAlertDialog
 import com.voxtube.app.ui.screens.sync.SyncActionRow
 import com.voxtube.app.ui.screens.sync.SyncCard
 import com.voxtube.app.ui.screens.sync.SyncManualEntryContent
@@ -307,7 +307,7 @@ private fun ServerHasGroup(
         ),
     )
     if (confirming) {
-        AlertDialog(
+        VoxTubeAlertDialog(
             onDismissRequest = { confirming = false },
             title = { Text(stringResource(R.string.linked_reset_server_title)) },
             text = { Text(stringResource(R.string.linked_reset_server_warning)) },
