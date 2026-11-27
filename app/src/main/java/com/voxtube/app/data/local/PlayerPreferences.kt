@@ -1776,7 +1776,7 @@ class PlayerPreferences(
 
     val bottomNavIconPop: Flow<Boolean> =
         context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.BOTTOM_NAV_ICON_POP] ?: false }
+            .map { preferences -> preferences[Keys.BOTTOM_NAV_ICON_POP] ?: true }
             .distinctUntilChanged()
 
     suspend fun setBottomNavIconPop(enabled: Boolean) {
@@ -1802,7 +1802,7 @@ class PlayerPreferences(
     // Beside the shrunk floating bar, the mini player drops into the bar's row.
     val bottomNavMiniBeside: Flow<Boolean> =
         context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.BOTTOM_NAV_MINI_BESIDE] ?: false }
+            .map { preferences -> preferences[Keys.BOTTOM_NAV_MINI_BESIDE] ?: true }
             .distinctUntilChanged()
 
     suspend fun setBottomNavMiniBeside(enabled: Boolean) {
@@ -6073,9 +6073,11 @@ data class NavBarLook(
     // Icons only by default: the floating glass bar reads cleanest without names.
     val labels: NavBarLabels = NavBarLabels.NEVER,
     val scrub: Boolean = true,
-    val iconPop: Boolean = false,
+    // A small spring pop on the icon of the tab just opened.
+    val iconPop: Boolean = true,
     val scroll: NavBarScroll = NavBarScroll.SHRINK,
-    val miniBeside: Boolean = false,
+    // Scrolled down, the bar shrinks to the open tab and the mini player rides beside it, like Apple Music.
+    val miniBeside: Boolean = true,
 )
 
 /** What scrolling does to the floating bar, when the bar reacts to scrolling at all. */

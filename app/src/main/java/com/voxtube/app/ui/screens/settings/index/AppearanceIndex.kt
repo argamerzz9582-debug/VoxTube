@@ -176,6 +176,15 @@ internal object AppearanceIndex {
             section = R.string.settings_section_style,
             destination = page,
         )
+    val reduceTransparency =
+        SettingEntry(
+            key = "appearance.reduce_transparency",
+            title = R.string.settings_reduce_transparency_title,
+            summary = R.string.settings_reduce_transparency_summary,
+            keywords = R.string.settings_reduce_transparency_keywords,
+            section = R.string.settings_section_style,
+            destination = page,
+        )
     val haptics =
         SettingEntry(
             key = "appearance.haptics",
@@ -220,6 +229,7 @@ internal object AppearanceIndex {
             skeletonGradient,
             marquee,
             classicLoadingIndicator,
+            reduceTransparency,
             haptics,
             hapticsIgnoreSystem,
             highlightNewSettings,

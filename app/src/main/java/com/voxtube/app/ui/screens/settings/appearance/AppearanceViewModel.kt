@@ -81,9 +81,9 @@ class AppearanceViewModel
         val navLabels = preferences.bottomNavLabels.asState(NavBarLabels.NEVER)
         val navStyle = preferences.bottomNavStyle.asState(NavBarStyle.FLOATING)
         val navScrub = preferences.bottomNavScrub.asState(true)
-        val navIconPop = preferences.bottomNavIconPop.asState(false)
+        val navIconPop = preferences.bottomNavIconPop.asState(true)
         val navScroll = preferences.bottomNavScroll.asState(NavBarScroll.SHRINK)
-        val navMiniBeside = preferences.bottomNavMiniBeside.asState(false)
+        val navMiniBeside = preferences.bottomNavMiniBeside.asState(true)
         val searchShowsNavBar = preferences.searchShowsNavBar.asState(false)
         val innerPagesShowNavBar = preferences.innerPagesShowNavBar.asState(false)
         val navTabOrder = preferences.navTabOrder.asState(DEFAULT_NAV_TAB_ORDER)
@@ -113,6 +113,10 @@ class AppearanceViewModel
         val newSettingsDays = preferences.newSettingsHighlightDays.asState(DEFAULT_NEW_SETTINGS_HIGHLIGHT_DAYS)
 
         fun setSkeletonGradient(enabled: Boolean) = write { localDataManager.setSkeletonGradient(enabled) }
+
+        val reduceTransparency = localDataManager.reduceTransparency.asState(false)
+
+        fun setReduceTransparency(enabled: Boolean) = write { localDataManager.setReduceTransparency(enabled) }
 
         fun setMarqueeEnabled(enabled: Boolean) = write { localDataManager.setMarqueeEnabled(enabled) }
 

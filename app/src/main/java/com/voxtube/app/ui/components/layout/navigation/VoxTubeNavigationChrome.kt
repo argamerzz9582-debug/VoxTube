@@ -26,6 +26,11 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onPlaced
@@ -240,9 +245,34 @@ private fun BoxScope.NavigationBarSlot(
                     look = look,
                     collapsed = scrollState?.isCollapsed == true,
                     onExpand = { scrollState?.expand() },
-                    modifier = barModifier,
+                    modifier = barModifier.bottomScrollEdge(MaterialTheme.colorScheme.background),
                 )
             }
         }
     }
 }
+
+/** How far above the floating bar the bottom scroll edge starts, and how much of the page it hides at the bottom. */
+private val BottomScrollEdgeReach = 24.dp
+private const val BOTTOM_SCROLL_EDGE_ALPHA = 0.6f
+
+/**
+ * Scroll edge effect under the floating bar: the page fades softly into [color] toward the screen's bottom
+ * edge instead of ending in a hard line behind the glass. Drawn behind the bar, and outside the backdrop
+ * the glass samples, so the glass itself still shows the page at full strength.
+ */
+private fun Modifier.bottomScrollEdge(color: Color): Modifier =
+    drawBehind {
+        val reach = BottomScrollEdgeReach.toPx()
+        drawRect(
+            brush =
+                Brush.verticalGradient(
+                    0f to Color.Transparent,
+                    1f to color.copy(alpha = BOTTOM_SCROLL_EDGE_ALPHA),
+                    startY = -reach,
+                    endY = size.height,
+                ),
+            topLeft = Offset(0f, -reach),
+            size = Size(size.width, size.height + reach),
+        )
+    }

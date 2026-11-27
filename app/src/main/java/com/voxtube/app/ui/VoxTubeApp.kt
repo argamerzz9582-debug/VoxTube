@@ -155,9 +155,9 @@ fun VoxTubeApp(
     val powerSave = rememberPowerSaveMode()
     val reducedNavMotion by rememberUpdatedState(lowRamDevice || powerSave)
     // Liquid Glass: the pages are recorded once and the bar, mini players and their sheets bend them.
-    // Low-RAM devices and battery saver get the solid fallback glass instead.
+    // Low-RAM devices, battery saver and the Reduce transparency setting get the solid fallback glass instead.
     val glassBackdrop = rememberGlassBackdrop()
-    val glassEnabled = !lowRamDevice && !powerSave
+    val glassEnabled = LocalLiquidGlassEnabled.current && !lowRamDevice && !powerSave
     val navTransitions =
         remember {
             VoxTubeNavTransitions(searchIsTab = { VoxTubeTab.Search in currentNavigationTabs }, reducedMotion = { reducedNavMotion })

@@ -1,5 +1,6 @@
 package com.voxtube.app.ui.components.layout.navigation
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -55,6 +56,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.local.NavBarLabels
 import com.voxtube.app.data.local.NavBarLook
+import com.voxtube.app.ui.components.musicplayer.common.readableAccentOn
 import com.voxtube.app.ui.components.shared.MediaMiniBarDefaults
 import com.voxtube.app.ui.theme.glass.GlassShapes
 import com.voxtube.app.ui.theme.glass.LiquidGlassStyle
@@ -246,7 +248,9 @@ private fun FloatingNavRow(
     // and the page still shows through it.
     val indicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = GLASS_INDICATOR_ALPHA)
     val belowNames = geometry.names == FloatingNavNames.BELOW
-    val selectedContentColor = MaterialTheme.colorScheme.onSurface
+    // The one place the bar spends the accent: the selected icon, kept at 3:1 against the glass.
+    val scheme = MaterialTheme.colorScheme
+    val selectedContentColor = readableAccentOn(container = scheme.surfaceContainer, accent = scheme.primary)
 
     Layout(
         content = {
@@ -255,6 +259,11 @@ private fun FloatingNavRow(
                     val selected = index == open
                     val target = geometry.widths.getOrElse(index) { 0f }
                     val width = animateFloatAsState(target, motion.defaultSpatialSpec(), label = "navItemWidth")
+                    val contentColor by animateColorAsState(
+                        targetValue = if (selected) selectedContentColor else colors.unselectedIconColor,
+                        animationSpec = motion.fastEffectsSpec(),
+                        label = "navItemColor",
+                    )
                     FloatingNavItem(
                         icon = slot.tab?.icon(selected) ?: Icons.Filled.MoreHoriz,
                         name = slot.name,
@@ -262,11 +271,7 @@ private fun FloatingNavRow(
                         names = geometry.names,
                         width = width,
                         namedWidth = target,
-                        contentColor =
-                            when {
-                                !selected -> colors.unselectedIconColor
-                                else -> selectedContentColor
-                            },
+                        contentColor = contentColor,
                         pop = pop,
                         hidden = folded && !selected,
                         onClick = { currentSelect(index) },

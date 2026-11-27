@@ -8,6 +8,7 @@ import androidx.compose.material.icons.outlined.EdgesensorHigh
 import androidx.compose.material.icons.outlined.FiberNew
 import androidx.compose.material.icons.outlined.Gradient
 import androidx.compose.material.icons.outlined.GridView
+import androidx.compose.material.icons.outlined.Opacity
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.TextFields
 import androidx.compose.material.icons.outlined.TextRotationNone
@@ -177,6 +178,12 @@ internal fun AppearanceScreen(
                 viewModel.classicLoadingIndicator,
                 viewModel::setClassicLoadingIndicator,
                 icon = Icons.Outlined.Autorenew,
+            )
+            switch(
+                AppearanceIndex.reduceTransparency,
+                viewModel.reduceTransparency,
+                viewModel::setReduceTransparency,
+                icon = Icons.Outlined.Opacity,
             )
             switch(AppearanceIndex.haptics, haptics, viewModel::setHaptics, icon = Icons.Outlined.Vibration)
             switch(
