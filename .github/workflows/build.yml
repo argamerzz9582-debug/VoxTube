@@ -119,6 +119,23 @@ jobs:
           :app:compileGithubDebugAndroidTestKotlin
           --build-cache --stacktrace
 
+      # Failed tests as annotations, readable on the run page without downloading the reports.
+      - name: Annotate failed tests
+        if: ${{ failure() }}
+        shell: python3 {0}
+        run: |
+          import glob, xml.etree.ElementTree as ET
+          failures = []
+          for path in glob.glob("app/build/test-results/**/TEST-*.xml", recursive=True):
+              for case in ET.parse(path).getroot().iter("testcase"):
+                  for bad in list(case.findall("failure")) + list(case.findall("error")):
+                      text = (bad.get("message") or bad.text or "").strip().replace("\n", " ")
+                      failures.append(f"{case.get('classname')}.{case.get('name')}: {text[:400]}")
+          unique = sorted(set(failures))
+          print(f"{len(unique)} failed tests")
+          for i in range(0, min(len(unique), 90), 9):
+              print("::error title=Failed tests::" + " %0A".join(unique[i:i + 9]))
+
       - name: Upload unit test reports
         if: ${{ failure() }}
         uses: actions/upload-artifact@v7
