@@ -1,0 +1,5 @@
+VoxTube 1.2.0, a UI/UX update:
+- Reduce transparency setting and glass that follows system animation and contrast settings
+- Folded glass tab bar on Shorts
+- Easier to read glass, accent on the selected tab, soft scroll edges
+- Like pop, haptics and press feedback on player buttons

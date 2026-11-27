@@ -41,6 +41,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
+import com.voxtube.app.ui.components.shared.popWhenTurnedOn
 import com.voxtube.app.utils.formatViewCount
 
 private val ActionSpacing = 8.dp
@@ -216,7 +217,7 @@ internal fun SegmentedLikeDislikeButton(
             Icon(
                 imageVector = if (isLiked) Icons.Filled.ThumbUp else Icons.Outlined.ThumbUp,
                 contentDescription = stringResource(R.string.like),
-                modifier = Modifier.size(ActionIconSize),
+                modifier = Modifier.size(ActionIconSize).popWhenTurnedOn(isLiked),
             )
             Spacer(modifier = Modifier.width(ActionIconSpacing))
             Text(text = likeText, style = MaterialTheme.typography.labelLarge)

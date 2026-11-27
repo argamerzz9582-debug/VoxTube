@@ -4535,6 +4535,9 @@
     <string name="settings_skeleton_gradient_title">Gradient loading placeholders</string>
     <string name="settings_skeleton_gradient_summary">Tint placeholders with your theme or the video\'s colors</string>
     <string name="settings_skeleton_gradient_keywords">gradient, loading screen, skeleton, shimmer</string>
+    <string name="settings_reduce_transparency_title">Reduce transparency</string>
+    <string name="settings_reduce_transparency_summary">Solid bars, players and sheets instead of see-through glass</string>
+    <string name="settings_reduce_transparency_keywords">glass, liquid glass, blur, transparency, opacity, accessibility, contrast</string>
     <string name="settings_marquee_title">Scrolling text</string>
     <string name="settings_marquee_summary">Scroll long titles and names. Turn off on slower devices</string>
     <string name="settings_marquee_keywords">marquee, scrolling title, artist name, low end, performance</string>

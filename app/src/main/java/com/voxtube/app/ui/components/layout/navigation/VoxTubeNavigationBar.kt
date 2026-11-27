@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationItemIconPosition
 import androidx.compose.material3.ShortNavigationBar
 import androidx.compose.material3.ShortNavigationBarArrangement
@@ -15,19 +16,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import com.voxtube.app.R
 import com.voxtube.app.data.local.NavBarLabels
 import com.voxtube.app.ui.theme.glass.GlassShapes
-import com.voxtube.app.ui.theme.glass.themedGlass
 import com.voxtube.app.ui.utils.LocalWindowSizeClass
 import com.voxtube.app.ui.utils.isMediumWidth
 
 internal const val MAX_BAR_TABS = 5
 
 /**
- * The bottom navigation bar, drawn as Liquid Glass. Material allows at most five destinations in a bar, so a sixth and
+ * The full-width bottom navigation bar, on a solid surface. Material allows at most five destinations in a bar, so a sixth and
  * seventh enabled tab move behind a "More" item.
  */
 @Composable
@@ -42,10 +42,11 @@ internal fun VoxTubeNavigationBar(
     val iconPosition = if (horizontalItems) NavigationItemIconPosition.Start else NavigationItemIconPosition.Top
     val (barTabs, overflowTabs) = splitTabsForOverflow(tabs, MAX_BAR_TABS)
 
-    // Liquid Glass: the bar is see-through and the page scrolling under it shows blurred and bent.
+    // A solid bar: Liquid Glass is kept for the floating capsule, the app's signature, so the
+    // full-width bar stays a quiet surface instead of a second kind of glass.
     ShortNavigationBar(
-        modifier = modifier.then(themedGlass(GlassShapes.BottomBar)),
-        containerColor = Color.Transparent,
+        modifier = modifier.clip(GlassShapes.BottomBar),
+        containerColor = MaterialTheme.colorScheme.surfaceContainer,
         arrangement =
             if (horizontalItems) ShortNavigationBarArrangement.Centered else ShortNavigationBarArrangement.EqualWeight,
     ) {

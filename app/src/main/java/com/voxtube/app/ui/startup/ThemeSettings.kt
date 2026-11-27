@@ -14,6 +14,9 @@ import com.voxtube.app.ui.theme.ThemeMode
 import com.voxtube.app.ui.theme.ThemeVariant
 import com.voxtube.app.ui.theme.VoxTubeFontFamily
 import com.voxtube.app.ui.theme.VoxTubeTheme
+import com.voxtube.app.ui.theme.glass.LocalGlassAccessibility
+import com.voxtube.app.ui.theme.glass.LocalLiquidGlassEnabled
+import com.voxtube.app.ui.theme.glass.rememberGlassAccessibility
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
@@ -30,6 +33,7 @@ data class ThemeSettings(
     val skeletonGradient: Boolean = false,
     val marqueeEnabled: Boolean = true,
     val classicLoadingIndicator: Boolean = false,
+    val reduceTransparency: Boolean = false,
 )
 
 fun LocalDataManager.themeSettings(fonts: AppFontPreferences): Flow<ThemeSettings> =
@@ -40,6 +44,7 @@ fun LocalDataManager.themeSettings(fonts: AppFontPreferences): Flow<ThemeSetting
         .combine(skeletonGradient) { settings, gradient -> settings.copy(skeletonGradient = gradient) }
         .combine(marqueeEnabled) { settings, marquee -> settings.copy(marqueeEnabled = marquee) }
         .combine(classicLoadingIndicator) { settings, classic -> settings.copy(classicLoadingIndicator = classic) }
+        .combine(reduceTransparency) { settings, reduce -> settings.copy(reduceTransparency = reduce) }
 
 @Composable
 fun VoxTubeTheme(
@@ -58,6 +63,9 @@ fun VoxTubeTheme(
             LocalSkeletonGradientEnabled provides settings.skeletonGradient,
             LocalMarqueeEnabled provides settings.marqueeEnabled,
             LocalClassicLoadingIndicator provides settings.classicLoadingIndicator,
+            // Glass follows the app's Reduce transparency setting and the system's motion and contrast states.
+            LocalLiquidGlassEnabled provides !settings.reduceTransparency,
+            LocalGlassAccessibility provides rememberGlassAccessibility(),
             content = content,
         )
     },

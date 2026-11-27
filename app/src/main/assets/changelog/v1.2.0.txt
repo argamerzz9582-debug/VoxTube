@@ -1,0 +1,19 @@
+VOXTUBE CHANGE LOG
+VERSION: 1.2.0
+DATE: 2026-11-27
+STATUS: stable
+
+NEW
+- Reduce transparency setting in Appearance turns every glass bar, player and sheet solid
+- On Shorts the tab bar rests folded to one glass button at the side; tap it to switch tabs
+- Liked songs and videos get a small pop on the heart or thumb, with a tap of vibration
+- Pull to refresh gives a tick when you have pulled far enough to refresh
+
+IMPROVED
+- Glass is easier to read over bright thumbnails
+- Glass stops bending light when system animations are off, and turns solid when system contrast is raised
+- The selected tab icon shows your accent colour
+- Lists fade softly under the header and toward the tab bar
+- Player toggles and the like and download buttons share one glass pill each, and press in under your finger
+- The mini player tucks beside the shrunk tab bar, and tab icons pop when opened, by default
+- The full-width bottom bar style is a solid bar
