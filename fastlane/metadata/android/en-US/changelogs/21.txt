@@ -1,0 +1,7 @@
+VoxTube 1.0.0, the first release:
+- New name, logo and app ID
+- Softer, rounder corners as the first step of the Liquid Glass redesign
+- Resizable mini player, fine scrubbing and per-network video quality
+- Captions follow the audio track; Shorts captions
+- Richer watch page, related videos and community posts
+- Faster, more reliable downloads and playback

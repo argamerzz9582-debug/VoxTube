@@ -1,4 +1,4 @@
-package io.github.aedev.flow.ui.components
+package com.voxtube.app.ui.components
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
@@ -20,8 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import io.github.aedev.flow.player.EnhancedMusicPlayerManager
-import io.github.aedev.flow.ui.screens.music.MusicTrack
+import com.voxtube.app.player.EnhancedMusicPlayerManager
+import com.voxtube.app.ui.screens.music.MusicTrack
 
 /**
   mini floating music player with modern design and dismiss functionality

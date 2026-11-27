@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "io.github.aedev.flow.benchmark"
+    namespace = "com.voxtube.app.benchmark"
     compileSdk = 37
 
     compileOptions {

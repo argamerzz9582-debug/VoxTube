@@ -68,3 +68,9 @@ Open Chinese Convert (github.com/BYVoid/OpenCC)
 The Traditional to Simplified character table in resources/neuro/fold is made from
 OpenCC's TSCharacters.txt. Copyright (c) the OpenCC authors. Licensed under the
 Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+
+
+Backdrop / AndroidLiquidGlass (github.com/Kyant0/AndroidLiquidGlass)
+The Liquid Glass blur, lens refraction and highlight effects of the VoxTube interface.
+Copyright (c) Kyant. Licensed under the Apache License, Version 2.0
+(https://www.apache.org/licenses/LICENSE-2.0).

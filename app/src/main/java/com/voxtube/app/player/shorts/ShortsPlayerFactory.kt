@@ -1,0 +1,200 @@
+package com.voxtube.app.player.shorts
+
+import android.content.Context
+import android.os.Looper
+import android.util.Log
+import androidx.annotation.OptIn
+import androidx.media3.common.AudioAttributes
+import androidx.media3.common.C
+import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DataSource
+import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.cache.Cache
+import androidx.media3.datasource.cache.CacheDataSource
+import androidx.media3.exoplayer.DefaultRenderersFactory
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.Renderer
+import androidx.media3.exoplayer.audio.AudioSink
+import androidx.media3.exoplayer.audio.DefaultAudioSink
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
+import androidx.media3.exoplayer.text.TextOutput
+import androidx.media3.exoplayer.text.TextRenderer
+import androidx.media3.exoplayer.trackselection.AdaptiveTrackSelection
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
+import androidx.media3.session.MediaSession
+import com.voxtube.app.BuildConfig
+import com.voxtube.app.player.MediaButtonSessionCallback
+import com.voxtube.app.player.PlaybackPriority
+import com.voxtube.app.player.analytics.PlaybackAnalyticsLogger
+import com.voxtube.app.player.analytics.PlaybackSessionStats
+import com.voxtube.app.player.audio.eq.EqualizerAudioProcessor
+import com.voxtube.app.player.cache.StreamIdentityCacheKeyFactory
+import com.voxtube.app.player.config.PlayerConfig
+import com.voxtube.app.player.config.VideoSizeCap
+import com.voxtube.app.player.datasource.YouTubeHttpDataSource
+import com.voxtube.app.player.factory.LoadControlFactory
+import com.voxtube.app.player.renderer.subtitle.VoxTubeSubtitleDecoderFactory
+
+/** Builds what the Shorts pool runs on: its players, the cached data source and the one media session. */
+@OptIn(UnstableApi::class)
+internal object ShortsPlayerFactory {
+    private const val SESSION_ID = "flow_shorts_session"
+    private const val TAG = "ShortsPlayerPool"
+    private const val STATS_TAG = "VoxTubePlaybackStats"
+
+    fun cachedDataSourceFactory(
+        appContext: Context,
+        cache: Cache,
+    ): DataSource.Factory =
+        CacheDataSource
+            .Factory()
+            .setCache(cache)
+            .setCacheKeyFactory(StreamIdentityCacheKeyFactory)
+            .setUpstreamDataSourceFactory(DefaultDataSource.Factory(appContext, YouTubeHttpDataSource.Factory()))
+            .setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR)
+
+    fun mediaSession(
+        context: Context,
+        player: ExoPlayer,
+    ): MediaSession? =
+        try {
+            MediaSession
+                .Builder(context, player)
+                .setId(SESSION_ID)
+                .setCallback(MediaButtonSessionCallback)
+                .build()
+        } catch (e: Exception) {
+            Log.w(TAG, "Shorts MediaSession unavailable; media buttons will not reach the reel", e)
+            null
+        }
+
+    fun player(
+        context: Context,
+        equalizer: EqualizerAudioProcessor,
+        dataSourceFactory: DataSource.Factory,
+        preferredAudioLanguage: String,
+        slotVideoId: () -> String?,
+        onFirstFrame: () -> Unit,
+        isActiveSlot: () -> Boolean,
+    ): ExoPlayer {
+        // The device cap is landscape; a Short is portrait, so its axes swap.
+        val (maxVideoWidth, maxVideoHeight) = VideoSizeCap.forDevice(context).let { it.maxHeight to it.maxWidth }
+
+        val loadControl = InactiveSlotLoadControl(LoadControlFactory.forShorts(), isActiveSlot)
+
+        val trackSelector =
+            DefaultTrackSelector(
+                context,
+                AdaptiveTrackSelection.Factory(),
+            ).apply {
+                val builder =
+                    buildUponParameters()
+                        .setPreferredVideoMimeTypes(*PlayerConfig.PREFERRED_VIDEO_MIME_TYPES)
+                        .setAllowVideoMixedMimeTypeAdaptiveness(true)
+                        .setForceHighestSupportedBitrate(false)
+                        .setViewportSizeToPhysicalDisplaySize(context, true)
+                        .setMaxVideoSize(maxVideoWidth, maxVideoHeight)
+                        // Captions are switched on for the reel on screen only.
+                        .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, true)
+
+                if (preferredAudioLanguage != "original" && preferredAudioLanguage.isNotEmpty()) {
+                    builder.setPreferredAudioLanguage(preferredAudioLanguage)
+                }
+
+                setParameters(builder.build())
+            }
+
+        // One processor per pooled player: they are all live at once and each keeps its own filter history.
+        val renderersFactory =
+            object : DefaultRenderersFactory(context) {
+                override fun buildAudioSink(
+                    context: Context,
+                    enableFloatOutput: Boolean,
+                    enableAudioTrackPlaybackParams: Boolean,
+                ): AudioSink =
+                    DefaultAudioSink
+                        .Builder(context)
+                        .setEnableFloatOutput(enableFloatOutput)
+                        .setEnableAudioTrackPlaybackParams(enableAudioTrackPlaybackParams)
+                        .setAudioProcessors(arrayOf(equalizer))
+                        .build()
+
+                // Side-loaded captions reach the text renderer unparsed, so it decodes them the legacy way, as the video player's does.
+                override fun buildTextRenderers(
+                    context: Context,
+                    output: TextOutput,
+                    outputLooper: Looper,
+                    extensionRendererMode: Int,
+                    out: ArrayList<Renderer>,
+                ) {
+                    val text = TextRenderer(output, outputLooper, VoxTubeSubtitleDecoderFactory())
+                    text.experimentalSetLegacyDecodingEnabled(true)
+                    out.add(text)
+                }
+            }.setExtensionRendererMode(DefaultRenderersFactory.EXTENSION_RENDERER_MODE_ON)
+                .setEnableDecoderFallback(true)
+
+        return ExoPlayer
+            .Builder(context, renderersFactory)
+            .setTrackSelector(trackSelector)
+            .setAudioAttributes(
+                AudioAttributes
+                    .Builder()
+                    .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)
+                    .setUsage(C.USAGE_MEDIA)
+                    .build(),
+                false,
+            ).setHandleAudioBecomingNoisy(true)
+            .setLoadControl(loadControl)
+            .setPriorityTaskManager(PlaybackPriority.tasks)
+            .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
+            .build()
+            .apply {
+                repeatMode = Player.REPEAT_MODE_ONE
+                playWhenReady = false
+                videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
+                addAnalyticsListener(PlaybackAnalyticsLogger(TAG) { slotVideoId() })
+                if (BuildConfig.DEBUG) {
+                    val player = this
+                    addAnalyticsListener(
+                        PlaybackSessionStats(
+                            STATS_TAG,
+                            { (player.bufferedPosition - player.currentPosition).coerceAtLeast(0) },
+                            slotVideoId,
+                        ),
+                    )
+                }
+                addListener(
+                    object : Player.Listener {
+                        override fun onRenderedFirstFrame() {
+                            ShortsStartupTrace.onFirstFrame(slotVideoId())
+                            onFirstFrame()
+                        }
+
+                        // Per slot: the pool's own current id is set after playWhenReady, and this fires inside it.
+                        override fun onIsPlayingChanged(isPlaying: Boolean) {
+                            if (isPlaying) ShortsStartupTrace.onPlaying(slotVideoId())
+                        }
+
+                        override fun onPlaybackStateChanged(playbackState: Int) {
+                            ShortsStartupTrace.onState(
+                                slotVideoId(),
+                                when (playbackState) {
+                                    Player.STATE_IDLE -> "IDLE"
+                                    Player.STATE_BUFFERING -> "BUFFERING"
+                                    Player.STATE_READY -> "READY"
+                                    else -> "ENDED"
+                                },
+                            )
+                        }
+
+                        override fun onPlayerError(error: PlaybackException) {
+                            ShortsStartupTrace.onState(slotVideoId(), "ERROR ${error.errorCodeName}: ${error.message}")
+                        }
+                    },
+                )
+            }
+    }
+}

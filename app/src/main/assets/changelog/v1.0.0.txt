@@ -1,0 +1,30 @@
+VOXTUBE CHANGE LOG
+VERSION: 1.0.0
+DATE: 2026-11-26
+STATUS: stable
+
+HIGHLIGHTS
+- New name, new logo and a new app ID
+- Softer, rounder corners across the app as the first step of the Liquid Glass redesign
+- Updates come straight from the VoxTube releases
+
+NEW
+- Pinch the mini player to any size, drag a tucked mini player back out, and new TalkBack actions for it
+- Fine scrubbing: pull up while dragging the seek bar to scroll through frames
+- Remember video quality per network (#2178)
+- Hashtags, music credits, verified badges and live viewer counts on the watch page
+- Related videos keep loading, and now include playlists, Mixes and Shorts
+- Autoplay on Home (off by default) and a top bar that slides away as you scroll
+- Captions follow the audio track, and Shorts can show captions (#2377)
+- Rich community posts: tappable links, playlist cards and image polls
+- Liked music first in Your playlists on Music home (#2359)
+- Spotify Canvas and a quality choice for animated album art (#2379)
+- Works on school and work Wi-Fi that needs a certificate you installed (#2284)
+- While Deep Focus is on, the keyboard does not learn what you type in search
+
+IMPROVED
+- Faster, more reliable downloads that survive network drops and expired links, with a free space check
+- Smoother playback start, preloading and picture-in-picture, and lower memory use in Shorts
+
+FIXES
+- Many fixes for live streams, the queue, music shuffle, HDR and Android TV

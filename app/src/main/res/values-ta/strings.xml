@@ -2,7 +2,7 @@
 <resources>
     <string name="subscriptions_video_section_title">வீடியோ சந்தாக்கள்</string>
     <string name="subscriptions_music_section_title">இசை சந்தாக்கள்</string>
-    <string name="app_name_uppercase">FLOW</string>
+    <string name="app_name_uppercase">VOXTUBE</string>
     <string name="deep_flow_mode_subtitle">உலாவும்போது கற்றலை இடைநிறுத்துங்கள்</string>
     <string name="player_appearance_haptics_subtitle">பிளேயர் தட்டல்கள் மற்றும் சைகைகளில் லேசாக அதிரும்</string>
     <string name="lyrics_provider_youtube_music_desc">எளிய உரை · பாடல் வரிகள் தாவல்</string>
@@ -19,7 +19,7 @@
     <string name="linked_title">இணைக்கப்பட்ட சாதனங்கள்</string>
     <string name="play_on_subtitle">அது எங்கு விளையாடுகிறது என்பதைத் தேர்ந்தெடுக்கவும்</string>
     <string name="play_on_manage_summary">சாதனங்களை மறுபெயரிட்டு, எவற்றை இங்கே இயக்கலாம் என்பதைத் தேர்வுசெய்யவும்</string>
-    <string name="linked_intro">உங்கள் சொந்த Flow ஒத்திசைவு சேவையகம், WebDAV கோப்புறை அல்லது உங்கள் Wi-Fi நெட்வொர்க் மூலம் இந்தச் சாதனத்தை உங்கள் பிற சாதனங்களுடன் ஒத்திசைவில் வைத்திருக்கவும். உங்கள் சாதனங்களில் அனைத்தும் குறியாக்கம் செய்யப்பட்டுள்ளன; எந்த சேவையகமும் அதைப் படிக்க முடியாது.</string>
+    <string name="linked_intro">உங்கள் சொந்த VoxTube ஒத்திசைவு சேவையகம், WebDAV கோப்புறை அல்லது உங்கள் Wi-Fi நெட்வொர்க் மூலம் இந்தச் சாதனத்தை உங்கள் பிற சாதனங்களுடன் ஒத்திசைவில் வைத்திருக்கவும். உங்கள் சாதனங்களில் அனைத்தும் குறியாக்கம் செய்யப்பட்டுள்ளன; எந்த சேவையகமும் அதைப் படிக்க முடியாது.</string>
     <string name="linked_join_request">%1$s சேர விரும்புகிறார்</string>
     <string name="linked_join_notification_text">உங்கள் இணைக்கப்பட்ட சாதனங்களில் சேர %1$s கேட்டுள்ளது. ஏற்க அல்லது நிராகரிக்க இணைக்கப்பட்ட சாதனங்களைத் திறக்கவும்.</string>
     <string name="linked_server">சேவையகம்</string>
@@ -58,7 +58,7 @@
     <string name="sb_category_highlight">சிறப்பம்சம்</string>
     <string name="sb_action_skip_automatically">தானாகத் தவிர்க்கவும்</string>
     <string name="sb_action_skip_once">ஒருமுறை மட்டும் தானாகத் தவிர்க்கவும்</string>
-    <string name="app_name">ஃப்ளோ</string>
+    <string name="app_name">VoxTube</string>
     <string name="subscriptions_search_placeholder">பின்தொடர்பவற்றைத் தேடு ...</string>
     <string name="subscriptions_sort_label">சேனல்களை வரிசைப்படுத்து</string>
     <string name="subscriptions_sort_default">இயல்புநிலை</string>
@@ -108,7 +108,7 @@
     <string name="copy_logs">பதிவுகளை நகலெடு</string>
     <string name="logs_copied">பதிவுகள் நகலெடுக்கப்பட்டன</string>
     <string name="logs_copy_failed">பதிவுகளை நகலெடுக்க முடியவில்லை</string>
-    <string name="channel_error_log_clip_label">ஃப்ளோ சேனல் பிழைப் பதிவு</string>
+    <string name="channel_error_log_clip_label">VoxTube சேனல் பிழைப் பதிவு</string>
     <string name="shorts">ஷார்ட்ஸ்</string>
     <string name="failed_to_load_channel">சேனலைப் பெற முடியவில்லை</string>
     <string name="subscribers">பின்தொடர்பவர்கள்</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Flow</string>
+    <string name="app_name">VoxTube</string>
     <string name="subscriptions_search_placeholder">සබ්ක්‍රිප්ශන්ස් හොයන්න...</string>
     <string name="subscriptions_sort_label">නාලිකා වර්ග කරන්න</string>
     <string name="subscriptions_sort_default">පෙරනිමිය</string>
@@ -17,7 +17,7 @@
     <string name="copy_logs">ලොග් පිටපත් කරන්න</string>
     <string name="logs_copied">ලොග් පිටපත් කරගන්නා ලදී</string>
     <string name="logs_copy_failed">ලොග් පිටපත් කරගැනීමට නොහැකි විය</string>
-    <string name="channel_error_log_clip_label">Flow නාලිකා දෝෂ ලොගය</string>
+    <string name="channel_error_log_clip_label">VoxTube නාලිකා දෝෂ ලොගය</string>
     <string name="shorts">ශෝට්ස්</string>
     <string name="failed_to_load_channel">නාලිකාව ලෝඩ් කිරීමට අසමත් විය</string>
     <string name="subscribers">දායකයන්</string>
@@ -43,7 +43,7 @@
     <string name="local_media_empty_title">ක්%1$sහමුවිය</string>
     <string name="local_media_empty_body">මෙම උපාංගයේ ගබඩා කර ඇති වීඩියෝ සහ සංගීතය මෙහි දිස්වනු ඇත.</string>
     <string name="local_media_permission_title">අවසරය අවශ්‍යයි</string>
-    <string name="local_media_permission_body">ඔබේ මාධ්‍ය වෙත ප්‍රවේශ වීමට ඉඩ දෙන්න එවිට Flow හට දේශීය වීඩියෝ සහ සංගීතය සොයා ගැනීමට සහ වාදනය කිරීමට හැකිය.</string>
+    <string name="local_media_permission_body">ඔබේ මාධ්‍ය වෙත ප්‍රවේශ වීමට ඉඩ දෙන්න එවිට VoxTube හට දේශීය වීඩියෝ සහ සංගීතය සොයා ගැනීමට සහ වාදනය කිරීමට හැකිය.</string>
     <string name="local_media_grant">ප්‍රවේශය ලබා දෙන්න</string>
     <string name="library_settings_data_header"><![CDATA[සැකසුම් සහ දත්ත]]></string>
     <string name="library_manage_data_label">දත්ත කළමනාකරණය කරන්න</string>
@@ -157,7 +157,7 @@
     <string name="tab_videos">වීඩියෝ</string>
     <string name="subscriptions_video_section_title">වීඩියෝ දායකත්වයන්</string>
     <string name="subscriptions_music_section_title">සංගීත දායකත්වයන්</string>
-    <string name="app_name_uppercase">FLOW</string>
+    <string name="app_name_uppercase">VOXTUBE</string>
     <string name="deep_flow_mode_subtitle">ඔබ බ්රවුස් කරන අතරතුර ඉගෙනීම නවත්වන්න</string>
     <string name="player_appearance_haptics_subtitle">ක්රීඩක තට්ටු සහ අභිනයන් මත සැහැල්ලුවෙන් කම්පනය කරන්න</string>
     <string name="lyrics_provider_youtube_music_desc">සරල පෙළ · ගී පද ටැබය</string>
@@ -174,7 +174,7 @@
     <string name="linked_title">සම්බන්ධිත උපාංග</string>
     <string name="play_on_subtitle">එය වාදනය කරන ස්ථානය තෝරන්න</string>
     <string name="play_on_manage_summary">උපාංග නැවත නම් කර මෙහි වාදනය කළ හැකි දේ තෝරන්න</string>
-    <string name="linked_intro">මෙම උපාංගය ඔබගේම Flow සමමුහුර්ත සේවාදායකය, WebDAV ෆෝල්ඩරයක් හෝ ඔබගේ Wi-Fi ජාලය හරහා ඔබගේ අනෙකුත් උපාංග සමඟ සමමුහුර්තව තබා ගන්න. ඔබගේ උපාංගවල සෑම දෙයක්ම සංකේතනය කර ඇත; කිසිම සේවාදායකයෙකුට එය කියවිය නොහැක.</string>
+    <string name="linked_intro">මෙම උපාංගය ඔබගේම VoxTube සමමුහුර්ත සේවාදායකය, WebDAV ෆෝල්ඩරයක් හෝ ඔබගේ Wi-Fi ජාලය හරහා ඔබගේ අනෙකුත් උපාංග සමඟ සමමුහුර්තව තබා ගන්න. ඔබගේ උපාංගවල සෑම දෙයක්ම සංකේතනය කර ඇත; කිසිම සේවාදායකයෙකුට එය කියවිය නොහැක.</string>
     <string name="linked_join_request">%1$s හට සම්බන්ධ වීමට අවශ්යයි</string>
     <string name="linked_join_notification_text">%1$s ඔබේ සම්බන්ධිත උපාංගවලට සම්බන්ධ වීමට ඉල්ලා සිටියේය. පිළිගැනීමට හෝ ප්රතික්ෂේප කිරීමට සම්බන්ධිත උපාංග විවෘත කරන්න.</string>
     <string name="linked_server">සේවාදායකය</string>

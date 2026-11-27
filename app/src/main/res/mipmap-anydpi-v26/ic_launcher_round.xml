@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The VoxTube logo (VoxTube_Logo.png): a full-bleed raster foreground over a matching blur. -->
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@color/ic_launcher_background" />
-    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+    <foreground android:drawable="@drawable/ic_launcher_voxtube_foreground" />
     <monochrome android:drawable="@drawable/ic_launcher_dynamic_foreground" />
 </adaptive-icon>
-

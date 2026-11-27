@@ -1,12 +1,12 @@
-package io.github.aedev.flow.legacy
+package com.voxtube.app.legacy
 
 import android.content.Context
 import android.util.Log
-import io.github.aedev.flow.data.local.*
-import io.github.aedev.flow.data.model.Video
-import io.github.aedev.flow.data.repository.YouTubeRepository
-import io.github.aedev.flow.legacy.RecommendationRepository
 import com.google.common.truth.Truth.assertThat
+import com.voxtube.app.data.local.*
+import com.voxtube.app.data.model.Video
+import com.voxtube.app.data.repository.YouTubeRepository
+import com.voxtube.app.legacy.RecommendationRepository
 import io.mockk.*
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest

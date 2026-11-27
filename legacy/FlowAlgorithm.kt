@@ -1,7 +1,7 @@
-package io.github.aedev.flow.data.recommendation
+package com.voxtube.app.data.recommendation
 
 import android.util.Log
-import io.github.aedev.flow.data.model.Video
+import com.voxtube.app.data.model.Video
 import kotlin.random.Random
 
 /**
