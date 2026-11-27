@@ -1,0 +1,4 @@
+VoxTube 1.1.1, a polish update:
+- Icons-only glass tab bar by default
+- Cleaner headers that frost as the feed scrolls under them
+- Pill filter chips

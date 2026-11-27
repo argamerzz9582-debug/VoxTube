@@ -1,4 +1,9 @@
-## Improved
+VOXTUBE CHANGE LOG
+VERSION: 1.1.1
+DATE: 2026-11-27
+STATUS: stable
+
+IMPROVED
 - The floating tab bar shows icons only by default, with a calmer neutral selection pill
 - Headers are the page's own colour at rest and frost as the feed scrolls under them, with no edge or shadow
 - Filter chips are pills
