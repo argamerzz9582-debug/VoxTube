@@ -87,7 +87,7 @@ internal fun selectApk(
     if (splits.isNotEmpty()) {
         return supportedAbis.firstNotNullOfOrNull { abi -> splits.firstOrNull { it.name.equals("voxtube-$abi.apk", ignoreCase = true) } }
     }
-    val publishesSplits = github.any { it.name.startsWith("flow-", ignoreCase = true) }
+    val publishesSplits = github.any { it.name.startsWith("voxtube-", ignoreCase = true) }
     if (publishesSplits && github.none { it.name.equals(UNIVERSAL_APK, ignoreCase = true) }) return null
     return github.firstOrNull { it.name.equals(UNIVERSAL_APK, ignoreCase = true) } ?: github.firstOrNull()
 }
