@@ -1,0 +1,6 @@
+VoxTube 1.1.0, the Liquid Glass release:
+- Glass tab bar, now floating by default
+- Glass headers on Home, Music, Subscriptions and settings
+- Glass music mini player and player buttons
+- Translucent dialogs and sheets over a frosted app (Android 12+)
+- Pill badges on thumbnails
