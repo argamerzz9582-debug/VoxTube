@@ -19,7 +19,6 @@ import androidx.compose.material.icons.rounded.PersonRemove
 import androidx.compose.material.icons.rounded.Visibility
 import androidx.compose.material.icons.rounded.VisibilityOff
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalButton
@@ -224,7 +223,7 @@ fun VoxTubeSubscribeButton(
             }
         }
 
-        DropdownMenu(
+        GlassDropdownMenu(
             expanded = menuExpanded,
             onDismissRequest = { menuExpanded = false },
             modifier = Modifier.width(MenuWidth),

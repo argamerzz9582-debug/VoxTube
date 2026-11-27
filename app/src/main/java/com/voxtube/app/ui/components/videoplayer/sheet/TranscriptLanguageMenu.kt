@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -19,6 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.player.state.SubtitleOption
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VoxTubeDropdownFilterChip
 
 /** Picks which caption track the transcript is read from, without touching the video's subtitles. */
@@ -39,7 +39,7 @@ internal fun TranscriptLanguageMenu(
             selected = selected != null,
             onClick = { expanded = true },
         )
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        GlassDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             tracks.forEach { track ->
                 DropdownMenuItem(
                     text = {

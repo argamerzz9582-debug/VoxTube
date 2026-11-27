@@ -298,6 +298,7 @@ private fun interfaceModeSummary(mode: AppUiMode): Int =
 @Composable
 private fun fontLabel(font: AppFontSelection): String =
     when (font.font) {
+        AppFont.INTER -> stringResource(R.string.font_inter)
         AppFont.SYSTEM -> stringResource(R.string.font_system_default)
         AppFont.CONDENSED -> stringResource(R.string.font_condensed)
         AppFont.SERIF -> stringResource(R.string.font_serif)

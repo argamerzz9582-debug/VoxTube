@@ -37,6 +37,8 @@ internal fun PlayerPillIconButton(
     interactionSource: MutableInteractionSource? = null,
 ) {
     val haptics = LocalHapticFeedback.current
+    // The standard on-video container is Liquid Glass; an explicit colour (often transparent) stays flat.
+    val glass = containerColor.isPlayerAffordance()
     FilledIconButton(
         onClick = {
             haptic?.let(haptics::performHapticFeedback)
@@ -45,10 +47,10 @@ internal fun PlayerPillIconButton(
         shapes = IconButtonDefaults.shapes(),
         colors =
             IconButtonDefaults.filledIconButtonColors(
-                containerColor = containerColor,
+                containerColor = if (glass) Color.Transparent else containerColor,
                 contentColor = contentColor,
             ),
-        modifier = modifier.size(buttonSize),
+        modifier = modifier.size(buttonSize).then(if (glass) playerGlass() else Modifier),
         interactionSource = interactionSource,
     ) {
         Icon(

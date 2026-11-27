@@ -102,6 +102,7 @@ internal fun FontScreen(
 
 private val builtInFonts =
     listOf(
+        AppFont.INTER to R.string.font_inter,
         AppFont.SYSTEM to R.string.font_system_default,
         AppFont.CONDENSED to R.string.font_condensed,
         AppFont.SERIF to R.string.font_serif,

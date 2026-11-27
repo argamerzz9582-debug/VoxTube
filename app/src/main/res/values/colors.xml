@@ -25,7 +25,7 @@
     <color name="icon_bg_expressive_pill">#FFF8F6</color>
     <color name="splash_background">#FFFFFF</color>
     <color name="splash_background_light">#FFFFFF</color>
-    <color name="splash_background_dark">#0F0F0F</color>
+    <color name="splash_background_dark">#06070A</color>
     <color name="splash_background_black">#000000</color>
 </resources>
 

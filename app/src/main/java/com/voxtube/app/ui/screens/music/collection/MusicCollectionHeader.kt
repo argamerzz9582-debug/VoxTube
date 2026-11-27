@@ -28,7 +28,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ButtonShapes
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalButton
@@ -60,6 +59,7 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.LocalSharedArtworkImages
 import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.connectedButtonShapes
@@ -348,7 +348,7 @@ private fun CollectionOverflowMenu(items: List<CollectionMenuItem>) {
         IconButton(onClick = { open = true }) {
             Icon(Icons.Rounded.MoreVert, contentDescription = stringResource(R.string.more_options))
         }
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+        GlassDropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             items.forEach { item ->
                 val color = if (item.destructive) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
                 DropdownMenuItem(

@@ -37,7 +37,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ButtonShapes
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalButton
@@ -66,6 +65,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.voxtube.app.R
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VoxTubeActionButtonPair
 import com.voxtube.app.ui.components.shared.VoxTubePairAction
 import com.voxtube.app.ui.components.shared.VoxTubeSortChip
@@ -334,7 +334,7 @@ private fun PlaylistOverflowMenu(
         IconButton(onClick = { open = true }) {
             Icon(Icons.Outlined.MoreVert, contentDescription = stringResource(R.string.more_options))
         }
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+        GlassDropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             if (state.canExport) {
                 DropdownMenuItem(
                     text = { Text(stringResource(R.string.export_playlist_action)) },
@@ -357,7 +357,7 @@ private fun PlaylistOverflowMenu(
                     },
                 )
             }
-            if (!state.canEdit) return@DropdownMenu
+            if (!state.canEdit) return@GlassDropdownMenu
             DropdownMenuItem(
                 text = { Text(stringResource(R.string.edit_playlist_action)) },
                 leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) },

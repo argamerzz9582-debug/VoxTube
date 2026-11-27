@@ -27,7 +27,6 @@ import androidx.compose.material.icons.outlined.NotificationsOff
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material.icons.outlined.SyncAlt
 import androidx.compose.material.icons.outlined.Verified
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -59,6 +58,7 @@ import com.voxtube.app.data.update.AppRelease
 import com.voxtube.app.data.update.AppVersions
 import com.voxtube.app.data.update.UpdateFailure
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.VoxTubeLogo
@@ -232,7 +232,7 @@ private fun UpdateMenu(
         IconButton(onClick = { open = true }, enabled = enabled) {
             Icon(Icons.Outlined.MoreVert, contentDescription = stringResource(R.string.more_options))
         }
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+        GlassDropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             DropdownMenuItem(
                 text = { Text(stringResource(R.string.update_skip_version)) },
                 leadingIcon = { Icon(Icons.Outlined.NotificationsOff, contentDescription = null) },

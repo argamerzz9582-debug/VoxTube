@@ -1,0 +1,5 @@
+VoxTube 1.3.0, the iOS 27 Liquid Glass redesign (phase A):
+- Lens tab bar that magnifies the icons under it, and a round glass search button
+- Inter font and the new Obsidian Glass default theme
+- Glass player buttons, time pill and top actions
+- Glass action pills, comments card and menus on the watch page

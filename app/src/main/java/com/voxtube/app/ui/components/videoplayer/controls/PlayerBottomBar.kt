@@ -57,12 +57,13 @@ private fun PlayerLabelPill(
             haptics.performHapticFeedback(HapticFeedbackType.ContextClick)
             onClick()
         },
-        color = PlayerScrimAffordance,
+        color = Color.Transparent,
         shape = CircleShape,
         modifier =
             Modifier
                 .height(height)
-                .widthIn(min = height),
+                .widthIn(min = height)
+                .then(playerGlass()),
     ) {
         Box(
             contentAlignment = Alignment.Center,
@@ -180,9 +181,9 @@ internal fun PlayerBottomBar(
                 if (currentChapter != null) {
                     Surface(
                         onClick = actions.onChapterClick,
-                        color = PlayerScrimAffordance,
+                        color = Color.Transparent,
                         shape = CircleShape,
-                        modifier = Modifier.height(metrics.pillHeight),
+                        modifier = Modifier.height(metrics.pillHeight).then(playerGlass()),
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,

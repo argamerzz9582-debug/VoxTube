@@ -12,10 +12,10 @@ class AppFontTest {
     val temp = TemporaryFolder()
 
     @Test
-    fun `stored ids round trip and anything unknown is the system font`() {
+    fun `stored ids round trip and anything unknown is the bundled font`() {
         AppFont.entries.forEach { assertThat(AppFont.fromStorage(it.storageId)).isEqualTo(it) }
-        assertThat(AppFont.fromStorage(null)).isEqualTo(AppFont.SYSTEM)
-        assertThat(AppFont.fromStorage("inter")).isEqualTo(AppFont.SYSTEM)
+        assertThat(AppFont.fromStorage(null)).isEqualTo(AppFont.INTER)
+        assertThat(AppFont.fromStorage("comic")).isEqualTo(AppFont.INTER)
     }
 
     @Test
@@ -63,7 +63,8 @@ class AppFontTest {
     @Test
     fun `built-in choices never touch the custom file`() {
         val file = temp.newFile("custom.ttf")
-        assertThat(appFontFamily(AppFont.SYSTEM, file) { error("not loaded") }).isEqualTo(VoxTubeFontFamily)
+        assertThat(appFontFamily(AppFont.INTER, file) { error("not loaded") }).isEqualTo(VoxTubeFontFamily)
+        assertThat(appFontFamily(AppFont.SYSTEM, file) { error("not loaded") }).isEqualTo(FontFamily.Default)
         assertThat(appFontFamily(AppFont.SERIF, file) { error("not loaded") }).isEqualTo(FontFamily.Serif)
     }
 }

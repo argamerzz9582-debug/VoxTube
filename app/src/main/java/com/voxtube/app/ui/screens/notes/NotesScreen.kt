@@ -19,7 +19,6 @@ import androidx.compose.material.icons.filled.SwapVert
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.outlined.StickyNote2
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -61,6 +60,7 @@ import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
 import com.voxtube.app.ui.components.layout.navigation.LocalMediaNavigator
 import com.voxtube.app.ui.components.layout.rememberFlowPaneScaffoldDirective
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 import com.voxtube.app.ui.components.shared.VoxTubeNoteEditorDialog
 import com.voxtube.app.ui.components.shared.VoxTubeSelectionAction
@@ -296,7 +296,7 @@ private fun NotesSortButton(
         IconButton(onClick = { open = true }) {
             Icon(Icons.AutoMirrored.Filled.Sort, contentDescription = stringResource(R.string.notes_sort))
         }
-        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+        GlassDropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             NotesSort.entries.forEach { sort ->
                 DropdownMenuItem(
                     text = { Text(stringResource(sort.labelRes)) },

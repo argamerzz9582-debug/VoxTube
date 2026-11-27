@@ -21,7 +21,6 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Upload
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -59,6 +58,7 @@ import com.voxtube.app.ui.components.layout.topbar.VoxTubeScrollAwayLayout
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeSearchTopBar
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
 import com.voxtube.app.ui.components.layout.topbar.rememberFlowScrollAwayState
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.utils.reachUnderStatusBar
 import kotlinx.coroutines.launch
 
@@ -150,7 +150,7 @@ fun SubscriptionsScreen(
                                     contentDescription = stringResource(R.string.subscriptions_sort_label),
                                 )
                             }
-                            DropdownMenu(
+                            GlassDropdownMenu(
                                 expanded = showSortMenu,
                                 onDismissRequest = { showSortMenu = false },
                             ) {

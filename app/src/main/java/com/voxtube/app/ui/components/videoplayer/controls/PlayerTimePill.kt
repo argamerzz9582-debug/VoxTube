@@ -73,21 +73,24 @@ fun PlayerTimePill(
     val isAtLiveEdge by remember(positionProvider, duration) {
         derivedStateOf { LiveEdgePolicy.isAtEdge(duration, positionProvider()) }
     }
+    val glass = containerColor.isPlayerAffordance()
+    val surfaceColor = if (glass) Color.Transparent else containerColor
+    val surfaceModifier = if (glass) modifier.then(playerGlass()) else modifier
     if (onClick != null) {
         Surface(
             onClick = onClick,
             enabled = !(isLive && isAtLiveEdge),
-            color = containerColor,
+            color = surfaceColor,
             shape = CircleShape,
-            modifier = modifier,
+            modifier = surfaceModifier,
         ) {
             PillRow(positionProvider, duration, isLive, showRemainingTime, isLayerVisible, isAtLiveEdge, isPlaying)
         }
     } else {
         Surface(
-            color = containerColor,
+            color = surfaceColor,
             shape = CircleShape,
-            modifier = modifier,
+            modifier = surfaceModifier,
         ) {
             PillRow(positionProvider, duration, isLive, showRemainingTime, isLayerVisible, isAtLiveEdge, isPlaying)
         }

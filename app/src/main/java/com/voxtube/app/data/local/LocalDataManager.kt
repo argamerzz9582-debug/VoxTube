@@ -174,7 +174,7 @@ class LocalDataManager
         // Theme Settings
         val themeMode: Flow<ThemeMode> =
             context.dataStore.data.map { prefs ->
-                parseThemeMode(prefs[THEME_MODE], ThemeMode.SYSTEM)
+                parseThemeMode(prefs[THEME_MODE], ThemeMode.DARK)
             }
 
         suspend fun setThemeMode(mode: ThemeMode) {
@@ -596,7 +596,7 @@ class LocalDataManager
                 )
             val strings = exported.strings.toMutableMap()
 
-            strings[THEME_MODE.name] = parseThemeMode(prefs[THEME_MODE], ThemeMode.SYSTEM).name
+            strings[THEME_MODE.name] = parseThemeMode(prefs[THEME_MODE], ThemeMode.DARK).name
             strings[THEME_VARIANT.name] =
                 parseThemeVariant(
                     prefs[THEME_VARIANT],

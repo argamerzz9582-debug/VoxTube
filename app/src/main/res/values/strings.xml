@@ -1318,8 +1318,8 @@
     <string name="theme_desc_sky_blue">A light, airy palette with open sky blues.</string>
     <string name="theme_name_cream_paper">Cream Paper</string>
     <string name="theme_desc_cream_paper">Warm paper tones for cosy daytime reading.</string>
-    <string name="theme_name_classic_dark">VoxTube Default</string>
-    <string name="theme_desc_classic_dark">The original VoxTube palette with the YouTube red accent.</string>
+    <string name="theme_name_classic_dark">Obsidian Glass</string>
+    <string name="theme_desc_classic_dark">The VoxTube default: deep obsidian behind Liquid Glass, with a red accent.</string>
     <string name="theme_name_true_black">True Black</string>
     <string name="theme_desc_true_black">Pure OLED</string>
     <string name="theme_name_monochrome">Monochrome</string>
@@ -4513,7 +4513,8 @@
     <string name="settings_font_title">Font</string>
     <string name="settings_font_summary">The typeface used across VoxTube</string>
     <string name="settings_keywords_font">typeface, text, letters, ttf, otf</string>
-    <string name="font_system_default">System default</string>
+    <string name="font_inter">Inter (default)</string>
+    <string name="font_system_default">Device font</string>
     <string name="font_condensed">Condensed</string>
     <string name="font_serif">Serif</string>
     <string name="font_custom">Custom font</string>
@@ -4585,6 +4586,8 @@
     <string name="settings_nav_scroll_shrink">Shrink</string>
     <string name="settings_nav_mini_beside_title">Mini player beside the bubble</string>
     <string name="settings_nav_mini_beside_summary">While the bar is shrunk, the mini player moves into its row</string>
+    <string name="settings_nav_search_orb_title">Search button beside the bar</string>
+    <string name="settings_nav_search_orb_summary">Search gets its own round glass button next to the tabs</string>
     <string name="settings_nav_scrub_title">Drag to switch tabs</string>
     <string name="settings_nav_scrub_summary">Slide along the floating bar to move between tabs</string>
     <string name="settings_nav_icon_pop_title">Icon pop</string>

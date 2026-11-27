@@ -31,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -40,17 +41,17 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.ui.components.shared.VoxTubeLoadingIndicator
 import com.voxtube.app.ui.components.shared.pressScale
-import com.voxtube.app.ui.theme.PlayerScrimAffordance
 import com.voxtube.app.ui.theme.PlayerScrimContent
 import com.voxtube.app.ui.theme.PlayerScrimContentDisabled
 
 private enum class TransportIcon { Buffering, Replay, Pause, Play }
 
-private val PlayPauseButtonSize = 62.dp
-private val PlayPauseIconSize = 54.dp
-private val BufferingIndicatorSlot = 48.dp
-private val SkipButtonSize = 48.dp
-private val SkipIconSize = 36.dp
+// iOS 26's player: every transport button is a Liquid Glass circle, play the largest.
+private val PlayPauseButtonSize = 68.dp
+private val PlayPauseIconSize = 42.dp
+private val BufferingIndicatorSlot = 44.dp
+private val SkipButtonSize = 52.dp
+private val SkipIconSize = 30.dp
 
 /** Breathing room kept at each end, so the outer button never touches the player edge. */
 private val TransportEdgeInset = 8.dp
@@ -135,14 +136,15 @@ internal fun PlayerTransportControls(
                 shapes = IconButtonDefaults.shapes(),
                 colors =
                     IconButtonDefaults.filledIconButtonColors(
-                        containerColor = PlayerScrimAffordance,
+                        containerColor = Color.Transparent,
                         contentColor = PlayerScrimContent,
                     ),
                 interactionSource = playPauseInteractionSource,
                 modifier =
                     playPauseModifier
                         .size(PlayPauseButtonSize)
-                        .pressScale(playPauseInteractionSource, pressedScale = 0.88f),
+                        .pressScale(playPauseInteractionSource, pressedScale = 0.88f)
+                        .then(playerGlass()),
             ) {
                 val transportIcon =
                     when {
@@ -221,7 +223,8 @@ private fun SkipButton(
         modifier =
             Modifier
                 .size(SkipButtonSize)
-                .pressScale(interactionSource, pressedScale = 0.82f),
+                .pressScale(interactionSource, pressedScale = 0.82f)
+                .then(playerGlass()),
         interactionSource = interactionSource,
     ) {
         Icon(

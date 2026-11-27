@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -24,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.data.model.PlaylistInfo
 import com.voxtube.app.data.playlist.PlaylistListOrder
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.MediaKind
 import com.voxtube.app.ui.components.shared.VoxTubeFilterChip
 import com.voxtube.app.ui.components.shared.VoxTubeSortChip
@@ -83,7 +83,7 @@ internal fun PlaylistLibraryFilterRow(
                     selected = selectedOwnership != PlaylistOwnershipFilter.All,
                     onClick = { ownershipExpanded = true },
                 )
-                DropdownMenu(
+                GlassDropdownMenu(
                     expanded = ownershipExpanded,
                     onDismissRequest = { ownershipExpanded = false },
                 ) {

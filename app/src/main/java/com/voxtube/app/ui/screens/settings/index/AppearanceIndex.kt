@@ -329,6 +329,16 @@ internal object NavigationBarIndex {
             destination = page,
             revealVia = style.key,
         )
+    val searchOrb =
+        SettingEntry(
+            key = "navigation_bar.search_orb",
+            title = R.string.settings_nav_search_orb_title,
+            summary = R.string.settings_nav_search_orb_summary,
+            keywords = R.string.settings_keywords_nav_style,
+            section = R.string.settings_section_style,
+            destination = page,
+            revealVia = style.key,
+        )
     val scrub =
         SettingEntry(
             key = "navigation_bar.scrub",
@@ -373,6 +383,7 @@ internal object NavigationBarIndex {
             labels,
             scroll,
             miniBeside,
+            searchOrb,
             scrub,
             iconPop,
             home,

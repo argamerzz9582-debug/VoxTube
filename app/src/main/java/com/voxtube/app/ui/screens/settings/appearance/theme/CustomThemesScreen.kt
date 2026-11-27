@@ -12,7 +12,6 @@ import androidx.compose.material.icons.outlined.FileOpen
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.SaveAlt
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -45,6 +44,7 @@ import com.voxtube.app.ui.components.settings.SettingsPage
 import com.voxtube.app.ui.components.settings.SettingsTarget
 import com.voxtube.app.ui.components.settings.nav
 import com.voxtube.app.ui.components.settings.notice
+import com.voxtube.app.ui.components.shared.GlassDropdownMenu
 import com.voxtube.app.ui.components.shared.VoxTubeEmptyState
 import com.voxtube.app.ui.screens.settings.index.CustomThemeIndex
 import com.voxtube.app.ui.theme.CustomTheme
@@ -289,7 +289,7 @@ private fun CustomThemeRow(
                 IconButton(onClick = { menuOpen = true }) {
                     Icon(Icons.Outlined.MoreVert, contentDescription = stringResource(R.string.settings_custom_theme_more))
                 }
-                DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+                GlassDropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
                     listOfNotNull(
                         R.string.settings_custom_theme_use to onUse,
                         R.string.settings_custom_theme_rename to onRename,
