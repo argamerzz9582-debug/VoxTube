@@ -357,7 +357,7 @@ private fun PlaylistOverflowMenu(
                     },
                 )
             }
-            if (!state.canEdit) return@DropdownMenu
+            if (!state.canEdit) return@GlassDropdownMenu
             DropdownMenuItem(
                 text = { Text(stringResource(R.string.edit_playlist_action)) },
                 leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) },
