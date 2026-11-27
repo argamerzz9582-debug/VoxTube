@@ -57,12 +57,13 @@ import com.voxtube.app.data.local.NavBarLabels
 import com.voxtube.app.data.local.NavBarLook
 import com.voxtube.app.ui.components.shared.MediaMiniBarDefaults
 import com.voxtube.app.ui.theme.glass.GlassShapes
+import com.voxtube.app.ui.theme.glass.LiquidGlassStyle
 import com.voxtube.app.ui.theme.glass.themedGlass
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 private const val SCRUB_SCALE = 1.035f
-private const val GLASS_INDICATOR_ALPHA = 0.72f
+private const val GLASS_INDICATOR_ALPHA = 0.1f
 private val BelowIndicatorTop = 4.dp
 
 /** One slot of the floating bar: a tab, or the "More" slot when [tab] is null. */
@@ -176,7 +177,7 @@ internal fun VoxTubeFloatingNavigationBar(
                         scaleX = scrubScale
                         scaleY = scrubScale
                         transformOrigin = TransformOrigin(0.5f, 1f)
-                    }.then(themedGlass(GlassShapes.Capsule))
+                    }.then(themedGlass(GlassShapes.Capsule, LiquidGlassStyle.TabBar))
                     .heightIn(min = VoxTubeNavigationDefaults.BarHeight)
                     .padding(horizontal = sidePadding),
         ) {
@@ -241,9 +242,11 @@ private fun FloatingNavRow(
     val currentGeometry by rememberUpdatedState(geometry)
     val ltr by rememberUpdatedState(LocalLayoutDirection.current == LayoutDirection.Ltr)
     val currentSelect by rememberUpdatedState(onSelect)
-    // On glass the indicator is a tinted lens rather than a solid pill, so the page still shows through it.
-    val indicatorColor = colors.selectedIndicatorColor.copy(alpha = GLASS_INDICATOR_ALPHA)
+    // On glass the indicator is a soft neutral pill rather than a solid accent, so the bar stays calm
+    // and the page still shows through it.
+    val indicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = GLASS_INDICATOR_ALPHA)
     val belowNames = geometry.names == FloatingNavNames.BELOW
+    val selectedContentColor = MaterialTheme.colorScheme.onSurface
 
     Layout(
         content = {
@@ -262,8 +265,7 @@ private fun FloatingNavRow(
                         contentColor =
                             when {
                                 !selected -> colors.unselectedIconColor
-                                belowNames -> colors.selectedIconColor
-                                else -> colors.selectedTextColorStartIconPosition
+                                else -> selectedContentColor
                             },
                         pop = pop,
                         hidden = folded && !selected,

@@ -153,7 +153,14 @@ fun VoxTubeScrollAwayLayout(
                         headerHeightPx = size.height
                         state.barState.heightOffsetLimit = -size.height.toFloat()
                     }.offset { IntOffset(0, state.barState.heightOffset.roundToInt()) }
-                    .then(themedGlass(GlassShapes.TopBar, LiquidGlassStyle.Regular, feedBackdrop.takeIf { glassOn })),
+                    .then(
+                        themedGlass(
+                            shape = GlassShapes.TopBar,
+                            style = LiquidGlassStyle.Bar,
+                            backdrop = feedBackdrop.takeIf { glassOn },
+                            tint = MaterialTheme.colorScheme.background,
+                        ),
+                    ),
         ) {
             Spacer(Modifier.height(statusBarTop))
             CompositionLocalProvider(LocalTopBarOnGlass provides true) { header() }

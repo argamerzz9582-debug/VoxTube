@@ -17,11 +17,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import com.voxtube.app.ui.theme.CapsuleShape
 
 /**
  * The single filter chip for every surface: home feed chips, search filters, browse tabs,
- * library content filters. Selection shows through the shape and the fill, with no check, so a
- * chip keeps its width when it is picked.
+ * library content filters. Pills, as Liquid Glass draws them; selection shows through the fill, with
+ * no check, so a chip keeps its width when it is picked.
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -41,7 +42,7 @@ fun VoxTubeFilterChip(
                 overflow = TextOverflow.Ellipsis,
             )
         },
-        shapes = FilterChipDefaults.shapes(),
+        shapes = FilterChipDefaults.shapes(shape = CapsuleShape, selectedShape = CapsuleShape),
         modifier = modifier,
     )
 }
@@ -68,7 +69,7 @@ fun VoxTubeDropdownFilterChip(
                 overflow = TextOverflow.Ellipsis,
             )
         },
-        shapes = FilterChipDefaults.shapes(),
+        shapes = FilterChipDefaults.shapes(shape = CapsuleShape, selectedShape = CapsuleShape),
         modifier = modifier,
         trailingIcon = {
             Icon(
