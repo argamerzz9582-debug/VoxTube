@@ -68,6 +68,7 @@ class PlayerAppearanceViewModel
         val miniCoverPausedShape = preferences.miniCoverPausedShape.asState(CoverShape.CIRCLE)
         val miniBarProgress = preferences.miniBarProgress.asState(MiniBarProgress.NONE)
         val miniCoverRing = preferences.miniCoverRing.asState(true)
+        val musicMiniOnlyInMusic = preferences.musicMiniOnlyInMusic.asState(true)
         val miniBarButtons = preferences.miniBarButtons.asState(DefaultMiniBarButtons)
         val miniCoverTap = preferences.miniCoverTap.asState(MiniCoverTap.OPEN)
         val miniLongPress = preferences.miniLongPress.asState(MiniLongPress.NOTHING)
@@ -156,6 +157,8 @@ class PlayerAppearanceViewModel
         fun setMiniBarProgress(value: MiniBarProgress) = write { preferences.setMiniBarProgress(value) }
 
         fun setMiniCoverRing(value: Boolean) = write { preferences.setMiniCoverRing(value) }
+
+        fun setMusicMiniOnlyInMusic(value: Boolean) = write { preferences.setMusicMiniOnlyInMusic(value) }
 
         fun setMiniBarButtons(value: List<MiniBarButton>) = write { preferences.setMiniBarButtons(value) }
 

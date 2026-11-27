@@ -1,0 +1,13 @@
+VOXTUBE CHANGE LOG
+VERSION: 1.5.0
+DATE: 2026-11-27
+STATUS: stable
+
+NEW
+- The search button beside the tab bar searches music while you are in Music
+- The music mini player shows only in the music section; songs keep playing elsewhere (Settings > Player appearance > Only in Music)
+
+IMPROVED
+- Home and Music drop the duplicate search button from the top bar
+- Pill buttons and filter chips sink with a springy bounce when pressed
+- A song started outside Music keeps its mini player on that page

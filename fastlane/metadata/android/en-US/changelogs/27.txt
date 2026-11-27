@@ -1,0 +1,5 @@
+VoxTube 1.5.0:
+- Search button beside the tab bar searches music while in Music
+- Music mini player stays in the music section; songs keep playing elsewhere
+- No duplicate search button in the Home and Music top bars
+- Springy press bounce on pill buttons and filter chips

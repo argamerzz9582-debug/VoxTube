@@ -41,6 +41,7 @@ import com.voxtube.app.ui.TabScrollEventBus
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
 import com.voxtube.app.ui.components.layout.flowBottomContentPadding
+import com.voxtube.app.ui.components.layout.navigation.LocalSearchOrbShown
 import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeScrollAwayLayout
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
@@ -166,6 +167,7 @@ fun EnhancedMusicScreen(
     val headerState = rememberFlowScrollAwayState()
     val headerSpec = MaterialTheme.motionScheme.fastSpatialSpec<Float>()
     OnTabReselected(VoxTubeTab.Music.route) { headerState.show(headerSpec) }
+    val searchOrbShown = LocalSearchOrbShown.current
 
     Scaffold(
         modifier = Modifier.reachUnderStatusBar(),
@@ -190,8 +192,11 @@ fun EnhancedMusicScreen(
                 VoxTubeTopBar(
                     title = stringResource(R.string.screen_title_music),
                     actions = {
-                        IconButton(onClick = onSearchClick) {
-                            Icon(Icons.Outlined.Search, stringResource(R.string.search))
+                        // The floating bar's search button searches music here; no second button.
+                        if (!searchOrbShown) {
+                            IconButton(onClick = onSearchClick) {
+                                Icon(Icons.Outlined.Search, stringResource(R.string.search))
+                            }
                         }
                     },
                 )

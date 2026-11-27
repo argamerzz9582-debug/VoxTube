@@ -50,6 +50,7 @@ import com.voxtube.app.ui.OnTabReselected
 import com.voxtube.app.ui.TabScrollEventBus
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.floatAboveBottomChrome
+import com.voxtube.app.ui.components.layout.navigation.LocalSearchOrbShown
 import com.voxtube.app.ui.components.layout.navigation.VoxTubeTab
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeScrollAwayLayout
 import com.voxtube.app.ui.components.layout.topbar.VoxTubeTopBar
@@ -143,6 +144,7 @@ fun HomeScreen(
     }
     val logoClicks = Modifier.homeLogoClicks(homeLabel, deepFlowLabel, onClick = reselectHome, onLongClick = toggleDeepFlow)
     OnTabReselected(VoxTubeTab.Home.route) { headerState.show(headerSpec) }
+    val searchOrbShown = LocalSearchOrbShown.current
 
     Scaffold(
         modifier = modifier.fillMaxSize().reachUnderStatusBar(),
@@ -180,11 +182,14 @@ fun HomeScreen(
                             null
                         },
                     actions = {
-                        IconButton(onClick = onSearchClick) {
-                            Icon(
-                                Icons.Outlined.Search,
-                                contentDescription = stringResource(R.string.search),
-                            )
+                        // The floating bar's search button covers search; the top bar keeps one only without it.
+                        if (!searchOrbShown) {
+                            IconButton(onClick = onSearchClick) {
+                                Icon(
+                                    Icons.Outlined.Search,
+                                    contentDescription = stringResource(R.string.search),
+                                )
+                            }
                         }
                     },
                 )

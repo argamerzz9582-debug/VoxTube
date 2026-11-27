@@ -40,6 +40,7 @@ import com.voxtube.app.sync2.service.LinkedCatchUp
 import com.voxtube.app.ui.components.equalizer.LocalEqualizerState
 import com.voxtube.app.ui.components.layout.LocalFlowBottomInsets
 import com.voxtube.app.ui.components.layout.LocalFlowSnackbarHostState
+import com.voxtube.app.ui.components.layout.navigation.LocalSearchOrbShown
 import com.voxtube.app.ui.components.layout.navigation.NavigationVisibility
 import com.voxtube.app.ui.components.layout.navigation.VoxTubeNavigationChrome
 import com.voxtube.app.ui.components.layout.navigation.VoxTubeNavigationDefaults
@@ -135,6 +136,7 @@ fun VoxTubeApp(
     val bottomNavLook by preferences.bottomNavLook.collectAsState(initial = NavBarLook())
     val searchShowsNavBar by preferences.searchShowsNavBar.collectAsState(initial = false)
     val innerPagesShowNavBar by preferences.innerPagesShowNavBar.collectAsState(initial = false)
+    val musicMiniOnlyInMusic by preferences.musicMiniOnlyInMusic.collectAsState(initial = true)
     val sleepTimerCloseAppOnExpiry by preferences.sleepTimerCloseAppOnExpiry.collectAsState(
         initial = SleepTimerManager.preferredCloseAppOnExpiry,
     )
@@ -308,11 +310,14 @@ fun VoxTubeApp(
 
         val currentMusicTrack by EnhancedMusicPlayerManager.currentTrack.collectAsStateWithLifecycle()
         var suppressMusicMiniAfterVideo by remember { mutableStateOf(false) }
+        // The page a song was started on keeps the mini player in view even outside Music, so the
+        // song the user just tapped never seems to vanish; it goes once they move on.
+        var musicStartedOnEntry by remember { mutableStateOf<String?>(null) }
         val openMusicPlayerOnPlay = preferences.openMusicPlayerOnPlay.collectAsState(initial = false)
         // Shows the player for a song that just started, without a route: a navigation here used to
         // swap the page out and back for a frame, which the mini player now leaves in view.
         val onMusicStarted: () -> Unit =
-            remember(musicPlayerSheetState, playerViewModel) {
+            remember(musicPlayerSheetState, playerViewModel, navController) {
                 {
                     // One player at a time: a video still cached, even one playing in the
                     // background, would keep the music from showing its own mini player.
@@ -321,6 +326,7 @@ fun VoxTubeApp(
                         playerViewModel.clearVideo()
                     }
                     suppressMusicMiniAfterVideo = false
+                    musicStartedOnEntry = navController.currentBackStackEntry?.id
                     if (openMusicPlayerOnPlay.value) {
                         musicPlayerSheetState.expand()
                     } else if (musicPlayerSheetState.isDismissed) {
@@ -380,7 +386,16 @@ fun VoxTubeApp(
                 musicSuppressed = suppressMusicMiniAfterVideo,
                 remoteSession = remote.session,
             )
-        val isMusicSheetShown = activeMiniPlayer == ActiveMiniPlayer.Music
+        val currentDestinationRoute = currentEntry?.destination?.route
+        val searchOrbShown = !usesNavigationRail && bottomNavLook.style == NavBarStyle.FLOATING && bottomNavLook.searchOrb
+        val musicSection = inMusicSection(currentTab, selectedTab, currentDestinationRoute)
+        // Off the music section the song plays on without its mini player; an open player stays.
+        val musicMiniInView =
+            !musicMiniOnlyInMusic ||
+                musicSection ||
+                musicPlayerSheetState.isExpanded ||
+                (musicStartedOnEntry != null && currentEntry?.id == musicStartedOnEntry)
+        val isMusicSheetShown = activeMiniPlayer == ActiveMiniPlayer.Music && musicMiniInView
         val isPlayerCoveringContent =
             (playerVisible && playerSheetState.currentValue == PlayerSheetValue.Expanded) ||
                 (isMusicSheetShown && musicPlayerSheetState.isExpanded)
@@ -396,7 +411,6 @@ fun VoxTubeApp(
         val isBottomNavShown = isBottomNavPresent && navScrollState.isBarVisible
         // The rail is hidden only where content goes truly full screen; the expanded players cover
         // it instead, so opening them never re-lays out the page beneath.
-        val currentDestinationRoute = currentEntry?.destination?.route
         val isNavigationRailVisible =
             !isInPipMode &&
                 needsOnboarding != null &&
@@ -451,7 +465,10 @@ fun VoxTubeApp(
             onRailWidthChanged = { navigationRailWidth = it },
             glassBackdrop = glassBackdrop.takeIf { glassEnabled },
             onSearchClick = {
-                if (VoxTubeTab.Search in currentNavigationTabs) {
+                if (musicSection && isMusicNavigationEnabled) {
+                    // In the music section the orb searches music, as the Music page's own search did.
+                    if (currentDestinationRoute?.substringBefore('?') != "musicSearch") navController.navigate("musicSearch")
+                } else if (VoxTubeTab.Search in currentNavigationTabs) {
                     val action = tabTapAction(VoxTubeTab.Search, currentTab, selectedTab, searchIsTab = true, startTab = defaultTab)
                     if (action == TabTap.SCROLL_TO_TOP) {
                         TabScrollEventBus.emitScrollToTop(VoxTubeTab.Search.route)
@@ -464,7 +481,9 @@ fun VoxTubeApp(
                     navController.navigate("search")
                 }
             },
-            searchActive = currentTab == VoxTubeTab.Search || currentDestinationRoute?.substringBefore('?') == "search",
+            searchActive =
+                currentTab == VoxTubeTab.Search ||
+                    currentDestinationRoute?.substringBefore('?').let { it == "search" || it == "musicSearch" },
         ) {
             ProvideMusicPlaybackState(
                 surfacesVisible = !musicPlayerSheetState.isExpanded && playerSheetState.currentValue != PlayerSheetValue.Expanded,
@@ -529,6 +548,7 @@ fun VoxTubeApp(
                                     LocalFlowSnackbarHostState provides snackbarHostState,
                                     LocalStatusBarHero provides statusBarHero,
                                     LocalNetworkOnline provides networkOnline,
+                                    LocalSearchOrbShown provides searchOrbShown,
                                 ) {
                                     if (needsOnboarding == false) SubscriptionBellAlerts(snackbarHostState)
                                     LinkedSyncAlerts(snackbarHostState)
