@@ -1739,7 +1739,7 @@ class PlayerPreferences(
             .map { preferences ->
                 preferences[Keys.BOTTOM_NAV_LABELS]
                     ?.let { stored -> runCatching { NavBarLabels.valueOf(stored) }.getOrNull() }
-                    ?: NavBarLabels.ALWAYS
+                    ?: NavBarLabels.NEVER
             }.distinctUntilChanged()
 
     suspend fun setBottomNavLabels(labels: NavBarLabels) {
@@ -6070,7 +6070,8 @@ enum class NavBarStyle {
 
 data class NavBarLook(
     val style: NavBarStyle = NavBarStyle.FLOATING,
-    val labels: NavBarLabels = NavBarLabels.ALWAYS,
+    // Icons only by default: the floating glass bar reads cleanest without names.
+    val labels: NavBarLabels = NavBarLabels.NEVER,
     val scrub: Boolean = true,
     val iconPop: Boolean = false,
     val scroll: NavBarScroll = NavBarScroll.SHRINK,

@@ -78,7 +78,7 @@ class AppearanceViewModel
             }.combine(preferences.downloadsNavigationEnabled) { visibility, downloads -> visibility.copy(downloads = downloads) }
                 .asState(NavigationVisibility())
         val hideNavOnScroll = preferences.bottomNavHideOnScroll.asState(true)
-        val navLabels = preferences.bottomNavLabels.asState(NavBarLabels.ALWAYS)
+        val navLabels = preferences.bottomNavLabels.asState(NavBarLabels.NEVER)
         val navStyle = preferences.bottomNavStyle.asState(NavBarStyle.FLOATING)
         val navScrub = preferences.bottomNavScrub.asState(true)
         val navIconPop = preferences.bottomNavIconPop.asState(false)

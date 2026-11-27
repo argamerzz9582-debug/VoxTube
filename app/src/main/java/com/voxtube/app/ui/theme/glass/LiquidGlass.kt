@@ -78,6 +78,7 @@ data class LiquidGlassStyle(
     val chromaticAberration: Boolean = false,
     val highlight: Boolean = true,
     val shadow: Boolean = true,
+    val rim: Boolean = true,
 ) {
     companion object {
         /** Tab bar, top bar and floating toolbars: clear glass that visibly bends what scrolls behind it. */
@@ -99,6 +100,35 @@ data class LiquidGlassStyle(
                 tintAlpha = 0.22f,
                 fallbackAlpha = 0.9f,
                 shadow = false,
+            )
+
+        /**
+         * The floating tab bar: [Regular] glass with a little more tint, so the icons hold their
+         * contrast over bright thumbnails.
+         */
+        val TabBar =
+            LiquidGlassStyle(
+                blurRadius = 4.dp,
+                refractionHeight = 16.dp,
+                refractionAmount = 32.dp,
+                tintAlpha = 0.55f,
+                fallbackAlpha = 0.96f,
+            )
+
+        /**
+         * Edge-to-edge headers: at rest they are the page's own colour, and content scrolling under
+         * them frosts, iOS-style. No lens, rim, highlight or shadow, so the header has no visible edge.
+         */
+        val Bar =
+            LiquidGlassStyle(
+                blurRadius = 20.dp,
+                refractionHeight = 0.dp,
+                refractionAmount = 0.dp,
+                tintAlpha = 0.8f,
+                fallbackAlpha = 1f,
+                highlight = false,
+                shadow = false,
+                rim = false,
             )
 
         /** Sheets, menus and dialogs: frosted enough that long text on it stays readable. */
@@ -186,10 +216,11 @@ fun Modifier.liquidGlass(
     enabled: Boolean = true,
 ): Modifier {
     if (backdrop == null || !enabled || !LiquidGlassSupport.hasBlur()) {
-        return this
-            .clip(shape)
-            .background(colors.tint.copy(alpha = style.fallbackAlpha), shape)
-            .border(Dp.Hairline, colors.rim, shape)
+        val solid =
+            this
+                .clip(shape)
+                .background(colors.tint.copy(alpha = style.fallbackAlpha), shape)
+        return if (style.rim) solid.border(Dp.Hairline, colors.rim, shape) else solid
     }
     val tint = colors.tint.copy(alpha = style.tintAlpha)
     val shadow = if (style.shadow) Shadow(color = colors.shadow) else null
@@ -199,7 +230,7 @@ fun Modifier.liquidGlass(
         effects = {
             if (style.vibrancy) vibrancy()
             blur(style.blurRadius.toPx())
-            if (LiquidGlassSupport.hasRefraction()) {
+            if (LiquidGlassSupport.hasRefraction() && style.refractionAmount > 0.dp) {
                 lens(
                     refractionHeight = style.refractionHeight.toPx(),
                     refractionAmount = style.refractionAmount.toPx(),
@@ -246,11 +277,12 @@ fun themedGlass(
     shape: CornerBasedShape,
     style: LiquidGlassStyle = LiquidGlassStyle.Regular,
     backdrop: Backdrop? = LocalGlassBackdrop.current,
+    tint: Color? = null,
 ): Modifier =
     Modifier.liquidGlass(
         backdrop = backdrop,
         shape = shape,
-        colors = LiquidGlassDefaults.colors(),
+        colors = LiquidGlassDefaults.colors().let { if (tint != null) it.copy(tint = tint) else it },
         style = style,
         enabled = LocalLiquidGlassEnabled.current,
     )
@@ -266,6 +298,6 @@ object GlassShapes {
     /** The edge-to-edge bottom bar: rounded where it meets the content. */
     val BottomBar: CornerBasedShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)
 
-    /** The top bar's glass when it floats over scrolling content. */
-    val TopBar: CornerBasedShape = RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp)
+    /** Edge-to-edge headers: square, so they meet the status bar and the screen edges cleanly. */
+    val TopBar: CornerBasedShape = RoundedCornerShape(0.dp)
 }
