@@ -384,7 +384,11 @@ fun VoxTubeApp(
         val isPlayerCoveringContent =
             (playerVisible && playerSheetState.currentValue == PlayerSheetValue.Expanded) ||
                 (isMusicSheetShown && musicPlayerSheetState.isExpanded)
-        val barOnScreen = navigationBarShown(currentTab, currentEntry?.destination?.route, searchShowsNavBar, innerPagesShowNavBar)
+        // On Shorts the floating bar rests folded to one glass button at the side, as it does when Home
+        // scrolls, so the reel shows nearly edge to edge and the other tabs stay one tap away.
+        val shortsFoldedBar = isShortsPlayerRoute && bottomNavLook.style == NavBarStyle.FLOATING && !usesNavigationRail
+        val barOnScreen =
+            navigationBarShown(currentTab, currentEntry?.destination?.route, searchShowsNavBar, innerPagesShowNavBar) || shortsFoldedBar
         val showBottomNav = !isInPipMode && barOnScreen && !isPlayerCoveringContent
         // The video player covers the bar rather than removing it, so the bar can ride the collapse.
         val barComposed = !isInPipMode && barOnScreen && !(isMusicSheetShown && musicPlayerSheetState.isExpanded)
@@ -441,6 +445,7 @@ fun VoxTubeApp(
             barCoveredFraction = { if (playerVisible) 1f - playerSheetState.fraction else 0f },
             barScrollState = navScrollState,
             barLook = bottomNavLook,
+            barRestsFolded = shortsFoldedBar,
             railVisible = isNavigationRailVisible,
             onBarHeightChanged = { navigationBarHeight = it },
             onRailWidthChanged = { navigationRailWidth = it },

@@ -150,10 +150,10 @@ fun NavGraphBuilder.flowAppGraph(
             ),
     ) { backStackEntry ->
         val source = ShortsQueueSource.decode(backStackEntry.arguments?.getString(SHORTS_ROUTE_ARG))
-        val isRootTab = source == ShortsQueueSource.Feed
         ShortsScreen(
             source = source,
-            bottomNavOverlayPadding = if (isRootTab) LocalFlowBottomInsets.current.barBottom else 0.dp,
+            // The bar, folded to one button, also rests over Shorts opened from a feed; zero while it is hidden.
+            bottomNavOverlayPadding = LocalFlowBottomInsets.current.barBottom,
             onBack = {
                 navController.popBackStack()
             },
