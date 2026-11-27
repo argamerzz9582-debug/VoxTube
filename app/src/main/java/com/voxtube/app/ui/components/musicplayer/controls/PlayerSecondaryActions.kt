@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -32,12 +33,19 @@ import androidx.compose.ui.unit.dp
 import com.voxtube.app.R
 import com.voxtube.app.player.RepeatMode
 import com.voxtube.app.ui.components.musicplayer.common.readableAccentOn
+import com.voxtube.app.ui.components.shared.popWhenTurnedOn
+import com.voxtube.app.ui.components.shared.toggleHapticType
+import com.voxtube.app.ui.theme.glass.GlassShapes
 import com.voxtube.app.ui.theme.glass.LiquidGlassStyle
 import com.voxtube.app.ui.theme.glass.LocalGlassBackdrop
 import com.voxtube.app.ui.theme.glass.themedGlass
 
 private val SegmentFullRadius = 21.dp
 private val SegmentEdgeRadius = 8.dp
+
+/** Room between a glass group's edge and the pills of the buttons that are switched on. */
+private val GroupInset = 3.dp
+private const val PRESSED_SCALE = 0.92f
 
 /** The first, inner and last segments of a player button group: round at the group's ends only. */
 internal val PlayerSegmentLeadingShape =
@@ -71,12 +79,16 @@ fun PlayerSecondaryActions(
     sleepTimerActive: Boolean = false,
     onSleepTimerClick: (() -> Unit)? = null,
 ) {
+    // Over the player's recorded background the toggles share one pane of clear glass instead of each
+    // drawing its own: one surface to read and render, with the switched-on ones as tinted pills inside.
+    val grouped = LocalGlassBackdrop.current != null
     Row(
         modifier =
             modifier
                 .fillMaxWidth()
-                .height(42.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                .height(42.dp)
+                .then(if (grouped) themedGlass(GlassShapes.Capsule, LiquidGlassStyle.Clear).padding(GroupInset) else Modifier),
+        horizontalArrangement = Arrangement.spacedBy(if (grouped) 2.dp else 4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         PlayerToggleButton(
@@ -87,6 +99,7 @@ fun PlayerSecondaryActions(
             contentDescription = stringResource(R.string.lyrics),
             uncheckedShape = PlayerSegmentLeadingShape,
             onClick = onLyricsClick,
+            grouped = grouped,
         )
         PlayerToggleButton(
             checked = shuffleEnabled,
@@ -96,6 +109,7 @@ fun PlayerSecondaryActions(
             contentDescription = stringResource(R.string.shuffle),
             uncheckedShape = PlayerSegmentInnerShape,
             onClick = onShuffleClick,
+            grouped = grouped,
         )
         PlayerToggleButton(
             checked = repeatMode != RepeatMode.OFF,
@@ -109,6 +123,7 @@ fun PlayerSecondaryActions(
             contentDescription = stringResource(R.string.repeat),
             uncheckedShape = PlayerSegmentInnerShape,
             onClick = onRepeatClick,
+            grouped = grouped,
         )
         PlayerToggleButton(
             checked = queueActive,
@@ -118,6 +133,7 @@ fun PlayerSecondaryActions(
             contentDescription = stringResource(R.string.playlist_queue),
             uncheckedShape = if (onSleepTimerClick == null) PlayerSegmentTrailingShape else PlayerSegmentInnerShape,
             onClick = onQueueClick,
+            grouped = grouped,
         )
         if (onSleepTimerClick != null) {
             PlayerToggleButton(
@@ -128,6 +144,7 @@ fun PlayerSecondaryActions(
                 contentDescription = stringResource(R.string.sleep_timer),
                 uncheckedShape = PlayerSegmentTrailingShape,
                 onClick = onSleepTimerClick,
+                grouped = grouped,
             )
         }
     }
@@ -143,9 +160,11 @@ internal fun RowScope.PlayerToggleButton(
     contentDescription: String?,
     uncheckedShape: CornerBasedShape,
     onClick: () -> Unit,
+    grouped: Boolean = false,
 ) {
-    // Off, the button is a pane of clear Liquid Glass over the player's background.
-    val glass = !checked && LocalGlassBackdrop.current != null
+    // Off, the button is a pane of clear Liquid Glass over the player's background, unless it sits in a
+    // group that already draws one pane for all of its buttons.
+    val glass = !grouped && !checked && LocalGlassBackdrop.current != null
     ToggleButton(
         checked = checked,
         onCheckedChange = { onClick() },
@@ -156,14 +175,15 @@ internal fun RowScope.PlayerToggleButton(
                 .then(if (glass) themedGlass(uncheckedShape, LiquidGlassStyle.Clear) else Modifier),
         colors =
             ToggleButtonDefaults.colors(
-                containerColor = if (glass) Color.Transparent else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f),
+                containerColor =
+                    if (glass || grouped) Color.Transparent else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f),
                 contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 checkedContainerColor = checkedContainerColor,
                 checkedContentColor = checkedContentColor,
             ),
         shapes =
             ToggleButtonShapes(
-                shape = uncheckedShape,
+                shape = if (grouped) RoundedCornerShape(SegmentFullRadius) else uncheckedShape,
                 pressedShape = RoundedCornerShape(12.dp),
                 checkedShape = RoundedCornerShape(SegmentFullRadius),
             ),
@@ -187,9 +207,11 @@ fun PlayerMainActionButtons(
     modifier: Modifier = Modifier,
 ) {
     val hapticFeedback = LocalHapticFeedback.current
+    // Like and download share one capsule of glass over the player's background.
+    val grouped = LocalGlassBackdrop.current != null
     Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = modifier.then(if (grouped) themedGlass(GlassShapes.Capsule, LiquidGlassStyle.Clear) else Modifier),
+        horizontalArrangement = Arrangement.spacedBy(if (grouped) 2.dp else 6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         SplitCapsuleButton(
@@ -204,6 +226,7 @@ fun PlayerMainActionButtons(
             icon = if (isDownloaded) Icons.Rounded.OfflinePin else Icons.Outlined.Download,
             contentDescription = stringResource(R.string.download),
             onClick = onDownloadClick,
+            grouped = grouped,
         )
         SplitCapsuleButton(
             active = isLiked,
@@ -216,7 +239,12 @@ fun PlayerMainActionButtons(
                 ),
             icon = if (isLiked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
             contentDescription = stringResource(R.string.like),
-            onClick = onLikeClick,
+            onClick = {
+                hapticFeedback.performHapticFeedback(toggleHapticType(nowOn = !isLiked))
+                onLikeClick()
+            },
+            grouped = grouped,
+            popOnActivate = true,
             onLongClick = {
                 hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                 onAddToPlaylist()
@@ -233,16 +261,27 @@ private fun SplitCapsuleButton(
     icon: ImageVector,
     contentDescription: String?,
     onClick: () -> Unit,
+    grouped: Boolean = false,
+    popOnActivate: Boolean = false,
     onLongClick: (() -> Unit)? = null,
 ) {
     val scheme = MaterialTheme.colorScheme
-    // Inactive, the capsule is clear Liquid Glass over the player's background.
-    val glass = !active && LocalGlassBackdrop.current != null
+    val motion = MaterialTheme.motionScheme
+    // Inactive, the capsule is clear Liquid Glass over the player's background, unless its group draws the glass.
+    val glass = !grouped && !active && LocalGlassBackdrop.current != null
+    // Press: the button sinks a little under the finger and springs back on release.
+    val interaction = remember { MutableInteractionSource() }
+    val pressed by interaction.collectIsPressedAsState()
+    val pressScale by animateFloatAsState(
+        targetValue = if (pressed) PRESSED_SCALE else 1f,
+        animationSpec = if (pressed) motion.fastEffectsSpec() else motion.fastSpatialSpec(),
+        label = "capsulePress",
+    )
     val containerColor by animateColorAsState(
         targetValue =
             when {
                 active -> scheme.primary
-                glass -> Color.Transparent
+                glass || grouped -> Color.Transparent
                 else -> scheme.onPrimary.copy(alpha = 0.7f)
             },
         animationSpec = tween(durationMillis = 250),
@@ -266,10 +305,15 @@ private fun SplitCapsuleButton(
         modifier =
             Modifier
                 .size(width = 50.dp, height = 42.dp)
-                .then(if (glass) themedGlass(shape, LiquidGlassStyle.Clear) else Modifier)
+                .graphicsLayer {
+                    scaleX = pressScale
+                    scaleY = pressScale
+                }.then(if (glass) themedGlass(shape, LiquidGlassStyle.Clear) else Modifier)
                 .clip(shape)
                 .background(containerColor)
                 .combinedClickable(
+                    interactionSource = interaction,
+                    indication = ripple(),
                     onClick = onClick,
                     onLongClick = onLongClick,
                 ),
@@ -279,7 +323,8 @@ private fun SplitCapsuleButton(
             imageVector = icon,
             contentDescription = contentDescription,
             tint = contentColor,
-            modifier = Modifier.size(22.dp),
+            // Turning on (a like), the icon pops past full size and settles, once.
+            modifier = Modifier.size(22.dp).then(if (popOnActivate) Modifier.popWhenTurnedOn(active) else Modifier),
         )
     }
 }

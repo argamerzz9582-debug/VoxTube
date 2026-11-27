@@ -12,10 +12,17 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshState
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.filter
 
 /**
  * Every pull-to-refresh surface in the app, on the M3 Expressive loading indicator, or on the circular
@@ -42,6 +49,18 @@ fun VoxTubePullToRefreshBox(
             }
         }
         return
+    }
+    // A tick under the finger the moment a pull goes far enough to refresh, so letting go is a sure thing.
+    // Only while idle: a refresh already running holds the indicator at the threshold.
+    if (!isRefreshing) {
+        val haptics = LocalHapticFeedback.current
+        LaunchedEffect(state) {
+            snapshotFlow { state.distanceFraction >= 1f }
+                .drop(1)
+                .distinctUntilChanged()
+                .filter { it }
+                .collect { haptics.performHapticFeedback(HapticFeedbackType.GestureThresholdActivate) }
+        }
     }
     PullToRefreshBox(
         isRefreshing = isRefreshing,

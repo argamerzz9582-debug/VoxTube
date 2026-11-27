@@ -81,13 +81,17 @@ data class LiquidGlassStyle(
     val rim: Boolean = true,
 ) {
     companion object {
-        /** Tab bar, top bar and floating toolbars: clear glass that visibly bends what scrolls behind it. */
+        /**
+         * Mini players and floating toolbars that carry text: frosted and tinted enough that a title stays
+         * readable over a bright thumbnail, while the rim still visibly bends what scrolls behind it
+         * (Apple's regular variant: a 60–80% fill over a soft blur).
+         */
         val Regular =
             LiquidGlassStyle(
-                blurRadius = 3.dp,
+                blurRadius = 10.dp,
                 refractionHeight = 16.dp,
                 refractionAmount = 32.dp,
-                tintAlpha = 0.38f,
+                tintAlpha = 0.62f,
                 fallbackAlpha = 0.94f,
             )
 
@@ -108,10 +112,10 @@ data class LiquidGlassStyle(
          */
         val TabBar =
             LiquidGlassStyle(
-                blurRadius = 4.dp,
+                blurRadius = 6.dp,
                 refractionHeight = 16.dp,
                 refractionAmount = 32.dp,
-                tintAlpha = 0.55f,
+                tintAlpha = 0.65f,
                 fallbackAlpha = 0.96f,
             )
 
@@ -150,6 +154,8 @@ data class LiquidGlassColors(
     val tint: Color,
     /** Hairline rim drawn on the fallback surface, where no shader highlight exists. */
     val rim: Color,
+    /** The firmer edge glass gets while the system asks for more contrast. */
+    val strongRim: Color,
     /** Contact shadow under floating glass. */
     val shadow: Color,
 )
@@ -163,6 +169,7 @@ object LiquidGlassDefaults {
         return LiquidGlassColors(
             tint = scheme.surfaceContainer,
             rim = scheme.outlineVariant.copy(alpha = if (isDark) DARK_RIM_ALPHA else LIGHT_RIM_ALPHA),
+            strongRim = scheme.outline,
             shadow = scheme.scrim.copy(alpha = if (isDark) DARK_SHADOW_ALPHA else LIGHT_SHADOW_ALPHA),
         )
     }
@@ -178,10 +185,25 @@ object LiquidGlassDefaults {
 val LocalGlassBackdrop = staticCompositionLocalOf<Backdrop?> { null }
 
 /**
- * Whether glass may draw backdrop effects at all. Off for "reduce transparency"-style preferences,
+ * Whether glass may draw backdrop effects at all. Off for the app's "Reduce transparency" setting,
  * battery saver or low-end devices; glass then uses the opaque fallback everywhere.
  */
 val LocalLiquidGlassEnabled = staticCompositionLocalOf { true }
+
+/**
+ * The system accessibility states glass answers to (see [rememberGlassAccessibility]).
+ *
+ * @param reduceMotion animations are off (Android's "Remove animations"): glass keeps its frost but stops
+ *   bending light, the way Apple drops refraction under Reduce Motion.
+ * @param increaseContrast the system contrast is raised: glass fills up and gets a firm edge.
+ */
+@Immutable
+data class GlassAccessibility(
+    val reduceMotion: Boolean = false,
+    val increaseContrast: Boolean = false,
+)
+
+val LocalGlassAccessibility = staticCompositionLocalOf { GlassAccessibility() }
 
 /** One recorded layer of window content that glass can sample. */
 @Composable
@@ -214,35 +236,48 @@ fun Modifier.liquidGlass(
     colors: LiquidGlassColors,
     style: LiquidGlassStyle = LiquidGlassStyle.Regular,
     enabled: Boolean = true,
+    accessibility: GlassAccessibility = GlassAccessibility(),
 ): Modifier {
+    val contrast = accessibility.increaseContrast
     if (backdrop == null || !enabled || !LiquidGlassSupport.hasBlur()) {
+        val fallbackAlpha = if (contrast) 1f else style.fallbackAlpha
         val solid =
             this
                 .clip(shape)
-                .background(colors.tint.copy(alpha = style.fallbackAlpha), shape)
-        return if (style.rim) solid.border(Dp.Hairline, colors.rim, shape) else solid
+                .background(colors.tint.copy(alpha = fallbackAlpha), shape)
+        return when {
+            contrast && style.rim -> solid.border(1.dp, colors.strongRim, shape)
+            style.rim -> solid.border(Dp.Hairline, colors.rim, shape)
+            else -> solid
+        }
     }
-    val tint = colors.tint.copy(alpha = style.tintAlpha)
+    val tint = colors.tint.copy(alpha = if (contrast) maxOf(style.tintAlpha, HIGH_CONTRAST_TINT_ALPHA) else style.tintAlpha)
     val shadow = if (style.shadow) Shadow(color = colors.shadow) else null
-    return this.drawBackdrop(
-        backdrop = backdrop,
-        shape = { shape },
-        effects = {
-            if (style.vibrancy) vibrancy()
-            blur(style.blurRadius.toPx())
-            if (LiquidGlassSupport.hasRefraction() && style.refractionAmount > 0.dp) {
-                lens(
-                    refractionHeight = style.refractionHeight.toPx(),
-                    refractionAmount = style.refractionAmount.toPx(),
-                    chromaticAberration = style.chromaticAberration,
-                )
-            }
-        },
-        highlight = if (style.highlight) ({ Highlight.Default }) else null,
-        shadow = shadow?.let { s -> { s } },
-        onDrawSurface = { drawRect(tint) },
-    )
+    val refract = LiquidGlassSupport.hasRefraction() && style.refractionAmount > 0.dp && !accessibility.reduceMotion
+    val glass =
+        this.drawBackdrop(
+            backdrop = backdrop,
+            shape = { shape },
+            effects = {
+                if (style.vibrancy) vibrancy()
+                blur(style.blurRadius.toPx())
+                if (refract) {
+                    lens(
+                        refractionHeight = style.refractionHeight.toPx(),
+                        refractionAmount = style.refractionAmount.toPx(),
+                        chromaticAberration = style.chromaticAberration,
+                    )
+                }
+            },
+            highlight = if (style.highlight) ({ Highlight.Default }) else null,
+            shadow = shadow?.let { s -> { s } },
+            onDrawSurface = { drawRect(tint) },
+        )
+    return if (contrast && style.rim) glass.border(1.dp, colors.strongRim, shape) else glass
 }
+
+/** The least tint glass keeps while the system asks for more contrast. */
+private const val HIGH_CONTRAST_TINT_ALPHA = 0.9f
 
 /**
  * A Liquid Glass container: [liquidGlass] with the theme's glass colours and the provided backdrop.
@@ -263,6 +298,7 @@ fun GlassSurface(
                 colors = LiquidGlassDefaults.colors(),
                 style = style,
                 enabled = LocalLiquidGlassEnabled.current,
+                accessibility = LocalGlassAccessibility.current,
             ),
         content = content,
     )
@@ -285,6 +321,7 @@ fun themedGlass(
         colors = LiquidGlassDefaults.colors().let { if (tint != null) it.copy(tint = tint) else it },
         style = style,
         enabled = LocalLiquidGlassEnabled.current,
+        accessibility = LocalGlassAccessibility.current,
     )
 
 /** Shapes the glass chrome uses, so every capsule and sheet bends light the same way. */

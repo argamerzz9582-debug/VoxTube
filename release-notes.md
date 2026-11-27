@@ -1,9 +1,9 @@
-# VoxTube v1.1.1
+# VoxTube v1.2.0
 
 **Release date:** 2026-11-27
 **Status:** Stable
 
-A polish update for the Liquid Glass look: a cleaner, icons-only tab bar, headers without edges, and pill chips.
+A UI/UX update: Liquid Glass that is easier to read and respects accessibility settings, a folded tab bar on Shorts, soft scroll edges, and small touches of motion and haptics.
 
 ## Download
 
@@ -16,18 +16,29 @@ A polish update for the Liquid Glass look: a cleaner, icons-only tab bar, header
 | `checksums.txt` | SHA-256 of every APK |
 | Source code (zip / tar.gz) | The full source of this release |
 
-Android 8.0 or newer. Updates over VoxTube 1.1.0 and 1.0.0 in place.
+Android 8.0 or newer. Updates over VoxTube 1.1.1, 1.1.0 and 1.0.0 in place.
+
+## New
+
+- Reduce transparency setting in Settings > Appearance turns every glass bar, player and sheet solid
+- On Shorts the tab bar rests folded to one glass button at the side, so the video shows nearly edge to edge; tap it to switch tabs
+- Liked songs and videos get a small pop on the heart or thumb, with a tap of vibration
+- Pull to refresh gives a tick when you have pulled far enough to refresh
 
 ## Improved
 
-- The floating tab bar shows icons only by default, with a calmer neutral selection pill (names can be turned back on in Settings > Appearance > Navigation bar)
-- Headers are the page's own colour at rest and frost as the feed scrolls under them, with no edge or shadow
-- Filter chips are pills
+- Glass is easier to read: the mini player and tab bar are frosted a little more over bright thumbnails
+- Glass stops bending light when system animations are off, and turns solid with a firm edge when system contrast is raised
+- The selected tab icon shows your accent colour
+- Lists fade softly under the header and toward the tab bar instead of ending in a hard line
+- Player toggles and the like and download buttons sit on one shared glass pill each, and press in under your finger
+- Scrolling down tucks the mini player beside the shrunk tab bar, and tab icons pop when opened, by default
+- The full-width bottom bar style is a solid bar, keeping glass for the floating one
 
 ## Direct links
 
-- APK (recommended): [voxtube.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.1.1/voxtube.apk)
-- APK (arm64): [voxtube-arm64-v8a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.1.1/voxtube-arm64-v8a.apk)
-- APK (32-bit): [voxtube-armeabi-v7a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.1.1/voxtube-armeabi-v7a.apk)
-- APK (FOSS): [voxtube-foss.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.1.1/voxtube-foss.apk)
-- Source code: [zip](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.1.1.zip) · [tar.gz](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.1.1.tar.gz)
+- APK (recommended): [voxtube.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.2.0/voxtube.apk)
+- APK (arm64): [voxtube-arm64-v8a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.2.0/voxtube-arm64-v8a.apk)
+- APK (32-bit): [voxtube-armeabi-v7a.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.2.0/voxtube-armeabi-v7a.apk)
+- APK (FOSS): [voxtube-foss.apk](https://github.com/argamerzz9582-debug/VoxTube/releases/download/v1.2.0/voxtube-foss.apk)
+- Source code: [zip](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.2.0.zip) · [tar.gz](https://github.com/argamerzz9582-debug/VoxTube/archive/refs/tags/v1.2.0.tar.gz)

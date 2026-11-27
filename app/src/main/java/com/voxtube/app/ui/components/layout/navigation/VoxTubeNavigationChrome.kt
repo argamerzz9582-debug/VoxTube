@@ -21,12 +21,24 @@ import androidx.compose.material3.ShortNavigationBarDefaults
 import androidx.compose.material3.WideNavigationRailDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.onSizeChanged
@@ -50,6 +62,7 @@ import com.voxtube.app.ui.utils.LocalWindowIsLandscape
 import com.voxtube.app.ui.utils.LocalWindowSizeClass
 import com.voxtube.app.ui.utils.isExpandedWidth
 import com.voxtube.app.ui.utils.isMediumHeight
+import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 
 const val FLOW_NAV_BAR_TAG = "flow_nav_bar"
@@ -104,6 +117,7 @@ fun VoxTubeNavigationChrome(
     barCoveredFraction: () -> Float = { 0f },
     barScrollState: VoxTubeNavigationScrollState? = null,
     barLook: NavBarLook = NavBarLook(),
+    barRestsFolded: Boolean = false,
     onBarHeightChanged: (Dp) -> Unit = {},
     onRailWidthChanged: (Dp) -> Unit = {},
     glassBackdrop: LayerBackdrop? = null,
@@ -125,6 +139,28 @@ fun VoxTubeNavigationChrome(
         }
     val density = LocalDensity.current
     val railInsets = WideNavigationRailDefaults.windowInsets
+    // [barRestsFolded]: the floating bar sits folded to its open tab. A tap unfolds it; swiping the page,
+    // choosing a tab or a few idle seconds fold it again.
+    var restUnfolded by remember { mutableStateOf(false) }
+    LaunchedEffect(barRestsFolded) { restUnfolded = false }
+    LaunchedEffect(restUnfolded) {
+        if (restUnfolded) {
+            delay(REST_UNFOLD_MILLIS)
+            restUnfolded = false
+        }
+    }
+    val refoldOnScroll =
+        remember {
+            object : NestedScrollConnection {
+                override fun onPreScroll(
+                    available: Offset,
+                    source: NestedScrollSource,
+                ): Offset {
+                    if (available.y != 0f) restUnfolded = false
+                    return Offset.Zero
+                }
+            }
+        }
 
     Row(modifier = modifier.fillMaxSize()) {
         if (showRail) {
@@ -144,6 +180,7 @@ fun VoxTubeNavigationChrome(
                     .weight(1f)
                     .fillMaxHeight()
                     .then(shrinkOnScroll)
+                    .then(if (barRestsFolded) Modifier.nestedScroll(refoldOnScroll) else Modifier)
                     .then(
                         if (showRail) {
                             Modifier.consumeWindowInsets(railInsets.only(WindowInsetsSides.Start))
@@ -172,7 +209,12 @@ fun VoxTubeNavigationChrome(
                     NavigationBarSlot(
                         tabs = tabs,
                         selectedTab = selectedTab,
-                        onTabSelected = onTabSelected,
+                        onTabSelected = { tab ->
+                            restUnfolded = false
+                            onTabSelected(tab)
+                        },
+                        restFolded = barRestsFolded && !restUnfolded,
+                        onRestUnfold = { restUnfolded = true },
                         visible = barVisible,
                         covered = barCovered,
                         coveredFraction = barCoveredFraction,
@@ -191,6 +233,8 @@ private fun BoxScope.NavigationBarSlot(
     tabs: List<VoxTubeTab>,
     selectedTab: VoxTubeTab?,
     onTabSelected: (VoxTubeTab) -> Unit,
+    restFolded: Boolean,
+    onRestUnfold: () -> Unit,
     visible: Boolean,
     covered: Boolean,
     coveredFraction: () -> Float,
@@ -238,11 +282,43 @@ private fun BoxScope.NavigationBarSlot(
                     selectedTab = selectedTab,
                     onTabSelected = onTabSelected,
                     look = look,
-                    collapsed = scrollState?.isCollapsed == true,
-                    onExpand = { scrollState?.expand() },
-                    modifier = barModifier,
+                    collapsed = restFolded || scrollState?.isCollapsed == true,
+                    onExpand = {
+                        onRestUnfold()
+                        scrollState?.expand()
+                    },
+                    // No scroll edge over a surface that rests folded (Shorts): it would wash out the video.
+                    modifier = if (restFolded) barModifier else barModifier.bottomScrollEdge(MaterialTheme.colorScheme.background),
                 )
             }
         }
     }
 }
+
+/** How long a bar that rests folded stays open after a tap before folding back on its own. */
+private const val REST_UNFOLD_MILLIS = 4_000L
+
+/** How far above the floating bar the bottom scroll edge starts, and how much of the page it hides at the bottom. */
+private val BottomScrollEdgeReach = 24.dp
+private const val BOTTOM_SCROLL_EDGE_ALPHA = 0.6f
+
+/**
+ * Scroll edge effect under the floating bar: the page fades softly into [color] toward the screen's bottom
+ * edge instead of ending in a hard line behind the glass. Drawn behind the bar, and outside the backdrop
+ * the glass samples, so the glass itself still shows the page at full strength.
+ */
+private fun Modifier.bottomScrollEdge(color: Color): Modifier =
+    drawBehind {
+        val reach = BottomScrollEdgeReach.toPx()
+        drawRect(
+            brush =
+                Brush.verticalGradient(
+                    0f to Color.Transparent,
+                    1f to color.copy(alpha = BOTTOM_SCROLL_EDGE_ALPHA),
+                    startY = -reach,
+                    endY = size.height,
+                ),
+            topLeft = Offset(0f, -reach),
+            size = Size(size.width, size.height + reach),
+        )
+    }

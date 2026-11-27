@@ -81,6 +81,7 @@ class LocalDataManager
             private val SKELETON_GRADIENT = booleanPreferencesKey("skeleton_gradient")
             private val MARQUEE_ENABLED = booleanPreferencesKey("marquee_enabled")
             private val CLASSIC_LOADING_INDICATOR = booleanPreferencesKey("classic_loading_indicator")
+            private val REDUCE_TRANSPARENCY = booleanPreferencesKey("reduce_transparency")
 
             val AUTO_BACKUP_LAST_RUN =
                 androidx.datastore.preferences.core
@@ -128,6 +129,7 @@ class LocalDataManager
                         SKELETON_GRADIENT.name,
                         MARQUEE_ENABLED.name,
                         CLASSIC_LOADING_INDICATOR.name,
+                        REDUCE_TRANSPARENCY.name,
                     ) +
                     DailyLimitStore.SETTING_NAMES
 
@@ -197,6 +199,13 @@ class LocalDataManager
 
         suspend fun setClassicLoadingIndicator(enabled: Boolean) {
             context.dataStore.edit { prefs -> prefs[CLASSIC_LOADING_INDICATOR] = enabled }
+        }
+
+        /** Liquid Glass drawn as plain solid surfaces: no blur, refraction or see-through bars. */
+        val reduceTransparency: Flow<Boolean> = context.dataStore.data.map { prefs -> prefs[REDUCE_TRANSPARENCY] ?: false }
+
+        suspend fun setReduceTransparency(enabled: Boolean) {
+            context.dataStore.edit { prefs -> prefs[REDUCE_TRANSPARENCY] = enabled }
         }
 
         val themeVariant: Flow<ThemeVariant> =
