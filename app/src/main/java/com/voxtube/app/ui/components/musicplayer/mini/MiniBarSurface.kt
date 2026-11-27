@@ -46,7 +46,7 @@ internal fun MiniBarSurface(
     val scheme =
         remember(style, controlScheme, appScheme, playerScheme) {
             when (style) {
-                MiniBarBackground.TINTED -> {
+                MiniBarBackground.GLASS, MiniBarBackground.TINTED -> {
                     controlScheme
                 }
 
@@ -68,7 +68,8 @@ internal fun MiniBarSurface(
         }
     val paint =
         when (style) {
-            MiniBarBackground.TINTED, MiniBarBackground.COVER_COLOURS -> {
+            // Glass is drawn by the sheet under the whole card, where it can sample the page.
+            MiniBarBackground.GLASS, MiniBarBackground.TINTED, MiniBarBackground.COVER_COLOURS -> {
                 Modifier
             }
 

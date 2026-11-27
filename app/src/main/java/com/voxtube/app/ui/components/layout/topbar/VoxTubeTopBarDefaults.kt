@@ -6,6 +6,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -28,14 +30,16 @@ object VoxTubeTopBarDefaults {
      */
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    internal fun colors(): TopAppBarColors =
-        TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.background,
-            scrolledContainerColor = MaterialTheme.colorScheme.surface,
+    internal fun colors(): TopAppBarColors {
+        val onGlass = LocalTopBarOnGlass.current
+        return TopAppBarDefaults.topAppBarColors(
+            containerColor = if (onGlass) Color.Transparent else MaterialTheme.colorScheme.background,
+            scrolledContainerColor = if (onGlass) Color.Transparent else MaterialTheme.colorScheme.surface,
             titleContentColor = MaterialTheme.colorScheme.onBackground,
             navigationIconContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
             actionIconContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+    }
 
     val titleStyle: TextStyle
         @Composable get() = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
@@ -43,3 +47,6 @@ object VoxTubeTopBarDefaults {
     val subtitleStyle: TextStyle
         @Composable get() = MaterialTheme.typography.bodySmall
 }
+
+/** True inside a Liquid Glass header, where a top bar must not paint over the glass with its own fill. */
+val LocalTopBarOnGlass = staticCompositionLocalOf { false }

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MotionScheme
@@ -32,18 +33,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.zIndex
+import com.voxtube.app.data.local.MiniBarBackground
 import com.voxtube.app.data.local.MiniBarSwipeAction
 import com.voxtube.app.data.music.model.MusicTrack
 import com.voxtube.app.player.EnhancedMusicPlayerManager
@@ -62,6 +66,7 @@ import com.voxtube.app.ui.components.shared.MediaMiniBarBounds
 import com.voxtube.app.ui.components.shared.MediaMiniBarDefaults
 import com.voxtube.app.ui.components.shared.mediaMiniBarSwipe
 import com.voxtube.app.ui.components.shared.rememberMediaMiniBarSwipeHandler
+import com.voxtube.app.ui.theme.glass.themedGlass
 import com.voxtube.app.ui.utils.LocalWindowSizeClass
 import com.voxtube.app.ui.utils.isMediumWidth
 import kotlinx.coroutines.flow.first
@@ -283,6 +288,12 @@ internal fun UnifiedMusicPlayerSheet(
         motionScheme = MotionScheme.expressive(),
     ) {
         val cardColor = MaterialTheme.colorScheme.surfaceContainerHigh
+        // Resting as a bar, the card turns to Liquid Glass over the page; it is solid again the moment it moves.
+        val restingAsBar by remember(state) {
+            derivedStateOf { state.isCollapsed && !isDragging && state.expansionFraction.value == 0f }
+        }
+        val glassMini = miniLook.background == MiniBarBackground.GLASS && restingAsBar
+        val glassShape = remember { RoundedCornerShape(MediaMiniBarDefaults.CornerRadius) }
 
         Box(
             modifier =
@@ -322,6 +333,24 @@ internal fun UnifiedMusicPlayerSheet(
                         },
                 )
             }
+            if (glassMini) {
+                Box(
+                    modifier =
+                        Modifier
+                            .align(Alignment.TopStart)
+                            .graphicsLayer {
+                                translationX = dismissOffset.value
+                                alpha = miniAppear.value
+                            }.layout { measurable, constraints ->
+                                val height = geometry.cardHeightPx().roundToInt().coerceAtLeast(0)
+                                val width = geometry.cardWidthPx().roundToInt().coerceAtLeast(0)
+                                val placeable = measurable.measure(Constraints.fixed(width, height))
+                                layout(constraints.maxWidth, height) {
+                                    placeable.placeRelative(geometry.cardStartPx().roundToInt().coerceAtLeast(0), 0)
+                                }
+                            }.then(themedGlass(glassShape)),
+                )
+            }
             Box(
                 modifier =
                     Modifier
@@ -354,10 +383,10 @@ internal fun UnifiedMusicPlayerSheet(
                                 placeable.placeRelative(startPx, 0)
                             }
                         }.shadow(
-                            elevation = cardShadowElevation,
+                            elevation = if (glassMini) 0.dp else cardShadowElevation,
                             shape = cardShape,
                             clip = false,
-                        ).background(cardColor, cardShape)
+                        ).background(if (glassMini) Color.Transparent else cardColor, cardShape)
                         .clip(cardShape)
                         .layout { measurable, constraints ->
                             val fullHeightPx = containerHeightPx.roundToInt()

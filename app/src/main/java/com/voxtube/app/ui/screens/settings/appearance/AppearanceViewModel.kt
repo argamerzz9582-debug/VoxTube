@@ -79,7 +79,7 @@ class AppearanceViewModel
                 .asState(NavigationVisibility())
         val hideNavOnScroll = preferences.bottomNavHideOnScroll.asState(true)
         val navLabels = preferences.bottomNavLabels.asState(NavBarLabels.ALWAYS)
-        val navStyle = preferences.bottomNavStyle.asState(NavBarStyle.STANDARD)
+        val navStyle = preferences.bottomNavStyle.asState(NavBarStyle.FLOATING)
         val navScrub = preferences.bottomNavScrub.asState(true)
         val navIconPop = preferences.bottomNavIconPop.asState(false)
         val navScroll = preferences.bottomNavScroll.asState(NavBarScroll.SHRINK)

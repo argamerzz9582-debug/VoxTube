@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -234,4 +235,37 @@ fun GlassSurface(
             ),
         content = content,
     )
+}
+
+/**
+ * The [liquidGlass] modifier for the current theme: the backdrop from [LocalGlassBackdrop], the theme's
+ * glass colours and the [LocalLiquidGlassEnabled] switch. Chrome without a backdrop gets the fallback.
+ */
+@Composable
+fun themedGlass(
+    shape: CornerBasedShape,
+    style: LiquidGlassStyle = LiquidGlassStyle.Regular,
+    backdrop: Backdrop? = LocalGlassBackdrop.current,
+): Modifier =
+    Modifier.liquidGlass(
+        backdrop = backdrop,
+        shape = shape,
+        colors = LiquidGlassDefaults.colors(),
+        style = style,
+        enabled = LocalLiquidGlassEnabled.current,
+    )
+
+/** Shapes the glass chrome uses, so every capsule and sheet bends light the same way. */
+object GlassShapes {
+    /** Tab bar, mini player, floating toolbars and pill buttons. */
+    val Capsule: CornerBasedShape = RoundedCornerShape(percent = 50)
+
+    /** Glass cards and grouped rows. */
+    val Card: CornerBasedShape = RoundedCornerShape(24.dp)
+
+    /** The edge-to-edge bottom bar: rounded where it meets the content. */
+    val BottomBar: CornerBasedShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)
+
+    /** The top bar's glass when it floats over scrolling content. */
+    val TopBar: CornerBasedShape = RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp)
 }

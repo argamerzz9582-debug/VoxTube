@@ -71,7 +71,7 @@ class PlayerAppearanceViewModel
         val miniBarButtons = preferences.miniBarButtons.asState(DefaultMiniBarButtons)
         val miniCoverTap = preferences.miniCoverTap.asState(MiniCoverTap.OPEN)
         val miniLongPress = preferences.miniLongPress.asState(MiniLongPress.NOTHING)
-        val miniBarBackground = preferences.miniBarBackground.asState(MiniBarBackground.TINTED)
+        val miniBarBackground = preferences.miniBarBackground.asState(MiniBarBackground.GLASS)
         val lyricsAnimationStyle = preferences.lyricsAnimationStyle.asState(LyricsAnimationStyle.CADENCE)
         val lyricsGlow = preferences.lyricsGlow.asState(LyricsGlow.NORMAL)
         val lyricsBlurOtherLines = preferences.lyricsBlurOtherLines.asState(true)

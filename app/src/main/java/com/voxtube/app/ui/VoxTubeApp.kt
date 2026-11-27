@@ -80,6 +80,8 @@ import com.voxtube.app.ui.screens.update.UPDATE_ROUTE
 import com.voxtube.app.ui.screens.update.UpdateLaunchEffect
 import com.voxtube.app.ui.theme.ThemeMode
 import com.voxtube.app.ui.theme.ThemeVariant
+import com.voxtube.app.ui.theme.glass.ProvideGlassBackdrop
+import com.voxtube.app.ui.theme.glass.rememberGlassBackdrop
 import com.voxtube.app.ui.utils.rememberPowerSaveMode
 import com.voxtube.app.ui.utils.rememberTouchExplorationEnabled
 import kotlinx.coroutines.flow.first
@@ -149,7 +151,12 @@ fun VoxTubeApp(
     val defaultStartRoute = defaultTab.route
     val currentNavigationTabs by rememberUpdatedState(navigationTabs)
     val lowRamDevice = remember(context) { context.getSystemService(ActivityManager::class.java)?.isLowRamDevice == true }
-    val reducedNavMotion by rememberUpdatedState(lowRamDevice || rememberPowerSaveMode())
+    val powerSave = rememberPowerSaveMode()
+    val reducedNavMotion by rememberUpdatedState(lowRamDevice || powerSave)
+    // Liquid Glass: the pages are recorded once and the bar, mini players and their sheets bend them.
+    // Low-RAM devices and battery saver get the solid fallback glass instead.
+    val glassBackdrop = rememberGlassBackdrop()
+    val glassEnabled = !lowRamDevice && !powerSave
     val navTransitions =
         remember {
             VoxTubeNavTransitions(searchIsTab = { VoxTubeTab.Search in currentNavigationTabs }, reducedMotion = { reducedNavMotion })
@@ -436,6 +443,7 @@ fun VoxTubeApp(
             railVisible = isNavigationRailVisible,
             onBarHeightChanged = { navigationBarHeight = it },
             onRailWidthChanged = { navigationRailWidth = it },
+            glassBackdrop = glassBackdrop.takeIf { glassEnabled },
         ) {
             ProvideMusicPlaybackState(
                 surfacesVisible = !musicPlayerSheetState.isExpanded && playerSheetState.currentValue != PlayerSheetValue.Expanded,
@@ -551,34 +559,36 @@ fun VoxTubeApp(
             } else {
                 with(density) { navBarBottomInset.toDp() }
             }
-        VoxTubePlayerOverlays(
-            navController = navController,
-            mediaNavigator = mediaNavigator,
-            playerViewModel = playerViewModel,
-            playerUiStateResult = playerUiStateResult,
-            playerVisibleState = playerVisibleState,
-            playerSheetState = playerSheetState,
-            activeVideo = activeVideo,
-            isShortsPlayerRoute = isShortsPlayerRoute,
-            bottomPadding = bottomPaddingTarget,
-            startInset = if (usesNavigationRail && isNavigationRailVisible) navigationRailWidth else 0.dp,
-            miniDock = miniPlayerDock,
-            miniPlayerScale = miniPlayerScale,
-            miniPlayerShowSkipControls = miniPlayerShowSkipControls,
-            miniPlayerShowNextPrevControls = miniPlayerShowNextPrevControls,
-            showMusicSheet = isMusicSheetShown,
-            showVideoBar = showVideoBar,
-            showRemoteBar = showRemoteBar,
-            musicPlayerSheetState = musicPlayerSheetState,
-            containerWidth = maxWidth,
-            containerHeight = with(density) { screenHeightPx.toDp() },
-            miniBarBounds = miniPlayerBounds,
-            musicMenus = musicMenus,
-            equalizerState = equalizerViewModel.state,
-            bottomInsets = bottomInsets,
-            openOrigins = mediaOpenOrigins,
-            snackbarHostState = snackbarHostState,
-        )
+        ProvideGlassBackdrop(glassBackdrop.takeIf { glassEnabled }) {
+            VoxTubePlayerOverlays(
+                navController = navController,
+                mediaNavigator = mediaNavigator,
+                playerViewModel = playerViewModel,
+                playerUiStateResult = playerUiStateResult,
+                playerVisibleState = playerVisibleState,
+                playerSheetState = playerSheetState,
+                activeVideo = activeVideo,
+                isShortsPlayerRoute = isShortsPlayerRoute,
+                bottomPadding = bottomPaddingTarget,
+                startInset = if (usesNavigationRail && isNavigationRailVisible) navigationRailWidth else 0.dp,
+                miniDock = miniPlayerDock,
+                miniPlayerScale = miniPlayerScale,
+                miniPlayerShowSkipControls = miniPlayerShowSkipControls,
+                miniPlayerShowNextPrevControls = miniPlayerShowNextPrevControls,
+                showMusicSheet = isMusicSheetShown,
+                showVideoBar = showVideoBar,
+                showRemoteBar = showRemoteBar,
+                musicPlayerSheetState = musicPlayerSheetState,
+                containerWidth = maxWidth,
+                containerHeight = with(density) { screenHeightPx.toDp() },
+                miniBarBounds = miniPlayerBounds,
+                musicMenus = musicMenus,
+                equalizerState = equalizerViewModel.state,
+                bottomInsets = bottomInsets,
+                openOrigins = mediaOpenOrigins,
+                snackbarHostState = snackbarHostState,
+            )
+        }
 
         androidx.compose.material3.SnackbarHost(
             hostState = snackbarHostState,

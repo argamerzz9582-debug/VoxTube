@@ -3,7 +3,6 @@ package com.voxtube.app.ui.components.layout.topbar
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.rememberSplineBasedDecay
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -21,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberBottomAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -40,6 +40,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import com.voxtube.app.ui.LocalStatusBarHero
 import com.voxtube.app.ui.components.layout.navigation.flowUsesNavigationRail
+import com.voxtube.app.ui.theme.glass.GlassShapes
+import com.voxtube.app.ui.theme.glass.LiquidGlassStyle
+import com.voxtube.app.ui.theme.glass.LocalLiquidGlassEnabled
+import com.voxtube.app.ui.theme.glass.glassBackdropSource
+import com.voxtube.app.ui.theme.glass.rememberGlassBackdrop
+import com.voxtube.app.ui.theme.glass.themedGlass
 import com.voxtube.app.ui.theme.statusBarScrim
 import com.voxtube.app.ui.utils.rememberTouchExplorationEnabled
 import kotlin.math.roundToInt
@@ -79,6 +85,9 @@ fun rememberFlowScrollAwayState(): VoxTubeScrollAwayState {
  * the layout phase; the feed keeps its full size and is never measured again while the header
  * moves. [content] receives the header's height, status bar included, as its top padding.
  *
+ * The header is Liquid Glass: the feed is recorded, and as it scrolls under the header it shows
+ * through blurred and refracted. Top bars inside the header drop their own fill ([LocalTopBarOnGlass]).
+ *
  * The header stays put when [hideOnScroll] is off, with a screen reader exploring by touch, and on
  * windows with the rail.
  */
@@ -117,7 +126,9 @@ fun VoxTubeScrollAwayLayout(
     val headerHeight =
         if (headerHeightPx > 0) with(density) { headerHeightPx.toDp() } else statusBarTop + TopAppBarDefaults.TopAppBarExpandedHeight
     val scrim = MaterialTheme.colorScheme.statusBarScrim
-    val ground = MaterialTheme.colorScheme.background
+    // Liquid Glass header: the feed is recorded and the header blurs and bends it as it scrolls under.
+    val feedBackdrop = rememberGlassBackdrop()
+    val glassOn = LocalLiquidGlassEnabled.current
 
     Box(
         modifier =
@@ -129,7 +140,11 @@ fun VoxTubeScrollAwayLayout(
                     drawRect(scrim, size = Size(size.width, statusBarTopPx.toFloat()))
                 },
     ) {
-        content(headerHeight)
+        Box(
+            modifier = Modifier.fillMaxSize().then(if (glassOn) Modifier.glassBackdropSource(feedBackdrop) else Modifier),
+        ) {
+            content(headerHeight)
+        }
         Column(
             modifier =
                 Modifier
@@ -138,10 +153,10 @@ fun VoxTubeScrollAwayLayout(
                         headerHeightPx = size.height
                         state.barState.heightOffsetLimit = -size.height.toFloat()
                     }.offset { IntOffset(0, state.barState.heightOffset.roundToInt()) }
-                    .background(ground),
+                    .then(themedGlass(GlassShapes.TopBar, LiquidGlassStyle.Regular, feedBackdrop.takeIf { glassOn })),
         ) {
             Spacer(Modifier.height(statusBarTop))
-            header()
+            CompositionLocalProvider(LocalTopBarOnGlass provides true) { header() }
         }
     }
 }

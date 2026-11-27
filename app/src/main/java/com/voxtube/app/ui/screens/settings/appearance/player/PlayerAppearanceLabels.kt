@@ -86,6 +86,7 @@ internal fun miniPlayerSizeLabel(size: MiniPlayerSize): Int =
 @StringRes
 internal fun miniBackgroundLabel(background: MiniBarBackground): Int =
     when (background) {
+        MiniBarBackground.GLASS -> R.string.mini_background_glass
         MiniBarBackground.TINTED -> R.string.mini_background_tinted
         MiniBarBackground.VIVID -> R.string.mini_background_vivid
         MiniBarBackground.APP_THEME -> R.string.mini_background_app_theme

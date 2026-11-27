@@ -1223,8 +1223,8 @@ class PlayerPreferences(
     val miniBarBackground: Flow<MiniBarBackground> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
-                runCatching { MiniBarBackground.valueOf(preferences[Keys.MINI_BAR_BACKGROUND] ?: MiniBarBackground.TINTED.name) }
-                    .getOrDefault(MiniBarBackground.TINTED)
+                runCatching { MiniBarBackground.valueOf(preferences[Keys.MINI_BAR_BACKGROUND] ?: MiniBarBackground.GLASS.name) }
+                    .getOrDefault(MiniBarBackground.GLASS)
             }
 
     suspend fun setMiniBarBackground(background: MiniBarBackground) {
@@ -1753,7 +1753,7 @@ class PlayerPreferences(
             .map { preferences ->
                 preferences[Keys.BOTTOM_NAV_STYLE]
                     ?.let { stored -> runCatching { NavBarStyle.valueOf(stored) }.getOrNull() }
-                    ?: NavBarStyle.STANDARD
+                    ?: NavBarStyle.FLOATING
             }.distinctUntilChanged()
 
     suspend fun setBottomNavStyle(style: NavBarStyle) {
@@ -5746,8 +5746,10 @@ internal fun parsePausedCoverShape(stored: String?): CoverShape? =
         else -> runCatching { CoverShape.valueOf(stored) }.getOrDefault(CoverShape.CIRCLE)
     }
 
-/** The music mini player's paint: the cover's tone on a quiet container (today), or one of the other looks. */
+/** The music mini player's paint: Liquid Glass (the default), the cover's tone on a quiet container, or another look. */
 enum class MiniBarBackground {
+    /** Liquid Glass: the bar blurs and bends the page under it, tinted with the cover's tone. The default. */
+    GLASS,
     TINTED,
     VIVID,
     APP_THEME,
@@ -6060,14 +6062,14 @@ enum class NavBarLabels {
     NEVER,
 }
 
-/** A full-width bottom bar, or one floating above the content. */
+/** A full-width bottom bar, or one floating above the content: a Liquid Glass capsule, iOS-style, by default. */
 enum class NavBarStyle {
     STANDARD,
     FLOATING,
 }
 
 data class NavBarLook(
-    val style: NavBarStyle = NavBarStyle.STANDARD,
+    val style: NavBarStyle = NavBarStyle.FLOATING,
     val labels: NavBarLabels = NavBarLabels.ALWAYS,
     val scrub: Boolean = true,
     val iconPop: Boolean = false,

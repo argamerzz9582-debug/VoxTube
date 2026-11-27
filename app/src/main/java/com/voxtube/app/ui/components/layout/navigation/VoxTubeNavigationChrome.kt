@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShortNavigationBarDefaults
 import androidx.compose.material3.WideNavigationRailDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
@@ -37,9 +38,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
+import com.kyant.backdrop.backdrops.LayerBackdrop
 import com.voxtube.app.data.local.NavBarLook
 import com.voxtube.app.data.local.NavBarScroll
 import com.voxtube.app.data.local.NavBarStyle
+import com.voxtube.app.ui.theme.glass.LocalGlassBackdrop
+import com.voxtube.app.ui.theme.glass.LocalLiquidGlassEnabled
+import com.voxtube.app.ui.theme.glass.ProvideGlassBackdrop
+import com.voxtube.app.ui.theme.glass.glassBackdropSource
 import com.voxtube.app.ui.utils.LocalWindowIsLandscape
 import com.voxtube.app.ui.utils.LocalWindowSizeClass
 import com.voxtube.app.ui.utils.isExpandedWidth
@@ -82,7 +88,7 @@ internal fun usesNavigationRail(
  * windows, the wide navigation rail beside it once the window is expanded.
  *
  * The bar overlays the content, so callers reserve [onBarHeightChanged] themselves. [barScrollState]
- * moves it with the content's scroll. The rail takes
+ * moves it with the content's scroll. [glassBackdrop] records the pages for the Liquid Glass bar. The rail takes
  * its own column; [onRailWidthChanged] is only for overlays drawn outside this layout.
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -100,6 +106,7 @@ fun VoxTubeNavigationChrome(
     barLook: NavBarLook = NavBarLook(),
     onBarHeightChanged: (Dp) -> Unit = {},
     onRailWidthChanged: (Dp) -> Unit = {},
+    glassBackdrop: LayerBackdrop? = null,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val usesRail = flowUsesNavigationRail()
@@ -145,19 +152,35 @@ fun VoxTubeNavigationChrome(
                         },
                     ),
         ) {
-            content()
+            // The pages are recorded so the glass bar floating over them can blur and bend them. Glass
+            // inside the pages must not sample that recording (it would sample itself), so it gets none;
+            // pages record their own (see VoxTubeScrollAwayLayout), and only while glass is on at all.
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .then(if (glassBackdrop != null) Modifier.glassBackdropSource(glassBackdrop) else Modifier),
+            ) {
+                val pages = this
+                CompositionLocalProvider(
+                    LocalGlassBackdrop provides null,
+                    LocalLiquidGlassEnabled provides (glassBackdrop != null),
+                ) { pages.content() }
+            }
             if (!usesRail) {
-                NavigationBarSlot(
-                    tabs = tabs,
-                    selectedTab = selectedTab,
-                    onTabSelected = onTabSelected,
-                    visible = barVisible,
-                    covered = barCovered,
-                    coveredFraction = barCoveredFraction,
-                    scrollState = barScrollState,
-                    look = barLook,
-                    onHeightChanged = onBarHeightChanged,
-                )
+                ProvideGlassBackdrop(glassBackdrop) {
+                    NavigationBarSlot(
+                        tabs = tabs,
+                        selectedTab = selectedTab,
+                        onTabSelected = onTabSelected,
+                        visible = barVisible,
+                        covered = barCovered,
+                        coveredFraction = barCoveredFraction,
+                        scrollState = barScrollState,
+                        look = barLook,
+                        onHeightChanged = onBarHeightChanged,
+                    )
+                }
             }
         }
     }
